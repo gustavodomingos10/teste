@@ -104,8 +104,70 @@
       codigo: 'ISO 12944-2',
       titulo: 'Corrosividade atmosférica — categorias C1 a CX',
       itens: { categorias: 'ISO 12944-2 — seleção de material/revestimento conforme a categoria de corrosividade (C1–CX).' }
+    },
+    NBR6123: {
+      codigo: 'ABNT NBR 6123',
+      titulo: 'Forças devidas ao vento em edificações',
+      itens: { vento: 'NBR 6123 — pressão dinâmica q = 0,613·V_k² (V_k = V₀·S1·S2·S3); força F = Ca·q·A. Relevante em silos/estruturas expostas.' }
+    },
+    // ----------------- NORMAS INTERNACIONAIS -----------------
+    EN795: {
+      codigo: 'EN 795 / CEN/TS 16415',
+      titulo: 'Anchor devices — Personal fall protection equipment',
+      internacional: true,
+      itens: {
+        tipoC: 'EN 795 Type C — flexible horizontal lifeline (cabo de aço). Equivale ao "tipo C" da NBR 16325.',
+        classes: 'EN 795 — Type A (structural), B (transportable), C (horizontal flexible line), D (rigid rail), E (deadweight).',
+        multi: 'CEN/TS 16415 — anchor devices for use by MORE THAN ONE person simultaneously (carga majorada por usuário adicional).'
+      }
+    },
+    EN355: {
+      codigo: 'EN 355 / EN 354 / EN 360 / EN 361',
+      titulo: 'PPE against falls — energy absorbers, lanyards, retractables, harnesses',
+      internacional: true,
+      itens: {
+        absorvedor: 'EN 355 — energy absorber limits the arrest force on the worker to ≤ 6 kN.',
+        arnes: 'EN 361 — full body harness; EN 354 lanyards; EN 360 self-retracting lifelines (SRL).'
+      }
+    },
+    OSHA: {
+      codigo: 'OSHA 29 CFR 1926.502 / 1910.140',
+      titulo: 'US — Fall protection systems criteria and practices',
+      internacional: true,
+      itens: {
+        arrest: 'OSHA 1926.502(d) — personal fall arrest: maximum arresting force 1.800 lbf (≈ 8 kN) with body harness; limit free fall to 6 ft (1,8 m).',
+        anchorage: 'OSHA 1926.502(d)(15) — anchorages: 5.000 lbf (≈ 22,2 kN) per worker, OR design with safety factor ≥ 2 under a qualified person.',
+        clearance: 'OSHA — verify total fall clearance (free fall + deceleration + harness stretch + safety margin).'
+      }
+    },
+    ANSI: {
+      codigo: 'ANSI/ASSP Z359',
+      titulo: 'US — Fall Protection Code',
+      internacional: true,
+      itens: {
+        z359_6: 'ANSI Z359.6 — design of active fall protection systems (engineered HLL): MAF ≤ 1.800 lbf; design by qualified person.',
+        z359_1: 'ANSI Z359.1 — general requirements; Z359.11 harnesses; Z359.13 energy absorbers.'
+      }
+    },
+    ISO22846: {
+      codigo: 'ISO 22846 / IRATA',
+      titulo: 'Rope access — safety and practice',
+      internacional: true,
+      itens: { acesso: 'ISO 22846 / IRATA — acesso por cordas (quando aplicável a inspeção/manutenção em altura).' }
     }
   };
+
+  /** Tabela de equivalência entre normas (BR × Internacionais) — exibida no prontuário internacional. */
+  var EQUIVALENCIAS = [
+    { tema: 'Linha de vida horizontal flexível', br: 'NBR 16325-2 (tipo C)', en: 'EN 795 Type C', us: 'ANSI Z359.6 / OSHA 1926.502' },
+    { tema: 'Força máxima no trabalhador', br: 'NR-35.6.7 — 6 kN', en: 'EN 355 — 6 kN', us: 'OSHA — 8 kN (1.800 lbf) / ANSI 6 kN' },
+    { tema: 'Resistência da ancoragem', br: 'NR-18 — 15 kN', en: 'EN 795 — ensaio 12–18 kN', us: 'OSHA — 22,2 kN (5.000 lbf) ou FS ≥ 2' },
+    { tema: 'Absorvedor de energia', br: 'NBR 16489', en: 'EN 355', us: 'ANSI Z359.13' },
+    { tema: 'Cinturão paraquedista', br: 'NR-35 / NBR 15836', en: 'EN 361', us: 'ANSI Z359.11' },
+    { tema: 'Múltiplos usuários', br: '— (majorar carga)', en: 'CEN/TS 16415', us: 'ANSI Z359.6' },
+    { tema: 'Vento em estruturas', br: 'NBR 6123', en: 'EN 1991-1-4', us: 'ASCE 7' },
+    { tema: 'Estruturas de aço', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' }
+  ];
 
   /** Lista plana (para a aba de referências do prontuário). */
   function listarReferencias() {
@@ -140,7 +202,7 @@
     { id: 'refs',        titulo: '18 · Referências normativas' }
   ];
 
-  var Norms = { NORMS: NORMS, PRONTUARIO_SECOES: PRONTUARIO_SECOES, listarReferencias: listarReferencias };
+  var Norms = { NORMS: NORMS, PRONTUARIO_SECOES: PRONTUARIO_SECOES, EQUIVALENCIAS: EQUIVALENCIAS, listarReferencias: listarReferencias };
 
   root.LV = root.LV || {};
   root.LV.Norms = Norms;

@@ -4,16 +4,18 @@ Software profissional para **dimensionamento de linhas de vida horizontais (SPIQ
 
 Desenvolvido a partir da ferramenta em planilha da **GD Engenharia e Perícia Ltda**, auditada, corrigida e expandida para uso comercial.
 
-![status](https://img.shields.io/badge/testes-65%20passando-brightgreen) ![normas](https://img.shields.io/badge/NR--35%20%C2%B7%20NR--18%20%C2%B7%20NBR%2016325%2F8800-conforme-blue)
+![status](https://img.shields.io/badge/testes-79%20passando-brightgreen) ![idiomas](https://img.shields.io/badge/PT--BR%20%C2%B7%20EN--US-bil%C3%ADngue-orange) ![normas](https://img.shields.io/badge/NR--35%20%C2%B7%20OSHA%20%C2%B7%20ANSI%20Z359%20%C2%B7%20EN%20795-conforme-blue)
 
 ---
 
 ## ✨ Recursos
 
-- **Motor de cálculo verificado** — equilíbrio do cabo por Newton-Raphson, ZLQ (NBR 16325-2 Anexo C.2), verificação do cabo, e dimensionamento do poste pela NBR 8800 (incluindo **flambagem**, **cisalhamento** e **classe da seção** — acréscimos à planilha original).
-- **Memorial de cálculo auditável** estruturado conforme **NR-35 Anexo II 5.1.1** (força de impacto → esforços → ZLQ), com fórmulas, valores e referência normativa de cada verificação.
-- **Prontuário completo (18 seções):** memoriais, materiais, compatibilidade, quantitativo, APR, PT, plano de inspeção, ensaio de carga, plano de resgate, capacitação, EPI, plaqueta de identificação (NR-18 18.12.12.3) e termo de liberação.
-- **Figuras técnicas em SVG:** 3D isométrico, elevação cotada da ZLQ, planta e diagrama de esforços.
+- **🌎 Internacional (PT-BR / EN-US):** escolha o país na tela inicial — Brasil (Português · SI · NR-35/NBR) ou Estados Unidos (English · Imperial · OSHA/ANSI). Tudo (interface, memoriais, prontuário e **figuras**) e as **unidades** se ajustam automaticamente. Ver [docs/INTERNACIONAL.md](docs/INTERNACIONAL.md).
+- **Motor de cálculo verificado** — equilíbrio do cabo por Newton-Raphson, ZLQ (NBR 16325-2 Anexo C.2), verificação do cabo, e dimensionamento do poste pela NBR 8800/AISC (incluindo **flambagem**, **cisalhamento**, **classe da seção**, **vento** NBR 6123/EN 1991, **energia/fator de queda** e **poste de canto**).
+- **Memorial de cálculo auditável** estruturado conforme **NR-35 Anexo II 5.1.1 / ANSI Z359.6** (força de impacto → esforços → ZLQ), com fórmulas, valores e referência normativa de cada verificação.
+- **Prontuário completo (19 seções):** memoriais, materiais, compatibilidade, quantitativo, APR, PT, inspeção, ensaio de carga, resgate, capacitação, EPI, plaqueta com **QR Code**, termo de liberação e **tabela de equivalência normativa** (BR × EN × USA).
+- **Figuras técnicas em SVG:** 3D isométrico, elevação cotada da ZLQ, planta e diagrama de esforços (bilíngues, com unidades automáticas).
+- **Gestão de ativos:** **QR Code** de rastreabilidade e **painel de conformidade** com semáforo de vencimento de inspeções.
 - **Segurança de acesso:** login com senhas protegidas (PBKDF2), perfis de acesso, bloqueio anti-força-bruta, sessões, licença comercial e trilha de auditoria.
 - **Sem dependências e offline:** roda em qualquer navegador moderno; um duplo clique abre o sistema.
 

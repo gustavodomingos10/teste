@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.0] — Versão internacional
+
+### Internacionalização (PT-BR / EN-US)
+- **Seleção de país** na tela inicial: Brasil (Português · SI · NR-35/NBR) e Estados Unidos (English · Imperial · OSHA/ANSI).
+- **Tradução completa** ao selecionar EUA: interface, memoriais, prontuário e **figuras** (3D, ZLQ, esforços) em inglês.
+- **Unidades automáticas** SI ↔ Imperial (kN/lbf, m/ft, mm/in, kN·m/lbf·ft, MPa/ksi); decimal e data localizados.
+- **Critérios por país** no motor (EUA: 8 kN / 22,2 kN; Brasil: 6 kN / 15 kN) — o caso brasileiro permanece idêntico ao validado.
+- **Tabela de equivalência normativa** internacional (BR × EN × USA) no prontuário.
+
+### Engenharia avançada (verificada, opcional, não altera o caso-base)
+- **Ação do vento** nos postes (NBR 6123 / EN 1991) — essencial para silos/estruturas expostas.
+- **Método de energia e fator de queda** (NBR 16325 / EN 355) — confirma adequação do absorvedor.
+- **Efeito da temperatura** na pré-tensão; **poste de canto** (resultante 2·T·sen(β/2)); fator multiusuário.
+
+### Catálogos ampliados
+- Cabos: inox 316/304, 1x19 rígido, galvanizado EIPS 6x36 (29 opções).
+- Perfis: SHS/RHS/CHS/tubos até Ø219 (29 opções, propriedades por geometria).
+- Aços: ASTM, ABNT e EN S235/S275/S355.
+
+### Produto / gestão de ativos
+- **QR Code** de rastreabilidade na plaqueta (gerador próprio, ISO/IEC 18004, validado por decodificação).
+- **Painel de conformidade** com semáforo de vencimento de inspeções (≤ 12 meses).
+- Cenários de **silo / industrial** na matriz de compatibilidade.
+
 ## [1.0.0] — Versão inicial (software)
 
 Transformação da planilha `Linha_de_Vida_GD_Engenharia_1.xlsx` em software comercializável, com auditoria de engenharia, segurança de acesso, mais dados técnicos e visualizações.

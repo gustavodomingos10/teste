@@ -19,7 +19,8 @@ Depois acesse `http://localhost:8000` no navegador.
 
 ## 2. Primeiro acesso
 
-1. Na tela de **ativação**, clique em **"Iniciar avaliação (30 dias)"** (ou informe a chave de licença).
+1. Na **tela inicial**, escolha o **país**: 🇧🇷 Brasil (Português, normas NR, unidades SI) ou 🇺🇸 Estados Unidos (Inglês, normas OSHA/ANSI, unidades imperiais). Tudo se ajusta sozinho — você pode trocar depois pelo botão de país na barra lateral.
+2. Na tela de **ativação**, clique em **"Iniciar avaliação (30 dias)"** (ou informe a chave de licença).
 2. Faça login com:
    - Usuário: **`admin`**
    - Senha: **`GD-altura@2026`**

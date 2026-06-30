@@ -30,21 +30,24 @@
     ['L', 'nVaos', 'h', 'peDireito', 'caboDiametro', 'T0', 'nUsuarios', 'Ft', 'H_ql', 'H_fr', 'F_abs', 'cursoAbsorvedor', 'gamaF', 'nChumbadores', 'bracoChumbadores', 'fck', 'ladoPlaca']
       .forEach(function (k) { if (e[k] !== undefined && e[k] !== '') o[k] = Number(e[k]); });
     o.posteperfil = e.posteperfil; o.caboMaterial = e.caboMaterial; o.temAbsorvedor = e.temAbsorvedor; o.acoNome = e.acoNome;
+    // País selecionado globalmente (define normas, unidades e idioma dos resultados)
+    o.pais = (LV.Paises ? (LV.Paises.getSelecionado() || 'BR') : 'BR');
     return o;
   }
+  function L(pt, en) { return (LV.I18n && LV.I18n.getLang() === 'en') ? en : pt; }
 
   // ======================= PAINEL =======================
   function painel(alvo) {
     H();
     var lista = LV.Storage.listar();
-    alvo.appendChild(tituloPagina('Painel de projetos', 'Gerencie os projetos de linha de vida.'));
+    alvo.appendChild(tituloPagina(L('Painel de projetos', 'Project dashboard'), L('Gerencie os projetos de linha de vida.', 'Manage your lifeline projects.')));
     alvo.appendChild(h('div', { class: 'toolbar' }, [
-      h('button', { class: 'btn primary', text: '+ Novo projeto', onclick: function () {
+      h('button', { class: 'btn primary', text: L('+ Novo projeto', '+ New project'), onclick: function () {
         var p = LV.Storage.salvar(LV.Storage.novoProjeto('Projeto ' + (lista.length + 1)));
         LV.state.projetoId = p.id; LV.UI.irPara('projeto');
       } }),
-      h('button', { class: 'btn ghost', text: '⭳ Backup (exportar)', onclick: function () { baixar('linha-de-vida-backup.json', LV.Storage.exportarTudo()); } }),
-      h('label', { class: 'btn ghost arquivo' }, ['Restaurar backup', h('input', { type: 'file', accept: '.json', style: 'display:none', onchange: function (ev) { importar(ev.target.files[0]); } })])
+      h('button', { class: 'btn ghost', text: L('⭳ Backup (exportar)', '⭳ Backup (export)'), onclick: function () { baixar('linha-de-vida-backup.json', LV.Storage.exportarTudo()); } }),
+      h('label', { class: 'btn ghost arquivo' }, [L('Restaurar backup', 'Restore backup'), h('input', { type: 'file', accept: '.json', style: 'display:none', onchange: function (ev) { importar(ev.target.files[0]); } })])
     ]));
     if (!lista.length) { alvo.appendChild(h('div', { class: 'vazio', text: 'Nenhum projeto ainda. Crie o primeiro.' })); return; }
     var grid = h('div', { class: 'cards' });
@@ -158,10 +161,23 @@
       campoNum('Braço dos chumbadores d', e.bracoChumbadores, 'm', function (v) { set('bracoChumbadores', v); }, 0.18)
     ]);
 
+    // seção 8 — avançado / internacional (opcional)
+    var s8 = secaoForm(L('8 · Avançado / Internacional (opcional)', '8 · Advanced / International (optional)'), [
+      campoNum(L('Velocidade básica do vento V0', 'Basic wind speed V0'), e.ventoV0, 'm/s', function (v) { set('ventoV0', v); }, 0),
+      campoNum(L('Fator topográfico S2', 'Terrain factor S2'), e.ventoS2, '—', function (v) { set('ventoS2', v); }, 1),
+      campoNum(L('Coef. de arrasto Ca', 'Drag coefficient Ca'), e.ventoCa, '—', function (v) { set('ventoCa', v); }, 2),
+      campoNum(L('Variação de temperatura ΔT', 'Temperature variation ΔT'), e.deltaTemp, '°C', function (v) { set('deltaTemp', v); }, 0),
+      campoNum(L('Ângulo de mudança de direção β (poste de canto)', 'Direction change angle β (corner post)'), e.anguloMudanca, '°', function (v) { set('anguloMudanca', v); }, 0),
+      campoNum(L('Comprimento do talabarte', 'Lanyard length'), e.compTalabarte, 'm', function (v) { set('compTalabarte', v); }, 1.5),
+      campoNum('fck ' + L('do concreto', 'concrete'), e.fck, 'MPa', function (v) { set('fck', v); }, 25)
+    ]);
+
     var nomeProj = h('input', { class: 'inp inp-nome', value: proj.nome, onchange: function () { proj.nome = nomeProj.value; salvar(); } });
-    alvo.appendChild(h('div', { class: 'form-topo' }, [campoWrap('Nome do projeto', nomeProj),
-      h('button', { class: 'btn primary', text: 'Salvar e calcular', onclick: function () { salvar(); toast('Projeto salvo.', 'ok'); LV.UI.irPara('resultados'); } })]));
-    [s1, s2, s3, s4, s5, s6, s7].forEach(function (x) { alvo.appendChild(x); });
+    var paisAtual = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
+    alvo.appendChild(h('div', { class: 'form-topo' }, [campoWrap(L('Nome do projeto', 'Project name'), nomeProj),
+      paisAtual ? h('div', { class: 'pais-tag', text: paisAtual.bandeira + ' ' + paisAtual.nome + ' · ' + (paisAtual.unidades === 'imperial' ? 'Imperial' : 'SI') }) : null,
+      h('button', { class: 'btn primary', text: L('Salvar e calcular', 'Save & calculate'), onclick: function () { salvar(); toast(L('Projeto salvo.', 'Project saved.'), 'ok'); LV.UI.irPara('resultados'); } })]));
+    [s1, s2, s3, s4, s5, s6, s7, s8].forEach(function (x) { alvo.appendChild(x); });
     // auto-salva ao sair de qualquer campo
     alvo.addEventListener('change', salvar);
   }
@@ -171,15 +187,15 @@
     H();
     var proj = projAtual();
     var c = calcular(proj);
-    alvo.appendChild(tituloPagina('Resultados — ' + proj.nome, 'Memória de cálculo automática conforme NR-35 Anexo II 5.1.1.'));
-    if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: 'Não foi possível calcular: ' + c.erro + '. Verifique os dados do projeto.' })); return; }
+    alvo.appendChild(tituloPagina(L('Resultados', 'Results') + ' — ' + proj.nome, L('Memória de cálculo automática (NR-35 Anexo II 5.1.1 / ANSI Z359.6).', 'Automatic calculation report (NR-35 Annex II 5.1.1 / ANSI Z359.6).')));
+    if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: L('Não foi possível calcular: ', 'Could not calculate: ') + c.erro })); return; }
     var R = c.R;
     LV.Audit.registrar('calculo', { projeto: proj.nome, veredito: R.veredito.texto }).catch(function(){});
 
     // veredito
     alvo.appendChild(h('div', { class: 'verdito-banner ' + (R.veredito.aprovado ? 'ok' : 'fail') }, [
-      h('span', { class: 'vb-txt', text: 'VEREDITO: ' + R.veredito.texto }),
-      h('div', { class: 'vb-ind' }, R.veredito.indicadores.map(function (i) { return h('span', { class: 'ind ' + (i.ok ? 'ok' : 'fail'), text: (i.ok ? '✔ ' : '✘ ') + i.nome }); }))
+      h('span', { class: 'vb-txt', text: L('VEREDITO', 'VERDICT') + ': ' + L(R.veredito.texto, R.veredito.aprovado ? 'APPROVED' : 'FAILED — review data') }),
+      h('div', { class: 'vb-ind' }, R.veredito.indicadores.map(function (i) { return h('span', { class: 'ind ' + (i.ok ? 'ok' : 'fail'), text: (i.ok ? '✔ ' : '✘ ') + L(i.nome, i.nomeEn || i.nome) }); }))
     ]));
     // avisos de validação
     if (c.val && (c.val.avisos.length || c.val.erros.length)) {
@@ -197,9 +213,9 @@
     }));
     // botões
     alvo.appendChild(h('div', { class: 'toolbar' }, [
-      h('button', { class: 'btn primary', text: '⎙ Imprimir memorial de cálculo', onclick: function () { imprimir(LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()), 'Memorial de Cálculo'); } }),
-      h('button', { class: 'btn ghost', text: '⎙ Memorial descritivo', onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, LV.Storage.getConfig()), 'Memorial Descritivo'); } }),
-      h('button', { class: 'btn ghost', text: 'Editar dados', onclick: function () { LV.UI.irPara('projeto'); } })
+      h('button', { class: 'btn primary', text: L('⎙ Imprimir memorial de cálculo', '⎙ Print calculation report'), onclick: function () { imprimir(LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()), 'Calc'); } }),
+      h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, LV.Storage.getConfig()), 'Desc'); } }),
+      h('button', { class: 'btn ghost', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })
     ]));
     // memorial inline
     alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
@@ -209,16 +225,65 @@
   function prontuario(alvo) {
     H();
     var proj = projAtual(); var c = calcular(proj);
-    alvo.appendChild(tituloPagina('Prontuário do sistema', 'Dossiê técnico completo (18 seções) para auditoria.'));
-    if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: 'Não foi possível gerar: ' + c.erro })); return; }
+    alvo.appendChild(tituloPagina(L('Prontuário do sistema', 'System technical file'), L('Dossiê técnico completo (19 seções) para auditoria.', 'Complete technical file (19 sections) for audit.')));
+    if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: L('Não foi possível gerar: ', 'Could not generate: ') + c.erro })); return; }
     var R = c.R; var cfg = LV.Storage.getConfig();
     var html = LV.Prontuario.gerar(R, proj, cfg);
     LV.Audit.registrar('prontuario', { projeto: proj.nome, veredito: R.veredito.texto }).catch(function(){});
     alvo.appendChild(h('div', { class: 'toolbar' }, [
-      h('button', { class: 'btn primary', text: '⎙ Imprimir / Salvar PDF', onclick: function () { imprimir(html, 'Prontuário'); } }),
-      h('button', { class: 'btn ghost', text: 'Registros do prontuário', onclick: function () { LV.UI.irPara('registros'); } })
+      h('button', { class: 'btn primary', text: L('⎙ Imprimir / Salvar PDF', '⎙ Print / Save PDF'), onclick: function () { imprimir(html, 'TechnicalFile'); } }),
+      h('button', { class: 'btn ghost', text: L('Registros', 'Records'), onclick: function () { LV.UI.irPara('registros'); } })
     ]));
     alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
+  }
+
+  // ======================= CONFORMIDADE (gestão de ativos) =======================
+  function conformidade(alvo) {
+    H();
+    var DIA = 864e5, hoje = Date.now();
+    alvo.appendChild(tituloPagina(L('Conformidade dos ativos', 'Asset compliance'),
+      L('Status de inspeção e vencimentos de todos os sistemas (NR-35.6.6 / OSHA).', 'Inspection status and due dates of all systems (NR-35.6.6 / OSHA).')));
+    var lista = LV.Storage.listar();
+    var cont = { ok: 0, avencer: 0, vencida: 0, pendente: 0 };
+    var linhas = lista.map(function (p) {
+      var full = LV.Storage.obter(p.id);
+      var insp = (full.registros && full.registros.inspecoes) || [];
+      var ultima = insp.length ? insp[insp.length - 1] : null;
+      var status, proxima = null, classe;
+      if (!ultima) { status = L('sem inspeção', 'no inspection'); classe = 'pendente'; cont.pendente++; }
+      else {
+        proxima = ultima.criadoEm + 365 * DIA;
+        var dias = Math.round((proxima - hoje) / DIA);
+        if (dias < 0) { status = L('VENCIDA', 'OVERDUE') + ' (' + (-dias) + 'd)'; classe = 'vencida'; cont.vencida++; }
+        else if (dias <= 60) { status = L('a vencer', 'due soon') + ' (' + dias + 'd)'; classe = 'avencer'; cont.avencer++; }
+        else { status = L('em dia', 'compliant') + ' (' + dias + 'd)'; classe = 'ok'; cont.ok++; }
+      }
+      return { p: p, ultima: ultima, proxima: proxima, status: status, classe: classe };
+    });
+    // cartões de resumo
+    alvo.appendChild(h('div', { class: 'conf-resumo' }, [
+      cardConf(L('Em dia', 'Compliant'), cont.ok, 'ok'),
+      cardConf(L('A vencer', 'Due soon'), cont.avencer, 'avencer'),
+      cardConf(L('Vencidas', 'Overdue'), cont.vencida, 'vencida'),
+      cardConf(L('Sem inspeção', 'No inspection'), cont.pendente, 'pendente')
+    ]));
+    if (!lista.length) { alvo.appendChild(h('div', { class: 'vazio', text: L('Nenhum sistema cadastrado.', 'No systems registered.') })); return; }
+    var tab = h('table', { class: 'tab' });
+    tab.appendChild(h('thead', {}, [h('tr', {}, [L('Sistema / Obra', 'System / Project'), L('Última inspeção', 'Last inspection'), L('Próxima', 'Next due'), 'Status'].map(function (t) { return h('th', { text: t }); }))]));
+    var tb = h('tbody');
+    linhas.forEach(function (x) {
+      tb.appendChild(h('tr', {}, [
+        h('td', {}, [h('b', { text: x.p.nome }), h('div', { class: 'small muted', text: x.p.obra || '' })]),
+        h('td', { text: x.ultima ? new Date(x.ultima.criadoEm).toLocaleDateString() : '—' }),
+        h('td', { text: x.proxima ? new Date(x.proxima).toLocaleDateString() : '—' }),
+        h('td', {}, [h('span', { class: 'conf-badge ' + x.classe, text: x.status })])
+      ]));
+    });
+    tab.appendChild(tb);
+    alvo.appendChild(tab);
+  }
+  function cardConf(rotulo, n, classe) {
+    return h('div', { class: 'conf-card ' + classe }, [h('div', { class: 'cc-num', text: String(n) }), h('div', { class: 'cc-rot', text: rotulo })]);
   }
 
   // ======================= REGISTROS =======================
@@ -381,5 +446,5 @@
     r.readAsText(file);
   }
 
-  LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, registros: registros, admin: admin };
+  LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, conformidade: conformidade, registros: registros, admin: admin };
 })(typeof self !== 'undefined' ? self : this);

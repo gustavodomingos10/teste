@@ -1,177 +1,175 @@
 /* ============================================================================
  *  LINHA DE VIDA · GD ENGENHARIA
- *  report.js — Geração de memoriais e do PRONTUÁRIO (dossiê técnico auditável)
+ *  report.js — Memoriais BILÍNGUES (PT-BR / EN-US) com unidades automáticas
  *
- *  Produz HTML pronto para impressão/PDF. A estrutura do memorial de cálculo
- *  segue a NR-35 Anexo II, item 5.1.1: (a) força de impacto; (b) esforços em
- *  cada parte do sistema; (c) zona livre de queda. Cada resultado traz a
- *  fórmula, os valores substituídos e a referência normativa — para resistir
- *  à auditoria de peritos e seguradoras.
+ *  O idioma e o sistema de unidades seguem o PAÍS selecionado (R.pais):
+ *    Brasil  → Português, SI, NR-35/NR-18/NBR.
+ *    EUA     → Inglês, Imperial, OSHA/ANSI.
+ *  A estrutura do memorial de cálculo segue a NR-35 Anexo II 5.1.1
+ *  (força de impacto → esforços → ZLQ) — equivalente a ANSI Z359.6.
  * ========================================================================== */
 (function (root) {
   'use strict';
 
   function dep(n) { var x = root.LV && root.LV[n]; if (!x) throw new Error('report.js: módulo ' + n + ' não carregado'); return x; }
 
-  // ---- Formatação ----
-  function f(x, dec) {
+  // ---- Estado de locale (definido por contexto em cada chamada pública) ----
+  var _lang = 'pt', _imp = false;
+  function setCtx(R) {
+    var p = R && R.pais ? R.pais : {};
+    _lang = (p.idioma === 'en') ? 'en' : 'pt';
+    _imp = (p.unidades === 'imperial');
+  }
+  function L(pt, en) { return _lang === 'en' ? en : pt; }
+
+  // ---- Formatação numérica + unidades ----
+  function fnum(x, dec) {
     if (x == null || !isFinite(x)) return '—';
     dec = dec == null ? 2 : dec;
-    return Number(x).toFixed(dec).replace('.', ',');
+    var s = Number(x).toFixed(dec);
+    return _lang === 'en' ? s : s.replace('.', ',');
   }
-  function v(o, dec) { return o ? f(o.valor, dec) + (o.unidade && o.unidade !== '—' ? ' ' + o.unidade : '') : '—'; }
+  function f(x, dec) { return fnum(x, dec); }
+  // Converte e formata um objeto {valor, unidade}
+  function U(o, dec) {
+    if (!o) return '—';
+    var val = o.valor, un = o.unidade;
+    if (_imp && root.LV.Units && un) { var c = root.LV.Units.conv(val, un, 'imperial'); val = c.valor; un = c.unidade; }
+    var d = dec;
+    if (d == null) d = (un === 'lbf' || un === 'lbf·ft' || un === 'mph') ? 0 : 2;
+    return fnum(val, d) + (un && un !== '—' ? ' ' + un : '');
+  }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-  function dataBR(ts) { if (!ts) return '—'; var d = new Date(ts); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear(); }
+  function dataBR(ts) { if (!ts) return '—'; var d = new Date(ts); var dd = ('0' + d.getDate()).slice(-2), mm = ('0' + (d.getMonth() + 1)).slice(-2), yy = d.getFullYear(); return _lang === 'en' ? (mm + '/' + dd + '/' + yy) : (dd + '/' + mm + '/' + yy); }
 
-  function chkBadge(ok) {
-    return '<span class="badge ' + (ok ? 'ok' : 'fail') + '">' + (ok ? '✔ ATENDE' : '✘ NÃO ATENDE') + '</span>';
-  }
+  function chkBadge(ok) { return '<span class="badge ' + (ok ? 'ok' : 'fail') + '">' + (ok ? '✔ ' + L('ATENDE', 'PASS') : '✘ ' + L('NÃO ATENDE', 'FAIL')) + '</span>'; }
   function linha(simb, desc, formula, valor, ref, ok) {
-    return '<tr>' +
-      '<td class="sym">' + esc(simb) + '</td>' +
-      '<td>' + esc(desc) + (formula ? '<div class="fml">' + formula + '</div>' : '') + '</td>' +
-      '<td class="val">' + valor + '</td>' +
-      '<td class="ref">' + esc(ref || '') + (ok != null ? '<br>' + chkBadge(ok) : '') + '</td>' +
-      '</tr>';
+    return '<tr><td class="sym">' + esc(simb) + '</td><td>' + esc(desc) + (formula ? '<div class="fml">' + formula + '</div>' : '') +
+      '</td><td class="val">' + valor + '</td><td class="ref">' + esc(ref || '') + (ok != null ? '<br>' + chkBadge(ok) : '') + '</td></tr>';
   }
 
   function cabecalho(cfg, titulo, subt, proj) {
-    return '<div class="rep-head">' +
-      '<div class="rh-emp">' + esc(cfg.empresa) + '</div>' +
+    return '<div class="rep-head"><div class="rh-emp">' + esc(cfg.empresa) + '</div>' +
       '<div class="rh-sub">' + esc(cfg.responsavel) + ' · ' + esc(cfg.crea) + ' · CNPJ ' + esc(cfg.cnpj) + ' · ' + esc(cfg.contato) + '</div>' +
       '<h1>' + esc(titulo) + '</h1>' + (subt ? '<div class="rh-norma">' + esc(subt) + '</div>' : '') +
-      (proj ? '<div class="rh-proj">Obra: <b>' + esc((proj.entrada || {}).obra || proj.nome) + '</b> · Local: ' + esc((proj.entrada || {}).local || '—') + ' · Rev. ' + esc(proj.revisao || 'R00') + ' · Emissão: ' + dataBR(Date.now()) + '</div>' : '') +
-      '</div>';
+      (proj ? '<div class="rh-proj">' + L('Obra', 'Project') + ': <b>' + esc((proj.entrada || {}).obra || proj.nome) + '</b> · ' +
+        L('Local', 'Site') + ': ' + esc((proj.entrada || {}).local || '—') + ' · ' + L('Rev.', 'Rev.') + ' ' + esc(proj.revisao || 'R00') +
+        ' · ' + L('Emissão', 'Issued') + ': ' + dataBR(Date.now()) + '</div>' : '') + '</div>';
   }
 
   function assinatura(cfg, proj) {
     var resp = (proj && proj.entrada && proj.entrada.responsavel) || cfg.responsavel;
-    return '<div class="assin">' +
-      '<div class="loc">' + esc(cfg.cidade) + ', ' + dataBR(Date.now()) + '.</div>' +
-      '<div class="linha-assin">__________________________________________</div>' +
-      '<div>' + esc(resp) + '</div>' +
-      '<div class="cargo">Engenheiro Civil — Responsável Técnico</div>' +
-      '<div class="cargo">ART nº ____________________ · ' + esc(cfg.crea) + '</div>' +
-      '</div>';
+    return '<div class="assin"><div class="loc">' + esc(cfg.cidade) + ', ' + dataBR(Date.now()) + '.</div>' +
+      '<div class="linha-assin">__________________________________________</div><div>' + esc(resp) + '</div>' +
+      '<div class="cargo">' + L('Engenheiro Civil — Responsável Técnico', 'Civil Engineer — Engineer of Record') + '</div>' +
+      '<div class="cargo">' + L('ART nº', 'PE Stamp / License') + ' ____________________ · ' + esc(cfg.crea) + '</div></div>';
   }
 
   // =======================================================================
-  //  MEMORIAL DE CÁLCULO  (NR-35 Anexo II 5.1.1)
+  //  MEMORIAL DE CÁLCULO
   // =======================================================================
   function memorialCalculo(R, proj, cfg) {
-    var Norms = dep('Norms').NORMS, Draw = root.LV.Draw;
-    var e = R.entrada;
+    setCtx(R);
+    var Norms = dep('Norms').NORMS;
+    var pais = R.pais || {};
+    var Draw = root.LV.Draw;
     var s = '<div class="report memorial-calc">';
-    s += cabecalho(cfg, 'MEMORIAL DE CÁLCULO', 'Linha de Vida Horizontal (SPIQ) · NR-35 Anexo II item 5.1.1 · NBR 16325 · NBR 8800', proj);
-
-    // Veredito
-    s += '<div class="verdito ' + (R.veredito.aprovado ? 'ok' : 'fail') + '">VEREDITO DO SISTEMA: ' + R.veredito.texto + '</div>';
+    s += cabecalho(cfg, L('MEMORIAL DE CÁLCULO', 'CALCULATION REPORT'),
+      L('Linha de Vida Horizontal (SPIQ) · ', 'Horizontal Lifeline (PFAS) · ') + (pais.normas ? pais.normas.join(' · ') : ''), proj);
+    s += '<div class="verdito ' + (R.veredito.aprovado ? 'ok' : 'fail') + '">' + L('VEREDITO DO SISTEMA', 'SYSTEM VERDICT') + ': ' +
+      L(R.veredito.aprovado ? 'APROVADO' : 'REPROVADO — revisar dados', R.veredito.aprovado ? 'APPROVED' : 'FAILED — review data') + '</div>';
 
     // 1 Premissas
-    s += '<h2>1 · Premissas e critérios normativos</h2><ul class="prem">' +
-      '<li>' + Norms.NR35.itens.forca6kN + '</li>' +
-      '<li>' + Norms.NR35.itens.a2_estrutura + '</li>' +
-      '<li>' + Norms.NR18.itens.ancoragem15kN + '</li>' +
-      '<li>' + Norms.NR18.itens.cabosAco + ' — adotado FS dinâmico ≥ 2 (carga de ruptura/tração máxima).</li>' +
-      '<li>' + Norms.NBR8800.itens.ponderacao + '</li>' +
-      '<li>' + Norms.NR35.itens.a2_dimensionamento + '</li></ul>';
+    s += '<h2>1 · ' + L('Premissas e critérios normativos', 'Assumptions and code criteria') + '</h2><ul class="prem">' +
+      '<li>' + L('Força de impacto no trabalhador', 'Worker arrest force') + ' ≤ ' + f(pais.forcaTrabalhadorMax) + ' kN — ' + esc(pais.refForca || '') + '</li>' +
+      '<li>' + L('Estrutura/ancoragem resiste à força máxima aplicável', 'Structure/anchorage resists the maximum applicable force') + ' — ' + esc(pais.refAncoragem || '') + '</li>' +
+      '<li>' + L('Fator de segurança dinâmico do cabo', 'Cable dynamic safety factor') + ' ≥ ' + f(pais.fsCaboMin) + '</li>' +
+      '<li>' + L('Dimensionamento determina: (a) força de impacto; (b) esforços em cada parte; (c) zona livre de queda.',
+        'Design determines: (a) arrest force; (b) forces in each part; (c) required fall clearance.') + ' ' + L('(NR-35 Anexo II 5.1.1 / ANSI Z359.6)', '(ANSI Z359.6 / NR-35 Annex II 5.1.1)') + '</li></ul>';
 
-    // 2 Dados de entrada
-    s += '<h2>2 · Dados de entrada</h2><table class="tab"><tbody>';
-    s += linha('L', 'Vão entre postes', '', v(R.dados.L), 'projeto');
-    s += linha('—', 'Nº de vãos', '', v(R.dados.nVaos), 'projeto');
-    s += linha('cabo', 'Cabo da linha de vida', '', esc(R.dados.cabo.material) + ' Ø' + R.dados.cabo.d + ' mm (' + esc(R.dados.cabo.construcao) + ')', 'catálogo');
-    s += linha('E', 'Módulo de elasticidade do cabo', '', v(R.dados.E), 'catálogo');
-    s += linha('A', 'Área metálica do cabo', '', v(R.dados.A_cabo), 'catálogo');
-    s += linha('F_rup', 'Carga de ruptura do cabo (MBL)', '', v(R.dados.MBL), 'catálogo');
-    s += linha('EA', 'Rigidez axial do cabo', 'EA = E·A/1000', v(R.dados.EA), '');
-    s += linha('T₀', 'Pré-tensão de instalação', '', v(R.dados.T0), 'projeto');
-    s += linha('n', 'Nº de usuários simultâneos', '', v(R.dados.n), 'projeto');
-    s += linha('Fₜ', 'Força de impacto no trabalhador', '', v(R.dados.Ft), 'NR-35.6.7');
-    s += linha('h', 'Altura do poste', '', v(R.dados.h), 'projeto');
-    s += linha('perfil', 'Perfil do poste', '', esc(R.poste.perfil) + ' · aço ' + esc(R.poste.aco) + ' (fy=' + v(R.poste.fy) + ')', 'projeto');
+    // 2 Dados
+    s += '<h2>2 · ' + L('Dados de entrada', 'Input data') + '</h2><table class="tab"><tbody>';
+    s += linha('L', L('Vão entre postes', 'Span between posts'), '', U(R.dados.L), L('projeto', 'project'));
+    s += linha('—', L('Nº de vãos', 'Number of spans'), '', U(R.dados.nVaos), L('projeto', 'project'));
+    s += linha(L('cabo', 'cable'), L('Cabo da linha de vida', 'Lifeline cable'), '', esc(R.dados.cabo.material) + ' Ø' + R.dados.cabo.d + ' mm (' + esc(R.dados.cabo.construcao) + ')', L('catálogo', 'catalog'));
+    s += linha('E', L('Módulo de elasticidade do cabo', 'Cable elastic modulus'), '', U(R.dados.E), L('catálogo', 'catalog'));
+    s += linha('A', L('Área metálica do cabo', 'Cable metallic area'), '', U(R.dados.A_cabo), L('catálogo', 'catalog'));
+    s += linha('F_rup', L('Carga de ruptura do cabo (MBL)', 'Cable breaking load (MBL)'), '', U(R.dados.MBL), L('catálogo', 'catalog'));
+    s += linha('T₀', L('Pré-tensão de instalação', 'Installation pretension'), '', U(R.dados.T0), L('projeto', 'project'));
+    s += linha('n', L('Nº de usuários simultâneos', 'Simultaneous users'), '', U(R.dados.n), L('projeto', 'project'));
+    s += linha('Fₜ', L('Força de impacto no trabalhador', 'Worker arrest force'), '', U(R.dados.Ft), esc(pais.refForca || ''));
+    s += linha('h', L('Altura do poste', 'Post height'), '', U(R.dados.h), L('projeto', 'project'));
+    s += linha(L('perfil', 'profile'), L('Perfil do poste', 'Post profile'), '', esc(R.poste.perfil) + ' · ' + esc(R.poste.aco) + ' (fy=' + U(R.poste.fy) + ')', L('projeto', 'project'));
     s += '</tbody></table>';
 
-    // 3 (a) Força de impacto — NR-35 Anexo II 5.1.1 (a)
-    s += '<h2>3 · (a) Força de impacto de retenção <span class="micro">— NR-35 Anexo II 5.1.1 (a)</span></h2><table class="tab"><tbody>';
-    s += linha('Fₜ', 'Força transmitida ao trabalhador', 'limite normativo ≤ 6 kN', v(R.trabalhador.Ft), Norms.NR35.itens.forca6kN, R.trabalhador.check_Ft.ok);
-    s += linha('Q', 'Carga aplicada à linha', 'Q = n · Fₜ', v(R.trabalhador.Q), 'considera impactos simultâneos');
+    // 3 (a) Força de impacto
+    s += '<h2>3 · (a) ' + L('Força de impacto de retenção', 'Fall arrest force') + '</h2><table class="tab"><tbody>';
+    s += linha('Fₜ', L('Força transmitida ao trabalhador', 'Force transmitted to worker'), L('limite ≤ ', 'limit ≤ ') + f(pais.forcaTrabalhadorMax) + ' kN', U(R.trabalhador.Ft), esc(pais.refForca || ''), R.trabalhador.check_Ft.ok);
+    s += linha('Q', L('Carga aplicada à linha', 'Load applied to the line'), 'Q = n · Fₜ', U(R.trabalhador.Q), L('impactos simultâneos', 'simultaneous impacts'));
     s += '</tbody></table>';
 
-    // 4 (b) Esforços — tração/flecha
-    s += '<h2>4 · (b) Tração e flecha da linha <span class="micro">— equilíbrio + compatibilidade elástica (Newton-Raphson)</span></h2>';
-    s += '<p class="nota">Resolve-se <span class="mono">Q = 2·T·senθ</span> com <span class="mono">T = T₀ + (2·EA/L)·(√(a²+f²) − a)</span>, ' +
-      'iterando a flecha f até convergir (a = L/2 = ' + v(R.dados.a) + '). Convergiu em ' + R.tracao.iteracoes + ' iterações.</p>';
+    // 4 (b) Tração e flecha
+    s += '<h2>4 · (b) ' + L('Tração e flecha da linha', 'Line tension and sag') + ' <span class="micro">— Newton-Raphson</span></h2>';
+    s += '<p class="nota">' + L('Resolve', 'Solves') + ' <span class="mono">Q = 2·T·senθ</span> ' + L('com', 'with') +
+      ' <span class="mono">T = T₀ + (2·EA/L)·(√(a²+f²) − a)</span>. ' + L('Convergiu em', 'Converged in') + ' ' + R.tracao.iteracoes + ' ' + L('iterações', 'iterations') + '.</p>';
     s += '<table class="tab"><tbody>';
-    s += linha('f_el', 'Flecha elástica convergida', '', v(R.tracao.f_el), '');
-    s += linha('T_el', 'Tração elástica', 'T_el = Q·√(a²+f²)/(2f)', v(R.tracao.T_el), '');
-    s += linha('abs', 'Absorvedor de energia da linha', '', R.tracao.absAtivo ? 'ATIVO — limita T a ' + f(e.F_abs) + ' kN' : 'não atuante', 'NBR 16325');
-    s += linha('T', 'TRAÇÃO MÁXIMA NA LINHA', '', '<b>' + v(R.tracao.T) + '</b>', 'esforço de projeto');
-    s += linha('θ', 'Ângulo da linha com a horizontal', 'senθ = Q/(2T)', v(R.tracao.theta), '');
-    s += linha('f_tot', 'FLECHA TOTAL (f + curso absorvedor)', '', '<b>' + v(R.tracao.f_tot) + '</b>', '');
+    s += linha('T_el', L('Tração elástica', 'Elastic tension'), 'Q·√(a²+f²)/(2f)', U(R.tracao.T_el), '');
+    s += linha(L('abs', 'abs'), L('Absorvedor de energia da linha', 'In-line energy absorber'), '', R.tracao.absAtivo ? L('ATIVO — limita T', 'ACTIVE — limits T') : L('não atuante', 'inactive'), L('NBR 16325 / EN 795', 'EN 795 / ANSI Z359.6'));
+    s += linha('T', L('TRAÇÃO MÁXIMA NA LINHA', 'MAXIMUM LINE TENSION'), '', '<b>' + U(R.tracao.T) + '</b>', L('esforço de projeto', 'design force'));
+    s += linha('θ', L('Ângulo da linha', 'Line angle'), 'senθ = Q/(2T)', U(R.tracao.theta), '');
+    s += linha('f_tot', L('FLECHA TOTAL', 'TOTAL SAG'), '', '<b>' + U(R.tracao.f_tot) + '</b>', '');
     s += '</tbody></table>';
 
-    // 5 (b) Reações e dimensionamento do poste
-    s += '<h2>5 · (b) Esforços nos postes e dimensionamento <span class="micro">— NBR 8800</span></h2><table class="tab"><tbody>';
-    s += linha('H', 'Reação horizontal no topo', 'H = T·cosθ', v(R.reacoes.H), '');
-    s += linha('V', 'Reação vertical no topo', 'V = T·senθ', v(R.reacoes.V), '');
-    s += linha('M_k', 'Momento na base (poste extremo)', 'M_k = H·h', v(R.reacoes.M_k), '');
-    s += linha('M_Sd', 'Momento solicitante de cálculo', 'M_Sd = γf·M_k (γf=' + f(R.poste.gf.valor, 2) + ')', v(R.poste.M_Sd), Norms.NBR8800.itens.ponderacao);
-    s += linha('M_Rd', 'Momento resistente', 'M_Rd = Z·fy/γa1', v(R.poste.M_Rd), 'γa1 = 1,10');
-    s += linha('λ₀', 'Esbeltez reduzida (flambagem)', 'Ne = π²EI/(K·L)²; λ₀=√(A·fy/Ne); K=' + f(R.poste.K.valor, 1), v(R.poste.lambda0), Norms.NBR8800.itens.compressao);
-    s += linha('χ', 'Coef. de redução à flambagem', '', v(R.poste.chi), '');
-    s += linha('N_Rd', 'Força axial resistente (c/ flambagem)', 'N_Rd = χ·A·fy/γa1', v(R.poste.N_Rd), '');
-    s += linha('util', 'UTILIZAÇÃO — flexo-compressão', 'interação ≤ 1,0', '<b>' + v(R.poste.util) + '</b>', Norms.NBR8800.itens.flexoComp, R.poste.check_util.ok);
-    s += linha('V_Sd/V_Rd', 'Força cortante', 'V_Rd = 0,6·fy·Aw/γa1', v(R.cisalhamento.V_Sd) + ' / ' + v(R.cisalhamento.V_Rd), Norms.NBR8800.itens.cortante, R.cisalhamento.check.ok);
-    s += linha('b/t', 'Esbeltez de parede (classe da seção)', '', v(R.secaoClasse.bt) + ' (lim ' + v(R.secaoClasse.limite) + ')', Norms.NBR8800.itens.local, R.secaoClasse.compacta);
+    // 5 (b) Poste
+    s += '<h2>5 · (b) ' + L('Esforços nos postes e dimensionamento', 'Post forces and design') + ' <span class="micro">— ' + L('NBR 8800', 'AISC 360 / NBR 8800') + '</span></h2><table class="tab"><tbody>';
+    s += linha('H', L('Reação horizontal no topo', 'Horizontal reaction at top'), 'H = T·cosθ', U(R.reacoes.H), '');
+    s += linha('V', L('Reação vertical no topo', 'Vertical reaction at top'), 'V = T·senθ', U(R.reacoes.V), '');
+    if (R.reacoes.vento) s += linha('M_w', L('Momento de vento', 'Wind moment'), 'F = Ca·q·A', U(R.reacoes.vento.M), esc(R.reacoes.vento.ref));
+    s += linha('M_k', L('Momento na base', 'Base moment'), 'M_k = H·h' + (R.reacoes.vento ? ' + M_w' : ''), U(R.reacoes.M_k), '');
+    s += linha('M_Sd', L('Momento solicitante de cálculo', 'Design moment'), 'γf·M_k (γf=' + f(R.poste.gf.valor) + ')', U(R.poste.M_Sd), '');
+    s += linha('M_Rd', L('Momento resistente', 'Moment resistance'), 'Z·fy/γ', U(R.poste.M_Rd), 'γa1 = 1,10');
+    s += linha('λ₀/χ', L('Esbeltez / flambagem', 'Slenderness / buckling'), 'χ = 0,658^(λ₀²)', f(R.poste.lambda0.valor) + ' / ' + f(R.poste.chi.valor), L('NBR 8800 5.3', 'AISC E3'));
+    s += linha('util', L('UTILIZAÇÃO — flexo-compressão', 'UTILIZATION — beam-column'), '≤ 1,0', '<b>' + f(R.poste.util.valor) + '</b>', L('NBR 8800', 'AISC H1'), R.poste.check_util.ok);
+    s += linha('V_Sd/V_Rd', L('Cisalhamento', 'Shear'), '0,6·fy·Aw/γ', U(R.cisalhamento.V_Sd) + ' / ' + U(R.cisalhamento.V_Rd), '', R.cisalhamento.check.ok);
     s += '</tbody></table>';
     if (Draw) s += '<div class="fig">' + Draw.esforcosPoste(R) + '</div>';
 
     // 6 (b) Ancoragem
-    s += '<h2>6 · (b) Placa de base e ancoragem</h2><table class="tab"><tbody>';
-    s += linha('T_ch', 'Tração de cálculo por chumbador', 'T_ch = M_Sd/((n/2)·d)', v(R.ancoragem.T_ch), 'verificar arrancamento (fabricante)');
-    s += linha('R_anc', 'Resistência mínima do dispositivo', 'R_anc = máx(15; T)', v(R.ancoragem.R_anc), Norms.NR18.itens.ancoragem15kN, R.ancoragem.check_15kN.ok);
-    s += linha('σ_c', 'Compressão no concreto sob a placa', 'σ ≤ 0,85·fcd', v(R.placaBase.sigma_c) + ' (adm ' + v(R.placaBase.sigma_adm) + ')', Norms.NBR6118.itens.contato, R.placaBase.check_contato.ok);
-    s += linha('t_placa', 'Espessura mínima estimada da placa', '', v(R.placaBase.t_min), 'detalhar em projeto');
+    s += '<h2>6 · (b) ' + L('Placa de base e ancoragem', 'Base plate and anchorage') + '</h2><table class="tab"><tbody>';
+    s += linha('T_ch', L('Tração por chumbador', 'Tension per anchor bolt'), 'M_Sd/((n/2)·d)', U(R.ancoragem.T_ch), L('verificar arrancamento', 'verify pull-out'));
+    s += linha('R_anc', L('Resistência mínima do dispositivo', 'Minimum device resistance'), 'máx(' + f(R.ancoragem.check_15kN.exigido) + '; T)', U(R.ancoragem.R_anc), esc(pais.refAncoragem || ''), R.ancoragem.check_15kN.ok);
+    s += linha('σ_c', L('Compressão no concreto', 'Concrete bearing'), 'σ ≤ 0,85·fcd', U(R.placaBase.sigma_c), L('NBR 6118 / ACI 318', 'ACI 318'), R.placaBase.check_contato.ok);
     s += '</tbody></table>';
-    s += '<p class="nota">' + esc(R.ancoragem.nota) + '</p>';
 
-    // 7 Verificação do cabo
-    s += '<h2>7 · Verificação do cabo</h2><table class="tab"><tbody>';
-    s += linha('FS_din', 'Fator de segurança dinâmico', 'FS = F_rup/T ≥ 2', v(R.cabo.FS_din), Norms.NBR16325_2.itens.forca, R.cabo.check_din.ok);
-    s += linha('FS_trab', 'FS em serviço', 'FS = F_rup/T₀ ≥ 5', v(R.cabo.FS_trab), Norms.NR18.itens.cabosAco, R.cabo.check_trab.ok);
+    // 7 Cabo
+    s += '<h2>7 · ' + L('Verificação do cabo', 'Cable verification') + '</h2><table class="tab"><tbody>';
+    s += linha('FS_din', L('FS dinâmico', 'Dynamic SF'), 'F_rup/T ≥ ' + f(pais.fsCaboMin), f(R.cabo.FS_din.valor), '', R.cabo.check_din.ok);
+    s += linha('FS_serv', L('FS em serviço', 'Service SF'), 'F_rup/T₀', f(R.cabo.FS_trab.valor), '', R.cabo.check_trab.ok);
     s += '</tbody></table>';
 
     // 8 (c) ZLQ
-    s += '<h2>8 · (c) Zona Livre de Queda — ZLQ <span class="micro">— NBR 16325-2 Anexo C.2 (dispositivo tipo C)</span></h2>';
-    s += '<table class="tab"><tbody>';
-    s += linha('H_ql', 'Queda livre', '', v(R.zlq.H_ql), 'projeto/AR');
-    s += linha('H_fr', 'Frenagem do absorvedor pessoal', '', v(R.zlq.H_fr), '');
-    s += linha('—', 'Engate do cinturão aos pés (norma)', 'fixo = 1,5 m', v(R.zlq.C_pes), 'NBR 16325-2 C.2');
-    s += linha('—', 'Distância de segurança (norma)', 'fixo = 1,0 m', v(R.zlq.C_seg), 'NBR 16325-2 C.2');
-    s += linha('f', 'Flecha (deflexão) da linha', '', v(R.zlq.f_tot), '');
-    s += linha('ZLQ', 'ZONA LIVRE DE QUEDA', 'ZLQ = H_ql + H_fr + 1,5 + 1,0 + f', '<b>' + v(R.zlq.ZLQ) + '</b>', Norms.NBR16325_2.itens.zlq, R.zlq.check.ok);
-    s += linha('—', 'Pé-direito livre disponível', '', v(R.zlq.peDireito), 'projeto', R.zlq.check.ok);
+    s += '<h2>8 · (c) ' + L('Zona Livre de Queda — ZLQ', 'Required Fall Clearance — RFC') + ' <span class="micro">— ' + L('NBR 16325-2 Anexo C.2', 'NBR 16325-2 Annex C.2 / ANSI Z359') + '</span></h2><table class="tab"><tbody>';
+    s += linha('H_ql', L('Queda livre', 'Free fall'), '', U(R.zlq.H_ql), '');
+    s += linha('H_fr', L('Frenagem do absorvedor', 'Deceleration distance'), '', U(R.zlq.H_fr), '');
+    s += linha('—', L('Engate aos pés (norma)', 'Harness-to-feet (code)'), '1,5 m', U(R.zlq.C_pes), '');
+    s += linha('—', L('Distância de segurança (norma)', 'Safety distance (code)'), '1,0 m', U(R.zlq.C_seg), '');
+    s += linha('f', L('Flecha da linha', 'Line deflection'), '', U(R.zlq.f_tot), '');
+    s += linha('ZLQ', L('ZONA LIVRE DE QUEDA', 'REQUIRED FALL CLEARANCE'), 'H_ql+H_fr+1,5+1,0+f', '<b>' + U(R.zlq.ZLQ) + '</b>', '', R.zlq.check.ok);
+    s += linha('—', L('Pé-direito disponível', 'Available clearance'), '', U(R.zlq.peDireito), '', R.zlq.check.ok);
     s += '</tbody></table>';
     if (Draw) s += '<div class="fig">' + Draw.elevacaoZLQ(R) + '</div>';
 
-    // 9 Resultados consolidados
-    s += '<h2>9 · Resultados consolidados e indicadores</h2><table class="tab indic"><tbody>';
-    R.veredito.indicadores.forEach(function (ind) {
-      s += '<tr><td>' + esc(ind.nome) + '</td><td class="val">' + chkBadge(ind.ok) + '</td></tr>';
-    });
+    // 9 Indicadores
+    s += '<h2>9 · ' + L('Resultados consolidados e indicadores', 'Consolidated results and indicators') + '</h2><table class="tab indic"><tbody>';
+    R.veredito.indicadores.forEach(function (ind) { s += '<tr><td>' + esc(L(ind.nome, ind.nomeEn || ind.nome)) + '</td><td class="val">' + chkBadge(ind.ok) + '</td></tr>'; });
     s += '</tbody></table>';
-    if (R.avisos && R.avisos.length) {
-      s += '<div class="avisos"><b>Observações automáticas:</b><ul>' + R.avisos.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul></div>';
-    }
 
     // 10 Conclusão
-    s += '<h2>10 · Conclusão</h2><p class="conclusao">' +
-      'Com os dados adotados, o sistema de linha de vida horizontal resulta <b>' + R.veredito.texto + '</b>. ' +
-      (R.veredito.aprovado
-        ? 'Foram atendidos os critérios da NR-35 (força ≤ 6 kN e ZLQ compatível), da NR-18 (ancoragem ≥ 15 kN e cabo) e da NBR 8800 (postes). '
-        : 'Um ou mais critérios não foram atendidos — rever vão, bitola do cabo, absorvedor ou perfil do poste. ') +
-      'Os resultados devem ser conferidos e validados pelo responsável técnico antes da emissão, com a respectiva ART.</p>';
+    s += '<h2>10 · ' + L('Conclusão', 'Conclusion') + '</h2><p class="conclusao">' +
+      L('Com os dados adotados, o sistema resulta ', 'With the adopted data, the system is ') + '<b>' +
+      L(R.veredito.aprovado ? 'APROVADO' : 'REPROVADO', R.veredito.aprovado ? 'APPROVED' : 'FAILED') + '</b>. ' +
+      L('Os resultados devem ser conferidos e validados pelo responsável técnico, com a respectiva ART.',
+        'Results must be checked and validated by the engineer of record, with the corresponding sealed documentation.') + '</p>';
     s += assinatura(cfg, proj);
     s += '</div>';
     return s;
@@ -181,26 +179,31 @@
   //  MEMORIAL DESCRITIVO
   // =======================================================================
   function memorialDescritivo(R, proj, cfg) {
-    var Norms = dep('Norms').NORMS, Draw = root.LV.Draw;
-    var e = R.entrada;
+    setCtx(R);
+    var e = R.entrada, pais = R.pais || {}, Draw = root.LV.Draw;
     var inox = /Inox/i.test(R.dados.cabo.material);
     var s = '<div class="report memorial-desc">';
-    s += cabecalho(cfg, 'MEMORIAL DESCRITIVO', 'Linha de Vida Horizontal — Sistema de Proteção Individual contra Quedas (SPIQ)', proj);
-    s += '<h2>1 · Objeto</h2><p>O presente memorial descreve o projeto da Linha de Vida Horizontal a ser instalada na obra <b>' +
-      esc(e.obra || proj.nome) + '</b>, situada em ' + esc(e.local || '—') + '. O sistema integra as medidas de proteção contra quedas de altura (SPIQ), permitindo o deslocamento seguro de trabalhadores.</p>';
-    s += '<h2>2 · Normas aplicáveis</h2><p>NR-35 (Trabalho em Altura) e seu Anexo II (Sistemas de Ancoragem); NR-18 (item 18.12.12); ABNT NBR 16325-1 e 16325-2 (dispositivos de ancoragem — sistema do <b>tipo C</b>, linha horizontal flexível); ABNT NBR 8800 (postes); NBR 6120 (ações) e NBR 6118 (concreto), no que couber.</p>';
-    s += '<h2>3 · Descrição do local e cenário</h2><p>Cenário: <b>' + esc(e.cenario || '—') + '</b>. Substrato a proteger: <b>' + esc(e.substrato || '—') + '</b>. ' +
-      'Ambiente classificado como <b>' + esc(e.ambiente || '—') + '</b>, parâmetro que orienta a seleção do material quanto à corrosão (ISO 12944-2).</p>';
-    s += '<h2>4 · Descrição do sistema proposto</h2><p>Sistema composto por cabo de aço tensionado entre <b>' + (Math.round(R.dados.nVaos.valor) + 1) +
-      ' postes</b> de ancoragem, em <b>' + Math.round(R.dados.nVaos.valor) + ' vão(s)</b> de ' + f(R.dados.L.valor) + ' m cada, com postes de ' + f(R.dados.h.valor) +
-      ' m de altura. Cabo Ø' + R.dados.cabo.d + ' mm (' + esc(R.dados.cabo.material) + '), pré-tensão de ' + f(R.dados.T0.valor) +
-      ' kN. O trabalhador conecta-se por trava-quedas deslizante ligado ao cinturão tipo paraquedista por talabarte com absorvedor de energia (NR-35.6.9.1.1).</p>';
-    if (Draw) s += '<div class="fig">' + Draw.iso3D(R) + '</div>' + '<div class="fig">' + Draw.planta(R) + '</div>';
-    s += '<h2>5 · Materiais</h2><p>Componentes em <b>' + (inox ? 'aço inoxidável AISI 316' : 'aço galvanizado a fogo') + '</b>' +
-      (inox ? ', recomendado para ambientes mais agressivos (C4–C5).' : ', adequado a ambientes abrigados (C2–C3), com inspeção periódica do revestimento.') +
-      ' A especificação completa consta da seção de materiais do prontuário.</p>';
-    s += '<h2>6 · Segurança e utilização</h2><p>O uso exige EPI completos (cinturão paraquedista, talabarte com absorvedor, trava-quedas, capacete com jugular e conectores), todos com CA válido, e capacitação conforme a NR-35.4 (mínimo 8 h). O sistema deve passar por inspeção inicial e periódica (≤ 12 meses) — NR-35.6.6.</p>';
-    s += '<p class="nota">A liberação para uso fica condicionada à correta instalação por equipe capacitada e à realização dos ensaios de carga das ancoragens (NR-35 Anexo II / NR-18 18.12.12.2.1).</p>';
+    s += cabecalho(cfg, L('MEMORIAL DESCRITIVO', 'DESCRIPTIVE REPORT'),
+      L('Linha de Vida Horizontal — Sistema de Proteção Individual contra Quedas',
+        'Horizontal Lifeline — Personal Fall Arrest System'), proj);
+    s += '<h2>1 · ' + L('Objeto', 'Object') + '</h2><p>' +
+      L('O presente memorial descreve o projeto da Linha de Vida Horizontal a ser instalada na obra ',
+        'This report describes the Horizontal Lifeline to be installed at ') + '<b>' + esc(e.obra || proj.nome) + '</b>, ' +
+      L('situada em ', 'located at ') + esc(e.local || '—') + '.</p>';
+    s += '<h2>2 · ' + L('Normas aplicáveis', 'Applicable standards') + '</h2><p>' + (pais.normas ? pais.normas.join(', ') : '') + '. ' +
+      L('Sistema classificado como dispositivo de ancoragem ', 'System classified as anchor device ') + '<b>' + esc(pais.tipoDispositivo || 'tipo C') + '</b>.</p>';
+    s += '<h2>3 · ' + L('Descrição do sistema', 'System description') + '</h2><p>' +
+      L('Sistema composto por cabo de aço tensionado entre ', 'System comprising a tensioned steel cable between ') +
+      '<b>' + (Math.round(R.dados.nVaos.valor) + 1) + ' ' + L('postes', 'posts') + '</b>, ' +
+      L('em', 'in') + ' ' + Math.round(R.dados.nVaos.valor) + ' ' + L('vão(s) de', 'span(s) of') + ' ' + U(R.dados.L) + ' ' + L('cada', 'each') +
+      ', ' + L('postes de', 'posts') + ' ' + U(R.dados.h) + '. ' + L('Cabo', 'Cable') + ' Ø' + R.dados.cabo.d + ' mm (' + esc(R.dados.cabo.material) + '), ' +
+      L('pré-tensão', 'pretension') + ' ' + U(R.dados.T0) + '.</p>';
+    if (Draw) s += '<div class="fig">' + Draw.iso3D(R) + '</div><div class="fig">' + Draw.planta(R) + '</div>';
+    s += '<h2>4 · ' + L('Materiais', 'Materials') + '</h2><p>' + L('Componentes em ', 'Components in ') + '<b>' +
+      (inox ? L('aço inoxidável AISI 316', 'AISI 316 stainless steel') : L('aço galvanizado a fogo', 'hot-dip galvanized steel')) + '</b>.</p>';
+    s += '<h2>5 · ' + L('Segurança e utilização', 'Safety and use') + '</h2><p>' +
+      L('O uso exige EPI completos (cinturão paraquedista, talabarte com absorvedor, trava-quedas, capacete) com certificação válida, e capacitação. Inspeção inicial e periódica (≤ 12 meses).',
+        'Use requires complete PPE (full-body harness, energy-absorbing lanyard, fall arrester, helmet) with valid certification, and training. Initial and periodic inspection (≤ 12 months).') + '</p>';
     s += assinatura(cfg, proj);
     s += '</div>';
     return s;
@@ -208,7 +211,8 @@
 
   var Report = {
     memorialCalculo: memorialCalculo, memorialDescritivo: memorialDescritivo,
-    cabecalho: cabecalho, assinatura: assinatura, _f: f, _v: v, _esc: esc, _dataBR: dataBR, _chkBadge: chkBadge
+    cabecalho: cabecalho, assinatura: assinatura, setCtx: setCtx, L: L, U: U,
+    _f: f, _U: U, _esc: esc, _dataBR: dataBR, _chkBadge: chkBadge, _L: L
   };
   root.LV = root.LV || {};
   root.LV.Report = Report;

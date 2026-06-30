@@ -25,9 +25,22 @@
   var ISO = Math.PI / 6;           // 30°
   var COS = Math.cos(ISO), SIN = Math.sin(ISO);
 
+  // ---- Locale (idioma + unidades) detectado a partir de R.pais ----
+  var _lang = 'pt', _imp = false;
+  function setLoc(R) { var p = R && R.pais ? R.pais : {}; _lang = (p.idioma === 'en') ? 'en' : 'pt'; _imp = (p.unidades === 'imperial'); }
+  function TR(pt, en) { return _lang === 'en' ? en : pt; }
+
   // ---- Helpers SVG ----
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-  function n2(x) { return (Math.round(x * 100) / 100).toFixed(2).replace('.', ','); }
+  function n2(x) { var s = (Math.round(x * 100) / 100).toFixed(2); return _lang === 'en' ? s : s.replace('.', ','); }
+  // Dimensão com conversão de unidade (SI/Imperial) e separador decimal por idioma
+  function dim(valor, unidade) {
+    var v = valor, u = unidade;
+    if (_imp && root.LV && root.LV.Units && u) { var c = root.LV.Units.conv(v, u, 'imperial'); v = c.valor; u = c.unidade; }
+    var dec = (u === 'lbf' || u === 'lbf·ft') ? 0 : 2;
+    var s = v.toFixed(dec); if (_lang !== 'en') s = s.replace('.', ',');
+    return s + (u ? ' ' + u : '');
+  }
   function line(x1, y1, x2, y2, cor, w, dash) {
     return '<line x1="' + x1.toFixed(1) + '" y1="' + y1.toFixed(1) + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) +
       '" stroke="' + cor + '" stroke-width="' + (w || 1) + '"' + (dash ? ' stroke-dasharray="' + dash + '"' : '') + ' stroke-linecap="round"/>';
@@ -81,6 +94,7 @@
   //  1 · 3D ISOMÉTRICO SIMPLIFICADO
   // ======================================================================
   function iso3D(R) {
+    setLoc(R);
     var L = num(R.dados.L.valor, 10), h = num(R.dados.h.valor, 1.2);
     var nVaos = Math.max(1, Math.round(num(R.dados.nVaos.valor, 1)));
     var f = num(R.tracao.f_tot.valor, 0.3);
@@ -148,18 +162,18 @@
     // Chamada (callout) da ZLQ junto ao trabalhador carregado
     var calloutX = cabopt[0] - 150, calloutY = cabopt[1] + 18;
     s += line(cabopt[0], cabopt[1], calloutX + 140, calloutY - 4, COR.cota, 0.8, '3 2');
-    s += text(calloutX, calloutY, 'ZLQ = ' + n2(ZLQ) + ' m ' + (R.zlq.check.ok ? '≤' : '>') + ' ' + n2(peDir) + ' m', { size: 11, weight: 'bold', cor: R.zlq.check.ok ? COR.ok : COR.falha });
+    s += text(calloutX, calloutY, (_lang === 'en' ? 'RFC = ' : 'ZLQ = ') + dim(ZLQ, 'm') + ' ' + (R.zlq.check.ok ? '≤' : '>') + ' ' + dim(peDir, 'm'), { size: 11, weight: 'bold', cor: R.zlq.check.ok ? COR.ok : COR.falha });
     rec([calloutX - 4, calloutY + 6]); rec([calloutX, calloutY - 14]);
 
     // --- Moldura automática + título/legenda no topo ---
     var pad = 16, topo = 56;
     var vbX = minX - pad, vbY = minY - topo, vbW = (maxX - minX) + 2 * pad, vbH = (maxY - minY) + topo + pad;
     var head = '';
-    head += text(vbX + 6, vbY + 20, 'LINHA DE VIDA HORIZONTAL — vista isométrica simplificada', { size: 13, weight: 'bold' });
-    head += text(vbX + 6, vbY + 37, spans + ' vão(s) de ' + n2(L) + ' m · poste h = ' + n2(h) + ' m · flecha f = ' + n2(f) + ' m · ' + nUsers + ' usuário(s)', { size: 10.5, cor: '#555' });
+    head += text(vbX + 6, vbY + 20, TR('LINHA DE VIDA HORIZONTAL — vista isométrica simplificada', 'HORIZONTAL LIFELINE — simplified isometric view'), { size: 13, weight: 'bold' });
+    head += text(vbX + 6, vbY + 37, spans + TR(' vão(s) de ', ' span(s) of ') + dim(L, 'm') + TR(' · poste h = ', ' · post h = ') + dim(h, 'm') + TR(' · flecha f = ', ' · sag f = ') + dim(f, 'm') + ' · ' + nUsers + TR(' usuário(s)', ' user(s)'), { size: 10.5, cor: '#555' });
     head += '<rect x="' + (vbX + vbW - 156) + '" y="' + (vbY + 8) + '" width="148" height="22" rx="4" fill="' + (aprovado ? COR.ok : COR.falha) + '"/>';
-    head += text(vbX + vbW - 148, vbY + 23, aprovado ? 'SISTEMA APROVADO' : 'SISTEMA REPROVADO', { size: 11, cor: '#fff', weight: 'bold' });
-    var notaEsq = 'esquemático — fora de escala' + (nVaos > spans ? ' · ' + nVaos + ' vãos no total' : '');
+    head += text(vbX + vbW - 148, vbY + 23, aprovado ? TR('SISTEMA APROVADO', 'SYSTEM APPROVED') : TR('SISTEMA REPROVADO', 'SYSTEM FAILED'), { size: 11, cor: '#fff', weight: 'bold' });
+    var notaEsq = TR('esquemático — fora de escala', 'schematic — not to scale') + (nVaos > spans ? TR(' · ' + nVaos + ' vãos no total', ' · ' + nVaos + ' spans total') : '');
     head += text(vbX + 6, vbY + vbH - 8, '(' + notaEsq + ')', { size: 10, cor: '#888' });
 
     return wrap(vbX.toFixed(0) + ' ' + vbY.toFixed(0) + ' ' + vbW.toFixed(0) + ' ' + vbH.toFixed(0), head + s, 'width="100%"');
@@ -169,55 +183,50 @@
   //  2 · ELEVAÇÃO COTADA DA ZLQ
   // ======================================================================
   function elevacaoZLQ(R) {
+    setLoc(R);
     var H_ql = num(R.zlq.H_ql.valor, 1.5), H_fr = num(R.zlq.H_fr.valor, 1.75);
     var Cpes = num(R.zlq.C_pes.valor, 1.5), Cseg = num(R.zlq.C_seg.valor, 1.0);
     var fl = num(R.zlq.f_tot.valor, 0.3), ZLQ = num(R.zlq.ZLQ.valor, 0), peDir = num(R.zlq.peDireito.valor, 0);
     var aprovado = R.zlq.check.ok;
-    var W = 620, Hh = 470, topo = 60, esq = 220;
+    var W = 640, Hh = 470, topo = 60, esq = 240;
     var maxm = Math.max(ZLQ, peDir) * 1.05;
     var sc = (Hh - topo - 40) / maxm;                     // px por metro
+    var sig = _lang === 'en' ? 'RFC' : 'ZLQ';
 
     var segs = [
-      { nome: 'Queda livre (H_ql)', v: H_ql, cor: '#e67e22' },
-      { nome: 'Frenagem do absorvedor (H_fr)', v: H_fr, cor: '#d35400' },
-      { nome: 'Flecha da linha (f)', v: fl, cor: '#c0392b' },
-      { nome: 'Engate aos pés (norma 1,5 m)', v: Cpes, cor: '#8e44ad' },
-      { nome: 'Distância de segurança (norma 1,0 m)', v: Cseg, cor: '#2c3e50' }
+      { nome: TR('Queda livre (H_ql)', 'Free fall (H_ff)'), v: H_ql, cor: '#e67e22' },
+      { nome: TR('Frenagem do absorvedor (H_fr)', 'Deceleration (H_dec)'), v: H_fr, cor: '#d35400' },
+      { nome: TR('Flecha da linha (f)', 'Line deflection (f)'), v: fl, cor: '#c0392b' },
+      { nome: TR('Engate aos pés (1,5 m)', 'Harness-to-feet (1.5 m)'), v: Cpes, cor: '#8e44ad' },
+      { nome: TR('Distância de segurança (1,0 m)', 'Safety distance (1.0 m)'), v: Cseg, cor: '#2c3e50' }
     ];
     var s = '';
-    s += text(20, 30, 'ZONA LIVRE DE QUEDA (ZLQ) — NBR 16325-2 Anexo C.2', { size: 13, weight: 'bold' });
-    // linha da ancoragem
+    s += text(20, 30, TR('ZONA LIVRE DE QUEDA (ZLQ) — NBR 16325-2 Anexo C.2', 'REQUIRED FALL CLEARANCE (RFC) — NBR 16325-2 Annex C.2 / ANSI Z359'), { size: 13, weight: 'bold' });
     var y = topo;
-    s += line(esq - 150, y, esq + 120, y, COR.cota, 1.5);
-    s += text(esq - 150, y - 6, 'Nível da ancoragem / cabo', { size: 11, cor: COR.cota });
-    // segmentos empilhados
+    s += line(esq - 170, y, esq + 120, y, COR.cota, 1.5);
+    s += text(esq - 170, y - 6, TR('Nível da ancoragem / cabo', 'Anchorage / cable level'), { size: 11, cor: COR.cota });
     segs.forEach(function (seg) {
       var hpx = seg.v * sc;
       s += '<rect x="' + esq + '" y="' + y + '" width="40" height="' + hpx + '" fill="' + seg.cor + '" fill-opacity="0.85"/>';
-      // cota lateral
       s += line(esq - 10, y, esq - 10, y + hpx, seg.cor, 1.2);
       s += line(esq - 14, y, esq - 6, y, seg.cor, 1.2);
       s += line(esq - 14, y + hpx, esq - 6, y + hpx, seg.cor, 1.2);
-      s += text(esq - 18, y + hpx / 2 + 4, seg.nome + ' = ' + n2(seg.v) + ' m', { size: 10.5, cor: '#333', anchor: 'end' });
+      s += text(esq - 18, y + hpx / 2 + 4, seg.nome + ' = ' + dim(seg.v, 'm'), { size: 10.5, cor: '#333', anchor: 'end' });
       y += hpx;
     });
     var yZLQ = y;
-    // total ZLQ (chave à direita)
     s += line(esq + 60, topo, esq + 60, yZLQ, aprovado ? COR.ok : COR.falha, 1.5);
     s += line(esq + 54, topo, esq + 66, topo, aprovado ? COR.ok : COR.falha, 1.5);
     s += line(esq + 54, yZLQ, esq + 66, yZLQ, aprovado ? COR.ok : COR.falha, 1.5);
-    s += text(esq + 70, (topo + yZLQ) / 2, 'ZLQ = ' + n2(ZLQ) + ' m', { size: 12.5, weight: 'bold', cor: aprovado ? COR.ok : COR.falha });
-    // pé-direito disponível (referência)
+    s += text(esq + 70, (topo + yZLQ) / 2, sig + ' = ' + dim(ZLQ, 'm'), { size: 12.5, weight: 'bold', cor: aprovado ? COR.ok : COR.falha });
     var yPe = topo + peDir * sc;
     s += line(esq - 60, yPe, esq + 120, yPe, COR.piso, 2, '6 3');
-    s += text(esq + 122, yPe + 4, 'piso/obstáculo a ' + n2(peDir) + ' m', { size: 10.5, cor: COR.piso });
-    // trabalhador suspenso na cota da flecha
+    s += text(esq + 122, yPe + 4, TR('piso/obstáculo a ', 'floor/obstacle at ') + dim(peDir, 'm'), { size: 10.5, cor: COR.piso });
     var fig = trabalhador(esq + 20, topo + (H_ql + H_fr + fl) * sc + 0.0, 70, COR.trabalhador);
     s += fig.svg;
-    // veredito
     s += '<rect x="20" y="' + (Hh - 34) + '" width="' + (W - 40) + '" height="26" rx="5" fill="' + (aprovado ? '#e8f6ee' : '#fdecea') + '" stroke="' + (aprovado ? COR.ok : COR.falha) + '"/>';
-    s += text(30, Hh - 16, (aprovado ? '✔ ' : '✘ ') + 'ZLQ ' + n2(ZLQ) + ' m ' + (aprovado ? '≤' : '>') + ' ' + n2(peDir) + ' m disponível — ' +
-      (aprovado ? 'CONDIÇÃO ATENDIDA' : 'NÃO ATENDIDA: rever vão, absorvedor ou ponto de ancoragem'),
+    s += text(30, Hh - 16, (aprovado ? '✔ ' : '✘ ') + sig + ' ' + dim(ZLQ, 'm') + ' ' + (aprovado ? '≤' : '>') + ' ' + dim(peDir, 'm') + ' — ' +
+      (aprovado ? TR('CONDIÇÃO ATENDIDA', 'CONDITION MET') : TR('NÃO ATENDIDA: rever vão/absorvedor/ancoragem', 'NOT MET: review span/absorber/anchorage')),
       { size: 11.5, weight: 'bold', cor: aprovado ? COR.ok : COR.falha });
     return wrap('0 0 ' + W + ' ' + Hh, s, 'width="100%"');
   }
@@ -226,24 +235,25 @@
   //  3 · PLANTA DOS VÃOS
   // ======================================================================
   function planta(R) {
+    setLoc(R);
     var L = num(R.dados.L.valor, 10), nVaos = Math.max(1, Math.round(num(R.dados.nVaos.valor, 1)));
     var W = 680, Hh = 200, mx = 60, y = 110;
     var total = nVaos * L;
     var sc = (W - 2 * mx) / total;
     var s = '';
-    s += text(20, 30, 'PLANTA — DISTRIBUIÇÃO DOS POSTES E VÃOS', { size: 13, weight: 'bold' });
+    s += text(20, 30, TR('PLANTA — DISTRIBUIÇÃO DOS POSTES E VÃOS', 'PLAN VIEW — POST AND SPAN LAYOUT'), { size: 13, weight: 'bold' });
     s += line(mx, y, mx + total * sc, y, COR.cabo, 2.5);              // cabo
     for (var i = 0; i <= nVaos; i++) {
       var x = mx + i * L * sc;
       s += circle(x, y, 6, (i === 0 || i === nVaos) ? COR.poste : '#fff', COR.poste, 2);
-      s += text(x, y - 14, (i === 0 || i === nVaos) ? 'P' + (i + 1) + ' (extremo)' : 'P' + (i + 1), { size: 9.5, anchor: 'middle', cor: '#333' });
+      s += text(x, y - 14, (i === 0 || i === nVaos) ? 'P' + (i + 1) + TR(' (extremo)', ' (end)') : 'P' + (i + 1), { size: 9.5, anchor: 'middle', cor: '#333' });
       if (i < nVaos) {
         var xm = mx + (i + 0.5) * L * sc;
         s += line(mx + i * L * sc, y + 22, mx + (i + 1) * L * sc, y + 22, COR.cota, 1);
-        s += text(xm, y + 36, 'L = ' + n2(L) + ' m', { size: 10, anchor: 'middle', cor: COR.cota });
+        s += text(xm, y + 36, 'L = ' + dim(L, 'm'), { size: 10, anchor: 'middle', cor: COR.cota });
       }
     }
-    s += text(mx + total * sc / 2, Hh - 16, 'Comprimento total da linha = ' + n2(total) + ' m  ·  ' + (nVaos + 1) + ' postes  ·  ' + nVaos + ' vão(s)', { size: 11, anchor: 'middle', weight: 'bold', cor: '#333' });
+    s += text(mx + total * sc / 2, Hh - 16, TR('Comprimento total = ', 'Total length = ') + dim(total, 'm') + '  ·  ' + (nVaos + 1) + TR(' postes  ·  ', ' posts  ·  ') + nVaos + TR(' vão(s)', ' span(s)'), { size: 11, anchor: 'middle', weight: 'bold', cor: '#333' });
     return wrap('0 0 ' + W + ' ' + Hh, s, 'width="100%"');
   }
 
@@ -251,14 +261,15 @@
   //  4 · ESFORÇOS NO POSTE EXTREMO
   // ======================================================================
   function esforcosPoste(R) {
+    setLoc(R);
     var h = num(R.dados.h.valor, 1.2);
     var H = num(R.reacoes.H.valor, 0), V = num(R.reacoes.V.valor, 0), M = num(R.reacoes.M_k.valor, 0);
     var util = num(R.poste.util.valor, 0); var ok = R.poste.check_util.ok;
     var W = 520, Hh = 420, baseX = 200, baseY = 330, sc = 170 / Math.max(0.6, h);
     var topY = baseY - h * sc;
     var s = '';
-    s += text(20, 30, 'ESFORÇOS NO POSTE EXTREMO (NBR 8800)', { size: 13, weight: 'bold' });
-    s += text(20, 48, 'Perfil ' + esc(R.poste.perfil) + ' · aço ' + esc(R.poste.aco), { size: 10.5, cor: '#555' });
+    s += text(20, 30, TR('ESFORÇOS NO POSTE EXTREMO (NBR 8800)', 'END POST FORCES (AISC 360 / NBR 8800)'), { size: 13, weight: 'bold' });
+    s += text(20, 48, TR('Perfil ', 'Profile ') + esc(R.poste.perfil) + TR(' · aço ', ' · steel ') + esc(R.poste.aco), { size: 10.5, cor: '#555' });
     // solo/base
     s += line(baseX - 70, baseY, baseX + 70, baseY, COR.solo, 6);
     for (var i = -60; i <= 60; i += 14) s += line(baseX + i, baseY, baseX + i - 8, baseY + 9, COR.solo, 2);
@@ -267,29 +278,29 @@
     s += polygon([[baseX - 22, baseY], [baseX + 22, baseY], [baseX + 22, baseY + 7], [baseX - 22, baseY + 7]], COR.poste, '#222', 0.6, 1); // placa de base
     // seta H (horizontal no topo)
     s += seta(baseX, topY, baseX + 90, topY, COR.cabo, 3);
-    s += text(baseX + 96, topY + 4, 'H = ' + n2(H) + ' kN', { size: 11.5, weight: 'bold', cor: COR.cabo });
+    s += text(baseX + 96, topY + 4, 'H = ' + dim(H, 'kN'), { size: 11.5, weight: 'bold', cor: COR.cabo });
     // seta V (vertical baixo no topo)
     s += seta(baseX, topY, baseX, topY + 46, '#8e44ad', 3);
-    s += text(baseX + 6, topY + 40, 'V = ' + n2(V) + ' kN', { size: 11, cor: '#8e44ad' });
+    s += text(baseX + 6, topY + 40, 'V = ' + dim(V, 'kN'), { size: 11, cor: '#8e44ad' });
     // momento na base (arco)
     s += '<path d="M ' + (baseX - 34) + ' ' + (baseY - 26) + ' A 34 34 0 0 1 ' + (baseX + 4) + ' ' + (baseY - 40) + '" fill="none" stroke="' + COR.cota + '" stroke-width="2.4"/>';
     s += seta(baseX + 0, baseY - 40, baseX + 10, baseY - 36, COR.cota, 2.4);
-    s += text(baseX - 150, baseY - 16, 'M = H·h = ' + n2(M) + ' kN·m', { size: 11.5, weight: 'bold', cor: COR.cota });
+    s += text(baseX - 160, baseY - 16, 'M = H·h = ' + dim(M, 'kN·m'), { size: 11.5, weight: 'bold', cor: COR.cota });
     // cota da altura
     s += line(baseX - 95, topY, baseX - 95, baseY, '#555', 1);
-    s += text(baseX - 100, (topY + baseY) / 2, 'h = ' + n2(h) + ' m', { size: 10.5, anchor: 'end', cor: '#555', rot: -90 });
+    s += text(baseX - 100, (topY + baseY) / 2, 'h = ' + dim(h, 'm'), { size: 10.5, anchor: 'end', cor: '#555', rot: -90 });
     // barra de utilização
     var bx = 345, bw = 150, by = 150;
-    s += text(bx, by - 10, 'Utilização (flexo-compressão)', { size: 11, weight: 'bold' });
+    s += text(bx, by - 10, TR('Utilização (flexo-compressão)', 'Utilization (beam-column)'), { size: 11, weight: 'bold' });
     s += '<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="18" rx="3" fill="#eee" stroke="#ccc"/>';
     s += '<rect x="' + bx + '" y="' + by + '" width="' + (Math.min(1, util) * bw).toFixed(1) + '" height="18" rx="3" fill="' + (ok ? COR.ok : COR.falha) + '"/>';
     s += line(bx + bw, by - 3, bx + bw, by + 21, '#333', 1.2);
-    s += text(bx + bw + 4, by + 13, '1,0', { size: 10, cor: '#333' });
-    s += text(bx, by + 38, 'índice = ' + n2(util) + (ok ? '  ✔ ≤ 1,0' : '  ✘ > 1,0'), { size: 11.5, weight: 'bold', cor: ok ? COR.ok : COR.falha });
+    s += text(bx + bw + 4, by + 13, _lang === 'en' ? '1.0' : '1,0', { size: 10, cor: '#333' });
+    s += text(bx, by + 38, TR('índice = ', 'index = ') + n2(util) + (ok ? (_lang === 'en' ? '  ✔ ≤ 1.0' : '  ✔ ≤ 1,0') : (_lang === 'en' ? '  ✘ > 1.0' : '  ✘ > 1,0')), { size: 11.5, weight: 'bold', cor: ok ? COR.ok : COR.falha });
     // mini quadro de resistências
-    s += text(bx, by + 70, 'M_Rd = ' + n2(num(R.poste.M_Rd.valor)) + ' kN·m', { size: 10.5, cor: '#333' });
-    s += text(bx, by + 88, 'N_Rd = ' + n2(num(R.poste.N_Rd.valor)) + ' kN (c/ flambagem χ=' + n2(num(R.poste.chi.valor)) + ')', { size: 10.5, cor: '#333' });
-    s += text(bx, by + 106, 'V_Rd = ' + n2(num(R.cisalhamento.V_Rd.valor)) + ' kN', { size: 10.5, cor: '#333' });
+    s += text(bx, by + 70, 'M_Rd = ' + dim(num(R.poste.M_Rd.valor), 'kN·m'), { size: 10.5, cor: '#333' });
+    s += text(bx, by + 88, 'N_Rd = ' + dim(num(R.poste.N_Rd.valor), 'kN') + ' (χ=' + n2(num(R.poste.chi.valor)) + ')', { size: 10.5, cor: '#333' });
+    s += text(bx, by + 106, 'V_Rd = ' + dim(num(R.cisalhamento.V_Rd.valor), 'kN'), { size: 10.5, cor: '#333' });
     return wrap('0 0 ' + W + ' ' + Hh, s, 'width="100%"');
   }
 

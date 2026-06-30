@@ -35,9 +35,14 @@
   var state = { rota: 'painel', projetoId: null, resultado: null };
   LV.state = state;
 
+  function T(k) { return LV.I18n ? LV.I18n.t(k) : k; }
+
   // ---- Boot ----
   function boot() {
     var app = qs('#app');
+    // Seleção de país/idioma na primeira execução
+    if (LV.Paises && !LV.Paises.getSelecionado()) return telaPais();
+    if (LV.Paises && LV.I18n) LV.I18n.setLang(LV.Paises.get(LV.Paises.getSelecionado()).idioma);
     LV.Auth.init().then(function () {
       var lic = LV.Auth.licencaAtual();
       if (!lic) return telaLicenca();
@@ -49,6 +54,32 @@
         montarApp();
       });
     }).catch(function (e) { app.innerHTML = '<div class="erro-fatal">Erro ao iniciar: ' + e.message + '</div>'; });
+  }
+
+  // ---- Tela de seleção de país / idioma ----
+  function telaPais() {
+    var app = clear(qs('#app'));
+    function escolher(cod) {
+      LV.Paises.setSelecionado(cod);
+      if (LV.I18n) LV.I18n.setLang(LV.Paises.get(cod).idioma);
+      boot();
+    }
+    var paises = LV.Paises.lista();
+    app.appendChild(h('div', { class: 'auth-wrap' }, [
+      h('div', { class: 'auth-card pais-card' }, [
+        marca(),
+        h('h2', { text: 'Selecione o país / Select country' }),
+        h('p', { class: 'muted', text: 'O software ajusta normas, unidades e idioma automaticamente. / The software adapts standards, units and language automatically.' }),
+        h('div', { class: 'pais-grid' }, paises.map(function (p) {
+          return h('button', { class: 'pais-btn', onclick: function () { escolher(p.codigo); } }, [
+            h('span', { class: 'pais-flag', text: p.bandeira }),
+            h('span', { class: 'pais-nome', text: p.nome }),
+            h('span', { class: 'pais-sub', text: p.codigo === 'BR' ? 'Português · SI · NR-35/NBR' : 'English · Imperial · OSHA/ANSI' })
+          ]);
+        })),
+        rodapeMarca()
+      ])
+    ]));
   }
 
   // ---- Tela de licença ----
@@ -144,9 +175,12 @@
         ]);
       })),
       h('div', { class: 'sb-rodape' }, [
-        h('div', { class: 'sb-user' }, [h('b', { text: sess.nome }), h('span', { text: LV.Auth.PERFIS[sess.role] })]),
+        h('div', { class: 'sb-user' }, [h('b', { text: sess.nome }), h('span', { text: T('role.' + sess.role) })]),
         h('div', { class: 'sb-lic small', text: 'Licença: ' + (lic ? lic.cliente + (lic.plano === 'TRIAL' ? ' (avaliação)' : '') : '—') }),
-        h('button', { class: 'btn ghost block small', text: 'Sair', onclick: function () { LV.Auth.logout(); toast('Sessão encerrada.', 'info'); telaLogin(); } })
+        h('button', { class: 'sb-pais', title: 'Trocar país / Change country', onclick: function () { trocarPais(); } }, [
+          h('span', { text: nomePaisAtual() })
+        ]),
+        h('button', { class: 'btn ghost block small', text: T('app.sair'), onclick: function () { LV.Auth.logout(); toast('Sessão encerrada.', 'info'); telaLogin(); } })
       ])
     ]);
     var main = h('main', { class: 'conteudo', id: 'conteudo' });
@@ -155,12 +189,13 @@
   }
 
   function navItens(sess) {
-    var itens = [{ rota: 'painel', nome: 'Painel', ico: '▤' }];
-    if (LV.Auth.pode('editar_projeto', sess)) itens.push({ rota: 'projeto', nome: 'Projeto', ico: '✎' });
-    if (LV.Auth.pode('calcular', sess)) itens.push({ rota: 'resultados', nome: 'Resultados', ico: '∑' });
-    if (LV.Auth.pode('emitir_prontuario', sess)) itens.push({ rota: 'prontuario', nome: 'Prontuário', ico: '◳' });
-    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'registros', nome: 'Registros', ico: '☑' });
-    if (LV.Auth.pode('gerenciar_usuarios', sess)) itens.push({ rota: 'admin', nome: 'Administração', ico: '⚙' });
+    var itens = [{ rota: 'painel', nome: T('app.painel'), ico: '▤' }];
+    if (LV.Auth.pode('editar_projeto', sess)) itens.push({ rota: 'projeto', nome: T('app.projeto'), ico: '✎' });
+    if (LV.Auth.pode('calcular', sess)) itens.push({ rota: 'resultados', nome: T('app.resultados'), ico: '∑' });
+    if (LV.Auth.pode('emitir_prontuario', sess)) itens.push({ rota: 'prontuario', nome: T('app.prontuario'), ico: '◳' });
+    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'conformidade', nome: T('app.conformidade'), ico: '◎' });
+    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'registros', nome: T('app.registros'), ico: '☑' });
+    if (LV.Auth.pode('gerenciar_usuarios', sess)) itens.push({ rota: 'admin', nome: T('app.admin'), ico: '⚙' });
     return itens;
   }
 
@@ -176,11 +211,27 @@
         case 'projeto': V.projeto(alvo); break;
         case 'resultados': V.resultados(alvo); break;
         case 'prontuario': V.prontuario(alvo); break;
+        case 'conformidade': V.conformidade(alvo); break;
         case 'registros': V.registros(alvo); break;
         case 'admin': V.admin(alvo); break;
         default: V.painel(alvo);
       }
     } catch (e) { alvo.appendChild(h('div', { class: 'erro-fatal', text: 'Erro ao renderizar: ' + e.message })); }
+  }
+
+  function nomePaisAtual() {
+    if (!LV.Paises) return '';
+    var p = LV.Paises.get(LV.Paises.getSelecionado());
+    var nm = (LV.I18n && LV.I18n.getLang() === 'en' && p.nomeEn) ? p.nomeEn : p.nome;
+    return (p.bandeira || '') + ' ' + nm;
+  }
+  function trocarPais() {
+    var atualP = LV.Paises.getSelecionado();
+    var novo = atualP === 'BR' ? 'US' : 'BR';
+    if (!confirmar('Trocar para ' + LV.Paises.get(novo).nome + '? (normas, unidades e idioma) / Switch to ' + LV.Paises.get(novo).nome + '?')) return;
+    LV.Paises.setSelecionado(novo);
+    if (LV.I18n) LV.I18n.setLang(LV.Paises.get(novo).idioma);
+    montarApp();
   }
 
   // ---- Auxiliares visuais ----
@@ -189,7 +240,7 @@
   function rotulo(t) { return h('label', { class: 'rot', text: t }); }
 
   LV.UI = {
-    h: h, qs: qs, clear: clear, toast: toast, confirmar: confirmar, boot: boot,
+    h: h, qs: qs, clear: clear, toast: toast, confirmar: confirmar, boot: boot, T: T,
     irPara: irPara, montarApp: montarApp, rotulo: rotulo, renderRota: renderRota
   };
 })(typeof self !== 'undefined' ? self : this);

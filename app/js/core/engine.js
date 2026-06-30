@@ -93,6 +93,14 @@
     deps(root);
     var out = { entrada: inp, avisos: [], ref: {} };
 
+    // ---- 0 · PERFIL DO PAÍS (critérios normativos) ------------------------
+    //   Brasil (padrão): 6 kN / 15 kN · EUA: 8 kN / 22,2 kN.
+    var pais = (root.LV && root.LV.Paises && inp.pais) ? root.LV.Paises.get(inp.pais) : null;
+    if (!pais) pais = { forcaTrabalhadorMax: 6, ancoragemMin: 15, fsCaboMin: 2, idioma: 'pt', unidades: 'SI',
+      refForca: 'NR-35.6.7', refAncoragem: 'NR-18 18.12.12.2 (≥ 15 kN)', refLinha: 'NBR 16325-2 (tipo C)', nome: 'Brasil',
+      normas: ['NR-35', 'NR-18', 'ABNT NBR 16325-1/2', 'ABNT NBR 8800'], tipoDispositivo: 'NBR 16325 tipo C' };
+    out.pais = pais;
+
     // ---- 1 · DADOS DE ENTRADA (vínculos) ----------------------------------
     var cabo   = Data.findCable(inp.caboMaterial, inp.caboDiametro);
     var perfil = Data.findProfile(inp.posteperfil);
@@ -117,11 +125,12 @@
       EA: g(EA, 'kN'), nVaos: g(num(inp.nVaos, 'Nº de vãos'), 'un')
     };
 
-    // ---- 2 · FORÇA NO TRABALHADOR (NR-35 35.6.7) --------------------------
+    // ---- 2 · FORÇA NO TRABALHADOR (critério do país) ---------------------
     var Q = n * Ft;                                  // carga aplicada à linha
+    var fMax = pais.forcaTrabalhadorMax;
     out.trabalhador = {
       Ft: g(Ft, 'kN'), Q: g(Q, 'kN'),
-      check_Ft: chk(Ft <= 6, 6, Ft, '≤', 'kN', 'NR-35 35.6.7')
+      check_Ft: chk(Ft <= fMax, fMax, Ft, '≤', 'kN', pais.refForca)
     };
 
     // ---- 3 · FLECHA E TRAÇÃO (equilíbrio + compatibilidade elástica) ------
@@ -168,7 +177,7 @@
     var FS_trab = Frup / T0;
     out.cabo = {
       FS_din: g(FS_din, '—'), FS_trab: g(FS_trab, '—'),
-      check_din: chk(FS_din >= 2, 2, FS_din, '≥', '—', 'NBR 16325 (dinâmico)'),
+      check_din: chk(FS_din >= pais.fsCaboMin, pais.fsCaboMin, FS_din, '≥', '—', 'FS dinâmico (' + pais.refLinha + ')'),
       check_trab: chk(FS_trab >= 5, 5, FS_trab, '≥', '—', 'NR-18 Anexo II (CR ≥ 5× carga)')
     };
 
@@ -176,11 +185,29 @@
     var H = T * Math.cos(rad(theta));                // reação horizontal no topo
     var V = T * Math.sin(rad(theta));                // reação vertical no topo
     var Pp = sec.A * 1e-4 * h * Data.GAMMA_STEEL;    // peso próprio [kN] (A[cm²]→m², h[m], γ[kN/m³])
-    var M_k = H * h;                                 // momento na base (poste extremo)
+
+    // ---- 6b · AÇÃO DO VENTO no poste (NBR 6123 / EN 1991) — opcional ------
+    //   Só entra quando o usuário informa a velocidade básica V0 (silos/estruturas expostas).
+    var V0 = num(inp.ventoV0 != null ? inp.ventoV0 : 0, 'Vento V0', true);
+    var M_wind = 0, F_wind = 0, q_vento = 0, Vk = 0;
+    if (V0 > 0) {
+      var S1 = num(inp.ventoS1 != null ? inp.ventoS1 : 1.0, 'S1', true);
+      var S2 = num(inp.ventoS2 != null ? inp.ventoS2 : 1.0, 'S2', true);
+      var S3 = num(inp.ventoS3 != null ? inp.ventoS3 : 1.0, 'S3', true);
+      var Ca = num(inp.ventoCa != null ? inp.ventoCa : 2.0, 'Ca', true); // coef. de arrasto (perfil + equipamentos)
+      Vk = V0 * S1 * S2 * S3;
+      q_vento = 0.613 * Vk * Vk / 1000;              // kN/m²
+      var bExp = sec.geom.b / 1000;                  // largura exposta [m]
+      F_wind = Ca * q_vento * bExp * h;              // kN (carga distribuída no fuste)
+      M_wind = F_wind * h / 2;                       // kN·m (resultante a meia-altura)
+    }
+
+    var M_k = H * h + M_wind;                        // momento na base (poste extremo) + vento
     var N_k = V + Pp;                                // força axial
     out.reacoes = {
       H: g(H, 'kN'), V: g(V, 'kN'), Pp: g(Pp, 'kN'), M_k: g(M_k, 'kN·m'), N_k: g(N_k, 'kN'),
-      nota: 'Poste EXTREMO (mais solicitado). Postes intermediários recebem a diferença de tração entre vãos; por segurança adota-se o caso extremo.'
+      vento: V0 > 0 ? { V0: g(V0, 'm/s'), Vk: g(Vk, 'm/s'), q: g(q_vento, 'kN/m²'), F: g(F_wind, 'kN'), M: g(M_wind, 'kN·m'), ref: 'NBR 6123 / EN 1991-1-4' } : null,
+      nota: 'Poste EXTREMO (mais solicitado). Postes intermediários recebem a diferença de tração entre vãos; por segurança adota-se o caso extremo.' + (V0 > 0 ? ' Inclui ação do vento.' : '')
     };
 
     // ---- 7 · DIMENSIONAMENTO DO POSTE (NBR 8800) --------------------------
@@ -250,11 +277,12 @@
     var n_ch = num(inp.nChumbadores, 'Nº de chumbadores');
     var d_ch = num(inp.bracoChumbadores, 'Braço dos chumbadores');
     var T_ch = M_Sd / ((n_ch / 2) * d_ch);           // tração de cálculo por chumbador
-    var R_anc = Math.max(15, T);                      // resistência mínima do dispositivo
+    var ancMin = pais.ancoragemMin;
+    var R_anc = Math.max(ancMin, T);                  // resistência mínima do dispositivo
     out.ancoragem = {
       n_ch: g(n_ch, 'un'), d_ch: g(d_ch, 'm'), T_ch: g(T_ch, 'kN'),
       R_anc: g(R_anc, 'kN'),
-      check_15kN: chk(R_anc >= 15, 15, R_anc, '≥', 'kN', 'NR-18 18.12.12.2 (≥ 15 kN)'),
+      check_15kN: chk(R_anc >= ancMin, ancMin, R_anc, '≥', 'kN', pais.refAncoragem),
       nota: 'Verificar o arrancamento dos chumbadores no concreto/aço (catálogo do fabricante) ≥ T_ch e a flexão da placa de base.'
     };
 
@@ -276,6 +304,47 @@
       nota: 'Espessura mínima estimada da placa por flexão do volado. Detalhar conforme projeto.'
     };
 
+    // ---- 8c · ANÁLISE DINÂMICA: MÉTODO DE ENERGIA E FATOR DE QUEDA --------
+    //   Verificação complementar (NBR 16325 / EN 355): confirma que o absorvedor
+    //   pessoal dissipa a energia da queda mantendo a força ≤ 6 kN.
+    var massaPad = num(inp.massaUsuario || 100, 'Massa do usuário', true);   // kg (padrão normativo 100 kg)
+    var gAcel = 9.81;
+    var compTal = num(inp.compTalabarte || 1.5, 'Comprimento do talabarte', true); // m
+    var fatorQueda = H_ql / Math.max(compTal, 0.1);                          // fator de queda (0–2)
+    var E_queda = massaPad * gAcel * (H_ql + H_fr) / 1000;                   // kJ ≈ energia total
+    var W_abs = Ft * H_fr;                                                    // kJ dissipado pelo absorvedor (F·curso)
+    var energiaOk = W_abs >= massaPad * gAcel * H_ql / 1000;                  // absorvedor cobre a energia da queda livre
+    out.dinamica = {
+      massa: g(massaPad, 'kg'), compTalabarte: g(compTal, 'm'),
+      fatorQueda: g(fatorQueda, '—'),
+      classeFQ: fatorQueda <= 0.5 ? 'baixo (seguro)' : (fatorQueda < 1.5 ? 'atenção' : 'alto risco'),
+      E_queda: g(E_queda, 'kJ'), W_abs: g(W_abs, 'kJ'),
+      check_energia: chk(energiaOk, massaPad * gAcel * H_ql / 1000, W_abs, '≥', 'kJ', 'NBR 16325 / EN 355 (energia ≤ absorvedor)'),
+      ref: 'Método de energia — confirma adequação do absorvedor pessoal (limite 6 kN).'
+    };
+
+    // ---- 8d · EFEITO DA TEMPERATURA na pré-tensão (opcional) --------------
+    var dTemp = num(inp.deltaTemp != null ? inp.deltaTemp : 0, 'ΔT', true);
+    if (dTemp !== 0) {
+      var alpha = 12e-6;                                  // coef. dilatação do aço [1/°C]
+      var dT0 = -EA * alpha * dTemp;                      // variação da pré-tensão [kN] (aquecimento relaxa)
+      out.temperatura = {
+        deltaTemp: g(dTemp, '°C'), variacaoT0: g(dT0, 'kN'),
+        T0_quente: g(T0 + (dTemp > 0 ? dT0 : 0), 'kN'), T0_frio: g(T0 + (dTemp < 0 ? -dT0 : 0), 'kN'),
+        nota: 'Variação da pré-tensão por ΔT (α=12·10⁻⁶/°C). Reapertar o esticador conforme a estação, se necessário.'
+      };
+    }
+
+    // ---- 8e · POSTE DE CANTO / MUDANÇA DE DIREÇÃO (opcional) --------------
+    var angCanto = num(inp.anguloMudanca != null ? inp.anguloMudanca : 0, 'Ângulo de mudança', true);
+    if (angCanto > 0) {
+      var R_canto = 2 * T * Math.sin(rad(angCanto / 2));  // resultante das duas trações
+      out.canto = {
+        angulo: g(angCanto, '°'), R: g(R_canto, 'kN'),
+        nota: 'Poste de canto recebe a RESULTANTE das trações dos dois tramos (R = 2·T·sen(β/2)). Dimensionar este poste e sua ancoragem para R, não para H.'
+      };
+    }
+
     // ---- 9 · INDICADORES E VEREDITO ---------------------------------------
     var checks = [
       out.trabalhador.check_Ft,
@@ -290,12 +359,12 @@
       aprovado: aprovado,
       texto: aprovado ? 'APROVADO' : 'REPROVADO — revisar dados',
       indicadores: [
-        { nome: 'Força no trabalhador ≤ 6 kN (NR-35)', ok: out.trabalhador.check_Ft.ok },
-        { nome: 'FS dinâmico do cabo ≥ 2', ok: out.cabo.check_din.ok },
-        { nome: 'ZLQ ≤ pé-direito livre disponível', ok: out.zlq.check.ok },
-        { nome: 'Utilização do poste ≤ 1,0 (NBR 8800)', ok: out.poste.check_util.ok },
-        { nome: 'Cisalhamento do poste OK (NBR 8800)', ok: out.cisalhamento.check.ok },
-        { nome: 'Dispositivo de ancoragem ≥ 15 kN (NR-18)', ok: out.ancoragem.check_15kN.ok }
+        { nome: 'Força no trabalhador ≤ ' + fMax + ' kN', nomeEn: 'Worker force ≤ ' + fMax + ' kN', ok: out.trabalhador.check_Ft.ok },
+        { nome: 'FS dinâmico do cabo ≥ ' + pais.fsCaboMin, nomeEn: 'Cable dynamic SF ≥ ' + pais.fsCaboMin, ok: out.cabo.check_din.ok },
+        { nome: 'ZLQ ≤ pé-direito livre disponível', nomeEn: 'Fall clearance ≤ available height', ok: out.zlq.check.ok },
+        { nome: 'Utilização do poste ≤ 1,0', nomeEn: 'Post utilization ≤ 1.0', ok: out.poste.check_util.ok },
+        { nome: 'Cisalhamento do poste OK', nomeEn: 'Post shear OK', ok: out.cisalhamento.check.ok },
+        { nome: 'Ancoragem ≥ ' + fmtN(ancMin) + ' kN', nomeEn: 'Anchorage ≥ ' + fmtN(ancMin) + ' kN', ok: out.ancoragem.check_15kN.ok }
       ]
     };
 
@@ -306,6 +375,7 @@
   //  Helpers de empacotamento
   // -------------------------------------------------------------------------
   function g(valor, unidade) { return { valor: valor, unidade: unidade }; }
+  function fmtN(x) { return (Math.round(x * 10) / 10).toString().replace('.', ','); }
   function chk(ok, exigido, obtido, op, unidade, ref) {
     return { ok: !!ok, exigido: exigido, obtido: obtido, op: op, unidade: unidade, ref: ref };
   }
