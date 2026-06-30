@@ -1,0 +1,15 @@
+# Dependências (somente para testes locais; não fazem parte do produto)
+node_modules/
+package-lock.json
+
+# Sistema operacional / editores
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Temporários
+*.log
+/tmp/
+*.tmp

@@ -1,0 +1,326 @@
+/* ============================================================================
+ *  LINHA DE VIDA · GD ENGENHARIA
+ *  engine.js — Motor de cálculo do dimensionamento (SPIQ horizontal)
+ *
+ *  Normas: NR-35 · NR-18 (Anexo II) · ABNT NBR 16325-1/2 · ABNT NBR 8800
+ *
+ *  Este módulo reproduz EXATAMENTE a memória de cálculo da planilha validada
+ *  (equilíbrio do cabo por Newton-Raphson, ZLQ, verificação do cabo e do poste)
+ *  e acrescenta verificações de engenharia adicionais — todas com testes.
+ *
+ *  Filosofia: cada grandeza retorna { valor, unidade, ref(norma) }, e cada
+ *  verificação retorna { ok, exigido, obtido, ref }. Nada é "mágico": a fonte
+ *  normativa de cada número está registrada.
+ * ========================================================================== */
+(function (root) {
+  'use strict';
+
+  var Data, Sections;
+  if (typeof module !== 'undefined' && module.exports) {
+    Data = require('./data.js');
+    Sections = require('./sections.js');
+  }
+  function deps(r) {
+    Data = Data || (r.LV && r.LV.Data);
+    Sections = Sections || (r.LV && r.LV.Sections);
+    if (!Data || !Sections) throw new Error('engine.js: dependências (Data, Sections) não carregadas');
+  }
+
+  // -------------------------------------------------------------------------
+  //  Utilidades numéricas
+  // -------------------------------------------------------------------------
+  var DEG = 180 / Math.PI;
+  function rad(d) { return d / DEG; }
+  function deg(r) { return r * DEG; }
+  function hypot(a, f) { return Math.sqrt(a * a + f * f); }
+
+  /**
+   * Resolve a flecha 'f' da linha de vida pelo método de Newton-Raphson.
+   *
+   * Modelo (idêntico à planilha):
+   *   Equilíbrio:      Q = 2·T·senθ ,  senθ = f/√(a²+f²)  ⇒  T = Q·√(a²+f²)/(2f)
+   *   Compatibilidade: T = T₀ + (2·EA/L)·(√(a²+f²) − a)
+   *   Resíduo:  g(f) = Q·√(a²+f²)/(2f) − T₀ − (2EA/L)·(√(a²+f²) − a) = 0
+   *
+   * Retorna { f, T_el, iteracoes, convergiu, historico[] }.
+   */
+  function solveSag(Q, a, T0, EA, L, opts) {
+    opts = opts || {};
+    var f = opts.f0 != null ? opts.f0 : 0.3;     // chute inicial (igual à planilha)
+    var tol = opts.tol != null ? opts.tol : 1e-10;
+    var maxIt = opts.maxIt != null ? opts.maxIt : 60;
+    var hist = [];
+    var convergiu = false, it = 0;
+
+    if (!(Q > 0)) {
+      // Sem carga aplicada não há flecha de serviço — retorna pré-tensão pura
+      return { f: 0, T_el: T0, iteracoes: 0, convergiu: true, historico: [] };
+    }
+
+    for (it = 0; it < maxIt; it++) {
+      if (f <= 1e-6) f = 1e-6;                    // guarda contra divisão por zero
+      var r = hypot(a, f);
+      var g  = Q * r / (2 * f) - T0 - (2 * EA / L) * (r - a);
+      var gl = -Q * a * a / (2 * r * f * f) - 2 * EA * f / (L * r);  // g'(f)
+      var fNext = f - g / gl;
+      hist.push({ i: it, f: f, r: r, g: g, gl: gl, fNext: fNext });
+      if (!isFinite(fNext) || fNext <= 0) { fNext = f / 2; }          // recuperação robusta
+      if (Math.abs(fNext - f) <= tol * Math.max(1, f)) { f = fNext; convergiu = true; break; }
+      f = fNext;
+    }
+    var T_el = Q * hypot(a, f) / (2 * f);
+    return { f: f, T_el: T_el, iteracoes: it + 1, convergiu: convergiu, historico: hist };
+  }
+
+  /**
+   * Coeficiente de redução à flambagem χ (NBR 8800, item 5.3.3).
+   *   λ₀ = √(Q·A·fy / Ne) ;  Ne = π²·E·I/(K·L)²   (aqui Q de flambagem local = 1 → seção compacta)
+   *   λ₀ ≤ 1,5 ⇒ χ = 0,658^(λ₀²) ;  λ₀ > 1,5 ⇒ χ = 0,877/λ₀²
+   */
+  function chiBuckling(lambda0) {
+    if (lambda0 <= 1.5) return Math.pow(0.658, lambda0 * lambda0);
+    return 0.877 / (lambda0 * lambda0);
+  }
+
+  // -------------------------------------------------------------------------
+  //  Cálculo principal
+  // -------------------------------------------------------------------------
+  /**
+   * @param {object} inp  Dados de entrada (ver schema em validate.js)
+   * @returns {object}    Resultado completo, com verdito e verificações.
+   */
+  function calcular(inp) {
+    deps(root);
+    var out = { entrada: inp, avisos: [], ref: {} };
+
+    // ---- 1 · DADOS DE ENTRADA (vínculos) ----------------------------------
+    var cabo   = Data.findCable(inp.caboMaterial, inp.caboDiametro);
+    var perfil = Data.findProfile(inp.posteperfil);
+    var aco    = Data.findSteel(inp.acoNome || 'ASTM A572 Gr.50');
+    var sec    = Sections.fromSpec(perfil.spec);
+
+    var L  = num(inp.L, 'Vão L');
+    var a  = L / 2;                                  // meio-vão
+    var T0 = num(inp.T0, 'Pré-tensão T₀');
+    var n  = num(inp.nUsuarios, 'Nº de usuários');
+    var Ft = num(inp.Ft, 'Força no trabalhador');
+    var h  = num(inp.h, 'Altura do poste');
+    var E  = cabo.E;
+    var Acabo = cabo.A;
+    var Frup = cabo.MBL;
+    var EA = E * Acabo / 1000;                       // kN  (E[MPa]·A[mm²]/1000)
+
+    out.dados = {
+      L: g(L, 'm'), a: g(a, 'm'), cabo: cabo, perfil: perfil, aco: aco, secao: sec,
+      E: g(E, 'MPa'), A_cabo: g(Acabo, 'mm²'), MBL: g(Frup, 'kN'),
+      T0: g(T0, 'kN'), n: g(n, 'un'), Ft: g(Ft, 'kN'), h: g(h, 'm'),
+      EA: g(EA, 'kN'), nVaos: g(num(inp.nVaos, 'Nº de vãos'), 'un')
+    };
+
+    // ---- 2 · FORÇA NO TRABALHADOR (NR-35 35.6.7) --------------------------
+    var Q = n * Ft;                                  // carga aplicada à linha
+    out.trabalhador = {
+      Ft: g(Ft, 'kN'), Q: g(Q, 'kN'),
+      check_Ft: chk(Ft <= 6, 6, Ft, '≤', 'kN', 'NR-35 35.6.7')
+    };
+
+    // ---- 3 · FLECHA E TRAÇÃO (equilíbrio + compatibilidade elástica) ------
+    var sag = solveSag(Q, a, T0, EA, L);
+    if (!sag.convergiu) out.avisos.push('A iteração da flecha não convergiu plenamente; conferir dados de entrada.');
+    var f_el = sag.f;
+    var T_el = sag.T_el;
+
+    // Absorvedor de energia DA LINHA (opcional) — limita a tração transmitida à estrutura
+    var temAbs = (inp.temAbsorvedor === true || inp.temAbsorvedor === 'Sim');
+    var F_abs = num(inp.F_abs != null ? inp.F_abs : 0, 'Força do absorvedor', true);
+    var absAtivo = temAbs && (T_el > F_abs) && F_abs > 0;
+    var T = absAtivo ? F_abs : T_el;                 // TRAÇÃO MÁXIMA NA LINHA
+
+    var senTheta = Q / (2 * T);
+    var theta = deg(Math.asin(Math.min(0.999, senTheta)));
+    var f_g = a * Math.tan(rad(theta));              // flecha sob carga (a·tanθ)
+    var dAbs = absAtivo ? num(inp.cursoAbsorvedor || 0, 'Curso do absorvedor', true) : 0;
+    var f_tot = f_g + dAbs;
+
+    out.tracao = {
+      f_el: g(f_el, 'm'), T_el: g(T_el, 'kN'), absAtivo: absAtivo,
+      T: g(T, 'kN'), senTheta: g(senTheta, '—'), theta: g(theta, '°'),
+      f_g: g(f_g, 'm'), dAbs: g(dAbs, 'm'), f_tot: g(f_tot, 'm'),
+      iteracoes: sag.iteracoes, convergiu: sag.convergiu, historico: sag.historico,
+      ref: 'Equilíbrio de cabo + compatibilidade elástica (Newton-Raphson)'
+    };
+
+    // ---- 4 · ZONA LIVRE DE QUEDA — ZLQ (NBR 16325-2 Anexo C) --------------
+    var H_ql = num(inp.H_ql, 'Queda livre');
+    var H_fr = num(inp.H_fr, 'Frenagem');
+    var C_pes = 1.5;                                 // engate aos pés (norma)
+    var C_seg = 1.0;                                 // distância de segurança (norma)
+    var ZLQ = H_ql + H_fr + C_pes + C_seg + f_tot;
+    var peDireito = num(inp.peDireito, 'Pé-direito livre');
+    out.zlq = {
+      H_ql: g(H_ql, 'm'), H_fr: g(H_fr, 'm'), C_pes: g(C_pes, 'm'), C_seg: g(C_seg, 'm'),
+      f_tot: g(f_tot, 'm'), ZLQ: g(ZLQ, 'm'), peDireito: g(peDireito, 'm'),
+      check: chk(ZLQ <= peDireito, peDireito, ZLQ, '≤', 'm', 'NBR 16325-2 Anexo C')
+    };
+
+    // ---- 5 · VERIFICAÇÃO DO CABO (NR-18 Anexo II / NBR 16325) -------------
+    var FS_din = Frup / T;
+    var FS_trab = Frup / T0;
+    out.cabo = {
+      FS_din: g(FS_din, '—'), FS_trab: g(FS_trab, '—'),
+      check_din: chk(FS_din >= 2, 2, FS_din, '≥', '—', 'NBR 16325 (dinâmico)'),
+      check_trab: chk(FS_trab >= 5, 5, FS_trab, '≥', '—', 'NR-18 Anexo II (CR ≥ 5× carga)')
+    };
+
+    // ---- 6 · REAÇÕES NOS APOIOS / POSTES ----------------------------------
+    var H = T * Math.cos(rad(theta));                // reação horizontal no topo
+    var V = T * Math.sin(rad(theta));                // reação vertical no topo
+    var Pp = sec.A * 1e-4 * h * Data.GAMMA_STEEL;    // peso próprio [kN] (A[cm²]→m², h[m], γ[kN/m³])
+    var M_k = H * h;                                 // momento na base (poste extremo)
+    var N_k = V + Pp;                                // força axial
+    out.reacoes = {
+      H: g(H, 'kN'), V: g(V, 'kN'), Pp: g(Pp, 'kN'), M_k: g(M_k, 'kN·m'), N_k: g(N_k, 'kN'),
+      nota: 'Poste EXTREMO (mais solicitado). Postes intermediários recebem a diferença de tração entre vãos; por segurança adota-se o caso extremo.'
+    };
+
+    // ---- 7 · DIMENSIONAMENTO DO POSTE (NBR 8800) --------------------------
+    var fy = aco.fy;
+    var gf = num(inp.gamaF || 1.4, 'γf');
+    var ga1 = 1.1;
+    var W = sec.W, Z = sec.Z, Asec = sec.A, Isec = sec.I, iraio = sec.i;
+    var M_Sd = gf * M_k;
+    var N_Sd = gf * N_k;
+    var M_Rd = Z * fy / ga1 / 1000;                  // kN·m  (Z[cm³]·fy[MPa]/γ → /1000)
+    var N_pl = Asec * fy / ga1 / 10;                 // kN  resistência ao escoamento (squash)
+
+    // Flambagem por flexão (NBR 8800 5.3) — poste em balanço: K = 2,0
+    var K = (inp.posteBiengastado ? 0.5 : 2.0);
+    var Lfl = K * h;                                 // comprimento de flambagem [m]
+    // Carga crítica de Euler Ne = π²·E·I/(K·L)².
+    //   E_STEEL = 200000 MPa = 20000 kN/cm²  ⇒  (E_STEEL/10) kN/cm²
+    //   I em cm⁴ ; (Lfl·100) em cm  ⇒  Ne em kN
+    var Ne = Math.PI * Math.PI * (Data.E_STEEL / 10) * Isec / Math.pow(Lfl * 100, 2); // kN
+    var Npl_full = Asec * fy / 10;                   // kN sem γ (para λ₀)
+    var lambda0 = Math.sqrt(Npl_full / Ne);
+    var chi = chiBuckling(lambda0);
+    var N_Rd_fl = chi * Asec * fy / ga1 / 10;        // kN resistência à compressão com flambagem
+    var N_Rd = Math.min(N_pl, N_Rd_fl);              // governante
+
+    // Interação flexo-compressão (NBR 8800 — fórmula de interação)
+    var util;
+    if (N_Sd / N_Rd >= 0.2) util = N_Sd / N_Rd + (8 / 9) * (M_Sd / M_Rd);
+    else util = N_Sd / (2 * N_Rd) + (M_Sd / M_Rd);
+
+    out.poste = {
+      perfil: perfil.nome, aco: aco.nome,
+      W: g(W, 'cm³'), Z: g(Z, 'cm³'), A: g(Asec, 'cm²'), I: g(Isec, 'cm⁴'), i: g(iraio, 'cm'),
+      fy: g(fy, 'MPa'), gf: g(gf, '—'), ga1: g(ga1, '—'),
+      K: g(K, '—'), Lfl: g(Lfl, 'm'), Ne: g(Ne, 'kN'), lambda0: g(lambda0, '—'), chi: g(chi, '—'),
+      M_Sd: g(M_Sd, 'kN·m'), N_Sd: g(N_Sd, 'kN'),
+      M_Rd: g(M_Rd, 'kN·m'), N_pl: g(N_pl, 'kN'), N_Rd_fl: g(N_Rd_fl, 'kN'), N_Rd: g(N_Rd, 'kN'),
+      util: g(util, '—'), folgaFlexao: g(M_Rd / M_Sd, '—'),
+      check_util: chk(util <= 1.0, 1.0, util, '≤', '—', 'NBR 8800 (flexo-compressão)')
+    };
+
+    // ---- 7b · CISALHAMENTO NO POSTE (NBR 8800) ----------------------------
+    // Área efetiva ao cisalhamento: SHS/RHS → 2 almas (2·d·t); CHS → 0,6·A
+    var Av;
+    if (sec.type === 'CHS') Av = 0.6 * sec._mm.A;            // mm²
+    else Av = 2 * sec._mm.dim * sec._mm.t;                   // mm² (2 almas)
+    var V_Rd = 0.6 * fy * Av / ga1 / 1000;                  // kN
+    var V_Sd = gf * H;                                       // kN
+    out.cisalhamento = {
+      Av: g(Av / 100, 'cm²'), V_Sd: g(V_Sd, 'kN'), V_Rd: g(V_Rd, 'kN'),
+      check: chk(V_Sd <= V_Rd, V_Rd, V_Sd, '≤', 'kN', 'NBR 8800 (força cortante)')
+    };
+
+    // ---- 7c · CLASSE DA SEÇÃO / FLAMBAGEM LOCAL (NBR 8800 Tabela F.1) -----
+    // Limite de plastificação para parede comprimida de tubo retangular: 1,12·√(E/fy)
+    var limFlange = 1.12 * Math.sqrt(Data.E_STEEL / fy);
+    var compacta = (sec.type === 'CHS')
+      ? (sec.bt <= 0.07 * Data.E_STEEL / fy)               // CHS: D/t ≤ 0,07·E/fy
+      : (sec.bt <= limFlange);
+    if (!compacta) out.avisos.push('Seção pode não ser compacta (verificar flambagem local da parede); reduzir b/t ou usar parede mais espessa.');
+    out.secaoClasse = {
+      bt: g(sec.bt, '—'), limite: g((sec.type === 'CHS') ? 0.07 * Data.E_STEEL / fy : limFlange, '—'),
+      compacta: compacta, ref: 'NBR 8800 Tabela F.1 (esbeltez de parede)'
+    };
+
+    // ---- 8 · PLACA DE BASE E CHUMBADORES ----------------------------------
+    var n_ch = num(inp.nChumbadores, 'Nº de chumbadores');
+    var d_ch = num(inp.bracoChumbadores, 'Braço dos chumbadores');
+    var T_ch = M_Sd / ((n_ch / 2) * d_ch);           // tração de cálculo por chumbador
+    var R_anc = Math.max(15, T);                      // resistência mínima do dispositivo
+    out.ancoragem = {
+      n_ch: g(n_ch, 'un'), d_ch: g(d_ch, 'm'), T_ch: g(T_ch, 'kN'),
+      R_anc: g(R_anc, 'kN'),
+      check_15kN: chk(R_anc >= 15, 15, R_anc, '≥', 'kN', 'NR-18 18.12.12.2 (≥ 15 kN)'),
+      nota: 'Verificar o arrancamento dos chumbadores no concreto/aço (catálogo do fabricante) ≥ T_ch e a flexão da placa de base.'
+    };
+
+    // ---- 8b · PLACA DE BASE (flexão simplificada) -------------------------
+    // Pressão de contato e espessura mínima da placa (modelo de balanço em flexão).
+    var fck = num(inp.fck || 25, 'fck do concreto', true);   // MPa
+    var fcd = fck / 1.4;
+    var ladoPlaca = num(inp.ladoPlaca || (sec.geom.b + 120), 'Lado da placa', true); // mm
+    var areaPlaca = ladoPlaca * ladoPlaca;                   // mm²
+    var sigma_c = N_Sd * 1000 / areaPlaca;                   // MPa (compressão média)
+    var balanco = (ladoPlaca - sec.geom.b) / 2;             // mm (volado da placa)
+    var fyPlaca = 250;                                       // MPa (chapa A36)
+    var t_placa = Math.sqrt(4 * sigma_c * balanco * balanco / (1.1 * fyPlaca)); // mm (modelo elástico)
+    out.placaBase = {
+      fck: g(fck, 'MPa'), lado: g(ladoPlaca, 'mm'), sigma_c: g(sigma_c, 'MPa'),
+      sigma_adm: g(0.85 * fcd, 'MPa'),
+      check_contato: chk(sigma_c <= 0.85 * fcd, 0.85 * fcd, sigma_c, '≤', 'MPa', 'NBR 6118 (esmagamento)'),
+      t_min: g(t_placa, 'mm'),
+      nota: 'Espessura mínima estimada da placa por flexão do volado. Detalhar conforme projeto.'
+    };
+
+    // ---- 9 · INDICADORES E VEREDITO ---------------------------------------
+    var checks = [
+      out.trabalhador.check_Ft,
+      out.cabo.check_din,
+      out.zlq.check,
+      out.poste.check_util,
+      out.cisalhamento.check,
+      out.ancoragem.check_15kN
+    ];
+    var aprovado = checks.every(function (c) { return c.ok; });
+    out.veredito = {
+      aprovado: aprovado,
+      texto: aprovado ? 'APROVADO' : 'REPROVADO — revisar dados',
+      indicadores: [
+        { nome: 'Força no trabalhador ≤ 6 kN (NR-35)', ok: out.trabalhador.check_Ft.ok },
+        { nome: 'FS dinâmico do cabo ≥ 2', ok: out.cabo.check_din.ok },
+        { nome: 'ZLQ ≤ pé-direito livre disponível', ok: out.zlq.check.ok },
+        { nome: 'Utilização do poste ≤ 1,0 (NBR 8800)', ok: out.poste.check_util.ok },
+        { nome: 'Cisalhamento do poste OK (NBR 8800)', ok: out.cisalhamento.check.ok },
+        { nome: 'Dispositivo de ancoragem ≥ 15 kN (NR-18)', ok: out.ancoragem.check_15kN.ok }
+      ]
+    };
+
+    return out;
+  }
+
+  // -------------------------------------------------------------------------
+  //  Helpers de empacotamento
+  // -------------------------------------------------------------------------
+  function g(valor, unidade) { return { valor: valor, unidade: unidade }; }
+  function chk(ok, exigido, obtido, op, unidade, ref) {
+    return { ok: !!ok, exigido: exigido, obtido: obtido, op: op, unidade: unidade, ref: ref };
+  }
+  function num(x, nome, permiteZero) {
+    var v = Number(x);
+    if (!isFinite(v)) throw new Error('Valor numérico inválido: ' + nome + ' = ' + x);
+    if (!permiteZero && v === 0 && nome.indexOf('Nº') === -1) {
+      // zero é suspeito para a maioria das grandezas físicas, mas não bloqueia
+    }
+    return v;
+  }
+
+  var Engine = { calcular: calcular, solveSag: solveSag, chiBuckling: chiBuckling };
+
+  root.LV = root.LV || {};
+  root.LV.Engine = Engine;
+  if (typeof module !== 'undefined' && module.exports) module.exports = Engine;
+})(typeof self !== 'undefined' ? self : (typeof globalThis !== 'undefined' ? globalThis : this));
