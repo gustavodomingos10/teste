@@ -111,6 +111,26 @@
       ));
     });
 
+    // 4) Valores fisicamente inválidos → ERRO bloqueante (evitam NaN/∞ no cálculo
+    //    e resultado sem sentido num prontuário auditado).
+    [['L', 0, 'Vão entre postes (L)', 'Span between posts (L)'],
+     ['h', 0, 'Altura do poste (h)', 'Post height (h)'],
+     ['T0', 0, 'Pré-tensão de instalação (T₀)', 'Installation pre-tension (T₀)'],
+     ['nUsuarios', 0, 'Nº de usuários simultâneos', 'No. of simultaneous users'],
+     ['bracoChumbadores', 0, 'Braço dos chumbadores (d)', 'Anchor bolt lever arm (d)']
+    ].forEach(function (b) {
+      if (isNum(inp[b[0]]) && Number(inp[b[0]]) <= b[1]) erros.push(tl(
+        '«' + b[2] + '» deve ser maior que ' + b[1] + '.', '“' + b[3] + '” must be greater than ' + b[1] + '.'));
+    });
+    if (isNum(inp.nChumbadores) && Number(inp.nChumbadores) < 2) erros.push(tl(
+      'Nº de chumbadores deve ser ≥ 2.', 'Number of anchor bolts must be ≥ 2.'));
+
+    // Absorvedor de linha precisa equilibrar a carga: F_abs ≥ Q/2 (senão senθ > 1, equilíbrio impossível)
+    var Qv = (isNum(inp.nUsuarios) && isNum(inp.Ft)) ? Number(inp.nUsuarios) * Number(inp.Ft) : 0;
+    if (temAbs && isNum(inp.F_abs) && Qv > 0 && Number(inp.F_abs) < Qv / 2) erros.push(tl(
+      'Força do absorvedor de linha (' + inp.F_abs + ' kN) menor que metade da carga aplicada Q/2 = ' + (Qv / 2).toFixed(1) + ' kN: o cabo não atinge equilíbrio (senθ > 1). Aumente F_abs.',
+      'Line absorber force (' + inp.F_abs + ' kN) is below half the applied load Q/2 = ' + (Qv / 2).toFixed(1) + ' kN: the cable cannot reach equilibrium (sinθ > 1). Increase F_abs.'));
+
     return { ok: erros.length === 0, erros: erros, avisos: avisos };
   }
 

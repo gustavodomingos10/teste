@@ -26,6 +26,15 @@
     };
   }
 
+  // Nomes bilíngues das chaves de material/EPI — reutilizados pelo prontuário e
+  // pela exportação Excel (L é uma função (pt,en)=>string do idioma ativo).
+  function nomesMateriais(L) {
+    return { poste: L('Poste de ancoragem', 'Anchor post'), 'placa+chumb': L('Placa de base + chumbadores', 'Base plate + anchors'), cabo: L('Cabo de aço', 'Steel cable'), esticador: L('Esticador / tensor', 'Turnbuckle'), absorvedor: L('Absorvedor de linha', 'In-line absorber'), terminacao: L('Terminação + sapatilho', 'Termination + thimble'), placaguia: L('Placa-guia / olhal', 'Guide plate / eye'), placaid: L('Placa de identificação', 'ID plate'), epdm: L('Arruela de vedação EPDM', 'EPDM sealing washer') };
+  }
+  function nomesEpi(L) {
+    return { cinturao: L('Cinturão paraquedista', 'Full-body harness'), talabarte: L('Talabarte Y c/ absorvedor', 'Y energy-absorbing lanyard'), travaquedas: L('Trava-quedas guiado', 'Guided fall arrester'), capacete: L('Capacete c/ jugular', 'Helmet w/ chin strap'), conector: L('Conector dupla trava', 'Double-locking connector'), calcado: L('Calçado + luvas', 'Boots + gloves') };
+  }
+
   function gerar(R, proj, cfg) {
     var Norms = dep('Norms'), Compat = dep('Compat'), Report = dep('Report'), I18n = dep('I18n'), Draw = root.LV.Draw, QR = root.LV.QR;
     Report.setCtx(R);
@@ -70,8 +79,8 @@
       '<p>' + L('Este prontuário consolida o projeto, os memoriais, as especificações, as análises de risco, os planos e os registros do sistema de linha de vida horizontal da obra ',
         'This technical file consolidates the design, reports, specifications, risk analyses, plans and records of the horizontal lifeline system at ') + '<b>' + esc(e.obra || proj.nome) + '</b>.</p>' +
       tabela([L('Parâmetro', 'Parameter'), L('Valor', 'Value')], [
-        [L('Cenário / substrato', 'Scenario / substrate'), (e.cenario || '—') + ' / ' + (e.substrato || '—')],
-        [L('Ambiente (corrosividade)', 'Environment (corrosivity)'), e.ambiente || '—'],
+        [L('Cenário / substrato', 'Scenario / substrate'), dLoc(e.cenario || '—') + ' / ' + dLoc(e.substrato || '—')],
+        [L('Ambiente (corrosividade)', 'Environment (corrosivity)'), dLoc(e.ambiente || '—')],
         [L('Geometria', 'Geometry'), Math.round(R.dados.nVaos.valor) + ' × ' + U(R.dados.L) + ' · ' + L('poste', 'post') + ' ' + U(R.dados.h)],
         [L('Nº de usuários', 'Number of users'), String(Math.round(R.dados.n.valor))],
         [L('Material principal', 'Main material'), inox ? L('Aço inox AISI 316', 'AISI 316 stainless') : L('Aço galvanizado', 'Galvanized steel')]
@@ -105,8 +114,8 @@
 
     // 7 QUANTITATIVO
     var q = quantitativo(e);
-    var matNome = { poste: L('Poste de ancoragem', 'Anchor post'), 'placa+chumb': L('Placa de base + chumbadores', 'Base plate + anchors'), cabo: L('Cabo de aço', 'Steel cable'), esticador: L('Esticador / tensor', 'Turnbuckle'), absorvedor: L('Absorvedor de linha', 'In-line absorber'), terminacao: L('Terminação + sapatilho', 'Termination + thimble'), placaguia: L('Placa-guia / olhal', 'Guide plate / eye'), placaid: L('Placa de identificação', 'ID plate'), epdm: L('Arruela de vedação EPDM', 'EPDM sealing washer') };
-    var epiNome = { cinturao: L('Cinturão paraquedista', 'Full-body harness'), talabarte: L('Talabarte Y c/ absorvedor', 'Y energy-absorbing lanyard'), travaquedas: L('Trava-quedas guiado', 'Guided fall arrester'), capacete: L('Capacete c/ jugular', 'Helmet w/ chin strap'), conector: L('Conector dupla trava', 'Double-locking connector'), calcado: L('Calçado + luvas', 'Boots + gloves') };
+    var matNome = nomesMateriais(L);
+    var epiNome = nomesEpi(L);
     s += secao('quantit', L('7 · Quantitativo de materiais e EPI', '7 · Bill of materials and PPE'),
       '<h3>A · ' + L('Materiais', 'Materials') + '</h3>' + tabela([L('Descrição', 'Description'), L('Qtd.', 'Qty'), L('Un.', 'Unit')], q.materiais.map(function (r) { return [matNome[r[0]], String(r[1]), r[2]]; })) +
       '<h3>B · ' + L('EPI por trabalhador', 'PPE per worker') + '</h3>' + tabela([L('Descrição', 'Description'), L('Qtd.', 'Qty')], q.epi.map(function (r) { return [epiNome[r[0]], String(r[1])]; })));
@@ -116,7 +125,7 @@
       tabela([L('Perigo', 'Hazard'), L('Risco', 'Risk'), L('Medidas de controle', 'Controls')], [
         [L('Queda de altura', 'Fall from height'), L('Lesão grave / morte', 'Serious injury / death'), L('100% conectado; trava-quedas; ZLQ verificada', '100% tie-off; fall arrester; clearance verified')],
         [L('Ruptura do cabo', 'Cable failure'), L('Queda', 'Fall'), L('Cabo dimensionado (FS≥2); terminações', 'Cable designed (SF≥2); terminations')],
-        [L('Falha da ancoragem', 'Anchorage failure'), L('Colapso', 'Collapse'), L('≥ ' + f(pais.forcaTrabalhadorMax >= 8 ? 22.2 : 15) + ' kN; ensaio de carga', '≥ load test')],
+        [L('Falha da ancoragem', 'Anchorage failure'), L('Colapso', 'Collapse'), L('≥ ' + f(pais.ancoragemMin) + ' kN; ensaio de carga', '≥ ' + f(pais.ancoragemMin) + ' kN; load test')],
         [L('Suspensão inerte', 'Suspension trauma'), L('Trauma', 'Trauma'), L('Plano de resgate (seção 12)', 'Rescue plan (section 12)')]
       ]));
 
@@ -182,7 +191,7 @@
 
     // 18 EQUIVALÊNCIA INTERNACIONAL
     s += secao('equiv', L('18 · Equivalência normativa internacional', '18 · International standards mapping'),
-      tabela([L('Tema', 'Topic'), 'Brasil', 'EN (EU)', 'USA'], Norms.EQUIVALENCIAS.map(function (q2) { return [q2.tema, q2.br, q2.en, q2.us]; })));
+      tabela([L('Tema', 'Topic'), L('Brasil', 'Brazil'), 'EN (EU)', 'USA'], Norms.EQUIVALENCIAS.map(function (q2) { return [L(q2.tema, q2.temaEn || q2.tema), q2.br, q2.en, q2.us]; })));
 
     // 19 REFERÊNCIAS
     s += secao('refs', L('19 · Referências normativas', '19 · Normative references'),
@@ -204,7 +213,7 @@
     return _ultimasSecoes.slice();
   }
 
-  var Prontuario = { gerar: gerar, secoesDisponiveis: secoesDisponiveis, quantitativo: quantitativo };
+  var Prontuario = { gerar: gerar, secoesDisponiveis: secoesDisponiveis, quantitativo: quantitativo, nomesMateriais: nomesMateriais, nomesEpi: nomesEpi };
   root.LV = root.LV || {};
   root.LV.Prontuario = Prontuario;
   if (typeof module !== 'undefined' && module.exports) module.exports = Prontuario;

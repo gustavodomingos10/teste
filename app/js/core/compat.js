@@ -32,8 +32,22 @@
     'Solo coesivo':                    ['–', '–', '–', '–', '–', '✔', '⚠'],
     'Solo arenoso':                    ['–', '–', '–', '–', '–', '✔', '✗'],
     'Rocha':                           ['–', '–', '–', '✔', '⚠', '✔', '–'],
-    'Talude protegido':                ['–', '–', '–', '–', '–', '✔', '⚠']
+    'Talude protegido':                ['–', '–', '–', '–', '–', '✔', '⚠'],
+    'Poste cravado':                   ['–', '–', '–', '–', '–', '✔', '✔'],
+    // Silo / industrial (estruturas metálicas): suporte parafusado/soldado à estrutura resistente
+    'Teto de silo metálico (cônico)':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Costado de silo (chapa)':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Anel de reforço do silo':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Passarela / galeria de correia':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Estrutura de torre de elevador':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Tremonta / cobertura de armazém': ['✔', '⚠', '⚠', '–', '–', '–', '–']
   };
+  // Índice normalizado (sem qualificadores entre parênteses) para casar os nomes
+  // descritivos dos cenários com as chaves da matriz (ex.: 'Solo coesivo (bloco
+  // concreto)' → 'Solo coesivo'; 'Telha fibrocimento' → 'Telha fibrocimento (frágil)').
+  function _norm(s) { return String(s || '').toLowerCase().replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(); }
+  var _MATRIZ_NORM = null;
+  function _matrizNorm() { if (!_MATRIZ_NORM) { _MATRIZ_NORM = {}; Object.keys(MATRIZ).forEach(function (k) { _MATRIZ_NORM[_norm(k)] = MATRIZ[k]; }); } return _MATRIZ_NORM; }
 
   var LEGENDA = {
     '✔':  'Recomendado — solução usual e segura',
@@ -57,7 +71,7 @@
 
   /** Linha da matriz para um substrato (com os símbolos por ancoragem). */
   function paraSubstrato(substrato) {
-    var linha = MATRIZ[substrato];
+    var linha = MATRIZ[substrato] || _matrizNorm()[_norm(substrato)];
     if (!linha) return null;
     return ANCORAGENS.map(function (anc, i) {
       return { ancoragem: anc, simbolo: linha[i], descricao: LEGENDA[linha[i]] };

@@ -150,14 +150,20 @@
     s2 += rowXml(cell(L('Método (aço)', 'Method (steel)')) + cell(R.poste.metodo) + cell(''));
     s2 += rowXml(cell(L('VEREDITO', 'VERDICT')) + cell(en ? (R.veredito.aprovado ? 'APPROVED' : 'FAILED') : R.veredito.texto) + cell(''));
 
-    // Aba 3 — Quantitativo / BOM
+    // Aba 3 — Quantitativo / BOM (descrições traduzidas; comprimentos convertidos)
     var q = LV.Prontuario.quantitativo(e);
-    var nomes = LV.I18n && en ? null : null;
+    var matNome = LV.Prontuario.nomesMateriais(L);
+    var epiNome = LV.Prontuario.nomesEpi(L);
+    function matLinha(r) {
+      var qtd = r[1], un = r[2];
+      if (imp && un === 'm' && Units) { var c = Units.conv(qtd, 'm', 'imperial'); qtd = Math.round(c.valor * 10) / 10; un = c.unidade; }
+      return rowXml(cell(matNome[r[0]] || r[0]) + cellNum(qtd) + cell(un));
+    }
     var s3 = rowXml(cell(L('QUANTITATIVO DE MATERIAIS', 'BILL OF MATERIALS')) + cell('') + cell(''));
     s3 += rowXml(cell(L('Descrição', 'Description')) + cell(L('Qtd', 'Qty')) + cell(L('Unid.', 'Unit')));
-    q.materiais.forEach(function (r) { s3 += rowXml(cell(r[0]) + cellNum(r[1]) + cell(r[2])); });
+    q.materiais.forEach(function (r) { s3 += matLinha(r); });
     s3 += rowXml(cell(L('EPI por trabalhador', 'PPE per worker')) + cell('') + cell(''));
-    q.epi.forEach(function (r) { s3 += rowXml(cell(r[0]) + cellNum(r[1]) + cell('un')); });
+    q.epi.forEach(function (r) { s3 += rowXml(cell(epiNome[r[0]] || r[0]) + cellNum(r[1]) + cell('un')); });
 
     // Aba 4 — Verificações / Checks
     var s4 = rowXml(cell(L('VERIFICAÇÕES', 'CHECKS')) + cell(''));

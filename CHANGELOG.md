@@ -1,5 +1,34 @@
 # Changelog
 
+## [2.1.1] — Auditoria completa e correções (rigor de engenharia)
+
+Auditoria multi-frente (6 revisões independentes + verificação adversarial de cada achado) que confirmou e corrigiu 20 pontos:
+
+### Correção — Segurança
+- **Controle de acesso (RBAC) reforçado**: as telas de Resultados, Prontuário, Conformidade e Registros passam a verificar a permissão do perfil (defesa em profundidade), além do menu.
+- Senha temporária de reset com maior entropia (~48 bits) e aderente à política.
+
+### Correção — Cálculos de engenharia
+- **Efeito da temperatura**: os extremos de pré-tensão estavam invertidos — corrigido (o frio TENSIONA e o calor RELAXA o cabo).
+- **Classe de seção (perfil RHS)**: a esbeltez local passa a distinguir **mesa (largura b)** e **alma (altura d)**, cada uma contra o seu limite (NBR 8800 Tabela F.1) — antes usava a dimensão errada.
+- **Absorvedor de linha insuficiente (F_abs < Q/2)**: o equilíbrio impossível (senθ > 1) agora é detectado, avisado e bloqueado, em vez de gerar flecha absurda silenciosa.
+- Rótulo da figura de esforços indica quando o momento inclui a ação do vento.
+
+### Correção — Robustez
+- Guardas contra **NaN/∞** (tração nula, pré-tensão nula, nº de chumbadores/braço nulos).
+- **Validação bloqueante** para valores fisicamente inválidos (L, h, T₀, nº de usuários, chumbadores, braço); Resultados/Prontuário não são emitidos sobre dados inválidos.
+
+### Correção — Internacionalização (sem vazamento de PT em modo EN)
+- Prontuário: cenário, substrato, ambiente e a coluna “Tema” da equivalência normativa agora traduzem; valor da ancoragem na APR deixa de sumir.
+- Memorial: `máx/mín`, `γ_aço`, e os separadores decimais (1,5 → 1.5; FS = 2.0; φ = 1.0) seguem o idioma.
+- Planilha (.xls): a lista de materiais/EPI usa descrições traduzidas e converte comprimentos para o sistema imperial; indicador de ancoragem com ponto decimal em EN.
+
+### Correção — Dados
+- **Matriz de compatibilidade** completa: todos os substratos dos cenários (inclusive Solo e Silo/Industrial) passam a ter ancoragens recomendadas (casamento tolerante de nomes + linhas novas).
+
+### Testes
+- Motor **71** casos, relatórios **49** casos, E2E **48** verificações (PT+EN) — todos com regressões que travam cada correção acima.
+
 ## [2.1.0] — Dimensionamento automático, exportação unificada e experiência premium
 
 ### Dimensionamento automático ("Calcule para mim")

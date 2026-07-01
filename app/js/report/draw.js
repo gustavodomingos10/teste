@@ -287,7 +287,8 @@
     // momento na base (arco) + rótulo ABAIXO da base (área livre)
     s += '<path d="M ' + (baseX - 32) + ' ' + (baseY - 24) + ' A 32 32 0 0 1 ' + (baseX + 2) + ' ' + (baseY - 38) + '" fill="none" stroke="' + COR.cota + '" stroke-width="2.4"/>';
     s += seta(baseX - 2, baseY - 38, baseX + 8, baseY - 34, COR.cota, 2.4);
-    s += text(baseX, baseY + 40, 'M = H·h = ' + dim(M, 'kN·m'), { size: 11.5, weight: 'bold', cor: COR.cota, anchor: 'middle' });
+    var temVento = !!(R.reacoes && R.reacoes.vento);
+    s += text(baseX, baseY + 40, 'M = H·h' + (temVento ? ' + M_w' : '') + ' = ' + dim(M, 'kN·m'), { size: 11.5, weight: 'bold', cor: COR.cota, anchor: 'middle' });
     // cota da altura (extrema esquerda)
     var hx = baseX - 52;
     s += line(hx, topY, hx, baseY, '#888', 1);

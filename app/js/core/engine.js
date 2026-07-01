@@ -145,14 +145,18 @@
     var absAtivo = temAbs && (T_el > F_abs) && F_abs > 0;
     var T = absAtivo ? F_abs : T_el;                 // TRAÇÃO MÁXIMA NA LINHA
 
-    var senTheta = Q / (2 * T);
+    var senTheta = (T > 0) ? Q / (2 * T) : 0;        // guarda contra T=0 (evita NaN)
+    var equilibrioOk = senTheta <= 1;                // senθ>1 ⇒ absorvedor insuficiente (F_abs < Q/2): equilíbrio impossível
     var theta = deg(Math.asin(Math.min(0.999, senTheta)));
     var f_g = a * Math.tan(rad(theta));              // flecha sob carga (a·tanθ)
     var dAbs = absAtivo ? num(inp.cursoAbsorvedor || 0, 'Curso do absorvedor', true) : 0;
     var f_tot = f_g + dAbs;
+    if (!equilibrioOk) out.avisos.push('Equilíbrio impossível: senθ = Q/(2·T) = ' + senTheta.toFixed(2) +
+      ' > 1 — a força de atuação do absorvedor de linha (F_abs) é insuficiente para a carga aplicada. ' +
+      'Aumente F_abs para ≥ Q/2 = ' + (Q / 2).toFixed(2) + ' kN. / Impossible equilibrium: increase the line-absorber force to ≥ Q/2.');
 
     out.tracao = {
-      f_el: g(f_el, 'm'), T_el: g(T_el, 'kN'), absAtivo: absAtivo,
+      f_el: g(f_el, 'm'), T_el: g(T_el, 'kN'), absAtivo: absAtivo, equilibrioOk: equilibrioOk,
       T: g(T, 'kN'), senTheta: g(senTheta, '—'), theta: g(theta, '°'),
       f_g: g(f_g, 'm'), dAbs: g(dAbs, 'm'), f_tot: g(f_tot, 'm'),
       iteracoes: sag.iteracoes, convergiu: sag.convergiu, historico: sag.historico,
@@ -173,8 +177,8 @@
     };
 
     // ---- 5 · VERIFICAÇÃO DO CABO (NR-18 Anexo II / NBR 16325) -------------
-    var FS_din = Frup / T;
-    var FS_trab = Frup / T0;
+    var FS_din = (T > 0) ? Frup / T : Infinity;       // guarda contra T=0
+    var FS_trab = (T0 > 0) ? Frup / T0 : Infinity;    // guarda contra pré-tensão nula
     out.cabo = {
       FS_din: g(FS_din, '—'), FS_trab: g(FS_trab, '—'),
       check_din: chk(FS_din >= pais.fsCaboMin, pais.fsCaboMin, FS_din, '≥', '—', 'FS dinâmico (' + pais.refLinha + ')'),
@@ -269,21 +273,28 @@
     };
 
     // ---- 7c · CLASSE DA SEÇÃO / FLAMBAGEM LOCAL (NBR 8800 Tabela F.1) -----
-    // Limite de plastificação para parede comprimida de tubo retangular: 1,12·√(E/fy)
+    //   MESA comprimida (largura b): λ ≤ 1,12·√(E/fy) ;  ALMA em flexão (altura d): λ ≤ 2,42·√(E/fy).
+    //   CHS: D/t ≤ 0,07·E/fy.  A seção é compacta quando MESA e ALMA atendem.
     var limFlange = 1.12 * Math.sqrt(Data.E_STEEL / fy);
-    var compacta = (sec.type === 'CHS')
-      ? (sec.bt <= 0.07 * Data.E_STEEL / fy)               // CHS: D/t ≤ 0,07·E/fy
-      : (sec.bt <= limFlange);
-    if (!compacta) out.avisos.push('Seção pode não ser compacta (verificar flambagem local da parede); reduzir b/t ou usar parede mais espessa.');
+    var limWeb    = 2.42 * Math.sqrt(Data.E_STEEL / fy);
+    var flangeOk = (sec.type === 'CHS') ? (sec.bt <= 0.07 * Data.E_STEEL / fy) : (sec.bt <= limFlange);
+    var webOk    = (sec.type === 'CHS' || sec.btWeb == null) ? true : (sec.btWeb <= limWeb);
+    var compacta = flangeOk && webOk;
+    if (!compacta) out.avisos.push('Seção pode não ser compacta (verificar flambagem local: ' +
+      (!flangeOk ? 'mesa' : '') + (!flangeOk && !webOk ? ' e ' : '') + (!webOk ? 'alma' : '') +
+      '); reduzir b/t (ou d/t) ou usar parede mais espessa.');
     out.secaoClasse = {
       bt: g(sec.bt, '—'), limite: g((sec.type === 'CHS') ? 0.07 * Data.E_STEEL / fy : limFlange, '—'),
-      compacta: compacta, ref: 'NBR 8800 Tabela F.1 (esbeltez de parede)'
+      btWeb: g(sec.btWeb, '—'), limiteWeb: g((sec.type === 'CHS') ? null : limWeb, '—'),
+      flangeOk: flangeOk, webOk: webOk,
+      compacta: compacta, ref: 'NBR 8800 Tabela F.1 (esbeltez de mesa e alma)'
     };
 
     // ---- 8 · PLACA DE BASE E CHUMBADORES ----------------------------------
     var n_ch = num(inp.nChumbadores, 'Nº de chumbadores');
     var d_ch = num(inp.bracoChumbadores, 'Braço dos chumbadores');
-    var T_ch = M_Sd / ((n_ch / 2) * d_ch);           // tração de cálculo por chumbador
+    var denomCh = (n_ch / 2) * d_ch;
+    var T_ch = denomCh > 0 ? M_Sd / denomCh : Infinity;  // tração por chumbador (guarda contra nº/braço nulos)
     var ancMin = pais.ancoragemMin;
     var R_anc = Math.max(ancMin, T);                  // resistência mínima do dispositivo
     out.ancoragem = {
@@ -334,11 +345,14 @@
     var dTemp = num(inp.deltaTemp != null ? inp.deltaTemp : 0, 'ΔT', true);
     if (dTemp !== 0) {
       var alpha = 12e-6;                                  // coef. dilatação do aço [1/°C]
-      var dT0 = -EA * alpha * dTemp;                      // variação da pré-tensão [kN] (aquecimento relaxa)
+      var dT0 = -EA * alpha * dTemp;                      // variação da pré-tensão p/ o ΔT informado [kN] (aquecimento relaxa ⇒ sinal −)
+      var dAbsT = EA * alpha * Math.abs(dTemp);           // magnitude da variação (para os dois extremos)
       out.temperatura = {
         deltaTemp: g(dTemp, '°C'), variacaoT0: g(dT0, 'kN'),
-        T0_quente: g(T0 + (dTemp > 0 ? dT0 : 0), 'kN'), T0_frio: g(T0 + (dTemp < 0 ? -dT0 : 0), 'kN'),
-        nota: 'Variação da pré-tensão por ΔT (α=12·10⁻⁶/°C). Reapertar o esticador conforme a estação, se necessário.'
+        // Física: RESFRIAR contrai o cabo ⇒ tração SOBE; AQUECER expande ⇒ tração CAI.
+        T0_frio: g(T0 + dAbsT, 'kN'),                     // extremo frio (mais tensionado)
+        T0_quente: g(Math.max(0, T0 - dAbsT), 'kN'),      // extremo quente (mais relaxado)
+        nota: 'Variação da pré-tensão por ΔT (α=12·10⁻⁶/°C): o frio TENSIONA e o calor RELAXA o cabo. Reapertar o esticador conforme a estação, se necessário.'
       };
     }
 
@@ -381,7 +395,7 @@
         { nome: 'ZLQ ≤ pé-direito livre disponível', nomeEn: 'Fall clearance ≤ available height', ok: out.zlq.check.ok },
         { nome: 'Utilização do poste ≤ 1,0', nomeEn: 'Post utilization ≤ 1.0', ok: out.poste.check_util.ok },
         { nome: 'Cisalhamento do poste OK', nomeEn: 'Post shear OK', ok: out.cisalhamento.check.ok },
-        { nome: 'Ancoragem ≥ ' + fmtN(ancMin) + ' kN', nomeEn: 'Anchorage ≥ ' + fmtN(ancMin) + ' kN', ok: out.ancoragem.check_15kN.ok }
+        { nome: 'Ancoragem ≥ ' + fmtN(ancMin) + ' kN', nomeEn: 'Anchorage ≥ ' + fmtN(ancMin, true) + ' kN', ok: out.ancoragem.check_15kN.ok }
       ]
     };
 
@@ -392,7 +406,7 @@
   //  Helpers de empacotamento
   // -------------------------------------------------------------------------
   function g(valor, unidade) { return { valor: valor, unidade: unidade }; }
-  function fmtN(x) { return (Math.round(x * 10) / 10).toString().replace('.', ','); }
+  function fmtN(x, en) { var s = (Math.round(x * 10) / 10).toString(); return en ? s : s.replace('.', ','); }
   function chk(ok, exigido, obtido, op, unidade, ref) {
     return { ok: !!ok, exigido: exigido, obtido: obtido, op: op, unidade: unidade, ref: ref };
   }

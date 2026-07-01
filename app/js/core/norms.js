@@ -164,19 +164,19 @@
 
   /** Tabela de equivalência entre normas (BR × Internacionais) — exibida no prontuário internacional. */
   var EQUIVALENCIAS = [
-    { tema: 'Linha de vida horizontal flexível', br: 'NBR 16325-2 (tipo C)', en: 'EN 795 Type C', us: 'ANSI Z359.6 / OSHA 1926.502' },
-    { tema: 'Força máxima no trabalhador', br: 'NR-35.6.7 — 6 kN', en: 'EN 355 — 6 kN', us: 'OSHA — 8 kN (1.800 lbf) / ANSI 6 kN' },
-    { tema: 'Resistência da ancoragem', br: 'NR-18 — 15 kN', en: 'EN 795 — ensaio 12–18 kN', us: 'OSHA — 22,2 kN (5.000 lbf) ou FS ≥ 2' },
-    { tema: 'Absorvedor de energia', br: 'NBR 16489', en: 'EN 355', us: 'ANSI Z359.13' },
-    { tema: 'Cinturão paraquedista', br: 'NR-35 / NBR 15836', en: 'EN 361', us: 'ANSI Z359.11' },
-    { tema: 'Múltiplos usuários', br: '— (majorar carga)', en: 'CEN/TS 16415', us: 'ANSI Z359.6' },
-    { tema: 'Vento em estruturas', br: 'NBR 6123', en: 'EN 1991-1-4', us: 'ASCE 7' },
-    { tema: 'Estruturas de aço', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' },
-    { tema: 'Estruturas de concreto', br: 'NBR 6118', en: 'EN 1992', us: 'ACI 318' },
-    { tema: 'Distância/zona livre de queda', br: 'NBR 16325-2 (ZLQ)', en: 'EN 363', us: 'OSHA TFD / Z359.6' },
-    { tema: 'Dispositivo retrátil (SRL)', br: 'NBR 16325', en: 'EN 360', us: 'ANSI Z359.14' },
-    { tema: 'Sistema vertical / ponto único', br: 'NBR 16325-1', en: 'EN 353/795', us: 'ANSI Z359.15' },
-    { tema: 'Indústria geral (uso/critérios)', br: 'NR-35 / NR-18', en: 'EN 365', us: 'OSHA 1910.140' }
+    { tema: 'Linha de vida horizontal flexível', temaEn: 'Flexible horizontal lifeline', br: 'NBR 16325-2 (tipo C)', en: 'EN 795 Type C', us: 'ANSI Z359.6 / OSHA 1926.502' },
+    { tema: 'Força máxima no trabalhador', temaEn: 'Maximum arrest force on worker', br: 'NR-35.6.7 — 6 kN', en: 'EN 355 — 6 kN', us: 'OSHA — 8 kN (1,800 lbf) / ANSI 6 kN' },
+    { tema: 'Resistência da ancoragem', temaEn: 'Anchorage strength', br: 'NR-18 — 15 kN', en: 'EN 795 — ensaio 12–18 kN', us: 'OSHA — 22.2 kN (5,000 lbf) or SF ≥ 2' },
+    { tema: 'Absorvedor de energia', temaEn: 'Energy absorber', br: 'NBR 16489', en: 'EN 355', us: 'ANSI Z359.13' },
+    { tema: 'Cinturão paraquedista', temaEn: 'Full-body harness', br: 'NR-35 / NBR 15836', en: 'EN 361', us: 'ANSI Z359.11' },
+    { tema: 'Múltiplos usuários', temaEn: 'Multiple users', br: '— (majorar carga)', en: 'CEN/TS 16415', us: 'ANSI Z359.6' },
+    { tema: 'Vento em estruturas', temaEn: 'Wind on structures', br: 'NBR 6123', en: 'EN 1991-1-4', us: 'ASCE 7' },
+    { tema: 'Estruturas de aço', temaEn: 'Steel structures', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' },
+    { tema: 'Estruturas de concreto', temaEn: 'Concrete structures', br: 'NBR 6118', en: 'EN 1992', us: 'ACI 318' },
+    { tema: 'Distância/zona livre de queda', temaEn: 'Required fall clearance', br: 'NBR 16325-2 (ZLQ)', en: 'EN 363', us: 'OSHA TFD / Z359.6' },
+    { tema: 'Dispositivo retrátil (SRL)', temaEn: 'Self-retracting lifeline (SRL)', br: 'NBR 16325', en: 'EN 360', us: 'ANSI Z359.14' },
+    { tema: 'Sistema vertical / ponto único', temaEn: 'Vertical system / single point', br: 'NBR 16325-1', en: 'EN 353/795', us: 'ANSI Z359.15' },
+    { tema: 'Indústria geral (uso/critérios)', temaEn: 'General industry (use/criteria)', br: 'NR-35 / NR-18', en: 'EN 365', us: 'OSHA 1910.140' }
   ];
 
   /** Lista plana (para a aba de referências do prontuário). */

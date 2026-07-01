@@ -81,6 +81,29 @@ ok('prontuário US em inglês (TECHNICAL FILE)', prUS.indexOf('TECHNICAL FILE') 
 ok('prontuário US cita ANSI', prUS.indexOf('ANSI') !== -1);
 ok('prontuário US sem NaN', prUS.indexOf('NaN') === -1);
 
+// ---- Correções da auditoria: sem vazamento de PT em modo EN ----
+console.log('\n=== Auditoria: i18n do memorial/prontuário em EN ===');
+ok('EN: não vaza "máx("', mcUS.indexOf('máx(') === -1);
+ok('EN: não vaza "mín("', mcUS.indexOf('mín(') === -1);
+ok('EN: usa "max(" no cálculo da ancoragem', mcUS.indexOf('max(') !== -1);
+ok('EN: não vaza "γ_aço"', mcUS.indexOf('γ_aço') === -1);
+ok('EN: rótulo do método com ponto (sem "2,0")', mcUS.indexOf('2,0') === -1);
+ok('EN: ZLQ sem literais "1,5"/"1,0"', mcUS.indexOf(' 1,5 ') === -1 && mcUS.indexOf(' 1,0 ') === -1);
+ok('EN: indicador de ancoragem com ponto (22.2)', RUS.veredito.indicadores.some(function (i) { return /Anchorage/.test(i.nomeEn) && /22\.2/.test(i.nomeEn); }));
+ok('EN: coluna Topic traduzida (Anchorage strength)', prUS.indexOf('Anchorage strength') !== -1);
+ok('EN: prontuário não vaza rótulo "Cenário"', prUS.indexOf('Cenário') === -1);
+ok('EN: quantitativo traduzido (Anchor post)', prUS.indexOf('Anchor post') !== -1);
+// PT permanece correto (máx/mín em português)
+ok('PT: memorial usa "máx(" na ancoragem', mc.indexOf('máx(') !== -1);
+
+// ---- Compatibilidade: todo substrato dos cenários tem recomendação ----
+console.log('\n=== Auditoria: matriz de compatibilidade completa ===');
+var semRec = 0;
+Object.keys(LV.Data.SCENARIOS).forEach(function (cen) {
+  LV.Data.SCENARIOS[cen].forEach(function (sub) { if (!LV.Compat.recomendadas(sub).length) semRec++; });
+});
+ok('todos os substratos têm ancoragem recomendada', semRec === 0);
+
 console.log('\n' + '='.repeat(50));
 console.log('RELATÓRIOS: ' + passes + ' aprovados, ' + fails + ' falhos.');
 process.exit(fails === 0 ? 0 : 1);

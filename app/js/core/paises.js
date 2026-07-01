@@ -31,7 +31,7 @@
       forcaTrabalhadorMax: 8, ancoragemMin: 22.24, fsCaboMin: 2, quedaLivreMax: 1.83, frenagemMax: 1.07,
       // Método de dimensionamento do aço (AISC 360 / OSHA-Z359.6): FS = 2,0 sobre a força de
       // retenção contra a resistência nominal (rota "engineered system" da OSHA 1926.502(d)(15)).
-      fatorCarga: 2.0, fatorResist: 1.0, metodoAco: 'AISC 360 · OSHA/Z359.6 (FS = 2)', fatorCargaLabel: 'FS = 2,0 (OSHA)', fatorResistLabel: 'φ = 1,0 (nominal)',
+      fatorCarga: 2.0, fatorResist: 1.0, metodoAco: 'AISC 360 · OSHA/Z359.6 (FS = 2)', fatorCargaLabel: 'FS = 2.0 (OSHA)', fatorResistLabel: 'φ = 1.0 (nominal)',
       refForca: 'OSHA 1926.502(d)(16) / Z359.6 — MAF ≤ 1,800 lbf (8 kN)', refAncoragem: 'OSHA 1926.502(d)(15) — 5,000 lbf (22.2 kN)/worker or engineered (PE)', refLinha: 'ANSI/ASSP Z359.6 (engineered HLL — deflection & anchor loads)',
       tipoDispositivo: 'ANSI Z359.6 HLL'
     }

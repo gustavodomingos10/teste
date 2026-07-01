@@ -196,10 +196,20 @@
   // ======================= RESULTADOS =======================
   function resultados(alvo) {
     H();
+    if (!LV.Auth.pode('calcular')) { alvo.appendChild(avisoPermissao()); return; }
     var proj = projAtual();
     var c = calcular(proj);
     alvo.appendChild(tituloPagina(L('Resultados', 'Results') + ' — ' + proj.nome, L('Memória de cálculo automática (NR-35 Anexo II 5.1.1 / ANSI Z359.6).', 'Automatic calculation report (NR-35 Annex II 5.1.1 / ANSI Z359.6).')));
     if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: L('Não foi possível calcular: ', 'Could not calculate: ') + c.erro })); return; }
+    // Erros bloqueantes de validação: não exibe resultado/prontuário sobre dados inválidos.
+    if (c.val && c.val.erros && c.val.erros.length) {
+      var boxErr = h('div', { class: 'avisos-box' });
+      boxErr.appendChild(h('div', { class: 'av erro forte', text: '⛔ ' + L('Corrija os dados abaixo para calcular. Não emitimos resultado nem prontuário sobre dados inválidos.', 'Fix the data below to calculate. No result or technical file is issued on invalid data.') }));
+      c.val.erros.forEach(function (m) { boxErr.appendChild(h('div', { class: 'av erro', text: '• ' + m })); });
+      alvo.appendChild(boxErr);
+      alvo.appendChild(h('div', { class: 'toolbar' }, [h('button', { class: 'btn primary', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })]));
+      return;
+    }
     var R = c.R;
     LV.Audit.registrar('calculo', { projeto: proj.nome, veredito: R.veredito.texto }).catch(function(){});
 
@@ -240,9 +250,18 @@
   // ======================= PRONTUÁRIO =======================
   function prontuario(alvo) {
     H();
+    if (!LV.Auth.pode('emitir_prontuario')) { alvo.appendChild(avisoPermissao()); return; }
     var proj = projAtual(); var c = calcular(proj);
     alvo.appendChild(tituloPagina(L('Prontuário do sistema', 'System technical file'), L('Dossiê técnico completo (19 seções) para auditoria.', 'Complete technical file (19 sections) for audit.')));
     if (c.erro) { alvo.appendChild(h('div', { class: 'erro-fatal', text: L('Não foi possível gerar: ', 'Could not generate: ') + c.erro })); return; }
+    if (c.val && c.val.erros && c.val.erros.length) {
+      var boxE = h('div', { class: 'avisos-box' });
+      boxE.appendChild(h('div', { class: 'av erro forte', text: '⛔ ' + L('Corrija os dados do projeto antes de emitir o prontuário.', 'Fix the project data before issuing the technical file.') }));
+      c.val.erros.forEach(function (m) { boxE.appendChild(h('div', { class: 'av erro', text: '• ' + m })); });
+      alvo.appendChild(boxE);
+      alvo.appendChild(h('div', { class: 'toolbar' }, [h('button', { class: 'btn primary', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })]));
+      return;
+    }
     var R = c.R; var cfg = LV.Storage.getConfig();
     var html = LV.Prontuario.gerar(R, proj, cfg);
     LV.Audit.registrar('prontuario', { projeto: proj.nome, veredito: R.veredito.texto }).catch(function(){});
@@ -257,6 +276,7 @@
   // ======================= CONFORMIDADE (gestão de ativos) =======================
   function conformidade(alvo) {
     H();
+    if (!LV.Auth.pode('registrar_inspecao')) { alvo.appendChild(avisoPermissao()); return; }
     var DIA = 864e5, hoje = Date.now();
     alvo.appendChild(tituloPagina(L('Conformidade dos ativos', 'Asset compliance'),
       L('Status de inspeção e vencimentos de todos os sistemas (NR-35.6.6 / OSHA).', 'Inspection status and due dates of all systems (NR-35.6.6 / OSHA).')));
@@ -306,6 +326,7 @@
   // ======================= REGISTROS =======================
   function registros(alvo) {
     H();
+    if (!LV.Auth.pode('registrar_inspecao')) { alvo.appendChild(avisoPermissao()); return; }
     var proj = projAtual();
     alvo.appendChild(tituloPagina('Registros do prontuário', L('Inspeções, ensaios, APR, capacitação e EPI — projeto «' + proj.nome + '».', 'Inspections, load tests, JHA, training and PPE — project “' + proj.nome + '”.')));
     var abas = [
@@ -363,7 +384,9 @@
         h('td', { text: (u.ativo ? D('ativo') : D('inativo')) + (u.bloqueado ? L(' (bloqueado)', ' (locked)') : '') + (u.mustChange ? L(' · troca pendente', ' · change pending') : '') }),
         h('td', {}, [
           h('button', { class: 'btn mini ghost', text: L('Resetar senha', 'Reset password'), onclick: function () {
-            var nova = 'GD-' + LV.Crypto.randomHex(3);
+            // Senha temporária de alta entropia (~48 bits) e que satisfaz a política
+            // (maiúscula G, minúscula d, símbolo @, dígitos do hex); troca obrigatória no 1º acesso.
+            var nova = 'Gd@' + LV.Crypto.randomHex(6);
             LV.Auth.resetarSenha(u.username, nova).then(function () { toast(L('Nova senha temporária: ', 'New temporary password: ') + nova, 'ok'); });
           } }),
           u.username !== 'admin' ? h('button', { class: 'btn mini danger', text: L('Remover', 'Remove'), onclick: function () { if (confirmar(L('Remover ' + u.username + '?', 'Remove ' + u.username + '?'))) { LV.Auth.removerUsuario(u.username); LV.UI.renderRota(); } } }) : null
@@ -475,8 +498,8 @@
     var cssHref = '';
     var link = qs('link[rel=stylesheet]'); if (link) cssHref = link.href;
     var w = window.open('', '_blank');
-    if (!w) { toast('Permita pop-ups para imprimir.', 'erro'); return; }
-    w.document.write('<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>' + titulo + '</title>' +
+    if (!w) { toast(L('Permita pop-ups para imprimir.', 'Allow pop-ups to print.'), 'erro'); return; }
+    w.document.write('<!DOCTYPE html><html lang="' + (LV.I18n && LV.I18n.getLang() === 'en' ? 'en' : 'pt-BR') + '"><head><meta charset="utf-8"><title>' + titulo + '</title>' +
       (cssHref ? '<link rel="stylesheet" href="' + cssHref + '">' : '') +
       '</head><body class="print-body">' + html + '</body></html>');
     w.document.close();
@@ -488,7 +511,7 @@
   }
   function importar(file) {
     if (!file) return; var r = new FileReader();
-    r.onload = function () { try { LV.Storage.importarTudo(r.result, true); toast('Backup restaurado.', 'ok'); LV.UI.renderRota(); } catch (e) { toast('Falha: ' + e.message, 'erro'); } };
+    r.onload = function () { try { LV.Storage.importarTudo(r.result, true); toast(L('Backup restaurado.', 'Backup restored.'), 'ok'); LV.UI.renderRota(); } catch (e) { toast(L('Falha: ', 'Failed: ') + e.message, 'erro'); } };
     r.readAsText(file);
   }
 

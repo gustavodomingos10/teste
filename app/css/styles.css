@@ -99,6 +99,7 @@ b.tok{color:var(--ok)} b.tfail{color:var(--fail)}
 .avisos-box{margin-bottom:16px}
 .av{padding:8px 12px;border-radius:7px;margin-bottom:6px;font-size:13px}
 .av.erro{background:var(--fail-bg);color:#7a1f15}
+.av.erro.forte{font-weight:700;border:1px solid var(--fail)}
 .av.aviso{background:#fff6e6;color:#7a5b13;border:1px solid #f3d99a}
 .figuras-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-bottom:8px}
 .figuras-grid .fig,.doc-inline .fig{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:10px;box-shadow:var(--sombra)}

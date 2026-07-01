@@ -141,7 +141,7 @@
       return '<div class="calc-step"><div class="cs-t"><b>' + num + '.</b> ' + esc(titulo) + (ref ? ' <span class="cs-ref">[' + esc(ref) + ']</span>' : '') + '</div>' +
         linhas.map(function (x) { return '<div class="cs-eq">' + x + '</div>'; }).join('') + '</div>';
     }
-    function chi_txt() { return lam <= 1.5 ? 'χ = 0,658^(λ₀²)' : 'χ = 0,877/λ₀²'; }
+    function chi_txt() { return lam <= 1.5 ? 'χ = ' + f(0.658, 3) + '^(λ₀²)' : 'χ = ' + f(0.877, 3) + '/λ₀²'; }
     function secDeriv() {
       var g = sec.geom, t = g.t;
       if (sec.type === 'SHS') { var b = g.b, bi = b - 2 * t;
@@ -169,13 +169,13 @@
       '<table class="nr-tab"><thead><tr><th>i</th><th>f_i (m)</th><th>g(f_i)</th><th>f_(i+1) (m)</th></tr></thead><tbody>' + nrRows + '</tbody></table>',
       L('Flecha convergida', 'Converged sag') + ': f = <b>' + f(f_el, 4) + ' m</b> (' + tr.iteracoes + ' ' + L('iterações', 'iterations') + ')']);
     s += pc('3.5', L('Tração elástica', 'Elastic tension'), '', ['T_el = Q·√(a²+f²)/(2f) = ' + f(Q, 2) + '·√(' + f(a, 2) + '²+' + f(f_el, 3) + '²)/(2·' + f(f_el, 3) + ') = ' + f(Q, 2) + '·' + f(r_el, 3) + '/' + f(2 * f_el, 3) + ' = <b>' + f(T_el, 2) + ' kN</b>']);
-    if (tr.absAtivo) s += pc('3.6', L('Tração máxima (absorvedor de linha ativo)', 'Max tension (in-line absorber active)'), 'NBR 16325 / EN 795', ['T = mín(T_el ; F_abs) = mín(' + f(T_el, 2) + ' ; ' + f(Fabs, 2) + ') = <b>' + f(T, 2) + ' kN</b>']);
+    if (tr.absAtivo) s += pc('3.6', L('Tração máxima (absorvedor de linha ativo)', 'Max tension (in-line absorber active)'), 'NBR 16325 / EN 795', ['T = ' + L('mín', 'min') + '(T_el ; F_abs) = ' + L('mín', 'min') + '(' + f(T_el, 2) + ' ; ' + f(Fabs, 2) + ') = <b>' + f(T, 2) + ' kN</b>']);
     else s += pc('3.6', L('Tração máxima na linha', 'Maximum line tension'), '', ['T = T_el = <b>' + f(T, 2) + ' kN</b> ' + L('(sem absorvedor de linha)', '(no in-line absorber)')]);
     s += pc('3.7', L('Ângulo da linha', 'Line angle'), '', ['senθ = Q/(2T) = ' + f(Q, 2) + '/(2·' + f(T, 2) + ') = <b>' + f(sen, 4) + '</b>', 'θ = arcsen(' + f(sen, 4) + ') = <b>' + f(th, 2) + '°</b>']);
     s += pc('3.8', L('Flecha sob carga', 'Sag under load'), '', ['f_g = a·tanθ = ' + f(a, 2) + '·tan(' + f(th, 2) + '°) = ' + f(a, 2) + '·' + f(tanT, 4) + ' = <b>' + f(f_g, 3) + ' m</b>']);
     s += pc('3.9', L('Flecha total', 'Total sag'), '', ['f_tot = f_g + Δ_abs = ' + f(f_g, 3) + ' + ' + f(dAbs, 2) + ' = <b>' + f(f_tot, 3) + ' m</b>']);
     s += pc('3.10', L('Zona Livre de Queda (ZLQ)', 'Required Fall Clearance (RFC)'), 'NBR 16325-2 C.2', [
-      'ZLQ = H_ql + H_fr + 1,5 + 1,0 + f_tot = ' + f(zl.H_ql.valor, 2) + ' + ' + f(zl.H_fr.valor, 2) + ' + 1,5 + 1,0 + ' + f(f_tot, 3) + ' = <b>' + f(zl.ZLQ.valor, 3) + ' m</b>',
+      'ZLQ = H_ql + H_fr + ' + f(1.5, 1) + ' + ' + f(1.0, 1) + ' + f_tot = ' + f(zl.H_ql.valor, 2) + ' + ' + f(zl.H_fr.valor, 2) + ' + ' + f(1.5, 1) + ' + ' + f(1.0, 1) + ' + ' + f(f_tot, 3) + ' = <b>' + f(zl.ZLQ.valor, 3) + ' m</b>',
       L('Pé-direito disponível', 'Available headroom') + ' = ' + f(zl.peDireito.valor, 2) + ' m → ZLQ ' + (zl.check.ok ? '≤' : '>') + ' ' + f(zl.peDireito.valor, 2) + ' m' + okmark(zl.check.ok)]);
     s += pc('3.11', L('Fator de segurança do cabo', 'Cable safety factor'), pais.refLinha || '', [
       'FS_din = F_rup / T = ' + f(MBL, 1) + ' / ' + f(T, 2) + ' = <b>' + f(R.cabo.FS_din.valor, 2) + '</b> (≥ ' + f(pais.fsCaboMin, 0) + okmark(R.cabo.check_din.ok) + ')',
@@ -184,10 +184,10 @@
     s += pc('3.12', L('Reações no topo do poste', 'Post-top reactions'), '', [
       'H = T·cosθ = ' + f(T, 2) + '·cos(' + f(th, 2) + '°) = ' + f(T, 2) + '·' + f(cosT, 4) + ' = <b>' + f(H, 2) + ' kN</b>',
       'V = T·senθ = ' + f(T, 2) + '·' + f(sen, 4) + ' = <b>' + f(V, 2) + ' kN</b>']);
-    s += pc('3.13', L('Peso próprio do poste', 'Post self-weight'), '', ['P_p = A·10⁻⁴·h·γ = ' + f(Asec, 2) + '·10⁻⁴·' + f(hP, 2) + '·77 = <b>' + f(Pp, 3) + ' kN</b> <span class="cs-note">(A ' + L('em cm²', 'in cm²') + ', γ_aço = 77 kN/m³)</span>']);
+    s += pc('3.13', L('Peso próprio do poste', 'Post self-weight'), '', ['P_p = A·10⁻⁴·h·γ = ' + f(Asec, 2) + '·10⁻⁴·' + f(hP, 2) + '·77 = <b>' + f(Pp, 3) + ' kN</b> <span class="cs-note">(A ' + L('em cm²', 'in cm²') + ', ' + L('γ_aço', 'γ_steel') + ' = 77 kN/m³)</span>']);
     if (R.reacoes.vento) { var w = R.reacoes.vento; s += pc('3.14', L('Ação do vento no poste', 'Wind action on post'), w.ref, [
       'V_k = V₀·S1·S2·S3 = <b>' + f(w.Vk.valor, 1) + ' m/s</b>',
-      'q = 0,613·V_k²/1000 = 0,613·' + f(w.Vk.valor, 1) + '²/1000 = <b>' + f(w.q.valor, 3) + ' kN/m²</b>',
+      'q = ' + f(0.613, 3) + '·V_k²/1000 = ' + f(0.613, 3) + '·' + f(w.Vk.valor, 1) + '²/1000 = <b>' + f(w.q.valor, 3) + ' kN/m²</b>',
       'F = Ca·q·(b·h) = <b>' + f(w.F.valor, 3) + ' kN</b> ; M_w = F·h/2 = <b>' + f(w.M.valor, 3) + ' kN·m</b>']); }
     s += pc('3.15', L('Momento na base', 'Base moment'), '', ['M_k = H·h' + (R.reacoes.vento ? ' + M_w' : '') + ' = ' + f(H, 2) + '·' + f(hP, 2) + (R.reacoes.vento ? ' + ' + f(R.reacoes.vento.M.valor, 3) : '') + ' = <b>' + f(M_k, 2) + ' kN·m</b>']);
     s += pc('3.16', L('Força axial na base', 'Axial force at base'), '', ['N_k = V + P_p = ' + f(V, 2) + ' + ' + f(Pp, 3) + ' = <b>' + f(N_k, 2) + ' kN</b>']);
@@ -204,17 +204,17 @@
       'N_Rd = ' + f(resF, 3) + '·χ·A·fy/10 = ' + f(resF, 3) + '·' + f(chi, 3) + '·' + f(Asec, 2) + '·' + f(fy, 0) + '/10 = <b>' + f(N_Rd, 1) + ' kN</b>']);
     var caso02 = (N_Sd / N_Rd) >= 0.2;
     s += pc('3.21', L('Interação flexo-compressão', 'Beam-column interaction'), 'NBR 8800 / AISC H1', [
-      'N_Sd/N_Rd = ' + f(N_Sd, 2) + '/' + f(N_Rd, 1) + ' = ' + f(N_Sd / N_Rd, 3) + ' ' + (caso02 ? '≥ 0,20' : '< 0,20'),
+      'N_Sd/N_Rd = ' + f(N_Sd, 2) + '/' + f(N_Rd, 1) + ' = ' + f(N_Sd / N_Rd, 3) + ' ' + (caso02 ? '≥ ' + f(0.2, 2) : '< ' + f(0.2, 2)),
       caso02
         ? 'util = N_Sd/N_Rd + (8/9)·(M_Sd/M_Rd) = ' + f(N_Sd / N_Rd, 3) + ' + (8/9)·' + f(M_Sd / M_Rd, 3) + ' = <b>' + f(util, 3) + '</b>'
         : 'util = N_Sd/(2·N_Rd) + M_Sd/M_Rd = ' + f(N_Sd / (2 * N_Rd), 3) + ' + ' + f(M_Sd, 2) + '/' + f(M_Rd, 2) + ' = <b>' + f(util, 3) + '</b>',
-      '(util ' + (util <= 1 ? '≤' : '>') + ' 1,0' + okmark(po.check_util.ok) + ')']);
+      '(util ' + (util <= 1 ? '≤' : '>') + ' ' + f(1.0, 1) + okmark(po.check_util.ok) + ')']);
     if (Draw) s += '<div class="fig">' + Draw.esforcosPoste(R) + '</div>';
     s += pc('3.22', L('Força cortante no poste', 'Post shear force'), R.poste.metodo, [
       'V_Sd = ' + lcLF + '·H = ' + f(LF, 2) + '·' + f(H, 2) + ' = <b>' + f(V_Sd, 2) + ' kN</b>',
-      'V_Rd = ' + f(resF, 3) + '·0,6·fy·A_w = <b>' + f(V_Rd, 1) + ' kN</b> (V_Sd ' + (ci.check.ok ? '≤' : '>') + ' V_Rd' + okmark(ci.check.ok) + ')']);
+      'V_Rd = ' + f(resF, 3) + '·' + f(0.6, 1) + '·fy·A_w = <b>' + f(V_Rd, 1) + ' kN</b> (V_Sd ' + (ci.check.ok ? '≤' : '>') + ' V_Rd' + okmark(ci.check.ok) + ')']);
     s += pc('3.23', L('Tração de cálculo por chumbador', 'Design tension per anchor bolt'), '', ['T_ch = M_Sd/((n/2)·d) = ' + f(M_Sd, 2) + '/((' + f(n_ch, 0) + '/2)·' + f(d_ch, 2) + ') = ' + f(M_Sd, 2) + '/' + f((n_ch / 2) * d_ch, 3) + ' = <b>' + f(T_ch, 1) + ' kN</b> <span class="cs-note">' + L('verificar arrancamento no catálogo do fabricante', 'verify pull-out per manufacturer catalog') + '</span>']);
-    s += pc('3.24', L('Resistência mínima da ancoragem', 'Minimum anchorage resistance'), pais.refAncoragem || '', ['R_anc = máx(' + f(ancMin, 1) + ' ; T) = máx(' + f(ancMin, 1) + ' ; ' + f(T, 2) + ') = <b>' + f(R_anc, 1) + ' kN</b> (≥ ' + f(ancMin, 1) + ' kN' + okmark(an.check_15kN.ok) + ')']);
+    s += pc('3.24', L('Resistência mínima da ancoragem', 'Minimum anchorage resistance'), pais.refAncoragem || '', ['R_anc = ' + L('máx', 'max') + '(' + f(ancMin, 1) + ' ; T) = ' + L('máx', 'max') + '(' + f(ancMin, 1) + ' ; ' + f(T, 2) + ') = <b>' + f(R_anc, 1) + ' kN</b> (≥ ' + f(ancMin, 1) + ' kN' + okmark(an.check_15kN.ok) + ')']);
     // passos avançados opcionais
     if (R.dinamica) s += pc('3.25', L('Verificação por energia (fator de queda)', 'Energy check (fall factor)'), 'NBR 16325 / EN 355', [
       L('Fator de queda', 'Fall factor') + ' = H_ql/L_tal = ' + f(zl.H_ql.valor, 2) + '/' + f(R.dinamica.compTalabarte.valor, 2) + ' = <b>' + f(R.dinamica.fatorQueda.valor, 2) + '</b> (' + esc(R.dinamica.classeFQ) + ')',
