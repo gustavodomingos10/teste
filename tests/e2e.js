@@ -173,14 +173,16 @@ async function fluxoDemo(page, demoUrl) {
   ok('demo · marca d’água presente', await page.locator('.demo-watermark').count() > 0);
   ok('demo · faixa de demonstração presente', await page.locator('.demo-faixa').count() > 0);
 
-  // 2 · Resultados: cálculo e figuras funcionam, mas o memorial fica bloqueado
+  // 2 · Resultados: mostra o veredito, mas SEM entregar o "ouro" (números/cálculos)
   await page.locator('.sb-nav .sb-link').nth(2).click();
   await page.waitForSelector('.verdito-banner');
-  ok('demo · veredito calculado', await page.locator('.verdito-banner').count() > 0);
+  ok('demo · veredito calculado (prova que funciona)', await page.locator('.verdito-banner').count() > 0);
   ok('demo · comparativo internacional visível', await page.locator('.ci-card').count() > 0);
-  ok('demo · figuras renderizadas', await page.locator('.figuras-grid svg').count() > 0);
-  ok('demo · memorial completo BLOQUEADO (teaser)', await page.locator('.demo-lock').count() > 0);
-  ok('demo · sem memorial inline completo', await page.locator('.doc-inline').count() === 0);
+  ok('demo · números do comparativo OCULTOS (🔒)', (await page.locator('.ci-tab').first().innerText()).indexOf('🔒') !== -1);
+  ok('demo · figuras em PRÉVIA borrada', await page.locator('.figuras-grid.demo-blur').count() > 0);
+  ok('demo · memorial de 1 página (demonstrativo)', await page.locator('.memorial-demo').count() > 0);
+  ok('demo · SEM passos de cálculo (o ouro)', await page.locator('.calc-step').count() === 0);
+  ok('demo · cálculo detalhado bloqueado', await page.locator('.demo-doc-lock').count() > 0);
 
   // 3 · Exportar/Prontuário bloqueado: clique mostra aviso e NÃO abre o modal
   await page.locator('.btn-prontuario').first().click();

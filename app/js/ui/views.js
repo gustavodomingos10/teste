@@ -220,20 +220,22 @@
     ]));
     // Comparativo internacional (Brasil × EUA) — mesmo projeto, dois critérios
     alvo.appendChild(comparativoInternacional(proj));
-    // avisos de validação
-    if (c.val && (c.val.avisos.length || c.val.erros.length)) {
+    // avisos de validação (ocultos na demonstração)
+    if (!LV.DEMO && c.val && (c.val.avisos.length || c.val.erros.length)) {
       var box = h('div', { class: 'avisos-box' });
       c.val.erros.forEach(function (m) { box.appendChild(h('div', { class: 'av erro', text: '⛔ ' + m })); });
       c.val.avisos.forEach(function (m) { box.appendChild(h('div', { class: 'av aviso', text: '⚠ ' + m })); });
       alvo.appendChild(box);
     }
-    // figuras
-    alvo.appendChild(h('div', { class: 'figuras-grid', html:
+    // figuras (borradas na demonstração — mostram que há saída profissional, sem entregar as cotas)
+    var figs = h('div', { class: 'figuras-grid' + (LV.DEMO ? ' demo-blur' : ''), html:
       '<div class="fig">' + LV.Draw.iso3D(R) + '</div>' +
       '<div class="fig">' + LV.Draw.elevacaoZLQ(R) + '</div>' +
       '<div class="fig">' + LV.Draw.esforcosPoste(R) + '</div>' +
       '<div class="fig">' + LV.Draw.planta(R) + '</div>'
-    }));
+    });
+    if (LV.DEMO) alvo.appendChild(h('div', { class: 'demo-preview-wrap' }, [figs, h('div', { class: 'demo-preview-tag', text: L('Prévia — figuras cotadas na versão completa', 'Preview — dimensioned figures in the full version') })]));
+    else alvo.appendChild(figs);
     // botões
     var cfgR = LV.Storage.getConfig();
     alvo.appendChild(h('div', { class: 'toolbar' }, [
@@ -243,9 +245,13 @@
       h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, cfgR), 'Desc'); } }),
       h('button', { class: 'btn ghost', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })
     ]));
-    // memorial inline (bloqueado na demonstração)
-    if (LV.DEMO) alvo.appendChild(teaserDemo(L('Memorial de cálculo', 'Calculation report')));
-    else alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
+    // memorial: completo na versão paga; na demonstração, apenas 1 página demonstrativa (sem cálculos)
+    if (LV.DEMO) {
+      alvo.appendChild(h('div', { class: 'doc-inline demo-doc', html: LV.Report.memorialDemo(R, proj, cfgR) }));
+      alvo.appendChild(teaserDemo(L('Memorial completo e prontuário', 'Full report and technical file')));
+    } else {
+      alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
+    }
   }
 
   // ======================= PRONTUÁRIO =======================
@@ -607,6 +613,7 @@
 
   // ---- "Calcule para mim": dimensionamento automático (perfil + cabo ótimos) ----
   function autoDimensionar(proj, aposAplicar) {
+    if (LV.DEMO) return LV.demoAviso();
     var e = proj.entrada, inp, r;
     try { inp = montarEntrada(e); } catch (err) { toast(err.message, 'erro'); return; }
     try { r = LV.Engine.otimizar(inp); } catch (err) { toast(err.message, 'erro'); return; }
@@ -663,6 +670,8 @@
     var cmp;
     try { cmp = LV.Engine.comparar(montarEntrada(proj.entrada)); } catch (e) { return h('div', {}); }
     var atual = LV.Paises ? LV.Paises.getSelecionado() : 'BR';
+    var demo = !!LV.DEMO;
+    function mask(v) { return demo ? '🔒' : v; }   // oculta os números "de ouro" na demonstração
     function utilPct(R) { return (R && R.poste && R.poste.util) ? (R.poste.util.valor * 100).toFixed(0) + '%' : '—'; }
     function veredito(R) { return R ? R.veredito.aprovado : null; }
     var cols = cmp.codigos.map(function (cod) {
@@ -673,7 +682,7 @@
         h('div', { class: 'ci-flag' }, [h('span', { class: 'ci-band', text: p.bandeira || '' }), h('b', { text: L(p.nome, p.nomeEn || p.nome) }), cod === atual ? h('span', { class: 'ci-tag-atual', text: L('atual', 'active') }) : null]),
         h('div', { class: 'ci-verd ' + (ap == null ? 'na' : (ap ? 'ok' : 'fail')), text: ap == null ? '—' : (ap ? L('APROVADO', 'APPROVED') : L('REPROVADO', 'FAILED')) }),
         h('table', { class: 'ci-tab' }, [
-          h('tr', {}, [h('td', { text: L('Utilização do poste', 'Post utilization') }), h('td', { class: 'v', text: utilPct(R) })]),
+          h('tr', {}, [h('td', { text: L('Utilização do poste', 'Post utilization') }), h('td', { class: 'v', text: mask(utilPct(R)) })]),
           h('tr', {}, [h('td', { text: L('Força máx. no trabalhador', 'Max. worker force') }), h('td', { class: 'v', text: p.forcaTrabalhadorMax + ' kN' })]),
           h('tr', {}, [h('td', { text: L('Ancoragem mínima', 'Min. anchorage') }), h('td', { class: 'v', text: (p.ancoragemMin != null ? p.ancoragemMin.toFixed(1) : '—') + ' kN' })]),
           h('tr', {}, [h('td', { text: L('Método de dimensionamento', 'Design method') }), h('td', { class: 'v', text: met })])

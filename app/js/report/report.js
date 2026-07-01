@@ -271,8 +271,36 @@
     return s;
   }
 
+  // =======================================================================
+  //  MEMORIAL DEMONSTRATIVO (amostra de 1 página — NÃO revela os cálculos)
+  //  Mostra marca, veredito e critérios normativos; o roteiro detalhado e os
+  //  resultados ("o ouro") ficam bloqueados para a versão licenciada.
+  // =======================================================================
+  function memorialDemo(R, proj, cfg) {
+    setCtx(R);
+    var pais = R.pais || {};
+    var contato = (root.LV && root.LV.demoContato) || 'GD Engenharia';
+    var s = '<div class="report memorial-demo">';
+    s += cabecalho(cfg, L('MEMORIAL DE CÁLCULO', 'CALCULATION REPORT'),
+      L('AMOSTRA DE DEMONSTRAÇÃO · ', 'DEMONSTRATION SAMPLE · ') + (pais.normas ? pais.normas.join(' · ') : ''), proj);
+    s += '<div class="verdito ' + (R.veredito.aprovado ? 'ok' : 'fail') + '">' + L('VEREDITO DO SISTEMA', 'SYSTEM VERDICT') + ': ' +
+      L(R.veredito.aprovado ? 'APROVADO' : 'REPROVADO', R.veredito.aprovado ? 'APPROVED' : 'FAILED') + '</div>';
+    s += '<h2>1 · ' + L('Premissas e critérios normativos', 'Assumptions and code criteria') + '</h2><ul class="prem">' +
+      '<li>' + L('Força de impacto no trabalhador', 'Worker arrest force') + ' ≤ ' + f(pais.forcaTrabalhadorMax) + ' kN — ' + esc(pais.refForca || '') + '</li>' +
+      '<li>' + L('Estrutura/ancoragem resiste à força máxima aplicável', 'Structure/anchorage resists the maximum applicable force') + ' — ' + esc(pais.refAncoragem || '') + '</li>' +
+      '<li>' + L('Fator de segurança dinâmico do cabo', 'Cable dynamic safety factor') + ' ≥ ' + f(pais.fsCaboMin) + '</li>' +
+      '<li>' + L('Normas aplicáveis', 'Applicable standards') + ': ' + esc((pais.normas || []).join(' · ')) + '</li></ul>';
+    s += '<h2>2 · ' + L('Memória de cálculo detalhada', 'Detailed calculation') + '</h2>';
+    s += '<div class="demo-doc-lock">🔒 ' + L(
+      'O roteiro completo — equilíbrio do cabo (Newton-Raphson), zona livre de queda, dimensionamento do poste (flambagem, cisalhamento, interação flexo-compressão), ancoragem e plaqueta — com todos os números substituídos, passo a passo e auditável, está disponível na VERSÃO LICENCIADA.',
+      'The full routine — cable equilibrium (Newton-Raphson), required fall clearance, post design (buckling, shear, beam-column interaction), anchorage and ID plate — with every substituted number, step by step and auditable, is available in the LICENSED VERSION.') +
+      '<div class="ddl-contato">' + esc(contato) + '</div></div>';
+    s += '</div>';
+    return s;
+  }
+
   var Report = {
-    memorialCalculo: memorialCalculo, memorialDescritivo: memorialDescritivo,
+    memorialCalculo: memorialCalculo, memorialDescritivo: memorialDescritivo, memorialDemo: memorialDemo,
     cabecalho: cabecalho, assinatura: assinatura, emblema: emblema, rodapeDoc: rodapeDoc, setCtx: setCtx, L: L, U: U,
     _f: f, _U: U, _esc: esc, _dataBR: dataBR, _chkBadge: chkBadge, _L: L
   };

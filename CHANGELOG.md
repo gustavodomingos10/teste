@@ -1,14 +1,21 @@
 # Changelog
 
-## [2.2.0] — Versão de demonstração (amostra pública para o site)
+## [2.2.0] — Versão de demonstração (amostra pública) + hospedagem gratuita
 
-- Novo modo **DEMONSTRAÇÃO** (`demo.html` ou `?demo=1`): entra direto, sem login/licença, para uma amostra pública.
-- Na demonstração: **calcula e mostra resultados/figuras/comparativo**, mas **bloqueia salvar, exportar (Word/PDF/Excel) e imprimir**; o memorial completo e o prontuário aparecem como prévia bloqueada.
-- **Nada é persistido** (armazenamento em memória — recarregar zera tudo).
-- **Marca d'água** "AMOSTRA · GD ENGENHARIA" sobre toda a tela (aparece em qualquer captura), faixa fixa de demonstração e **anti-cópia** (clique-direito, seleção, Ctrl+S/P/C e impressão inibidos).
-- A versão completa (`index.html`) permanece inalterada. E2E cobre o fluxo de demonstração (12 verificações).
+### Modo DEMONSTRAÇÃO (`demo.html` ou `?demo=1`)
+- Entra direto, sem login/licença, para uma amostra pública.
+- **Mostra que funciona** (veredito, comparativo Brasil × EUA, figuras) mas **não entrega o "ouro"**:
+  - números do comparativo **ocultos** (🔒), figuras em **prévia borrada**;
+  - **memorial de 1 página** apenas demonstrativo (marca, veredito e critérios normativos) — **sem os cálculos**;
+  - **dimensionamento automático, salvar, exportar (Word/PDF/Excel) e imprimir bloqueados**.
+- **Nada é persistido** (armazenamento em memória — recarregar zera).
+- **Marca d'água** "AMOSTRA · GD ENGENHARIA" sobre toda a tela, faixa fixa e **anti-cópia** (clique-direito, seleção, Ctrl+S/P/C e impressão inibidos).
+- A versão completa (`index.html`) permanece inalterada. E2E cobre a demonstração (14 verificações).
 
-> Observação honesta: nenhuma página web impede 100% uma foto de tela (câmera do celular / Print Screen). A marca d'água garante que toda captura saia identificada como amostra sem valor oficial.
+> Observação honesta: por rodar no navegador, a proteção segura a grande maioria (quem só quer tirar print), mas não um usuário muito técnico — a proteção definitiva exige cálculo no servidor (SaaS).
+
+### Hospedagem
+- Workflow de **deploy automático no GitHub Pages** (`.github/workflows/deploy-pages.yml`): cada push publica o site (versão completa em `/index.html`, amostra em `/demo.html`).
 
 ## [2.1.1] — Auditoria completa e correções (rigor de engenharia)
 

@@ -372,6 +372,15 @@ body.demo-mode .credito-canto{display:none}
   border:1px dashed var(--azul2);border-radius:12px;padding:18px 20px;margin-top:14px}
 .demo-lock-ico{font-size:30px;line-height:1;flex:0 0 auto}
 .demo-lock b{color:var(--azul);font-size:15px}
+/* prévia borrada (figuras) — mostra que há saída profissional sem entregar as cotas */
+.demo-blur{filter:blur(5px);pointer-events:none;user-select:none}
+.demo-preview-wrap{position:relative;overflow:hidden;border-radius:10px}
+.demo-preview-tag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(31,58,95,.94);color:#fff;
+  padding:9px 18px;border-radius:22px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.3);pointer-events:none;white-space:nowrap}
+/* memorial demonstrativo de 1 página — bloco de bloqueio do cálculo */
+.demo-doc .demo-doc-lock{background:linear-gradient(135deg,#eef4fb,#e3edf8);border:1px dashed var(--azul2);border-radius:10px;
+  padding:18px 20px;font-size:13px;color:var(--cinza);margin-top:10px;line-height:1.6}
+.demo-doc .ddl-contato{margin-top:10px;font-weight:800;color:var(--azul)}
 /* Impressão bloqueada na demonstração */
 @media print{
   body.demo-mode *{display:none!important}
