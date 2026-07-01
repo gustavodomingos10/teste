@@ -265,42 +265,47 @@
     var h = num(R.dados.h.valor, 1.2);
     var H = num(R.reacoes.H.valor, 0), V = num(R.reacoes.V.valor, 0), M = num(R.reacoes.M_k.valor, 0);
     var util = num(R.poste.util.valor, 0); var ok = R.poste.check_util.ok;
-    var W = 520, Hh = 420, baseX = 200, baseY = 330, sc = 170 / Math.max(0.6, h);
-    var topY = baseY - h * sc;
+    // Altura de poste FIXA na tela (desacopla o desenho da magnitude real de h);
+    // o valor real de h é apenas rotulado. Evita distorção e sobreposição.
+    var W = 540, Hh = 430, baseX = 170, baseY = 320, postPx = 150, topY = baseY - postPx;
     var s = '';
-    s += text(20, 30, TR('ESFORÇOS NO POSTE EXTREMO (NBR 8800)', 'END POST FORCES (AISC 360 / NBR 8800)'), { size: 13, weight: 'bold' });
-    s += text(20, 48, TR('Perfil ', 'Profile ') + esc(R.poste.perfil) + TR(' · aço ', ' · steel ') + esc(R.poste.aco), { size: 10.5, cor: '#555' });
+    s += text(20, 28, TR('ESFORÇOS NO POSTE EXTREMO (NBR 8800)', 'END POST FORCES (AISC 360 / NBR 8800)'), { size: 13, weight: 'bold' });
+    s += text(20, 46, TR('Perfil ', 'Profile ') + esc(R.poste.perfil) + TR(' · aço ', ' · steel ') + esc(R.poste.aco), { size: 10.5, cor: '#555' });
+
+    // --- Diagrama de corpo livre (coluna esquerda: x < 300) ---
     // solo/base
-    s += line(baseX - 70, baseY, baseX + 70, baseY, COR.solo, 6);
-    for (var i = -60; i <= 60; i += 14) s += line(baseX + i, baseY, baseX + i - 8, baseY + 9, COR.solo, 2);
-    // poste
-    s += line(baseX, baseY, baseX, topY, COR.poste, 9);
-    s += polygon([[baseX - 22, baseY], [baseX + 22, baseY], [baseX + 22, baseY + 7], [baseX - 22, baseY + 7]], COR.poste, '#222', 0.6, 1); // placa de base
-    // seta H (horizontal no topo)
-    s += seta(baseX, topY, baseX + 90, topY, COR.cabo, 3);
-    s += text(baseX + 96, topY + 4, 'H = ' + dim(H, 'kN'), { size: 11.5, weight: 'bold', cor: COR.cabo });
-    // seta V (vertical baixo no topo)
-    s += seta(baseX, topY, baseX, topY + 46, '#8e44ad', 3);
-    s += text(baseX + 6, topY + 40, 'V = ' + dim(V, 'kN'), { size: 11, cor: '#8e44ad' });
-    // momento na base (arco)
-    s += '<path d="M ' + (baseX - 34) + ' ' + (baseY - 26) + ' A 34 34 0 0 1 ' + (baseX + 4) + ' ' + (baseY - 40) + '" fill="none" stroke="' + COR.cota + '" stroke-width="2.4"/>';
-    s += seta(baseX + 0, baseY - 40, baseX + 10, baseY - 36, COR.cota, 2.4);
-    s += text(baseX - 160, baseY - 16, 'M = H·h = ' + dim(M, 'kN·m'), { size: 11.5, weight: 'bold', cor: COR.cota });
-    // cota da altura
-    s += line(baseX - 95, topY, baseX - 95, baseY, '#555', 1);
-    s += text(baseX - 100, (topY + baseY) / 2, 'h = ' + dim(h, 'm'), { size: 10.5, anchor: 'end', cor: '#555', rot: -90 });
-    // barra de utilização
-    var bx = 345, bw = 150, by = 150;
-    s += text(bx, by - 10, TR('Utilização (flexo-compressão)', 'Utilization (beam-column)'), { size: 11, weight: 'bold' });
+    s += line(baseX - 66, baseY, baseX + 66, baseY, COR.solo, 6);
+    for (var i = -58; i <= 58; i += 14) s += line(baseX + i, baseY, baseX + i - 8, baseY + 9, COR.solo, 2);
+    s += line(baseX, baseY, baseX, topY, COR.poste, 9);                                  // fuste
+    s += polygon([[baseX - 22, baseY], [baseX + 22, baseY], [baseX + 22, baseY + 7], [baseX - 22, baseY + 7]], COR.poste, '#222', 0.6, 1);
+    // seta H (horizontal no topo) — rótulo ACIMA da seta (não invade o painel)
+    s += seta(baseX, topY, baseX + 78, topY, COR.cabo, 3);
+    s += text(baseX + 40, topY - 9, 'H = ' + dim(H, 'kN'), { size: 11.5, weight: 'bold', cor: COR.cabo, anchor: 'middle' });
+    // seta V (vertical p/ baixo no topo)
+    s += seta(baseX, topY, baseX, topY + 42, '#8e44ad', 3);
+    s += text(baseX + 8, topY + 30, 'V = ' + dim(V, 'kN'), { size: 11, cor: '#8e44ad' });
+    // momento na base (arco) + rótulo ABAIXO da base (área livre)
+    s += '<path d="M ' + (baseX - 32) + ' ' + (baseY - 24) + ' A 32 32 0 0 1 ' + (baseX + 2) + ' ' + (baseY - 38) + '" fill="none" stroke="' + COR.cota + '" stroke-width="2.4"/>';
+    s += seta(baseX - 2, baseY - 38, baseX + 8, baseY - 34, COR.cota, 2.4);
+    s += text(baseX, baseY + 40, 'M = H·h = ' + dim(M, 'kN·m'), { size: 11.5, weight: 'bold', cor: COR.cota, anchor: 'middle' });
+    // cota da altura (extrema esquerda)
+    var hx = baseX - 52;
+    s += line(hx, topY, hx, baseY, '#888', 1);
+    s += line(hx - 4, topY, hx + 4, topY, '#888', 1); s += line(hx - 4, baseY, hx + 4, baseY, '#888', 1);
+    s += text(hx - 6, (topY + baseY) / 2, 'h = ' + dim(h, 'm'), { size: 10.5, anchor: 'middle', cor: '#555', rot: -90 });
+
+    // --- Painel numérico (coluna direita: x ≥ 330) ---
+    var bx = 330, bw = 155, by = 95;
+    s += text(bx, by - 8, TR('Utilização (flexo-compressão)', 'Utilization (beam-column)'), { size: 11.5, weight: 'bold' });
     s += '<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="18" rx="3" fill="#eee" stroke="#ccc"/>';
     s += '<rect x="' + bx + '" y="' + by + '" width="' + (Math.min(1, util) * bw).toFixed(1) + '" height="18" rx="3" fill="' + (ok ? COR.ok : COR.falha) + '"/>';
     s += line(bx + bw, by - 3, bx + bw, by + 21, '#333', 1.2);
     s += text(bx + bw + 4, by + 13, _lang === 'en' ? '1.0' : '1,0', { size: 10, cor: '#333' });
-    s += text(bx, by + 38, TR('índice = ', 'index = ') + n2(util) + (ok ? (_lang === 'en' ? '  ✔ ≤ 1.0' : '  ✔ ≤ 1,0') : (_lang === 'en' ? '  ✘ > 1.0' : '  ✘ > 1,0')), { size: 11.5, weight: 'bold', cor: ok ? COR.ok : COR.falha });
-    // mini quadro de resistências
-    s += text(bx, by + 70, 'M_Rd = ' + dim(num(R.poste.M_Rd.valor), 'kN·m'), { size: 10.5, cor: '#333' });
-    s += text(bx, by + 88, 'N_Rd = ' + dim(num(R.poste.N_Rd.valor), 'kN') + ' (χ=' + n2(num(R.poste.chi.valor)) + ')', { size: 10.5, cor: '#333' });
-    s += text(bx, by + 106, 'V_Rd = ' + dim(num(R.cisalhamento.V_Rd.valor), 'kN'), { size: 10.5, cor: '#333' });
+    s += text(bx, by + 40, TR('índice = ', 'index = ') + n2(util) + (ok ? (_lang === 'en' ? '  ✔ ≤ 1.0' : '  ✔ ≤ 1,0') : (_lang === 'en' ? '  ✘ > 1.0' : '  ✘ > 1,0')), { size: 12, weight: 'bold', cor: ok ? COR.ok : COR.falha });
+    s += text(bx, by + 72, TR('Resistências:', 'Resistances:'), { size: 11, weight: 'bold', cor: '#333' });
+    s += text(bx, by + 92, 'M_Rd = ' + dim(num(R.poste.M_Rd.valor), 'kN·m'), { size: 10.5, cor: '#333' });
+    s += text(bx, by + 110, 'N_Rd = ' + dim(num(R.poste.N_Rd.valor), 'kN') + ' (χ=' + n2(num(R.poste.chi.valor)) + ')', { size: 10.5, cor: '#333' });
+    s += text(bx, by + 128, 'V_Rd = ' + dim(num(R.cisalhamento.V_Rd.valor), 'kN'), { size: 10.5, cor: '#333' });
     return wrap('0 0 ' + W + ' ' + Hh, s, 'width="100%"');
   }
 

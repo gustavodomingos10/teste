@@ -102,7 +102,16 @@
     { nome: 'CHS Ø114,3x6,3',  spec: { type: 'CHS', D: 114.3, t: 6.3 }, fonte: 'catálogo' },
     { nome: 'CHS Ø141,3x8,0',  spec: { type: 'CHS', D: 141.3, t: 8.0 }, fonte: 'catálogo' },
     { nome: 'CHS Ø168,3x8,0',  spec: { type: 'CHS', D: 168.3, t: 8.0 }, fonte: 'catálogo' },
-    { nome: 'CHS Ø219,1x10,0', spec: { type: 'CHS', D: 219.1, t: 10.0 }, fonte: 'catálogo' }
+    { nome: 'CHS Ø219,1x10,0', spec: { type: 'CHS', D: 219.1, t: 10.0 }, fonte: 'catálogo' },
+    // --- HSS (designação americana AISC — polegadas) para clientes dos EUA ---
+    { nome: 'HSS 3x3x1/4 (US)',   spec: { type: 'SHS', b: 76.2,  t: 6.35 }, fonte: 'AISC' },
+    { nome: 'HSS 4x4x1/4 (US)',   spec: { type: 'SHS', b: 101.6, t: 6.35 }, fonte: 'AISC' },
+    { nome: 'HSS 4x4x3/8 (US)',   spec: { type: 'SHS', b: 101.6, t: 9.53 }, fonte: 'AISC' },
+    { nome: 'HSS 5x5x5/16 (US)',  spec: { type: 'SHS', b: 127.0, t: 7.94 }, fonte: 'AISC' },
+    { nome: 'HSS 6x6x3/8 (US)',   spec: { type: 'SHS', b: 152.4, t: 9.53 }, fonte: 'AISC' },
+    { nome: 'HSS 8x8x1/2 (US)',   spec: { type: 'SHS', b: 203.2, t: 12.70 }, fonte: 'AISC' },
+    { nome: 'HSS 4.500x0.237 (US round)', spec: { type: 'CHS', D: 114.3, t: 6.02 }, fonte: 'AISC' },
+    { nome: 'HSS 6.625x0.280 (US round)', spec: { type: 'CHS', D: 168.3, t: 7.11 }, fonte: 'AISC' }
   ];
 
   /* --------------------------------------------------------------------------
@@ -142,7 +151,8 @@
   var SCENARIOS = {
     'Cobertura': [
       'Telha trapezoidal metálica', 'Telha fibrocimento', 'Telha cerâmica',
-      'Laje de concreto', 'Telha termoacústica (sanduíche)'
+      'Laje de concreto', 'Telha termoacústica (sanduíche)',
+      'Membrana TPO (termoplástica)', 'Membrana EPDM (borracha)'
     ],
     'Estrutura': [
       'Viga metálica (perfil I/H)', 'Viga metálica (tubular)', 'Laje de concreto',

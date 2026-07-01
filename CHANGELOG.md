@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.1.0] — Dimensionamento automático, exportação unificada e experiência premium
+
+### Dimensionamento automático ("Calcule para mim")
+- Botão **⚡ Calcule para mim / Calculate for me** no formulário e nos resultados: o software busca no catálogo a combinação **poste + cabo mais leve APROVADA** em todas as verificações do país selecionado (`Engine.otimizar`).
+- A escolha **manual** de material, perfil e vão continua totalmente disponível — o automático é opcional.
+- Resultado detalhado (perfil, bitola, massa linear kg/m, utilização governante, alternativas válidas) e diagnóstico claro quando a limitação é **geométrica** (ZLQ) ou de carga.
+
+### Gerar Prontuário Completo (exportação unificada)
+- Botão único **📑 Gerar Prontuário Completo** abre um painel com **caixas de seleção de cada seção** (Memorial de Cálculo, Descritivo, Lista de Materiais, Lista de EPIs, …), com **Selecionar todos / Desmarcar todos** e opção de incluir a capa.
+- Exporta em **Word (.doc editável)**, **PDF (impressão/assinatura)** e **Planilha (.xls editável, 4 abas)** — todos com **logotipo/emblema, dados de contato e rodapé institucional** com as normas.
+- Upload de **logotipo do escritório** na Administração (aparece no cabeçalho e na capa de todos os documentos).
+
+### Comparativo internacional (Brasil × EUA) — a "cereja do bolo"
+- Painel nos resultados que avalia o **mesmo projeto sob as duas jurisdições lado a lado** (`Engine.comparar`), destacando quando o veredito **DIVERGE** (aprovado no Brasil e reprovado nos EUA, por conta dos métodos, limites e exigências distintos).
+
+### Layout premium
+- Emblema do **país habilitado em cor** e unidades na barra lateral; **nome da empresa sutil** no rodapé; botões primários refinados; modais e cartões com acabamento profissional.
+
+### Testes
+- Motor: 52 casos (inclui `otimizar` e `comparar`, com o cenário BR-aprova/EUA-reprova).
+- Relatórios: 37 casos. **E2E (Playwright, PT e EN): 37 verificações**, incluindo geração real de `.xls` sem `NaN` e ausência de vazamento de português na versão em inglês.
+
 ## [2.0.0] — Versão internacional
 
 ### Internacionalização (PT-BR / EN-US)

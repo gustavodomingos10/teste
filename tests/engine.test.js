@@ -122,6 +122,33 @@ console.log('    T=' + fmt(R2.tracao.T.valor) + ' kN  ZLQ=' + fmt(R2.zlq.ZLQ.val
 eq('Sistema REPROVADO', R2.veredito.aprovado, false);
 
 // ---------------------------------------------------------------------------
+head('6 · Dimensionamento automático (otimizar) e comparativo internacional');
+require('../app/js/core/paises.js');   // habilita critérios BR/US para comparar()
+var inpOt = { L: 10, nVaos: 3, h: 1.5, peDireito: 12, caboMaterial: 'Inox AISI 316', caboDiametro: 12, T0: 1,
+  nUsuarios: 1, Ft: 6, H_ql: 1.0, H_fr: 1.0, temAbsorvedor: 'Sim', F_abs: 12, cursoAbsorvedor: 0.5,
+  posteperfil: 'SHS 250x250x12,5', acoNome: 'ASTM A572 Gr.50', gamaF: 1.4, nChumbadores: 4, bracoChumbadores: 0.18, pais: 'BR' };
+var ot = Engine.otimizar(inpOt);
+eq('otimizar retorna solução', !!ot, true);
+eq('solução ótima é APROVADA', ot.R.veredito.aprovado, true);
+eq('massa linear positiva', ot.massaLinear > 0, true);
+eq('massa por poste = massa linear × h', Math.abs(ot.massaPoste - ot.massaLinear * 1.5) < 1e-6, true);
+console.log('    ótimo: ' + ot.perfil + ' Ø' + ot.caboDiametro + ' · ' + ot.massaLinear.toFixed(1) + ' kg/m · util ' + (ot.utilizacao * 100).toFixed(0) + '%');
+
+// otimizar retorna null quando a limitação é geométrica (ZLQ > pé-direito)
+var inpSem = Object.assign({}, inpOt, { peDireito: 4 });
+eq('otimizar retorna null sem solução geométrica', Engine.otimizar(inpSem), null);
+
+// comparativo internacional: mesmo projeto APROVADO no BR e REPROVADO nos EUA
+var inpCmp = Object.assign({}, inpOt, { posteperfil: 'SHS 100x100x6,3', caboDiametro: 10 });
+var cmp = Engine.comparar(inpCmp);
+eq('comparar avalia BR e US', cmp.codigos.length >= 2, true);
+eq('BR aprovado', cmp.resultados.BR.veredito.aprovado, true);
+eq('US reprovado (método mais conservador)', cmp.resultados.US.veredito.aprovado, false);
+eq('divergência de veredito detectada', cmp.divergem, true);
+console.log('    BR util ' + cmp.resultados.BR.poste.util.valor.toFixed(3) + ' × US util ' + cmp.resultados.US.poste.util.valor.toFixed(3));
+eq('US mais conservador (util maior)', cmp.resultados.US.poste.util.valor > cmp.resultados.BR.poste.util.valor, true);
+
+// ---------------------------------------------------------------------------
 console.log('\n' + '='.repeat(60));
 console.log('RESULTADO: ' + passes + ' aprovados, ' + fails + ' falhos.');
 console.log('='.repeat(60));

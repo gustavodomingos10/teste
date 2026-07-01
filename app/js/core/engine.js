@@ -214,11 +214,17 @@
     var fy = aco.fy;
     var gf = num(inp.gamaF || 1.4, 'γf');
     var ga1 = 1.1;
+    // MÉTODO DE DIMENSIONAMENTO conforme o país:
+    //   BR (NBR 8800): LF = γf (ações) · resF = 1/γa1 = 1/1,10 na resistência.
+    //   US (AISC 360 / OSHA-Z359.6): LF = 2,0 (fator de segurança sobre a força de retenção)
+    //                                 · resF = 1,0 (resistência nominal).
+    var LF = (pais.fatorCarga != null) ? pais.fatorCarga : gf;         // fator sobre a demanda
+    var resF = (pais.fatorResist != null) ? pais.fatorResist : (1 / ga1); // multiplicador da resistência
     var W = sec.W, Z = sec.Z, Asec = sec.A, Isec = sec.I, iraio = sec.i;
-    var M_Sd = gf * M_k;
-    var N_Sd = gf * N_k;
-    var M_Rd = Z * fy / ga1 / 1000;                  // kN·m  (Z[cm³]·fy[MPa]/γ → /1000)
-    var N_pl = Asec * fy / ga1 / 10;                 // kN  resistência ao escoamento (squash)
+    var M_Sd = LF * M_k;
+    var N_Sd = LF * N_k;
+    var M_Rd = resF * Z * fy / 1000;                 // kN·m  (Z[cm³]·fy[MPa] → /1000)
+    var N_pl = resF * Asec * fy / 10;                // kN  resistência ao escoamento (squash)
 
     // Flambagem por flexão (NBR 8800 5.3) — poste em balanço: K = 2,0
     var K = (inp.posteBiengastado ? 0.5 : 2.0);
@@ -230,7 +236,7 @@
     var Npl_full = Asec * fy / 10;                   // kN sem γ (para λ₀)
     var lambda0 = Math.sqrt(Npl_full / Ne);
     var chi = chiBuckling(lambda0);
-    var N_Rd_fl = chi * Asec * fy / ga1 / 10;        // kN resistência à compressão com flambagem
+    var N_Rd_fl = resF * chi * Asec * fy / 10;       // kN resistência à compressão com flambagem
     var N_Rd = Math.min(N_pl, N_Rd_fl);              // governante
 
     // Interação flexo-compressão (NBR 8800 — fórmula de interação)
@@ -239,14 +245,15 @@
     else util = N_Sd / (2 * N_Rd) + (M_Sd / M_Rd);
 
     out.poste = {
-      perfil: perfil.nome, aco: aco.nome,
+      perfil: perfil.nome, aco: aco.nome, metodo: pais.metodoAco || 'NBR 8800',
       W: g(W, 'cm³'), Z: g(Z, 'cm³'), A: g(Asec, 'cm²'), I: g(Isec, 'cm⁴'), i: g(iraio, 'cm'),
       fy: g(fy, 'MPa'), gf: g(gf, '—'), ga1: g(ga1, '—'),
+      LF: g(LF, '—'), resF: g(resF, '—'), fatorCargaLabel: pais.fatorCargaLabel || 'γf', fatorResistLabel: pais.fatorResistLabel || '1/γa1',
       K: g(K, '—'), Lfl: g(Lfl, 'm'), Ne: g(Ne, 'kN'), lambda0: g(lambda0, '—'), chi: g(chi, '—'),
       M_Sd: g(M_Sd, 'kN·m'), N_Sd: g(N_Sd, 'kN'),
       M_Rd: g(M_Rd, 'kN·m'), N_pl: g(N_pl, 'kN'), N_Rd_fl: g(N_Rd_fl, 'kN'), N_Rd: g(N_Rd, 'kN'),
       util: g(util, '—'), folgaFlexao: g(M_Rd / M_Sd, '—'),
-      check_util: chk(util <= 1.0, 1.0, util, '≤', '—', 'NBR 8800 (flexo-compressão)')
+      check_util: chk(util <= 1.0, 1.0, util, '≤', '—', (pais.metodoAco || 'NBR 8800') + ' (flexo-compressão)')
     };
 
     // ---- 7b · CISALHAMENTO NO POSTE (NBR 8800) ----------------------------
@@ -254,8 +261,8 @@
     var Av;
     if (sec.type === 'CHS') Av = 0.6 * sec._mm.A;            // mm²
     else Av = 2 * sec._mm.dim * sec._mm.t;                   // mm² (2 almas)
-    var V_Rd = 0.6 * fy * Av / ga1 / 1000;                  // kN
-    var V_Sd = gf * H;                                       // kN
+    var V_Rd = resF * 0.6 * fy * Av / 1000;                 // kN
+    var V_Sd = LF * H;                                       // kN
     out.cisalhamento = {
       Av: g(Av / 100, 'cm²'), V_Sd: g(V_Sd, 'kN'), V_Rd: g(V_Rd, 'kN'),
       check: chk(V_Sd <= V_Rd, V_Rd, V_Sd, '≤', 'kN', 'NBR 8800 (força cortante)')
@@ -345,6 +352,16 @@
       };
     }
 
+    // ---- 8f · LIMITES OSHA (queda livre / desaceleração) — informativo (só p/ país que define) ----
+    if (pais.quedaLivreMax) {
+      out.osha = {
+        quedaLivre: chk(H_ql <= pais.quedaLivreMax, pais.quedaLivreMax, H_ql, '≤', 'm', 'OSHA 1926.502(d)(16) — 6 ft'),
+        frenagem: chk(H_fr <= pais.frenagemMax, pais.frenagemMax, H_fr, '≤', 'm', 'OSHA 1926.502(d)(16) — 3.5 ft')
+      };
+      if (!out.osha.quedaLivre.ok) out.avisos.push('Free fall ' + H_ql.toFixed(2) + ' m exceeds the OSHA limit of 6 ft (1.83 m) — 1926.502(d)(16).');
+      if (!out.osha.frenagem.ok) out.avisos.push('Deceleration distance ' + H_fr.toFixed(2) + ' m exceeds the OSHA limit of 3.5 ft (1.07 m) — use a compliant shock-absorbing lanyard/SRL.');
+    }
+
     // ---- 9 · INDICADORES E VEREDITO ---------------------------------------
     var checks = [
       out.trabalhador.check_Ft,
@@ -388,7 +405,89 @@
     return v;
   }
 
-  var Engine = { calcular: calcular, solveSag: solveSag, chiBuckling: chiBuckling };
+  /**
+   * DIMENSIONAMENTO AUTOMÁTICO ("Calcule para mim") — busca a combinação
+   * (perfil de poste + bitola de cabo) MAIS LEVE que é APROVADA em TODAS as
+   * verificações do país selecionado. Respeita as escolhas do usuário: mantém
+   * o vão, as cargas, o material do cabo, o aço e a geometria; varia apenas o
+   * diâmetro do cabo e o perfil do poste (os dois itens que o software
+   * dimensiona). Retorna a solução ótima, alternativas próximas e diagnóstico.
+   *
+   * @returns {object|null} {
+   *   perfil, caboDiametro, R, area, massaLinear (kg/m), massaPoste (kg),
+   *   utilizacao, testados, alternativas[], diagnostico
+   * }  — ou null se nenhuma combinação do catálogo aprovar.
+   */
+  function otimizar(inp) {
+    deps(root);
+    var RHO = 7850; // kg/m³ (aço) — massa linear = A[cm²]·1e-4[m²]·RHO
+    var diams = Data.DIAMETERS.slice().sort(function (a, b) { return a - b; });
+    // Perfis ordenados por área da seção (proxy de peso/custo), do mais leve ao mais pesado
+    var perfis = Data.PROFILES.map(function (p) {
+      var area = 1e9; try { area = Sections.fromSpec(p.spec).A; } catch (e) {}
+      return { nome: p.nome, area: area };
+    }).sort(function (a, b) { return a.area - b.area; });
+
+    var h = Number(inp.h) || 1.2;
+    var testados = 0, encontrou = 0, melhor = null;
+    var alternativas = [];         // até 3 soluções válidas mais leves
+    var util = function (R) {       // utilização governante (maior das verificadas)
+      var u = R.poste && R.poste.util ? R.poste.util.valor : (R.veredito && R.veredito.utilizacao ? R.veredito.utilizacao.valor : null);
+      return (typeof u === 'number') ? u : null;
+    };
+
+    for (var i = 0; i < perfis.length; i++) {
+      for (var j = 0; j < diams.length; j++) {
+        testados++;
+        var R;
+        try { R = calcular(Object.assign({}, inp, { posteperfil: perfis[i].nome, caboDiametro: diams[j] })); }
+        catch (e) { continue; }               // combinação inexistente (bitola indisponível p/ o material) — segue
+        if (R.veredito.aprovado) {
+          var massaLinear = perfis[i].area * 1e-4 * RHO;   // kg/m
+          var sol = {
+            perfil: perfis[i].nome, caboDiametro: diams[j], R: R,
+            area: perfis[i].area, massaLinear: massaLinear, massaPoste: massaLinear * h,
+            utilizacao: util(R), testados: testados
+          };
+          if (!melhor) melhor = sol;           // a PRIMEIRA solução é a mais leve (perfis já ordenados)
+          if (alternativas.length < 3) alternativas.push({ perfil: sol.perfil, caboDiametro: sol.caboDiametro, massaLinear: massaLinear, utilizacao: sol.utilizacao });
+          encontrou++;
+          break;                               // para este perfil, o menor cabo que passa basta — vai ao próximo perfil
+        }
+      }
+      if (alternativas.length >= 3) break;      // já temos a ótima + 2 alternativas mais pesadas
+    }
+
+    if (!melhor) {
+      return null;                              // nada no catálogo aprova — a limitação é geométrica (ZLQ) ou de carga
+    }
+    melhor.alternativas = alternativas.filter(function (a) { return a.perfil !== melhor.perfil || a.caboDiametro !== melhor.caboDiametro; });
+    melhor.testados = testados;
+    melhor.diagnostico = 'Solução mais leve do catálogo aprovada em todas as verificações do país selecionado.';
+    return melhor;
+  }
+
+  /**
+   * COMPARATIVO INTERNACIONAL — avalia o MESMO projeto sob os critérios de cada
+   * país disponível (Brasil × EUA) e sinaliza quando os vereditos DIVERGEM
+   * (aprovado numa jurisdição e reprovado noutra), reflexo dos diferentes
+   * métodos de dimensionamento, limites e exigências normativas.
+   * @returns {object} { resultados: {BR:R, US:R}, divergem: bool, itens: [...] }
+   */
+  function comparar(inp) {
+    deps(root);
+    var codigos = (root.LV && root.LV.Paises) ? root.LV.Paises.lista().map(function (p) { return p.codigo; }) : ['BR', 'US'];
+    var resultados = {};
+    codigos.forEach(function (cod) {
+      try { resultados[cod] = calcular(Object.assign({}, inp, { pais: cod })); }
+      catch (e) { resultados[cod] = null; }
+    });
+    var vers = codigos.map(function (c) { return resultados[c] ? resultados[c].veredito.aprovado : null; });
+    var divergem = vers.indexOf(true) !== -1 && vers.indexOf(false) !== -1;
+    return { codigos: codigos, resultados: resultados, divergem: divergem };
+  }
+
+  var Engine = { calcular: calcular, solveSag: solveSag, chiBuckling: chiBuckling, otimizar: otimizar, comparar: comparar };
 
   root.LV = root.LV || {};
   root.LV.Engine = Engine;

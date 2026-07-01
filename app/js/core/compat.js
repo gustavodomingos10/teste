@@ -22,6 +22,8 @@
     'Telha fibrocimento (frágil)':     ['✔*', '–', '–', '–', '–', '–', '–'],
     'Telha cerâmica (frágil)':         ['✔*', '–', '–', '–', '–', '–', '–'],
     'Telha termoacústica (sanduíche)': ['✔', '⚠', '⚠', '–', '–', '–', '–'],
+    'Membrana TPO (termoplástica)':    ['✔', '⚠', '–', '⚠', '–', '–', '–'],
+    'Membrana EPDM (borracha)':        ['✔', '⚠', '–', '⚠', '–', '–', '–'],
     'Laje de concreto':                ['✔', '–', '–', '✔', '⚠', '–', '–'],
     'Viga metálica (perfil I/H)':      ['✔', '✔', '✔', '–', '–', '–', '–'],
     'Viga metálica (tubular)':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
@@ -49,7 +51,8 @@
     'Em aço, a chapa/olhal soldado deve ser executado por soldador qualificado, com solda dimensionada; o grampo (clamp) exige verificação de escorregamento.',
     'Em concreto, o chumbador químico (epóxi) deve respeitar profundidade e distância de borda do fabricante; verificar arrancamento (cone de concreto).',
     'Em solo/talude, os postes devem ser ancorados em blocos de fundação dimensionados ao tombamento/arrancamento; em solo arenoso evitar postes simplesmente cravados.',
-    'Materiais resistentes às intempéries: aço inoxidável AISI 316 ou equivalente — NR-18 18.12.12.2 (d).'
+    'Materiais resistentes às intempéries: aço inoxidável AISI 316 ou equivalente — NR-18 18.12.12.2 (d).',
+    'Coberturas de membrana (TPO/EPDM): o poste transpassa a membrana e fixa-se à estrutura/deck resistente abaixo; usar bota de vedação (flashing) soldada/colada à membrana para estanqueidade.'
   ];
 
   /** Linha da matriz para um substrato (com os símbolos por ancoragem). */

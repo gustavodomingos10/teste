@@ -135,18 +135,23 @@
       titulo: 'US — Fall protection systems criteria and practices',
       internacional: true,
       itens: {
-        arrest: 'OSHA 1926.502(d) — personal fall arrest: maximum arresting force 1.800 lbf (≈ 8 kN) with body harness; limit free fall to 6 ft (1,8 m).',
-        anchorage: 'OSHA 1926.502(d)(15) — anchorages: 5.000 lbf (≈ 22,2 kN) per worker, OR design with safety factor ≥ 2 under a qualified person.',
-        clearance: 'OSHA — verify total fall clearance (free fall + deceleration + harness stretch + safety margin).'
+        gi1910: 'OSHA 1910.140 (General Industry) — personal fall protection systems: definitions and performance criteria (MAF ≤ 1,800 lbf; anchorages ≥ 5,000 lbf or engineered).',
+        arrest: 'OSHA 1926.502(d)(16) (Construction, Subpart M) — personal fall arrest: maximum arresting force (MAF) ≤ 1,800 lbf (≈ 8 kN) with body harness.',
+        freefall: 'OSHA 1926.502(d)(16) — limit free fall to 6 ft (1.83 m) and maximum deceleration distance to 3.5 ft (1.07 m).',
+        anchorage: 'OSHA 1926.502(d)(15) — anchorages: 5,000 lbf (≈ 22.2 kN) per worker, OR designed as part of a complete system (safety factor ≥ 2) supervised by a qualified person.',
+        clearance: 'OSHA — verify total fall distance (TFD): free fall + deceleration + harness stretch + safety margin — no contact with lower level.'
       }
     },
     ANSI: {
-      codigo: 'ANSI/ASSP Z359',
+      codigo: 'ANSI/ASSP Z359 (Fall Protection Code)',
       titulo: 'US — Fall Protection Code',
       internacional: true,
       itens: {
-        z359_6: 'ANSI Z359.6 — design of active fall protection systems (engineered HLL): MAF ≤ 1.800 lbf; design by qualified person.',
-        z359_1: 'ANSI Z359.1 — general requirements; Z359.11 harnesses; Z359.13 energy absorbers.'
+        z359_6: 'ANSI/ASSP Z359.6 — design of active fall protection systems by a qualified person: computes lifeline DEFLECTION, anchorage/support forces and total fall clearance for engineered HLL. (Base do dimensionamento deste software.)',
+        z359_11: 'ANSI/ASSP Z359.11 — full-body harnesses.',
+        z359_13: 'ANSI/ASSP Z359.13 — personal energy absorbers and lanyards (limit MAF to 1,800 lbf).',
+        z359_14: 'ANSI/ASSP Z359.14 — self-retracting devices (SRLs).',
+        z359_15: 'ANSI/ASSP Z359.15 — single-anchor lifelines and fall arresters for vertical systems.'
       }
     },
     ISO22846: {
@@ -166,7 +171,12 @@
     { tema: 'Cinturão paraquedista', br: 'NR-35 / NBR 15836', en: 'EN 361', us: 'ANSI Z359.11' },
     { tema: 'Múltiplos usuários', br: '— (majorar carga)', en: 'CEN/TS 16415', us: 'ANSI Z359.6' },
     { tema: 'Vento em estruturas', br: 'NBR 6123', en: 'EN 1991-1-4', us: 'ASCE 7' },
-    { tema: 'Estruturas de aço', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' }
+    { tema: 'Estruturas de aço', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' },
+    { tema: 'Estruturas de concreto', br: 'NBR 6118', en: 'EN 1992', us: 'ACI 318' },
+    { tema: 'Distância/zona livre de queda', br: 'NBR 16325-2 (ZLQ)', en: 'EN 363', us: 'OSHA TFD / Z359.6' },
+    { tema: 'Dispositivo retrátil (SRL)', br: 'NBR 16325', en: 'EN 360', us: 'ANSI Z359.14' },
+    { tema: 'Sistema vertical / ponto único', br: 'NBR 16325-1', en: 'EN 353/795', us: 'ANSI Z359.15' },
+    { tema: 'Indústria geral (uso/critérios)', br: 'NR-35 / NR-18', en: 'EN 365', us: 'OSHA 1910.140' }
   ];
 
   /** Lista plana (para a aba de referências do prontuário). */

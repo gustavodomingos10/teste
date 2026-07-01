@@ -27,10 +27,13 @@
   }
 
   function gerar(R, proj, cfg) {
-    var Norms = dep('Norms'), Compat = dep('Compat'), Report = dep('Report'), Draw = root.LV.Draw, QR = root.LV.QR;
+    var Norms = dep('Norms'), Compat = dep('Compat'), Report = dep('Report'), I18n = dep('I18n'), Draw = root.LV.Draw, QR = root.LV.QR;
     Report.setCtx(R);
     var L = Report.L, U = Report._U, f = Report._f, esc = Report._esc, dataBR = Report._dataBR;
     var e = R.entrada, reg = (proj.registros || {}), pais = R.pais || {};
+    var lang = (pais.idioma === 'en') ? 'en' : 'pt';
+    // Traduz um VALOR DE DADO exibido (mantém a chave PT para indexação/lookup)
+    function dLoc(nome) { return I18n.d(nome, lang); }
     var inox = /Inox/i.test(R.dados.cabo.material);
     var serie = 'GDLV-' + (proj.id || '').slice(-6).toUpperCase() + '-' + new Date().getFullYear();
 
@@ -40,12 +43,14 @@
       return s + '</tbody></table>';
     }
     function vazia(headers, n) { var rows = []; for (var i = 0; i < (n || 4); i++) rows.push(headers.map(function () { return ''; })); return tabela(headers, rows, 'preencher'); }
-    function secao(id, titulo, conteudo) { return '<section class="pr-sec" id="pr-' + id + '"><h2 class="pr-h">' + esc(titulo) + '</h2>' + conteudo + '</section>'; }
+    // Coleta as seções num array (para permitir seleção do que incluir na exportação)
+    var SEC = [];
+    function secao(id, titulo, conteudo) { SEC.push({ id: id, titulo: titulo, html: '<section class="pr-sec" id="pr-' + id + '"><h2 class="pr-h">' + esc(titulo) + '</h2>' + conteudo + '</section>' }); return ''; }
 
-    var s = '<div class="report prontuario">';
+    var s = '';
 
     // CAPA
-    s += '<div class="pr-capa"><div class="cp-emp">' + esc(cfg.empresa) + '</div>' +
+    var capaHtml = '<div class="pr-capa">' + Report.emblema(cfg) + '<div class="cp-emp">' + esc(cfg.empresa) + '</div>' +
       '<div class="cp-sub">' + esc(cfg.responsavel) + ' · ' + esc(cfg.crea) + ' · CNPJ ' + esc(cfg.cnpj) + '</div>' +
       '<div class="cp-titulo">' + L('PRONTUÁRIO DO SISTEMA<br>DE LINHA DE VIDA HORIZONTAL', 'HORIZONTAL LIFELINE<br>SYSTEM TECHNICAL FILE') + '</div>' +
       '<div class="cp-sub2">' + (pais.normas ? pais.normas.join(' · ') : '') + '</div>' +
@@ -93,8 +98,8 @@
       ]));
 
     // 6 COMPATIBILIDADE
-    var headC = [L('Substrato', 'Substrate')].concat(Compat.ANCORAGENS.map(function (a) { return a.replace(/ \(.*/, ''); }));
-    var rowsC = Object.keys(Compat.MATRIZ).map(function (sub) { return [sub].concat(Compat.MATRIZ[sub]); });
+    var headC = [L('Substrato', 'Substrate')].concat(Compat.ANCORAGENS.map(function (a) { var rot = dLoc(a); return lang === 'en' ? rot : rot.replace(/ \(.*/, ''); }));
+    var rowsC = Object.keys(Compat.MATRIZ).map(function (sub) { return [dLoc(sub)].concat(Compat.MATRIZ[sub]); });
     s += secao('compat', L('6 · Compatibilidade substrato × ancoragem', '6 · Substrate × anchorage compatibility'),
       tabela(headC, rowsC, 'matriz') + '<p class="leg">✔ ' + L('recomendado', 'recommended') + ' · ⚠ ' + L('com restrição', 'restricted') + ' · ✗ ' + L('não permitido', 'not allowed') + ' · – ' + L('não aplicável', 'n/a') + '</p>');
 
@@ -183,11 +188,23 @@
     s += secao('refs', L('19 · Referências normativas', '19 · Normative references'),
       '<ul class="refs">' + Norms.listarReferencias().map(function (nx) { return '<li><b>' + esc(nx.codigo) + '</b> — ' + esc(nx.titulo) + '</li>'; }).join('') + '</ul>');
 
-    s += '</div>';
-    return s;
+    // Montagem final conforme a seleção (opts.ids) e inclusão da capa (opts.capa)
+    var opts = arguments[3] || {};
+    var idsSel = opts.ids || null;
+    var body = SEC.filter(function (x) { return !idsSel || idsSel.indexOf(x.id) !== -1; }).map(function (x) { return x.html; }).join('');
+    var head = (opts.capa === false) ? '' : capaHtml;
+    _ultimasSecoes = SEC.map(function (x) { return { id: x.id, titulo: x.titulo }; });
+    return '<div class="report prontuario">' + head + body + '</div>';
   }
 
-  var Prontuario = { gerar: gerar, quantitativo: quantitativo };
+  // Lista as seções disponíveis {id, titulo} (roda a montagem sem corpo)
+  var _ultimasSecoes = [];
+  function secoesDisponiveis(R, proj, cfg) {
+    gerar(R, proj, cfg, { capa: false, ids: [] });   // popula _ultimasSecoes sem gerar corpo
+    return _ultimasSecoes.slice();
+  }
+
+  var Prontuario = { gerar: gerar, secoesDisponiveis: secoesDisponiveis, quantitativo: quantitativo };
   root.LV = root.LV || {};
   root.LV.Prontuario = Prontuario;
   if (typeof module !== 'undefined' && module.exports) module.exports = Prontuario;

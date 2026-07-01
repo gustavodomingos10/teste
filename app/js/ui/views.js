@@ -49,7 +49,7 @@
       h('button', { class: 'btn ghost', text: L('⭳ Backup (exportar)', '⭳ Backup (export)'), onclick: function () { baixar('linha-de-vida-backup.json', LV.Storage.exportarTudo()); } }),
       h('label', { class: 'btn ghost arquivo' }, [L('Restaurar backup', 'Restore backup'), h('input', { type: 'file', accept: '.json', style: 'display:none', onchange: function (ev) { importar(ev.target.files[0]); } })])
     ]));
-    if (!lista.length) { alvo.appendChild(h('div', { class: 'vazio', text: 'Nenhum projeto ainda. Crie o primeiro.' })); return; }
+    if (!lista.length) { alvo.appendChild(h('div', { class: 'vazio', text: D('Nenhum projeto ainda. Crie o primeiro.') })); return; }
     var grid = h('div', { class: 'cards' });
     lista.forEach(function (p) {
       var full = LV.Storage.obter(p.id);
@@ -58,14 +58,14 @@
       grid.appendChild(h('div', { class: 'card proj' }, [
         h('div', { class: 'card-top' }, [
           h('b', { text: p.nome }),
-          ver ? h('span', { class: 'badge ' + (ver.aprovado ? 'ok' : 'fail'), text: ver.aprovado ? 'APROVADO' : 'REVISAR' }) : null
+          ver ? h('span', { class: 'badge ' + (ver.aprovado ? 'ok' : 'fail'), text: ver.aprovado ? D('APROVADO') : D('REVISAR') }) : null
         ]),
         h('div', { class: 'card-sub', text: (p.obra || '—') + ' · ' + p.revisao }),
-        h('div', { class: 'card-sub small', text: 'Atualizado ' + new Date(p.atualizadoEm).toLocaleDateString('pt-BR') }),
+        h('div', { class: 'card-sub small', text: L('Atualizado ', 'Updated ') + new Date(p.atualizadoEm).toLocaleDateString(dateLoc()) }),
         h('div', { class: 'card-acoes' }, [
-          h('button', { class: 'btn mini', text: 'Abrir', onclick: function () { LV.state.projetoId = p.id; LV.UI.irPara('projeto'); } }),
-          h('button', { class: 'btn mini ghost', text: 'Duplicar', onclick: function () { LV.Storage.duplicar(p.id); toast('Projeto duplicado.', 'ok'); LV.UI.renderRota(); } }),
-          podeEditar() ? h('button', { class: 'btn mini danger', text: 'Excluir', onclick: function () { if (confirmar('Excluir «' + p.nome + '»?')) { LV.Storage.remover(p.id); if (LV.state.projetoId === p.id) LV.state.projetoId = null; LV.UI.renderRota(); } } }) : null
+          h('button', { class: 'btn mini', text: D('Abrir'), onclick: function () { LV.state.projetoId = p.id; LV.UI.irPara('projeto'); } }),
+          h('button', { class: 'btn mini ghost', text: D('Duplicar'), onclick: function () { LV.Storage.duplicar(p.id); toast(D('Projeto duplicado.'), 'ok'); LV.UI.renderRota(); } }),
+          podeEditar() ? h('button', { class: 'btn mini danger', text: D('Excluir'), onclick: function () { if (confirmar(L('Excluir «' + p.nome + '»?', 'Delete “' + p.nome + '”?'))) { LV.Storage.remover(p.id); if (LV.state.projetoId === p.id) LV.state.projetoId = null; LV.UI.renderRota(); } } }) : null
         ])
       ]));
     });
@@ -94,16 +94,16 @@
     function popularSub(cenario) {
       var lista = LV.Data.SCENARIOS[cenario] || [];
       clear(selSub);
-      lista.forEach(function (o) { selSub.appendChild(h('option', { value: o, text: o, selected: o === e.substrato ? 'true' : null })); });
+      lista.forEach(function (o) { selSub.appendChild(h('option', { value: o, text: D(o), selected: o === e.substrato ? 'true' : null })); });
       e.substrato = selSub.value;
     }
     var selCen = h('select', { class: 'inp', onchange: function () { set('cenario', selCen.value); popularSub(selCen.value); } });
-    ['Cobertura', 'Estrutura', 'Solo'].forEach(function (c) { selCen.appendChild(h('option', { value: c, text: c, selected: c === (e.cenario || 'Cobertura') ? 'true' : null })); });
+    ['Cobertura', 'Estrutura', 'Solo', 'Silo / Industrial'].forEach(function (c) { selCen.appendChild(h('option', { value: c, text: D(c), selected: c === (e.cenario || 'Cobertura') ? 'true' : null })); });
     e.cenario = e.cenario || 'Cobertura';
     selSub = h('select', { class: 'inp', onchange: function () { set('substrato', selSub.value); } });
     popularSub(e.cenario);
     var selAmb = h('select', { class: 'inp', onchange: function () { set('ambiente', selAmb.value); } });
-    LV.Data.CORROSION.forEach(function (c) { selAmb.appendChild(h('option', { value: c.nome, text: c.nome, selected: c.nome === e.ambiente ? 'true' : null })); });
+    LV.Data.CORROSION.forEach(function (c) { selAmb.appendChild(h('option', { value: c.nome, text: D(c.nome), selected: c.nome === e.ambiente ? 'true' : null })); });
     e.ambiente = e.ambiente || LV.Data.CORROSION[3].nome;
     var s2 = secaoForm('2 · Cenário e substrato', [
       campoWrap('Cenário', selCen), campoWrap('Substrato / cobertura', selSub), campoWrap('Ambiente (corrosividade)', selAmb)
@@ -118,7 +118,7 @@
     ]);
     // seção 4 — cabo
     var selMat = h('select', { class: 'inp', onchange: function () { set('caboMaterial', selMat.value); } });
-    LV.Data.MATERIALS.forEach(function (m) { selMat.appendChild(h('option', { value: m, text: m, selected: m === e.caboMaterial ? 'true' : null })); });
+    LV.Data.MATERIALS.forEach(function (m) { selMat.appendChild(h('option', { value: m, text: D(m), selected: m === e.caboMaterial ? 'true' : null })); });
     e.caboMaterial = e.caboMaterial || LV.Data.MATERIALS[0];
     var selDia = h('select', { class: 'inp', onchange: function () { set('caboDiametro', Number(selDia.value)); } });
     LV.Data.DIAMETERS.forEach(function (d) { selDia.appendChild(h('option', { value: d, text: d + ' mm', selected: Number(d) === Number(e.caboDiametro) ? 'true' : null })); });
@@ -129,7 +129,7 @@
     ]);
     // seção 5 — usuários e EPI
     var selTal = h('select', { class: 'inp', onchange: function () { set('talabarte', selTal.value); var l = LV.Data.LANYARDS.filter(function (x) { return x.nome === selTal.value; })[0]; if (l) { e.H_ql = l.H_ql; e.H_fr = l.H_fr; salvar(); LV.UI.renderRota(); } } });
-    LV.Data.LANYARDS.forEach(function (l) { selTal.appendChild(h('option', { value: l.nome, text: l.nome, selected: l.nome === e.talabarte ? 'true' : null })); });
+    LV.Data.LANYARDS.forEach(function (l) { selTal.appendChild(h('option', { value: l.nome, text: D(l.nome), selected: l.nome === e.talabarte ? 'true' : null })); });
     e.talabarte = e.talabarte || LV.Data.LANYARDS[0].nome;
     var s5 = secaoForm('5 · Usuários e EPI', [
       campoNum('Nº de usuários simultâneos n', e.nUsuarios, 'un', function (v) { set('nUsuarios', v); }, 1),
@@ -140,7 +140,7 @@
     ]);
     // seção 6 — absorvedor de linha
     var selAbs = h('select', { class: 'inp', onchange: function () { set('temAbsorvedor', selAbs.value); } });
-    ['Sim', 'Não'].forEach(function (o) { selAbs.appendChild(h('option', { value: o, text: o, selected: o === (e.temAbsorvedor || 'Sim') ? 'true' : null })); });
+    ['Sim', 'Não'].forEach(function (o) { selAbs.appendChild(h('option', { value: o, text: D(o), selected: o === (e.temAbsorvedor || 'Sim') ? 'true' : null })); });
     e.temAbsorvedor = e.temAbsorvedor || 'Sim';
     var s6 = secaoForm('6 · Absorvedor de energia da linha (opcional)', [
       campoWrap('Possui absorvedor de linha?', selAbs),
@@ -161,6 +161,17 @@
       campoNum('Braço dos chumbadores d', e.bracoChumbadores, 'm', function (v) { set('bracoChumbadores', v); }, 0.18)
     ]);
 
+    // Cartão de dimensionamento automático ("Calcule para mim") — respeita as
+    // escolhas manuais acima e oferece a busca da melhor solução do catálogo.
+    var sAuto = h('div', { class: 'auto-card' }, [
+      h('div', { class: 'auto-card-txt' }, [
+        h('div', { class: 'auto-card-t', text: '⚡ ' + L('Dimensionamento automático', 'Automatic dimensioning') }),
+        h('div', { class: 'auto-card-s', text: L('Você pode escolher o perfil, o cabo e o vão manualmente acima — ou deixar o software encontrar a solução APROVADA mais leve (menor custo) para o país e as cargas informadas.',
+          'You can pick the profile, cable and span manually above — or let the software find the lightest PASSING solution (lowest cost) for the selected country and loads.') })
+      ]),
+      h('button', { class: 'btn primary btn-calc', text: L('⚡ Calcule para mim', '⚡ Calculate for me'), onclick: function () { salvar(); autoDimensionar(proj); } })
+    ]);
+
     // seção 8 — avançado / internacional (opcional)
     var s8 = secaoForm(L('8 · Avançado / Internacional (opcional)', '8 · Advanced / International (optional)'), [
       campoNum(L('Velocidade básica do vento V0', 'Basic wind speed V0'), e.ventoV0, 'm/s', function (v) { set('ventoV0', v); }, 0),
@@ -175,9 +186,9 @@
     var nomeProj = h('input', { class: 'inp inp-nome', value: proj.nome, onchange: function () { proj.nome = nomeProj.value; salvar(); } });
     var paisAtual = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
     alvo.appendChild(h('div', { class: 'form-topo' }, [campoWrap(L('Nome do projeto', 'Project name'), nomeProj),
-      paisAtual ? h('div', { class: 'pais-tag', text: paisAtual.bandeira + ' ' + paisAtual.nome + ' · ' + (paisAtual.unidades === 'imperial' ? 'Imperial' : 'SI') }) : null,
+      paisAtual ? h('div', { class: 'pais-tag', text: paisAtual.bandeira + ' ' + (L(paisAtual.nome, paisAtual.nomeEn || paisAtual.nome)) + ' · ' + (paisAtual.unidades === 'imperial' ? 'Imperial' : 'SI') }) : null,
       h('button', { class: 'btn primary', text: L('Salvar e calcular', 'Save & calculate'), onclick: function () { salvar(); toast(L('Projeto salvo.', 'Project saved.'), 'ok'); LV.UI.irPara('resultados'); } })]));
-    [s1, s2, s3, s4, s5, s6, s7, s8].forEach(function (x) { alvo.appendChild(x); });
+    [s1, s2, s3, s4, s5, s6, s7, sAuto, s8].forEach(function (x) { alvo.appendChild(x); });
     // auto-salva ao sair de qualquer campo
     alvo.addEventListener('change', salvar);
   }
@@ -197,6 +208,8 @@
       h('span', { class: 'vb-txt', text: L('VEREDITO', 'VERDICT') + ': ' + L(R.veredito.texto, R.veredito.aprovado ? 'APPROVED' : 'FAILED — review data') }),
       h('div', { class: 'vb-ind' }, R.veredito.indicadores.map(function (i) { return h('span', { class: 'ind ' + (i.ok ? 'ok' : 'fail'), text: (i.ok ? '✔ ' : '✘ ') + L(i.nome, i.nomeEn || i.nome) }); }))
     ]));
+    // Comparativo internacional (Brasil × EUA) — mesmo projeto, dois critérios
+    alvo.appendChild(comparativoInternacional(proj));
     // avisos de validação
     if (c.val && (c.val.avisos.length || c.val.erros.length)) {
       var box = h('div', { class: 'avisos-box' });
@@ -212,9 +225,12 @@
       '<div class="fig">' + LV.Draw.planta(R) + '</div>'
     }));
     // botões
+    var cfgR = LV.Storage.getConfig();
     alvo.appendChild(h('div', { class: 'toolbar' }, [
-      h('button', { class: 'btn primary', text: L('⎙ Imprimir memorial de cálculo', '⎙ Print calculation report'), onclick: function () { imprimir(LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()), 'Calc'); } }),
-      h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, LV.Storage.getConfig()), 'Desc'); } }),
+      h('button', { class: 'btn primary btn-prontuario', text: L('📑 Gerar Prontuário Completo', '📑 Generate Complete Technical File'), onclick: function () { abrirExportModal(R, proj, cfgR); } }),
+      h('button', { class: 'btn ghost', text: L('⚡ Calcule para mim', '⚡ Calculate for me'), title: L('Dimensionamento automático', 'Automatic dimensioning'), onclick: function () { autoDimensionar(proj); } }),
+      h('button', { class: 'btn ghost', text: L('⎙ Imprimir memorial de cálculo', '⎙ Print calculation report'), onclick: function () { imprimir(LV.Report.memorialCalculo(R, proj, cfgR), 'Calc'); } }),
+      h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, cfgR), 'Desc'); } }),
       h('button', { class: 'btn ghost', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })
     ]));
     // memorial inline
@@ -231,7 +247,8 @@
     var html = LV.Prontuario.gerar(R, proj, cfg);
     LV.Audit.registrar('prontuario', { projeto: proj.nome, veredito: R.veredito.texto }).catch(function(){});
     alvo.appendChild(h('div', { class: 'toolbar' }, [
-      h('button', { class: 'btn primary', text: L('⎙ Imprimir / Salvar PDF', '⎙ Print / Save PDF'), onclick: function () { imprimir(html, 'TechnicalFile'); } }),
+      h('button', { class: 'btn primary btn-prontuario', text: L('📑 Gerar Prontuário Completo', '📑 Generate Complete Technical File'), onclick: function () { abrirExportModal(R, proj, cfg); } }),
+      h('button', { class: 'btn ghost', text: L('⎙ Imprimir / Salvar PDF', '⎙ Print / Save PDF'), onclick: function () { imprimir(html, 'TechnicalFile'); } }),
       h('button', { class: 'btn ghost', text: L('Registros', 'Records'), onclick: function () { LV.UI.irPara('registros'); } })
     ]));
     alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
@@ -290,7 +307,7 @@
   function registros(alvo) {
     H();
     var proj = projAtual();
-    alvo.appendChild(tituloPagina('Registros do prontuário', 'Inspeções, ensaios, APR, capacitação e EPI — projeto «' + proj.nome + '».'));
+    alvo.appendChild(tituloPagina('Registros do prontuário', L('Inspeções, ensaios, APR, capacitação e EPI — projeto «' + proj.nome + '».', 'Inspections, load tests, JHA, training and PPE — project “' + proj.nome + '”.')));
     var abas = [
       { id: 'inspecoes', nome: 'Inspeções', campos: [['tipo', 'Tipo (inicial/rotineira/periódica)'], ['inspetor', 'Inspetor'], ['resultado', 'Resultado'], ['proxima', 'Próxima inspeção'], ['obs', 'Observações']] },
       { id: 'ensaios', nome: 'Ensaios de carga', campos: [['ponto', 'Ponto'], ['exigida', 'Carga exigida (kN)'], ['aplicada', 'Carga aplicada (kN)'], ['resultado', 'Resultado'], ['resp', 'Responsável']] },
@@ -300,31 +317,31 @@
     ];
     var ativo = LV.state.regAba || 'inspecoes';
     alvo.appendChild(h('div', { class: 'tabs' }, abas.map(function (a) {
-      return h('button', { class: 'tab' + (a.id === ativo ? ' ativo' : ''), text: a.nome, onclick: function () { LV.state.regAba = a.id; LV.UI.renderRota(); } });
+      return h('button', { class: 'tab' + (a.id === ativo ? ' ativo' : ''), text: D(a.nome), onclick: function () { LV.state.regAba = a.id; LV.UI.renderRota(); } });
     })));
     var aba = abas.filter(function (a) { return a.id === ativo; })[0];
     var inputs = {};
     var form = h('div', { class: 'reg-form' }, aba.campos.map(function (c) {
-      var inp = h('input', { class: 'inp', placeholder: c[1] }); inputs[c[0]] = inp;
-      return h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: c[1] }), inp]);
-    }).concat([h('button', { class: 'btn primary', text: '+ Adicionar', onclick: function () {
+      var inp = h('input', { class: 'inp', placeholder: D(c[1]) }); inputs[c[0]] = inp;
+      return h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: D(c[1]) }), inp]);
+    }).concat([h('button', { class: 'btn primary', text: D('+ Adicionar'), onclick: function () {
       var rec = {}; aba.campos.forEach(function (c) { rec[c[0]] = inputs[c[0]].value; });
       LV.Storage.addRegistro(proj.id, aba.id, rec); LV.Audit.registrar('registro', { tipo: aba.id, projeto: proj.nome }).catch(function(){});
-      toast('Registro adicionado.', 'ok'); LV.UI.renderRota();
+      toast(D('Registro adicionado.'), 'ok'); LV.UI.renderRota();
     } })]));
     alvo.appendChild(form);
     var registrosAtuais = (proj.registros && proj.registros[aba.id]) || [];
     var tab = h('table', { class: 'tab' });
-    tab.appendChild(h('thead', {}, [h('tr', {}, aba.campos.map(function (c) { return h('th', { text: c[1] }); }).concat([h('th', { text: 'Data' }), h('th', { text: '' })]))]));
+    tab.appendChild(h('thead', {}, [h('tr', {}, aba.campos.map(function (c) { return h('th', { text: D(c[1]) }); }).concat([h('th', { text: D('Data') }), h('th', { text: '' })]))]));
     var tb = h('tbody');
     registrosAtuais.forEach(function (r) {
       tb.appendChild(h('tr', {}, aba.campos.map(function (c) { return h('td', { text: r[c[0]] || '' }); }).concat([
-        h('td', { text: new Date(r.criadoEm).toLocaleDateString('pt-BR') }),
+        h('td', { text: new Date(r.criadoEm).toLocaleDateString(dateLoc()) }),
         h('td', {}, [h('button', { class: 'btn mini danger', text: 'x', onclick: function () { LV.Storage.removerRegistro(proj.id, aba.id, r.id); LV.UI.renderRota(); } })])
       ])));
     });
     tab.appendChild(tb);
-    alvo.appendChild(registrosAtuais.length ? tab : h('div', { class: 'vazio', text: 'Sem registros nesta aba.' }));
+    alvo.appendChild(registrosAtuais.length ? tab : h('div', { class: 'vazio', text: D('Sem registros nesta aba.') }));
   }
 
   // ======================= ADMINISTRAÇÃO =======================
@@ -332,36 +349,37 @@
     H();
     if (!LV.Auth.pode('gerenciar_usuarios')) { alvo.appendChild(avisoPermissao()); return; }
     alvo.appendChild(tituloPagina('Administração', 'Usuários, licença, dados do escritório, auditoria e backup.'));
+    function rolLabel(r) { return LV.I18n ? LV.I18n.t('role.' + r) : r; }
 
     // --- Usuários ---
     var box = h('div', { class: 'admin-sec' });
-    box.appendChild(h('h3', { text: 'Usuários e perfis de acesso' }));
+    box.appendChild(h('h3', { text: D('Usuários e perfis de acesso') }));
     var tab = h('table', { class: 'tab' });
-    tab.appendChild(h('thead', {}, [h('tr', {}, ['Usuário', 'Nome', 'Perfil', 'Estado', ''].map(function (t) { return h('th', { text: t }); }))]));
+    tab.appendChild(h('thead', {}, [h('tr', {}, ['Usuário', 'Nome', 'Perfil', 'Estado', ''].map(function (t) { return h('th', { text: D(t) }); }))]));
     var tb = h('tbody');
     LV.Auth.listarUsuarios().forEach(function (u) {
       tb.appendChild(h('tr', {}, [
-        h('td', { text: u.username }), h('td', { text: u.nome }), h('td', { text: LV.Auth.PERFIS[u.role] }),
-        h('td', { text: (u.ativo ? 'ativo' : 'inativo') + (u.bloqueado ? ' (bloqueado)' : '') + (u.mustChange ? ' · troca pendente' : '') }),
+        h('td', { text: u.username }), h('td', { text: u.nome }), h('td', { text: rolLabel(u.role) }),
+        h('td', { text: (u.ativo ? D('ativo') : D('inativo')) + (u.bloqueado ? L(' (bloqueado)', ' (locked)') : '') + (u.mustChange ? L(' · troca pendente', ' · change pending') : '') }),
         h('td', {}, [
-          h('button', { class: 'btn mini ghost', text: 'Resetar senha', onclick: function () {
+          h('button', { class: 'btn mini ghost', text: L('Resetar senha', 'Reset password'), onclick: function () {
             var nova = 'GD-' + LV.Crypto.randomHex(3);
-            LV.Auth.resetarSenha(u.username, nova).then(function () { toast('Nova senha temporária: ' + nova, 'ok'); });
+            LV.Auth.resetarSenha(u.username, nova).then(function () { toast(L('Nova senha temporária: ', 'New temporary password: ') + nova, 'ok'); });
           } }),
-          u.username !== 'admin' ? h('button', { class: 'btn mini danger', text: 'Remover', onclick: function () { if (confirmar('Remover ' + u.username + '?')) { LV.Auth.removerUsuario(u.username); LV.UI.renderRota(); } } }) : null
+          u.username !== 'admin' ? h('button', { class: 'btn mini danger', text: L('Remover', 'Remove'), onclick: function () { if (confirmar(L('Remover ' + u.username + '?', 'Remove ' + u.username + '?'))) { LV.Auth.removerUsuario(u.username); LV.UI.renderRota(); } } }) : null
         ])
       ]));
     });
     tab.appendChild(tb); box.appendChild(tab);
     // novo usuário
-    var nu = {}, campos = [['username', 'usuário'], ['nome', 'nome completo'], ['senha', 'senha inicial']];
+    var nu = {}, campos = [['username', L('usuário', 'username')], ['nome', L('nome completo', 'full name')], ['senha', L('senha inicial', 'initial password')]];
     var roleSel = h('select', { class: 'inp' });
-    Object.keys(LV.Auth.PERFIS).forEach(function (r) { roleSel.appendChild(h('option', { value: r, text: LV.Auth.PERFIS[r] })); });
-    box.appendChild(h('div', { class: 'reg-form' }, campos.map(function (c) { var i = h('input', { class: 'inp', placeholder: c[1], type: c[0] === 'senha' ? 'text' : 'text' }); nu[c[0]] = i; return h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: c[1] }), i]); }).concat([
-      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: 'perfil' }), roleSel]),
-      h('button', { class: 'btn primary', text: '+ Criar usuário', onclick: function () {
+    Object.keys(LV.Auth.PERFIS).forEach(function (r) { roleSel.appendChild(h('option', { value: r, text: rolLabel(r) })); });
+    box.appendChild(h('div', { class: 'reg-form' }, campos.map(function (c) { var i = h('input', { class: 'inp', placeholder: c[1], type: 'text' }); nu[c[0]] = i; return h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: c[1] }), i]); }).concat([
+      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: L('perfil', 'role') }), roleSel]),
+      h('button', { class: 'btn primary', text: L('+ Criar usuário', '+ Create user'), onclick: function () {
         LV.Auth.criarUsuario({ username: nu.username.value, nome: nu.nome.value, senha: nu.senha.value, role: roleSel.value, mustChange: true })
-          .then(function () { toast('Usuário criado.', 'ok'); LV.UI.renderRota(); }).catch(function (e) { toast(e.message, 'erro'); });
+          .then(function () { toast(L('Usuário criado.', 'User created.'), 'ok'); LV.UI.renderRota(); }).catch(function (e) { toast(e.message, 'erro'); });
       } })
     ])));
     alvo.appendChild(box);
@@ -369,60 +387,88 @@
     // --- Licença ---
     var lic = LV.Auth.licencaAtual();
     var boxL = h('div', { class: 'admin-sec' });
-    boxL.appendChild(h('h3', { text: 'Licença comercial' }));
-    boxL.appendChild(h('p', { class: 'muted', text: lic ? ('Cliente: ' + lic.cliente + ' · plano ' + lic.plano + ' · validade ' + lic.validade) : 'Sem licença.' }));
-    var gc = {}, gcCli = h('input', { class: 'inp', placeholder: 'CLIENTE' }), gcVal = h('input', { class: 'inp', placeholder: 'AAAAMMDD (validade)' }), gcPl = h('input', { class: 'inp', placeholder: 'PRO', value: 'PRO' });
-    var saidaChave = h('input', { class: 'inp', readonly: 'true', placeholder: 'chave gerada aparecerá aqui' });
+    boxL.appendChild(h('h3', { text: L('Licença comercial', 'Commercial license') }));
+    boxL.appendChild(h('p', { class: 'muted', text: lic ? (L('Cliente: ', 'Client: ') + lic.cliente + L(' · plano ', ' · plan ') + lic.plano + L(' · validade ', ' · valid until ') + lic.validade) : L('Sem licença.', 'No license.') }));
+    var gc = {}, gcCli = h('input', { class: 'inp', placeholder: L('CLIENTE', 'CLIENT') }), gcVal = h('input', { class: 'inp', placeholder: L('AAAAMMDD (validade)', 'YYYYMMDD (valid until)') }), gcPl = h('input', { class: 'inp', placeholder: 'PRO', value: 'PRO' });
+    var saidaChave = h('input', { class: 'inp', readonly: 'true', placeholder: L('chave gerada aparecerá aqui', 'generated key will appear here') });
     boxL.appendChild(h('div', { class: 'reg-form' }, [
-      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: 'Cliente' }), gcCli]),
-      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: 'Validade (AAAAMMDD)' }), gcVal]),
-      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: 'Plano' }), gcPl]),
-      h('button', { class: 'btn primary', text: 'Gerar chave de licença', onclick: function () {
-        LV.Auth.gerarChave(gcCli.value, gcVal.value, gcPl.value).then(function (k) { saidaChave.value = k; toast('Chave gerada.', 'ok'); });
+      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: L('Cliente', 'Client') }), gcCli]),
+      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: L('Validade (AAAAMMDD)', 'Valid until (YYYYMMDD)') }), gcVal]),
+      h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: L('Plano', 'Plan') }), gcPl]),
+      h('button', { class: 'btn primary', text: L('Gerar chave de licença', 'Generate license key'), onclick: function () {
+        LV.Auth.gerarChave(gcCli.value, gcVal.value, gcPl.value).then(function (k) { saidaChave.value = k; toast(L('Chave gerada.', 'Key generated.'), 'ok'); });
       } })
     ]));
-    boxL.appendChild(h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: 'Chave gerada (entregue ao cliente)' }), saidaChave]));
+    boxL.appendChild(h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: L('Chave gerada (entregue ao cliente)', 'Generated key (deliver to client)') }), saidaChave]));
     alvo.appendChild(boxL);
 
     // --- Config do escritório ---
     var cfg = LV.Storage.getConfig();
     var boxC = h('div', { class: 'admin-sec' });
-    boxC.appendChild(h('h3', { text: 'Dados do escritório (marca dos relatórios)' }));
+    boxC.appendChild(h('h3', { text: L('Dados do escritório (marca dos relatórios)', 'Office data (report branding)') }));
     var ci = {};
-    [['empresa', 'Empresa'], ['cnpj', 'CNPJ'], ['responsavel', 'Responsável técnico'], ['crea', 'CREA'], ['contato', 'Contato'], ['cidade', 'Cidade']].forEach(function (c) {
+    [['empresa', L('Empresa', 'Company')], ['cnpj', L('CNPJ', 'Company Tax ID')], ['responsavel', L('Responsável técnico', 'Engineer of record')], ['crea', L('CREA', 'License / PE')], ['contato', L('Contato', 'Contact')], ['cidade', L('Cidade', 'City')]].forEach(function (c) {
       var i = h('input', { class: 'inp', value: cfg[c[0]] || '' }); ci[c[0]] = i;
       boxC.appendChild(h('div', { class: 'reg-campo' }, [h('label', { class: 'rot', text: c[1] }), i]));
     });
-    boxC.appendChild(h('button', { class: 'btn primary', text: 'Salvar dados', onclick: function () { var n = {}; Object.keys(ci).forEach(function (k) { n[k] = ci[k].value; }); LV.Storage.setConfig(n); toast('Dados salvos.', 'ok'); } }));
+    // --- Logotipo (aparece no cabeçalho e na capa de todos os documentos) ---
+    var logoState = { data: cfg.logo || '' };
+    var logoPrev = h('div', { class: 'logo-prev' + (logoState.data ? '' : ' vazio') },
+      logoState.data ? [h('img', { src: logoState.data, alt: 'logo' })] : [h('span', { class: 'muted', text: L('Sem logotipo — será usado o monograma do escritório.', 'No logo — the office monogram will be used.') })]);
+    function pintarLogo() {
+      clear(logoPrev);
+      logoPrev.className = 'logo-prev' + (logoState.data ? '' : ' vazio');
+      if (logoState.data) logoPrev.appendChild(h('img', { src: logoState.data, alt: 'logo' }));
+      else logoPrev.appendChild(h('span', { class: 'muted', text: L('Sem logotipo — será usado o monograma do escritório.', 'No logo — the office monogram will be used.') }));
+    }
+    var inputLogo = h('input', { type: 'file', accept: 'image/png,image/jpeg,image/svg+xml', style: 'display:none', onchange: function (ev) {
+      var file = ev.target.files && ev.target.files[0]; if (!file) return;
+      if (file.size > 512 * 1024) { toast(L('Imagem muito grande (máx. 512 KB).', 'Image too large (max 512 KB).'), 'erro'); return; }
+      var rd = new FileReader();
+      rd.onload = function () { logoState.data = rd.result; pintarLogo(); toast(L('Logotipo carregado — clique em Salvar dados.', 'Logo loaded — click Save data.'), 'ok'); };
+      rd.readAsDataURL(file);
+    } });
+    boxC.appendChild(h('div', { class: 'reg-campo logo-campo' }, [
+      h('label', { class: 'rot', text: L('Logotipo do escritório (PNG/JPG/SVG · máx. 512 KB)', 'Office logo (PNG/JPG/SVG · max 512 KB)') }),
+      logoPrev,
+      h('div', { class: 'logo-btns' }, [
+        h('label', { class: 'btn ghost arquivo' }, [L('⭱ Enviar imagem', '⭱ Upload image'), inputLogo]),
+        h('button', { class: 'btn ghost danger', text: L('Remover', 'Remove'), onclick: function () { logoState.data = ''; pintarLogo(); toast(L('Logotipo removido — clique em Salvar dados.', 'Logo removed — click Save data.'), 'ok'); } })
+      ])
+    ]));
+    boxC.appendChild(h('button', { class: 'btn primary', text: L('Salvar dados', 'Save data'), onclick: function () { var n = Object.assign({}, cfg); Object.keys(ci).forEach(function (k) { n[k] = ci[k].value; }); n.logo = logoState.data; LV.Storage.setConfig(n); toast(L('Dados salvos.', 'Data saved.'), 'ok'); } }));
     alvo.appendChild(boxC);
 
     // --- Auditoria ---
     var boxA = h('div', { class: 'admin-sec' });
-    boxA.appendChild(h('h3', { text: 'Trilha de auditoria' }));
-    boxA.appendChild(h('button', { class: 'btn ghost', text: 'Verificar integridade', onclick: function () {
-      LV.Audit.verificarIntegridade().then(function (r) { toast(r.ok ? ('Cadeia íntegra (' + r.total + ' eventos).') : ('Integridade ROMPIDA no evento ' + r.rompidaEm), r.ok ? 'ok' : 'erro'); });
+    boxA.appendChild(h('h3', { text: L('Trilha de auditoria', 'Audit trail') }));
+    boxA.appendChild(h('button', { class: 'btn ghost', text: L('Verificar integridade', 'Verify integrity'), onclick: function () {
+      LV.Audit.verificarIntegridade().then(function (r) { toast(r.ok ? (L('Cadeia íntegra (', 'Chain intact (') + r.total + L(' eventos).', ' events).')) : (L('Integridade ROMPIDA no evento ', 'Integrity BROKEN at event ') + r.rompidaEm), r.ok ? 'ok' : 'erro'); });
     } }));
     var logTab = h('table', { class: 'tab' });
-    logTab.appendChild(h('thead', {}, [h('tr', {}, ['#', 'Data', 'Ação', 'Detalhes'].map(function (t) { return h('th', { text: t }); }))]));
+    logTab.appendChild(h('thead', {}, [h('tr', {}, ['#', 'Data', 'Ação', 'Detalhes'].map(function (t) { return h('th', { text: D(t) }); }))]));
     var ltb = h('tbody');
     LV.Audit.listar(15).forEach(function (ev) {
-      ltb.appendChild(h('tr', {}, [h('td', { text: ev.seq }), h('td', { text: new Date(ev.ts).toLocaleString('pt-BR') }), h('td', { text: ev.acao }), h('td', { text: JSON.stringify(ev.dados) })]));
+      ltb.appendChild(h('tr', {}, [h('td', { text: ev.seq }), h('td', { text: new Date(ev.ts).toLocaleString(dateLoc()) }), h('td', { text: ev.acao }), h('td', { text: JSON.stringify(ev.dados) })]));
     });
     logTab.appendChild(ltb); boxA.appendChild(logTab);
     alvo.appendChild(boxA);
   }
 
   // ======================= helpers de view =======================
-  function tituloPagina(t, sub) { return h('div', { class: 'pg-titulo' }, [h('h1', { text: t }), sub ? h('p', { class: 'muted', text: sub }) : null]); }
-  function secaoForm(titulo, campos) { return h('div', { class: 'form-sec' }, [h('h3', { text: titulo }), h('div', { class: 'grid-campos' }, campos)]); }
-  function campoWrap(rotulo, el) { return h('div', { class: 'campo' }, [h('label', { class: 'rot', text: rotulo }), el]); }
+  // D(s): traduz uma string estática de UI (dicionário PT→EN) conforme o idioma.
+  function D(s) { return (LV.I18n && typeof s === 'string') ? LV.I18n.d(s) : s; }
+  function dateLoc() { return (LV.I18n && LV.I18n.getLang() === 'en') ? 'en-US' : 'pt-BR'; }
+  function tituloPagina(t, sub) { return h('div', { class: 'pg-titulo' }, [h('h1', { text: D(t) }), sub ? h('p', { class: 'muted', text: D(sub) }) : null]); }
+  function secaoForm(titulo, campos) { return h('div', { class: 'form-sec' }, [h('h3', { text: D(titulo) }), h('div', { class: 'grid-campos' }, campos)]); }
+  function campoWrap(rotulo, el) { return h('div', { class: 'campo' }, [h('label', { class: 'rot', text: D(rotulo) }), el]); }
   function campoTexto(rotulo, val, onchange) { var i = h('input', { class: 'inp', value: val || '', onchange: function () { onchange(i.value); } }); return campoWrap(rotulo, i); }
   function campoNum(rotulo, val, un, onchange, ph) {
     var i = h('input', { class: 'inp', type: 'number', step: 'any', value: (val != null && val !== '') ? val : '', placeholder: ph != null ? String(ph) : '', onchange: function () { onchange(i.value); } });
-    return h('div', { class: 'campo' }, [h('label', { class: 'rot', text: rotulo + (un && un !== '—' ? ' (' + un + ')' : '') }), i]);
+    return h('div', { class: 'campo' }, [h('label', { class: 'rot', text: D(rotulo) + (un && un !== '—' ? ' (' + un + ')' : '') }), i]);
   }
   function podeEditar() { return LV.Auth.pode('editar_projeto'); }
-  function avisoPermissao() { return h('div', { class: 'vazio', text: 'Seu perfil não tem permissão para acessar esta área.' }); }
+  function avisoPermissao() { return h('div', { class: 'vazio', text: L('Seu perfil não tem permissão para acessar esta área.', 'Your role does not have permission to access this area.') }); }
 
   // imprimir/PDF: abre janela com o documento + folha de estilo
   function imprimir(html, titulo) {
@@ -444,6 +490,165 @@
     if (!file) return; var r = new FileReader();
     r.onload = function () { try { LV.Storage.importarTudo(r.result, true); toast('Backup restaurado.', 'ok'); LV.UI.renderRota(); } catch (e) { toast('Falha: ' + e.message, 'erro'); } };
     r.readAsText(file);
+  }
+
+  // ---- Modal genérico (overlay central) ----
+  function modal(titulo, corpoEl, rodapeEls, classeExtra) {
+    var overlay = h('div', { class: 'modal-overlay' });
+    function fechar() { overlay.remove(); document.removeEventListener('keydown', onKey); }
+    function onKey(ev) { if (ev.key === 'Escape') fechar(); }
+    document.addEventListener('keydown', onKey);
+    var caixa = h('div', { class: 'modal-caixa ' + (classeExtra || '') }, [
+      h('div', { class: 'modal-head' }, [
+        h('h3', { text: D(titulo) }),
+        h('button', { class: 'modal-x', text: '✕', title: L('Fechar', 'Close'), onclick: fechar })
+      ]),
+      h('div', { class: 'modal-corpo' }, [corpoEl]),
+      rodapeEls ? h('div', { class: 'modal-rodape' }, rodapeEls) : null
+    ]);
+    overlay.appendChild(caixa);
+    overlay.addEventListener('click', function (ev) { if (ev.target === overlay) fechar(); });
+    document.body.appendChild(overlay);
+    return { overlay: overlay, fechar: fechar };
+  }
+
+  // ---- "Gerar Prontuário Completo": seleção de seções + formatos de saída ----
+  function abrirExportModal(R, proj, cfg) {
+    var secoes = LV.Prontuario.secoesDisponiveis(R, proj, cfg);
+    var checks = {};
+    var lista = h('div', { class: 'exp-secoes' }, secoes.map(function (s, i) {
+      var cb = h('input', { type: 'checkbox', checked: 'true', value: s.id });
+      checks[s.id] = cb;
+      return h('label', { class: 'exp-item' }, [cb, h('span', { class: 'exp-n', text: String(i + 1) }), h('span', { text: s.titulo })]);
+    }));
+    var fmtWord = h('input', { type: 'checkbox', checked: 'true' });
+    var fmtPdf = h('input', { type: 'checkbox', checked: 'true' });
+    var fmtXls = h('input', { type: 'checkbox', checked: 'true' });
+    var incluiCapa = h('input', { type: 'checkbox', checked: 'true' });
+    function setAll(v) { Object.keys(checks).forEach(function (id) { checks[id].checked = v; }); }
+
+    var corpo = h('div', { class: 'exp-modal' }, [
+      h('p', { class: 'muted', text: L('Escolha as seções que deseja incluir no prontuário e os formatos de saída. Todos os documentos saem com a marca, o emblema do país e os dados de contato do escritório.',
+        'Choose the sections to include in the technical file and the output formats. Every document carries the branding, the country emblem and the office contact details.') }),
+      h('div', { class: 'exp-acoes-sel' }, [
+        h('button', { class: 'btn mini ghost', text: L('☑ Selecionar todos', '☑ Select all'), onclick: function () { setAll(true); } }),
+        h('button', { class: 'btn mini ghost', text: L('☐ Desmarcar todos', '☐ Clear all'), onclick: function () { setAll(false); } })
+      ]),
+      h('div', { class: 'exp-titulo-grupo', text: L('Seções do prontuário', 'Technical-file sections') }),
+      lista,
+      h('div', { class: 'exp-formatos' }, [
+        h('div', { class: 'exp-titulo-grupo', text: L('Formatos de saída', 'Output formats') }),
+        h('label', { class: 'exp-fmt' }, [fmtWord, h('span', { text: L('Word (.doc) — editável, com figuras e rodapé', 'Word (.doc) — editable, with figures and footer') })]),
+        h('label', { class: 'exp-fmt' }, [fmtPdf, h('span', { text: L('PDF (impressão / assinatura)', 'PDF (print / signature)') })]),
+        h('label', { class: 'exp-fmt' }, [fmtXls, h('span', { text: L('Planilha (.xls) — editável (entrada, resultados, materiais, verificações)', 'Spreadsheet (.xls) — editable (input, results, materials, checks)') })]),
+        h('label', { class: 'exp-fmt exp-capa' }, [incluiCapa, h('span', { text: L('Incluir capa institucional', 'Include institutional cover page') })])
+      ])
+    ]);
+
+    var m = modal(L('Gerar Prontuário Completo', 'Generate Complete Technical File'), corpo, [
+      h('button', { class: 'btn ghost', text: L('Cancelar', 'Cancel'), onclick: function () { m.fechar(); } }),
+      h('button', { class: 'btn primary', text: L('⭳ Gerar documentos', '⭳ Generate documents'), onclick: function () {
+        var ids = Object.keys(checks).filter(function (id) { return checks[id].checked; });
+        if (!ids.length) { toast(L('Selecione ao menos uma seção.', 'Select at least one section.'), 'erro'); return; }
+        if (!fmtWord.checked && !fmtPdf.checked && !fmtXls.checked) { toast(L('Selecione ao menos um formato.', 'Select at least one format.'), 'erro'); return; }
+        var html = LV.Prontuario.gerar(R, proj, cfg, { ids: ids, capa: incluiCapa.checked });
+        var nome = LV.Export.slug((proj.entrada && proj.entrada.obra) || proj.nome) + '-prontuario';
+        LV.Audit.registrar('exportacao', { projeto: proj.nome, secoes: ids.length }).catch(function () {});
+        try {
+          if (fmtWord.checked) LV.Export.gerarWord(html, nome, R, cfg);
+          if (fmtPdf.checked) LV.Export.gerarPDF(html, nome, R, cfg);
+          if (fmtXls.checked) LV.Export.gerarExcel(R, proj, cfg, nome);
+          toast(L('Documentos gerados.', 'Documents generated.'), 'ok');
+          m.fechar();
+        } catch (e) { toast(L('Falha ao gerar: ', 'Generation failed: ') + e.message, 'erro'); }
+      } })
+    ], 'modal-exportar');
+  }
+
+  // ---- "Calcule para mim": dimensionamento automático (perfil + cabo ótimos) ----
+  function autoDimensionar(proj, aposAplicar) {
+    var e = proj.entrada, inp, r;
+    try { inp = montarEntrada(e); } catch (err) { toast(err.message, 'erro'); return; }
+    try { r = LV.Engine.otimizar(inp); } catch (err) { toast(err.message, 'erro'); return; }
+    if (!r) {
+      var ms = modal(L('Sem solução no catálogo', 'No catalog solution'),
+        h('div', { class: 'auto-sem' }, [
+          h('p', { text: L('Nenhuma combinação de perfil de poste e bitola de cabo do catálogo foi APROVADA em todas as verificações do país selecionado.',
+            'No combination of post profile and cable diameter in the catalog PASSED all checks for the selected country.') }),
+          h('p', { class: 'muted', text: L('Isso quase sempre indica uma limitação geométrica (zona livre de queda maior que o pé-direito disponível) ou de carga — não algo que um poste maior resolva. Sugestões: aumentar o pé-direito livre, reduzir o vão entre postes, adicionar/limitar o absorvedor de energia da linha, ou reduzir o nº de usuários simultâneos.',
+            'This almost always means a geometric limit (required fall clearance exceeds the available headroom) or a load limit — not something a bigger post fixes. Try: increase available headroom, reduce the span between posts, add/limit the line energy absorber, or reduce the number of simultaneous users.') })
+        ]),
+        [h('button', { class: 'btn primary', text: L('Entendi', 'Got it'), onclick: function () { ms.fechar(); } })]);
+      return;
+    }
+    var pais = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
+    var alt = (r.alternativas || []).map(function (a) {
+      return h('li', { text: a.perfil + ' · Ø' + a.caboDiametro + ' mm · ' + a.massaLinear.toFixed(1) + ' kg/m' + (a.utilizacao != null ? ' · ' + L('utilização', 'utilization') + ' ' + (a.utilizacao * 100).toFixed(0) + '%' : '') });
+    });
+    var util = (r.utilizacao != null) ? (r.utilizacao * 100).toFixed(0) + '%' : '—';
+    var corpo = h('div', { class: 'auto-res' }, [
+      h('div', { class: 'auto-badge', text: '⚡ ' + L('Solução ótima encontrada', 'Optimal solution found') }),
+      h('table', { class: 'auto-tab' }, [
+        linhaAuto(L('Perfil do poste', 'Post profile'), r.perfil),
+        linhaAuto(L('Diâmetro do cabo', 'Cable diameter'), 'Ø ' + r.caboDiametro + ' mm'),
+        linhaAuto(L('Massa linear do poste', 'Post linear mass'), r.massaLinear.toFixed(1) + ' kg/m'),
+        linhaAuto(L('Massa por poste (h=' + (Number(e.h) || 1.2).toFixed(2) + ' m)', 'Mass per post (h=' + (Number(e.h) || 1.2).toFixed(2) + ' m)'), r.massaPoste.toFixed(1) + ' kg'),
+        linhaAuto(L('Utilização governante', 'Governing utilization'), util),
+        linhaAuto(L('Critério normativo', 'Design basis'), pais ? (pais.bandeira + ' ' + L(pais.nome, pais.nomeEn || pais.nome)) : '—'),
+        linhaAuto(L('Combinações avaliadas', 'Combinations evaluated'), String(r.testados))
+      ]),
+      alt.length ? h('div', { class: 'auto-alt' }, [h('div', { class: 'auto-alt-t', text: L('Alternativas válidas (mais pesadas)', 'Valid alternatives (heavier)') }), h('ul', {}, alt)]) : null,
+      h('p', { class: 'muted small', text: L('Selecionamos a opção APROVADA mais leve do catálogo (menor custo de material). Você pode aplicá-la ou continuar ajustando manualmente.',
+        'We picked the lightest PASSING option in the catalog (lowest material cost). You can apply it or keep adjusting manually.') })
+    ]);
+    var mr = modal(L('Dimensionamento automático', 'Automatic dimensioning'), corpo, [
+      h('button', { class: 'btn ghost', text: L('Fechar', 'Close'), onclick: function () { mr.fechar(); } }),
+      h('button', { class: 'btn primary', text: L('✔ Aplicar e ver resultados', '✔ Apply & view results'), onclick: function () {
+        e.posteperfil = r.perfil; e.caboDiametro = r.caboDiametro;
+        LV.Storage.salvar(proj);
+        LV.Audit.registrar('otimizacao', { projeto: proj.nome, perfil: r.perfil, cabo: r.caboDiametro }).catch(function () {});
+        mr.fechar();
+        if (aposAplicar) aposAplicar();
+        LV.UI.irPara('resultados');
+      } })
+    ], 'modal-auto');
+  }
+  function linhaAuto(rot, val) { return h('tr', {}, [h('td', { class: 'ar-rot', text: rot }), h('td', { class: 'ar-val', text: val })]); }
+
+  // ---- Comparativo internacional (Brasil × EUA) — a "cereja do bolo" ----
+  //  O MESMO projeto avaliado sob cada jurisdição, lado a lado. Como os métodos
+  //  de dimensionamento e os limites diferem, um sistema pode ser APROVADO no
+  //  Brasil e REPROVADO nos EUA (ou vice-versa) — e isso fica explícito aqui.
+  function comparativoInternacional(proj) {
+    var cmp;
+    try { cmp = LV.Engine.comparar(montarEntrada(proj.entrada)); } catch (e) { return h('div', {}); }
+    var atual = LV.Paises ? LV.Paises.getSelecionado() : 'BR';
+    function utilPct(R) { return (R && R.poste && R.poste.util) ? (R.poste.util.valor * 100).toFixed(0) + '%' : '—'; }
+    function veredito(R) { return R ? R.veredito.aprovado : null; }
+    var cols = cmp.codigos.map(function (cod) {
+      var R = cmp.resultados[cod], p = LV.Paises ? LV.Paises.get(cod) : { nome: cod, bandeira: '' };
+      var ap = veredito(R);
+      var met = (R && R.poste && R.poste.metodo) ? R.poste.metodo : ((p.metodoAco) || '');
+      return h('div', { class: 'ci-col' + (cod === atual ? ' ativo' : '') }, [
+        h('div', { class: 'ci-flag' }, [h('span', { class: 'ci-band', text: p.bandeira || '' }), h('b', { text: L(p.nome, p.nomeEn || p.nome) }), cod === atual ? h('span', { class: 'ci-tag-atual', text: L('atual', 'active') }) : null]),
+        h('div', { class: 'ci-verd ' + (ap == null ? 'na' : (ap ? 'ok' : 'fail')), text: ap == null ? '—' : (ap ? L('APROVADO', 'APPROVED') : L('REPROVADO', 'FAILED')) }),
+        h('table', { class: 'ci-tab' }, [
+          h('tr', {}, [h('td', { text: L('Utilização do poste', 'Post utilization') }), h('td', { class: 'v', text: utilPct(R) })]),
+          h('tr', {}, [h('td', { text: L('Força máx. no trabalhador', 'Max. worker force') }), h('td', { class: 'v', text: p.forcaTrabalhadorMax + ' kN' })]),
+          h('tr', {}, [h('td', { text: L('Ancoragem mínima', 'Min. anchorage') }), h('td', { class: 'v', text: (p.ancoragemMin != null ? p.ancoragemMin.toFixed(1) : '—') + ' kN' })]),
+          h('tr', {}, [h('td', { text: L('Método de dimensionamento', 'Design method') }), h('td', { class: 'v', text: met })])
+        ])
+      ]);
+    });
+    var aviso = cmp.divergem
+      ? h('div', { class: 'ci-aviso divergem', text: '⚠ ' + L('Atenção: o veredito DIVERGE entre as jurisdições — o sistema atende uma norma e não atende a outra. Verifique o país de destino antes de emitir o prontuário.',
+          'Warning: the verdict DIFFERS across jurisdictions — the system meets one code but not the other. Confirm the destination country before issuing the technical file.') })
+      : h('div', { class: 'ci-aviso igual', text: '✔ ' + L('Veredito consistente nas duas jurisdições avaliadas.', 'Consistent verdict across both jurisdictions evaluated.') });
+    return h('div', { class: 'ci-card' }, [
+      h('div', { class: 'ci-head', text: '🌐 ' + L('Comparativo internacional — mesmo projeto, dois critérios (Brasil × EUA)', 'International comparison — same project, two criteria (Brazil × USA)') }),
+      h('div', { class: 'ci-cols' }, cols),
+      aviso
+    ]);
   }
 
   LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, conformidade: conformidade, registros: registros, admin: admin };

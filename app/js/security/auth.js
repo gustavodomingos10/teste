@@ -20,6 +20,9 @@
   if (typeof module !== 'undefined' && module.exports) Crypto = require('./crypto.js');
   function deps() { Crypto = Crypto || (root.LV && root.LV.Crypto); if (!Crypto) throw new Error('auth.js: crypto.js não carregado'); }
 
+  // ---- i18n local (padrão português quando LV.I18n ausente) ----------------
+  function tl(pt, en) { return (root.LV && root.LV.I18n && root.LV.I18n.getLang() === 'en') ? en : pt; }
+
   // ---- Perfis e permissões -------------------------------------------------
   var PERMISSOES = {
     admin:      ['gerenciar_usuarios', 'gerenciar_licenca', 'configurar', 'editar_projeto', 'calcular', 'emitir_prontuario', 'registrar_inspecao', 'assinar_rt', 'ver'],
@@ -97,11 +100,11 @@
     deps();
     var u = load(K_USERS, {});
     var username = String(dados.username || '').trim().toLowerCase();
-    if (!username) return Promise.reject(new Error('Usuário inválido.'));
-    if (u[username]) return Promise.reject(new Error('Usuário já existe: ' + username));
-    if (!PERMISSOES[dados.role]) return Promise.reject(new Error('Perfil inválido: ' + dados.role));
+    if (!username) return Promise.reject(new Error(tl('Usuário inválido.', 'Invalid user.')));
+    if (u[username]) return Promise.reject(new Error(tl('Usuário já existe: ', 'User already exists: ') + username));
+    if (!PERMISSOES[dados.role]) return Promise.reject(new Error(tl('Perfil inválido: ', 'Invalid role: ') + dados.role));
     var f = Crypto.forcaSenha(dados.senha || '');
-    if (!f.aceitavel) return Promise.reject(new Error('Senha fraca: mínimo 8 caracteres, com maiúscula, minúscula e número.'));
+    if (!f.aceitavel) return Promise.reject(new Error(tl('Senha fraca: mínimo 8 caracteres, com maiúscula, minúscula e número.', 'Weak password: minimum 8 characters, with uppercase, lowercase and a number.')));
     return Crypto.hashSenha(dados.senha).then(function (reg) {
       u[username] = {
         username: username, nome: dados.nome || username, role: dados.role, senha: reg,
@@ -115,7 +118,7 @@
   function removerUsuario(username) {
     var u = load(K_USERS, {});
     username = String(username || '').toLowerCase();
-    if (username === 'admin') throw new Error('O administrador padrão não pode ser removido.');
+    if (username === 'admin') throw new Error(tl('O administrador padrão não pode ser removido.', 'The default administrator cannot be removed.'));
     delete u[username];
     save(K_USERS, u);
     return { ok: true };
@@ -124,7 +127,7 @@
   function definirAtivo(username, ativo) {
     var u = load(K_USERS, {});
     username = String(username || '').toLowerCase();
-    if (!u[username]) throw new Error('Usuário inexistente.');
+    if (!u[username]) throw new Error(tl('Usuário inexistente.', 'User does not exist.'));
     u[username].ativo = !!ativo;
     save(K_USERS, u);
     return { ok: true };
@@ -136,18 +139,18 @@
     username = String(username || '').trim().toLowerCase();
     var u = load(K_USERS, {});
     var user = u[username];
-    if (!user) return Promise.resolve({ ok: false, erro: 'Usuário ou senha inválidos.' });
-    if (!user.ativo) return Promise.resolve({ ok: false, erro: 'Usuário desativado. Procure o administrador.' });
+    if (!user) return Promise.resolve({ ok: false, erro: tl('Usuário ou senha inválidos.', 'Invalid username or password.') });
+    if (!user.ativo) return Promise.resolve({ ok: false, erro: tl('Usuário desativado. Procure o administrador.', 'User deactivated. Please contact the administrator.') });
     if (user.bloqueadoAte > clock()) {
       var min = Math.ceil((user.bloqueadoAte - clock()) / 60000);
-      return Promise.resolve({ ok: false, erro: 'Conta bloqueada por tentativas. Tente novamente em ' + min + ' min.' });
+      return Promise.resolve({ ok: false, erro: tl('Conta bloqueada por tentativas. Tente novamente em ', 'Account locked due to failed attempts. Try again in ') + min + tl(' min.', ' min.') });
     }
     return Crypto.verificarSenha(senha, user.senha).then(function (ok) {
       if (!ok) {
         user.falhas = (user.falhas || 0) + 1;
         if (user.falhas >= MAX_TENTATIVAS) { user.bloqueadoAte = clock() + BLOQUEIO_MS; user.falhas = 0; }
         save(K_USERS, u);
-        return { ok: false, erro: 'Usuário ou senha inválidos.' };
+        return { ok: false, erro: tl('Usuário ou senha inválidos.', 'Invalid username or password.') };
       }
       user.falhas = 0; user.bloqueadoAte = 0; user.ultimoAcesso = clock();
       save(K_USERS, u);
@@ -192,11 +195,11 @@
     username = String(username || '').toLowerCase();
     var u = load(K_USERS, {});
     var user = u[username];
-    if (!user) return Promise.reject(new Error('Usuário inexistente.'));
+    if (!user) return Promise.reject(new Error(tl('Usuário inexistente.', 'User does not exist.')));
     var f = Crypto.forcaSenha(novaSenha);
-    if (!f.aceitavel) return Promise.reject(new Error('Senha fraca: mínimo 8 caracteres, com maiúscula, minúscula e número.'));
+    if (!f.aceitavel) return Promise.reject(new Error(tl('Senha fraca: mínimo 8 caracteres, com maiúscula, minúscula e número.', 'Weak password: minimum 8 characters, with uppercase, lowercase and a number.')));
     return Crypto.verificarSenha(senhaAtual, user.senha).then(function (ok) {
-      if (!ok) throw new Error('Senha atual incorreta.');
+      if (!ok) throw new Error(tl('Senha atual incorreta.', 'Current password is incorrect.'));
       return Crypto.hashSenha(novaSenha);
     }).then(function (reg) {
       user.senha = reg; user.mustChange = false;
@@ -212,7 +215,7 @@
     username = String(username || '').toLowerCase();
     var u = load(K_USERS, {});
     var user = u[username];
-    if (!user) return Promise.reject(new Error('Usuário inexistente.'));
+    if (!user) return Promise.reject(new Error(tl('Usuário inexistente.', 'User does not exist.')));
     return Crypto.hashSenha(novaSenhaTemp).then(function (reg) {
       user.senha = reg; user.mustChange = true; user.falhas = 0; user.bloqueadoAte = 0;
       save(K_USERS, u);
@@ -234,15 +237,15 @@
     deps();
     chave = String(chave || '').trim().toUpperCase();
     var p = chave.split('-');
-    if (p.length < 5 || p[0] !== 'GDLV') return Promise.resolve({ ok: false, erro: 'Formato de chave inválido.' });
+    if (p.length < 5 || p[0] !== 'GDLV') return Promise.resolve({ ok: false, erro: tl('Formato de chave inválido.', 'Invalid license key format.') });
     var cliente = p[1], validade = p[2], plano = p[3], assinf = p.slice(4).join('-');
     var payload = ['GDLV', cliente, validade, plano].join('-');
     return Crypto.sha256(payload + '|' + SEGREDO_PRODUTO).then(function (h) {
       var esperado = h.slice(0, 12).toUpperCase();
-      if (!Crypto.timingSafeEqual(esperado, assinf)) return { ok: false, erro: 'Assinatura da licença inválida.' };
+      if (!Crypto.timingSafeEqual(esperado, assinf)) return { ok: false, erro: tl('Assinatura da licença inválida.', 'Invalid license signature.') };
       var hoje = clock();
       var venc = Date.UTC(+validade.slice(0, 4), +validade.slice(4, 6) - 1, +validade.slice(6, 8), 23, 59, 59);
-      if (isFinite(venc) && hoje > venc) return { ok: false, erro: 'Licença expirada em ' + validade + '.', cliente: cliente, validade: validade };
+      if (isFinite(venc) && hoje > venc) return { ok: false, erro: tl('Licença expirada em ', 'License expired on ') + validade + '.', cliente: cliente, validade: validade };
       return { ok: true, cliente: cliente, validade: validade, plano: plano };
     });
   }
@@ -256,7 +259,7 @@
   function licencaAtual() { return load(K_LICENSE, null); }
   function licencaValida() {
     var l = licencaAtual();
-    if (!l) return Promise.resolve({ ok: false, erro: 'Sem licença ativada.' });
+    if (!l) return Promise.resolve({ ok: false, erro: tl('Sem licença ativada.', 'No license activated.') });
     return validarChave(l.chave);
   }
   /** Utilitário para o vendedor/admin gerar uma chave para um cliente. */

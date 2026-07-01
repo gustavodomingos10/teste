@@ -98,7 +98,7 @@
     return load(K_CFG, {
       empresa: 'GD ENGENHARIA E PERÍCIA LTDA', cnpj: '54.705.748/0001-19',
       responsavel: 'Eng. Civil Gustavo Francisco Floriano Domingos', crea: 'CREA 140.964-D/PR',
-      contato: '(43) 9 9925-9577', cidade: 'Cornélio Procópio/PR'
+      contato: '(43) 9 9925-9577', cidade: 'Cornélio Procópio/PR', logo: ''
     });
   }
   function setConfig(cfg) { save(K_CFG, cfg); return cfg; }
