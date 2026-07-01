@@ -13,7 +13,7 @@
     pt: {
       'app.painel': 'Painel', 'app.projeto': 'Projeto', 'app.resultados': 'Resultados',
       'app.prontuario': 'Prontuário', 'app.registros': 'Registros', 'app.admin': 'Administração',
-      'app.conformidade': 'Conformidade', 'app.sair': 'Sair', 'app.idioma': 'Idioma',
+      'app.conformidade': 'Conformidade', 'app.sobre': 'Sobre', 'app.sair': 'Sair', 'app.idioma': 'Idioma',
       'btn.novo': '+ Novo projeto', 'btn.calcular': 'Salvar e calcular', 'btn.editar': 'Editar dados',
       'btn.imprimir': 'Imprimir', 'btn.pdf': 'Imprimir / Salvar PDF',
       'res.veredito': 'VEREDITO', 'res.aprovado': 'APROVADO', 'res.reprovado': 'REPROVADO',
@@ -24,7 +24,7 @@
     en: {
       'app.painel': 'Dashboard', 'app.projeto': 'Project', 'app.resultados': 'Results',
       'app.prontuario': 'Technical file', 'app.registros': 'Records', 'app.admin': 'Administration',
-      'app.conformidade': 'Compliance', 'app.sair': 'Sign out', 'app.idioma': 'Language',
+      'app.conformidade': 'Compliance', 'app.sobre': 'About', 'app.sair': 'Sign out', 'app.idioma': 'Language',
       'btn.novo': '+ New project', 'btn.calcular': 'Save & calculate', 'btn.editar': 'Edit data',
       'btn.imprimir': 'Print', 'btn.pdf': 'Print / Save PDF',
       'res.veredito': 'VERDICT', 'res.aprovado': 'APPROVED', 'res.reprovado': 'FAILED',
@@ -35,7 +35,7 @@
     es: {
       'app.painel': 'Panel', 'app.projeto': 'Proyecto', 'app.resultados': 'Resultados',
       'app.prontuario': 'Expediente técnico', 'app.registros': 'Registros', 'app.admin': 'Administración',
-      'app.conformidade': 'Conformidad', 'app.sair': 'Salir', 'app.idioma': 'Idioma',
+      'app.conformidade': 'Conformidad', 'app.sobre': 'Acerca de', 'app.sair': 'Salir', 'app.idioma': 'Idioma',
       'btn.novo': '+ Nuevo proyecto', 'btn.calcular': 'Guardar y calcular', 'btn.editar': 'Editar datos',
       'btn.imprimir': 'Imprimir', 'btn.pdf': 'Imprimir / Guardar PDF',
       'res.veredito': 'VEREDICTO', 'res.aprovado': 'APROBADO', 'res.reprovado': 'RECHAZADO',

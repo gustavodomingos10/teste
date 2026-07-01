@@ -191,11 +191,20 @@
           ]);
         })(),
         h('button', { class: 'btn ghost block small', text: T('app.sair'), onclick: function () { LV.Auth.logout(); toast(LV.I18n.L('Sessão encerrada.', 'Session ended.'), 'info'); telaLogin(); } }),
-        h('div', { class: 'sb-empresa', text: (LV.Storage && LV.Storage.getConfig ? (LV.Storage.getConfig().empresa || 'GD Engenharia') : 'GD Engenharia') })
+        (function () {
+          var emp = (LV.Storage && LV.Storage.getConfig ? (LV.Storage.getConfig().empresa || 'GD Engenharia e Perícia') : 'GD Engenharia e Perícia');
+          return h('button', { class: 'sb-empresa', title: LV.I18n.L('Sobre o software', 'About the software'), onclick: function () { irPara('sobre'); } }, [
+            h('span', { class: 'sb-emp-rot', text: LV.I18n.L('Desenvolvido por', 'Developed by') }),
+            h('span', { class: 'sb-emp-nome', text: emp })
+          ]);
+        })()
       ])
     ]);
     var main = h('main', { class: 'conteudo', id: 'conteudo' });
     app.appendChild(h('div', { class: 'shell' }, [sidebar, main]));
+    // Crédito discreto no canto da área de trabalho (bilíngue, estilo premium)
+    app.appendChild(h('button', { class: 'credito-canto', title: LV.I18n.L('Sobre o software', 'About the software'), onclick: function () { irPara('sobre'); } },
+      [h('span', { text: LV.I18n.L('Desenvolvido por ', 'Developed by ') }), h('b', { text: 'GD Engenharia e Perícia' })]));
     renderRota();
   }
 
@@ -207,6 +216,7 @@
     if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'conformidade', nome: T('app.conformidade'), ico: '◎' });
     if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'registros', nome: T('app.registros'), ico: '☑' });
     if (LV.Auth.pode('gerenciar_usuarios', sess)) itens.push({ rota: 'admin', nome: T('app.admin'), ico: '⚙' });
+    itens.push({ rota: 'sobre', nome: T('app.sobre'), ico: 'ⓘ' });   // visível a todos os perfis
     return itens;
   }
 
@@ -225,6 +235,7 @@
         case 'conformidade': V.conformidade(alvo); break;
         case 'registros': V.registros(alvo); break;
         case 'admin': V.admin(alvo); break;
+        case 'sobre': V.sobre(alvo); break;
         default: V.painel(alvo);
       }
     } catch (e) { alvo.appendChild(h('div', { class: 'erro-fatal', text: LV.I18n.L('Erro ao renderizar: ', 'Render error: ') + e.message })); }

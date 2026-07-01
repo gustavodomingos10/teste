@@ -314,7 +314,45 @@ table.nr-tab th{background:var(--azul-claro);color:var(--azul)}
 .sb-pais-txt{display:flex;flex-direction:column;line-height:1.2}
 .sb-pais-txt b{color:#fff;font-size:12.5px}
 .sb-pais-un{font-size:9.5px;color:#9bb8d6;letter-spacing:.3px}
-.sb-empresa{margin-top:10px;font-size:9.5px;color:#7f9ab8;text-align:center;letter-spacing:.3px;line-height:1.4}
+.sb-empresa{display:block;width:100%;margin-top:10px;background:transparent;border:none;cursor:pointer;text-align:center;line-height:1.35;font-family:inherit;padding:2px;border-radius:6px;transition:.15s}
+.sb-empresa:hover{background:rgba(255,255,255,.06)}
+.sb-emp-rot{display:block;font-size:8.5px;letter-spacing:.6px;text-transform:uppercase;color:#6f8bab}
+.sb-emp-nome{display:block;font-size:10px;color:#9bb8d6;font-weight:600}
+
+/* Crédito discreto no canto da área de trabalho */
+.credito-canto{position:fixed;right:14px;bottom:12px;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(3px);
+  border:1px solid var(--borda);border-radius:20px;padding:5px 12px;font-size:10.5px;color:var(--muted);
+  cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.18s;font-family:inherit;opacity:.75}
+.credito-canto:hover{opacity:1;color:var(--azul);border-color:var(--azul2)}
+.credito-canto b{color:var(--cinza);font-weight:700}
+.credito-canto:hover b{color:var(--azul)}
+
+/* Página Sobre / About */
+.sobre-hero{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:var(--sombra)}
+.sh-emblema .rep-emblema{width:60px;height:60px;font-size:22px;background:rgba(255,255,255,.16);box-shadow:none}
+.sh-emblema .rep-logo{max-height:64px;max-width:200px;background:#fff;border-radius:8px;padding:4px}
+.sh-produto{font-size:22px;font-weight:800;letter-spacing:.5px}
+.sh-tagline{font-size:12.5px;color:#dbe7f5;margin-top:2px;max-width:640px}
+.sh-dev{margin-top:10px;font-size:13px;color:#eaf1f8}.sh-dev b{color:#fff}
+.sh-versao{font-size:11px;color:#bcd0e8;margin-top:3px}
+.sobre-card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--sombra)}
+.sobre-card h3{margin:0 0 10px;color:var(--azul);font-size:15px}
+.sobre-tab{width:100%;border-collapse:collapse;font-size:13px}
+.sobre-tab td{padding:6px 4px;border-bottom:1px solid var(--borda)}
+.sobre-tab .sf-rot{color:var(--cinza);width:44%}
+.sobre-tab .sf-val{font-weight:600;color:var(--texto)}
+.sobre-recursos{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+.sr-item{display:flex;gap:11px;align-items:flex-start}
+.sr-ico{font-size:20px;line-height:1.1;flex:0 0 24px;text-align:center}
+.sr-item b{color:var(--azul);font-size:13.5px}
+.sr-desc{font-size:12px;color:var(--cinza);margin-top:2px}
+.sobre-normas{display:flex;flex-wrap:wrap;gap:6px}
+.sn-chip{background:var(--azul-claro);color:var(--azul);border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600}
+.sobre-nota{font-size:12px;color:var(--cinza);font-style:italic;background:#f9fafb;border-left:3px solid var(--azul2);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:14px}
+.sobre-copy{text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--borda);padding-top:14px;line-height:1.7}
+.sobre-copy .sc-dev{display:block;font-size:10px;color:#9aa3af;letter-spacing:.3px}
+@media (max-width:620px){.sobre-recursos{grid-template-columns:1fr}.sobre-hero{flex-direction:column;text-align:center}}
+
 /* Premium: leve refino nos botões primários */
 .btn.primary{background:linear-gradient(180deg,var(--azul2),var(--azul))}
 .btn.primary:hover{background:linear-gradient(180deg,#3568a0,var(--azul2))}
@@ -327,7 +365,7 @@ table.nr-tab th{background:var(--azul-claro);color:var(--azul)}
 .print-body .report,.print-body .prontuario{padding:18mm 16mm}
 @media print{
   body{background:#fff}
-  .sidebar,.toolbar,.tabs,.reg-form,.pg-titulo .muted,.modal-overlay,.auto-card{display:none!important}
+  .sidebar,.toolbar,.tabs,.reg-form,.pg-titulo .muted,.modal-overlay,.auto-card,.credito-canto{display:none!important}
   .doc-inline{border:none;box-shadow:none;padding:0}
   .pr-sec{break-inside:avoid}
   .pr-capa{break-after:page}

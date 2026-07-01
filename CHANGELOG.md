@@ -18,6 +18,10 @@
 ### Layout premium
 - Emblema do **país habilitado em cor** e unidades na barra lateral; **nome da empresa sutil** no rodapé; botões primários refinados; modais e cartões com acabamento profissional.
 
+### Marca do fabricante
+- Nova aba **Sobre / About** apresentando a **GD Engenharia e Perícia como fabricante do software** (dados oficiais, versão, recursos, normas atendidas e aviso de responsabilidade técnica), bilíngue.
+- Crédito discreto **"Desenvolvido por GD Engenharia e Perícia / Developed by …"** no canto da área de trabalho e na barra lateral, ambos clicáveis para a aba Sobre.
+
 ### Testes
 - Motor: 52 casos (inclui `otimizar` e `comparar`, com o cenário BR-aprova/EUA-reprova).
 - Relatórios: 37 casos. **E2E (Playwright, PT e EN): 37 verificações**, incluindo geração real de `.xls` sem `NaN` e ausência de vazamento de português na versão em inglês.

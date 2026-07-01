@@ -134,11 +134,25 @@ async function fluxo(page, base, locale) {
   if (await page.locator('.modal-overlay').count() > 0) { await page.locator('.modal-overlay .modal-x').first().click().catch(function () {}); }
   await page.waitForTimeout(150);
 
-  // 9 · Sem vazamento de PT quando em inglês (checa textos-chave da UI nova)
+  // 8c · Crédito discreto no canto + aba "Sobre / About"
+  ok(locale + ' · crédito no canto presente', await page.locator('.credito-canto').count() > 0);
+  const credTxt = await page.locator('.credito-canto').innerText();
+  ok(locale + ' · crédito traduzido', (isEN ? /Developed by/i.test(credTxt) : /Desenvolvido por/i.test(credTxt)) && /GD Engenharia/.test(credTxt));
+  await page.locator('.credito-canto').click();
+  await page.waitForSelector('.sobre-hero');
+  ok(locale + ' · página Sobre carregou', await page.locator('.sobre-hero').count() > 0);
+  const sobreTxt = await page.locator('.conteudo').innerText();
+  ok(locale + ' · Sobre cita o fabricante', /GD Engenharia/i.test(sobreTxt));
+  ok(locale + ' · Sobre traduzido', isEN ? /Developed by|Manufacturer/i.test(sobreTxt) : /Desenvolvido por|Fabricante/i.test(sobreTxt));
+
+  // 9 · Sem vazamento de PT quando em inglês (resultados + Sobre)
   if (isEN) {
+    const corpoSobre = await page.locator('.conteudo').innerText();
+    ok('US · sem PT vazado na página Sobre', !/(Desenvolvido|Fabricante|Versão|Normas atendidas)/.test(corpoSobre));
+    await page.locator('.sb-nav .sb-link').nth(2).click(); // volta a Resultados
+    await page.waitForSelector('.verdito-banner');
     const corpo = await page.locator('.conteudo').innerText();
-    const vazou = /(Vão|Veredito|Prontuário|Selecionar|Comparativo)/.test(corpo);
-    ok('US · sem PT vazado na tela de resultados', !vazou);
+    ok('US · sem PT vazado na tela de resultados', !/(Vão|Veredito|Prontuário|Selecionar|Comparativo)/.test(corpo));
   }
 
   ok(locale + ' · nenhum erro de JS no console', erros.length === 0);

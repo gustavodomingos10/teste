@@ -651,5 +651,76 @@
     ]);
   }
 
-  LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, conformidade: conformidade, registros: registros, admin: admin };
+  // ======================= SOBRE / ABOUT =======================
+  function sobre(alvo) {
+    H();
+    var cfg = LV.Storage.getConfig();
+    var pais = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
+    var VERSAO = '2.1';
+    var ano = new Date().getFullYear();
+    alvo.appendChild(tituloPagina(L('Sobre o software', 'About the software'),
+      L('Fabricante, tecnologia e conformidade normativa.', 'Manufacturer, technology and standards compliance.')));
+
+    // Hero — emblema + "Desenvolvido por"
+    alvo.appendChild(h('div', { class: 'sobre-hero' }, [
+      h('div', { class: 'sh-emblema', html: LV.Report ? LV.Report.emblema(cfg) : '' }),
+      h('div', { class: 'sh-info' }, [
+        h('div', { class: 'sh-produto', text: 'Linha de Vida' }),
+        h('div', { class: 'sh-tagline', text: L('Dimensionamento de linha de vida horizontal (SPIQ) e geração de prontuário técnico auditável.',
+          'Horizontal lifeline (PFAS) design and auditable technical-file generation.') }),
+        h('div', { class: 'sh-dev' }, [h('span', { text: L('Desenvolvido por ', 'Developed by ') }), h('b', { text: cfg.empresa || 'GD Engenharia e Perícia' })]),
+        h('div', { class: 'sh-versao', text: L('Versão ', 'Version ') + VERSAO + (pais ? ' · ' + pais.bandeira + ' ' + L(pais.nome, pais.nomeEn || pais.nome) : '') })
+      ])
+    ]));
+
+    // Fabricante — dados oficiais
+    var dados = [
+      [L('Empresa / Fabricante do software', 'Company / Software manufacturer'), cfg.empresa],
+      ['CNPJ', cfg.cnpj],
+      [L('Responsável técnico', 'Engineer of record'), cfg.responsavel],
+      [L('Registro profissional', 'Professional license'), cfg.crea],
+      [L('Contato', 'Contact'), cfg.contato],
+      [L('Cidade', 'City'), cfg.cidade]
+    ].filter(function (l) { return l[1]; });
+    var tabF = h('table', { class: 'sobre-tab' });
+    dados.forEach(function (l) { tabF.appendChild(h('tr', {}, [h('td', { class: 'sf-rot', text: l[0] }), h('td', { class: 'sf-val', text: l[1] })])); });
+    alvo.appendChild(h('div', { class: 'sobre-card' }, [h('h3', { text: L('Fabricante', 'Manufacturer') }), tabF]));
+
+    // O que o software faz
+    var recursos = [
+      ['⚙', L('Motor de cálculo verificado', 'Verified calculation engine'), L('Reproduz a planilha validada e acrescenta flambagem, cisalhamento, classe de seção, placa de base, vento e energia — com memorial passo a passo auditável.', 'Reproduces the validated spreadsheet and adds buckling, shear, section class, base plate, wind and energy — with an auditable step-by-step report.')],
+      ['🌐', L('Bilíngue e internacional', 'Bilingual and international'), L('Brasil (SI · NR-35/ABNT) e EUA (Imperial · OSHA/ANSI Z359), com comparativo lado a lado das duas jurisdições.', 'Brazil (SI · NR-35/ABNT) and USA (Imperial · OSHA/ANSI Z359), with a side-by-side comparison of both jurisdictions.')],
+      ['⚡', L('Dimensionamento automático', 'Automatic dimensioning'), L('Encontra a solução aprovada mais leve (menor custo) e permite ajuste manual completo.', 'Finds the lightest passing (lowest-cost) solution and allows full manual override.')],
+      ['📑', L('Prontuário completo', 'Complete technical file'), L('Exportação unificada em Word, PDF e planilha editável, com marca, logotipo e rodapé normativo.', 'Unified export to Word, PDF and editable spreadsheet, with branding, logo and standards footer.')],
+      ['🔒', L('Acesso seguro e auditoria', 'Secure access and audit trail'), L('Perfis de usuário, senha protegida (PBKDF2) e trilha de auditoria encadeada.', 'User roles, PBKDF2-protected passwords and a tamper-evident audit trail.')],
+      ['◎', L('Gestão de ativos', 'Asset management'), L('Controle de inspeções, ensaios, EPI e vencimentos com QR de rastreabilidade.', 'Inspections, load tests, PPE and due-date tracking with a traceability QR code.')]
+    ];
+    alvo.appendChild(h('div', { class: 'sobre-card' }, [
+      h('h3', { text: L('O que o software faz', 'What the software does') }),
+      h('div', { class: 'sobre-recursos' }, recursos.map(function (r) {
+        return h('div', { class: 'sr-item' }, [h('div', { class: 'sr-ico', text: r[0] }), h('div', {}, [h('b', { text: r[1] }), h('div', { class: 'sr-desc', text: r[2] })])]);
+      }))
+    ]));
+
+    // Normas atendidas (do país ativo)
+    if (pais && pais.normas) {
+      alvo.appendChild(h('div', { class: 'sobre-card' }, [
+        h('h3', { text: L('Normas atendidas', 'Standards addressed') + ' · ' + (pais.bandeira || '') + ' ' + L(pais.nome, pais.nomeEn || pais.nome) }),
+        h('div', { class: 'sobre-normas' }, pais.normas.map(function (n) { return h('span', { class: 'sn-chip', text: n }); }))
+      ]));
+    }
+
+    // Aviso técnico / responsabilidade
+    alvo.appendChild(h('div', { class: 'sobre-nota', text: L(
+      'Este software é uma ferramenta de apoio à engenharia. Os resultados devem ser conferidos e assinados por profissional legalmente habilitado (Responsável Técnico), que responde pelo projeto.',
+      'This software is an engineering support tool. Results must be reviewed and signed by a legally qualified professional (Engineer of Record), who is responsible for the design.') }));
+
+    // Rodapé de copyright / fabricante
+    alvo.appendChild(h('div', { class: 'sobre-copy' }, [
+      h('span', { text: '© ' + ano + ' ' + (cfg.empresa || 'GD Engenharia e Perícia Ltda') + '. ' + L('Todos os direitos reservados.', 'All rights reserved.') }),
+      h('span', { class: 'sc-dev', text: L('Desenvolvido por ', 'Developed by ') + (cfg.empresa || 'GD Engenharia e Perícia') + ' · Linha de Vida v' + VERSAO })
+    ]));
+  }
+
+  LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, conformidade: conformidade, registros: registros, admin: admin, sobre: sobre };
 })(typeof self !== 'undefined' ? self : this);
