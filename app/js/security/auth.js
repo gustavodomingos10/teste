@@ -273,8 +273,20 @@
     });
   }
 
+  // Sessão de DEMONSTRAÇÃO (sem senha/licença) — perfil funcional para calcular,
+  // mas a camada de demo (demo.js/views) bloqueia salvar, exportar e imprimir.
+  function iniciarDemo() {
+    var agora = clock();
+    var sessao = {
+      username: 'demo', nome: 'Demonstração', role: 'engenheiro', demo: true,
+      criadaEm: agora, expiraEm: agora + SESSAO_MS, ultimaAtividade: agora, token: 'demo', mustChange: false
+    };
+    save(K_SESSION, sessao);
+    return sessao;
+  }
+
   var Auth = {
-    init: init, setStore: setStore, setClock: setClock, memStore: memStore,
+    init: init, setStore: setStore, setClock: setClock, memStore: memStore, iniciarDemo: iniciarDemo,
     PERMISSOES: PERMISSOES, PERFIS: PERFIS,
     listarUsuarios: listarUsuarios, criarUsuario: criarUsuario, removerUsuario: removerUsuario, definirAtivo: definirAtivo,
     login: login, logout: logout, sessaoAtual: sessaoAtual, registrarAtividade: registrarAtividade, pode: pode,

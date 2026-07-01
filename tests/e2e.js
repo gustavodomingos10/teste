@@ -159,6 +159,40 @@ async function fluxo(page, base, locale) {
   if (erros.length) console.log('    erros:', erros.slice(0, 5).join(' | '));
 }
 
+async function fluxoDemo(page, demoUrl) {
+  const erros = [];
+  page.on('console', function (m) { if (m.type() === 'error') erros.push(m.text()); });
+  page.on('pageerror', function (e) { erros.push(String(e)); });
+  await page.addInitScript(function () { try { localStorage.clear(); } catch (e) {} });
+  await page.goto(demoUrl, { waitUntil: 'networkidle' });
+
+  // 1 · Entra direto na aplicação (sem login/licença)
+  await page.waitForSelector('.shell .sidebar', { timeout: 9000 });
+  ok('demo · entra sem login', await page.locator('.auth-card').count() === 0);
+  ok('demo · body.demo-mode ativo', await page.evaluate(function () { return document.body.classList.contains('demo-mode'); }));
+  ok('demo · marca d’água presente', await page.locator('.demo-watermark').count() > 0);
+  ok('demo · faixa de demonstração presente', await page.locator('.demo-faixa').count() > 0);
+
+  // 2 · Resultados: cálculo e figuras funcionam, mas o memorial fica bloqueado
+  await page.locator('.sb-nav .sb-link').nth(2).click();
+  await page.waitForSelector('.verdito-banner');
+  ok('demo · veredito calculado', await page.locator('.verdito-banner').count() > 0);
+  ok('demo · comparativo internacional visível', await page.locator('.ci-card').count() > 0);
+  ok('demo · figuras renderizadas', await page.locator('.figuras-grid svg').count() > 0);
+  ok('demo · memorial completo BLOQUEADO (teaser)', await page.locator('.demo-lock').count() > 0);
+  ok('demo · sem memorial inline completo', await page.locator('.doc-inline').count() === 0);
+
+  // 3 · Exportar/Prontuário bloqueado: clique mostra aviso e NÃO abre o modal
+  await page.locator('.btn-prontuario').first().click();
+  await page.waitForTimeout(300);
+  ok('demo · exportação bloqueada (sem modal)', await page.locator('.modal-exportar').count() === 0);
+  ok('demo · aviso de bloqueio exibido (toast)', await page.locator('.toast').count() > 0);
+
+  // 4 · Nada é persistido: recarregar zera (sem projetos salvos além do exemplo)
+  ok('demo · sem erros de JS', erros.length === 0);
+  if (erros.length) console.log('    erros:', erros.slice(0, 5).join(' | '));
+}
+
 (async function () {
   const srv = await serve();
   const base = 'http://127.0.0.1:' + srv.address().port + '/index.html';
@@ -172,6 +206,12 @@ async function fluxo(page, base, locale) {
       await fluxo(page, base, loc);
       await ctx.close();
     }
+    console.log('\n=== E2E · DEMONSTRAÇÃO ===');
+    const ctxD = await browser.newContext();
+    const pageD = await ctxD.newPage();
+    pageD.setDefaultTimeout(9000);
+    await fluxoDemo(pageD, 'http://127.0.0.1:' + srv.address().port + '/demo.html');
+    await ctxD.close();
   } catch (e) {
     fails++; console.log('  ✗ EXCEÇÃO: ' + e.message);
   } finally {

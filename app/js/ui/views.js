@@ -187,7 +187,7 @@
     var paisAtual = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
     alvo.appendChild(h('div', { class: 'form-topo' }, [campoWrap(L('Nome do projeto', 'Project name'), nomeProj),
       paisAtual ? h('div', { class: 'pais-tag', text: paisAtual.bandeira + ' ' + (L(paisAtual.nome, paisAtual.nomeEn || paisAtual.nome)) + ' · ' + (paisAtual.unidades === 'imperial' ? 'Imperial' : 'SI') }) : null,
-      h('button', { class: 'btn primary', text: L('Salvar e calcular', 'Save & calculate'), onclick: function () { salvar(); toast(L('Projeto salvo.', 'Project saved.'), 'ok'); LV.UI.irPara('resultados'); } })]));
+      h('button', { class: 'btn primary', text: LV.DEMO ? L('Calcular (demonstração)', 'Calculate (demo)') : L('Salvar e calcular', 'Save & calculate'), onclick: function () { salvar(); if (!LV.DEMO) toast(L('Projeto salvo.', 'Project saved.'), 'ok'); LV.UI.irPara('resultados'); } })]));
     [s1, s2, s3, s4, s5, s6, s7, sAuto, s8].forEach(function (x) { alvo.appendChild(x); });
     // auto-salva ao sair de qualquer campo
     alvo.addEventListener('change', salvar);
@@ -243,8 +243,9 @@
       h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, cfgR), 'Desc'); } }),
       h('button', { class: 'btn ghost', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })
     ]));
-    // memorial inline
-    alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
+    // memorial inline (bloqueado na demonstração)
+    if (LV.DEMO) alvo.appendChild(teaserDemo(L('Memorial de cálculo', 'Calculation report')));
+    else alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
   }
 
   // ======================= PRONTUÁRIO =======================
@@ -270,7 +271,8 @@
       h('button', { class: 'btn ghost', text: L('⎙ Imprimir / Salvar PDF', '⎙ Print / Save PDF'), onclick: function () { imprimir(html, 'TechnicalFile'); } }),
       h('button', { class: 'btn ghost', text: L('Registros', 'Records'), onclick: function () { LV.UI.irPara('registros'); } })
     ]));
-    alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
+    if (LV.DEMO) alvo.appendChild(teaserDemo(L('Prontuário completo', 'Complete technical file')));
+    else alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
   }
 
   // ======================= CONFORMIDADE (gestão de ativos) =======================
@@ -481,6 +483,18 @@
   // ======================= helpers de view =======================
   // D(s): traduz uma string estática de UI (dicionário PT→EN) conforme o idioma.
   function D(s) { return (LV.I18n && typeof s === 'string') ? LV.I18n.d(s) : s; }
+  // Cartão de bloqueio da versão demonstração (substitui o documento completo)
+  function teaserDemo(titulo) {
+    return h('div', { class: 'demo-lock' }, [
+      h('div', { class: 'demo-lock-ico', text: '🔒' }),
+      h('div', {}, [
+        h('b', { text: L(titulo + ' — disponível na versão completa', titulo + ' — available in the full version') }),
+        h('div', { class: 'muted', text: L(
+          'Nesta demonstração você calcula e visualiza os resultados. O memorial detalhado, o prontuário e a exportação (Word/PDF/Excel) ficam na versão licenciada. Contato: ' + (LV.demoContato || ''),
+          'In this demo you can calculate and preview the results. The detailed report, technical file and export (Word/PDF/Excel) are in the licensed version. Contact: ' + (LV.demoContato || '')) })
+      ])
+    ]);
+  }
   function dateLoc() { return (LV.I18n && LV.I18n.getLang() === 'en') ? 'en-US' : 'pt-BR'; }
   function tituloPagina(t, sub) { return h('div', { class: 'pg-titulo' }, [h('h1', { text: D(t) }), sub ? h('p', { class: 'muted', text: D(sub) }) : null]); }
   function secaoForm(titulo, campos) { return h('div', { class: 'form-sec' }, [h('h3', { text: D(titulo) }), h('div', { class: 'grid-campos' }, campos)]); }
@@ -495,6 +509,7 @@
 
   // imprimir/PDF: abre janela com o documento + folha de estilo
   function imprimir(html, titulo) {
+    if (LV.DEMO) return LV.demoAviso();
     var cssHref = '';
     var link = qs('link[rel=stylesheet]'); if (link) cssHref = link.href;
     var w = window.open('', '_blank');
@@ -506,6 +521,7 @@
     setTimeout(function () { w.focus(); w.print(); }, 500);
   }
   function baixar(nome, conteudo) {
+    if (LV.DEMO) return LV.demoAviso();
     var blob = new Blob([conteudo], { type: 'application/json' });
     var a = h('a', { href: URL.createObjectURL(blob), download: nome }); document.body.appendChild(a); a.click(); a.remove();
   }
@@ -537,6 +553,7 @@
 
   // ---- "Gerar Prontuário Completo": seleção de seções + formatos de saída ----
   function abrirExportModal(R, proj, cfg) {
+    if (LV.DEMO) return LV.demoAviso();
     var secoes = LV.Prontuario.secoesDisponiveis(R, proj, cfg);
     var checks = {};
     var lista = h('div', { class: 'exp-secoes' }, secoes.map(function (s, i) {

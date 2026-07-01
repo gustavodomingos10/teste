@@ -360,6 +360,27 @@ table.nr-tab th{background:var(--azul-claro);color:var(--azul)}
 .btn-prontuario{box-shadow:0 4px 14px rgba(31,58,95,.28)}
 
 /* ============================================================================
+ *  MODO DEMONSTRAÇÃO (amostra pública — sem salvar/exportar/imprimir)
+ * ========================================================================== */
+body.demo-mode{user-select:none;-webkit-user-select:none}
+.demo-watermark{position:fixed;inset:0;pointer-events:none;z-index:9998;background-repeat:repeat}
+.demo-faixa{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#c0392b;color:#fff;text-align:center;
+  font-size:12px;font-weight:700;letter-spacing:.3px;padding:6px 10px;pointer-events:none;box-shadow:0 -2px 8px rgba(0,0,0,.25)}
+body.demo-mode .conteudo{padding-bottom:48px}
+body.demo-mode .credito-canto{display:none}
+.demo-lock{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#eef4fb,#e3edf8);
+  border:1px dashed var(--azul2);border-radius:12px;padding:18px 20px;margin-top:14px}
+.demo-lock-ico{font-size:30px;line-height:1;flex:0 0 auto}
+.demo-lock b{color:var(--azul);font-size:15px}
+/* Impressão bloqueada na demonstração */
+@media print{
+  body.demo-mode *{display:none!important}
+  body.demo-mode{background:#fff}
+  body.demo-mode::before{content:"Impressão desabilitada na versão de demonstração — GD Engenharia · (43) 9 9925-9577";
+    display:block!important;padding:40px;font:700 16px Arial,sans-serif;color:#1f3a5f}
+}
+
+/* ============================================================================
  *  IMPRESSÃO
  * ========================================================================== */
 .print-body{background:#fff;padding:0;margin:0}

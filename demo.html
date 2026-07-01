@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Linha de Vida — Dimensionamento &amp; Prontuário · GD Engenharia</title>
-  <meta name="description" content="Software de dimensionamento de linha de vida horizontal (SPIQ) e geração de prontuário técnico conforme NR-35, NR-18 e ABNT NBR 16325/8800.">
+  <title>Linha de Vida — DEMONSTRAÇÃO · GD Engenharia</title>
+  <meta name="description" content="Versão de demonstração (amostra) do software de dimensionamento de linha de vida horizontal (SPIQ) — GD Engenharia. Sem salvar/exportar.">
+  <meta name="robots" content="noindex">
   <link rel="stylesheet" href="app/css/styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231f3a5f'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Arial'>LV</text></svg>">
+  <!-- Ativa o MODO DEMONSTRAÇÃO (amostra pública, sem salvar/exportar/imprimir) -->
+  <script>window.LV_DEMO = true;</script>
 </head>
 <body>
-  <div id="app"><div class="carregando">Carregando o sistema…</div></div>
+  <div id="app"><div class="carregando">Carregando a demonstração…</div></div>
 
   <!-- Núcleo de engenharia -->
   <script src="app/js/core/sections.js"></script>
@@ -27,7 +30,7 @@
   <script src="app/js/security/audit.js"></script>
   <!-- Dados -->
   <script src="app/js/data/storage.js"></script>
-  <!-- Modo demonstração (ativa apenas com ?demo=1 na URL ou via demo.html) -->
+  <!-- Modo demonstração -->
   <script src="app/js/core/demo.js"></script>
   <!-- Relatórios e figuras -->
   <script src="app/js/report/draw.js"></script>

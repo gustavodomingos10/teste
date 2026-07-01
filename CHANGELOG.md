@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.0] — Versão de demonstração (amostra pública para o site)
+
+- Novo modo **DEMONSTRAÇÃO** (`demo.html` ou `?demo=1`): entra direto, sem login/licença, para uma amostra pública.
+- Na demonstração: **calcula e mostra resultados/figuras/comparativo**, mas **bloqueia salvar, exportar (Word/PDF/Excel) e imprimir**; o memorial completo e o prontuário aparecem como prévia bloqueada.
+- **Nada é persistido** (armazenamento em memória — recarregar zera tudo).
+- **Marca d'água** "AMOSTRA · GD ENGENHARIA" sobre toda a tela (aparece em qualquer captura), faixa fixa de demonstração e **anti-cópia** (clique-direito, seleção, Ctrl+S/P/C e impressão inibidos).
+- A versão completa (`index.html`) permanece inalterada. E2E cobre o fluxo de demonstração (12 verificações).
+
+> Observação honesta: nenhuma página web impede 100% uma foto de tela (câmera do celular / Print Screen). A marca d'água garante que toda captura saia identificada como amostra sem valor oficial.
+
 ## [2.1.1] — Auditoria completa e correções (rigor de engenharia)
 
 Auditoria multi-frente (6 revisões independentes + verificação adversarial de cada achado) que confirmou e corrigiu 20 pontos:

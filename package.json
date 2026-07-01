@@ -1,6 +1,6 @@
 {
   "name": "linha-de-vida-gd",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Software internacional (PT-BR/EN-US) de dimensionamento de linha de vida horizontal (SPIQ) e geração de prontuário técnico — NR-35, NR-18, ABNT NBR 16325/8800, OSHA, ANSI Z359, EN 795.",
   "private": true,
   "scripts": {

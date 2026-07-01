@@ -40,6 +40,7 @@
   // ---- Boot ----
   function boot() {
     var app = qs('#app');
+    if (LV.DEMO) return bootDemo(app);
     // Seleção de país/idioma na primeira execução
     if (LV.Paises && !LV.Paises.getSelecionado()) return telaPais();
     if (LV.Paises && LV.I18n) LV.I18n.setLang(LV.Paises.get(LV.Paises.getSelecionado()).idioma);
@@ -54,6 +55,20 @@
         montarApp();
       });
     }).catch(function (e) { app.innerHTML = '<div class="erro-fatal">' + LV.I18n.L('Erro ao iniciar: ', 'Failed to start: ') + e.message + '</div>'; });
+  }
+
+  // ---- Boot da DEMONSTRAÇÃO (sem login/licença; entra direto, sem persistir) ----
+  function bootDemo(app) {
+    if (LV.Paises && LV.I18n) {
+      var cod = LV.Paises.getSelecionado() || 'BR';
+      LV.I18n.setLang(LV.Paises.get(cod).idioma);
+    }
+    LV.Auth.init().then(function () {
+      LV.Auth.iniciarDemo();
+      montarApp();
+    }).catch(function (e) {
+      app.innerHTML = '<div class="erro-fatal">' + LV.I18n.L('Erro na demonstração: ', 'Demo error: ') + e.message + '</div>';
+    });
   }
 
   // ---- Tela de seleção de país / idioma ----
