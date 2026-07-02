@@ -22,7 +22,7 @@ var passes = 0, fails = 0;
 function ok(n, c) { if (c) { passes++; console.log('  ✓ ' + n); } else { fails++; console.log('  ✗ ' + n); } }
 
 var entradaBase = {
-  obra: 'Cobertura metálica — Maxi Limpeza', local: 'Cornélio Procópio/PR', responsavel: 'Eng. Gustavo Domingos',
+  obra: 'Cobertura metálica — Empresa Fictícia', local: 'Avenida Principal', responsavel: 'Eng. Gustavo Domingos',
   cenario: 'Cobertura', substrato: 'Telha trapezoidal metálica', ambiente: 'C4 — Alta',
   L: 10, nVaos: 3, h: 1.2, peDireito: 8.5, caboMaterial: 'Inox AISI 316', caboDiametro: 10, T0: 1,
   nUsuarios: 1, Ft: 6, H_ql: 1.5, H_fr: 1.75, temAbsorvedor: 'Sim', F_abs: 12, cursoAbsorvedor: 0.5,

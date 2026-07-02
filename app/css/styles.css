@@ -364,9 +364,12 @@ table.nr-tab th{background:var(--azul-claro);color:var(--azul)}
  * ========================================================================== */
 body.demo-mode{user-select:none;-webkit-user-select:none}
 .demo-watermark{position:fixed;inset:0;pointer-events:none;z-index:9998;background-repeat:repeat}
-.demo-faixa{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#c0392b;color:#fff;text-align:center;
-  font-size:12px;font-weight:700;letter-spacing:.3px;padding:6px 10px;pointer-events:none;box-shadow:0 -2px 8px rgba(0,0,0,.25)}
-body.demo-mode .conteudo{padding-bottom:48px}
+.demo-faixa{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#111;border-top:2px solid #c0140f;color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  font-size:12px;font-weight:700;letter-spacing:.3px;padding:7px 12px;box-shadow:0 -2px 10px rgba(0,0,0,.4)}
+.demo-lic-btn{background:#c0140f;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-weight:800;font-size:12px;cursor:pointer;letter-spacing:.3px}
+.demo-lic-btn:hover{background:#e01b13}
+body.demo-mode .conteudo{padding-bottom:52px}
 body.demo-mode .credito-canto{display:none}
 .demo-lock{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#eef4fb,#e3edf8);
   border:1px dashed var(--azul2);border-radius:12px;padding:18px 20px;margin-top:14px}
@@ -377,10 +380,25 @@ body.demo-mode .credito-canto{display:none}
 .demo-preview-wrap{position:relative;overflow:hidden;border-radius:10px}
 .demo-preview-tag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(31,58,95,.94);color:#fff;
   padding:9px 18px;border-radius:22px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.3);pointer-events:none;white-space:nowrap}
-/* memorial demonstrativo de 1 página — bloco de bloqueio do cálculo */
-.demo-doc .demo-doc-lock{background:linear-gradient(135deg,#eef4fb,#e3edf8);border:1px dashed var(--azul2);border-radius:10px;
-  padding:18px 20px;font-size:13px;color:var(--cinza);margin-top:10px;line-height:1.6}
-.demo-doc .ddl-contato{margin-top:10px;font-weight:800;color:var(--azul)}
+/* TARJAS DE CENSURA — cobrem os dados essenciais (tabelas, plaqueta, comparativo) */
+.tarjado{position:relative;overflow:hidden;border-radius:6px;min-height:44px}
+.tarjado > *{filter:blur(3px)}
+.tarjado::after{content:"⛔ VERSÃO DEMONSTRATIVA — SEM VALIDADE LEGAL — NECESSÁRIO ADQUIRIR LICENÇA";
+  position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:8px 12px;background:rgba(17,17,17,.97);border:2px solid #c0140f;border-radius:6px;
+  color:#fff;font-weight:800;font-size:12px;letter-spacing:.4px;line-height:1.35;text-shadow:0 1px 2px #000}
+/* Planos / aquisição de licença */
+.demo-planos .dp-intro{font-size:13.5px;color:var(--cinza);margin:0 0 14px}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dp-card{border:1px solid var(--borda);border-radius:12px;padding:18px;text-align:center;position:relative;background:#fff}
+.dp-card.dp-dest{border-color:var(--azul);box-shadow:0 6px 18px rgba(31,58,95,.15)}
+.dp-tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border-radius:20px;padding:3px 12px}
+.dp-nome{font-weight:700;color:var(--azul);font-size:15px}
+.dp-preco{font-family:Georgia,serif;font-size:22px;color:var(--texto);margin:6px 0 2px}
+.dp-nota{font-size:12px;color:var(--muted)}
+.dp-pub{margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.dp-pub-item{font-size:13px;color:var(--cinza)}
+@media(max-width:520px){.dp-grid{grid-template-columns:1fr}}
 /* Impressão bloqueada na demonstração */
 @media print{
   body.demo-mode *{display:none!important}

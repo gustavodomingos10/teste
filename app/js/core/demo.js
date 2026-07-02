@@ -4,14 +4,16 @@
  *
  *  Ativa quando a URL tem ?demo=1 ou quando window.LV_DEMO === true
  *  (ver o arquivo demo.html). Neste modo:
- *    · nada é salvo (armazenamento em memória — recarregar zera tudo);
- *    · salvar/exportar (Word/PDF/Excel)/imprimir ficam BLOQUEADOS;
- *    · marca d'água "AMOSTRA · GD ENGENHARIA" cobre a tela e as capturas;
- *    · clique-direito, seleção/cópia e atalhos (Ctrl+S/P/C…) são inibidos.
+ *    · a pessoa NAVEGA e VÊ tudo o que o software produz (veredito, figuras,
+ *      memorial, prontuário) — provando que funciona;
+ *    · MAS os dados que valem (materiais, cabo, chumbadores, espaçadores,
+ *      quantitativos) ficam cobertos por TARJAS DE CENSURA enormes com o texto
+ *      "VERSÃO DEMONSTRATIVA · SEM VALIDADE LEGAL · NECESSÁRIO ADQUIRIR LICENÇA";
+ *    · nada é salvo (memória — recarregar zera); salvar/exportar/imprimir
+ *      ficam BLOQUEADOS; clique-direito/cópia/atalhos são inibidos.
  *
- *  IMPORTANTE: nenhuma página web consegue IMPEDIR uma foto de tela (câmera do
- *  celular, Print Screen do sistema). A marca d'água garante que qualquer
- *  captura saia identificada como amostra e sem valor de documento oficial.
+ *  IMPORTANTE: nenhuma página web impede uma foto de tela — as tarjas garantem
+ *  que qualquer captura saia sem os dados essenciais e sem validade legal.
  * ========================================================================== */
 (function (root) {
   'use strict';
@@ -30,22 +32,36 @@
   if (LV.Storage && LV.Storage.setStore) LV.Storage.setStore(memStore);
   if (LV.Auth && LV.Auth.setStore) LV.Auth.setStore(memStore);
 
-  // 2) Aviso padrão ao tentar uma ação bloqueada.
+  // 2) Textos e aviso padrão ao tentar uma ação bloqueada (abre os planos).
   LV.demoContato = 'GD Engenharia · (43) 9 9925-9577';
+  LV.demoTexto = 'VERSÃO DEMONSTRATIVA · SEM VALIDADE LEGAL · NECESSÁRIO ADQUIRIR LICENÇA';
   LV.demoAviso = function () {
-    var en = LV.I18n && LV.I18n.getLang && LV.I18n.getLang() === 'en';
-    var msg = en
-      ? '🔒 Available only in the full (licensed) version. Contact: ' + LV.demoContato
-      : '🔒 Disponível apenas na versão completa (licenciada). Contato: ' + LV.demoContato;
-    if (LV.UI && LV.UI.toast) LV.UI.toast(msg, 'aviso'); else if (typeof alert === 'function') alert(msg);
+    if (typeof LV.demoPlanos === 'function') return LV.demoPlanos();
+    if (LV.UI && LV.UI.toast) LV.UI.toast('🔒 ' + LV.demoTexto + ' — ' + LV.demoContato, 'aviso');
     return false;
   };
 
-  // 3) Marca d'água, faixa e anti-cópia — instalados quando o DOM está pronto.
+  // 3) TARJAS: cobre os elementos com dados essenciais (tabelas, plaqueta,
+  //    comparativo, dimensionamento) de um documento/tela já renderizado.
+  LV.aplicarTarjas = function (container) {
+    if (!container || !LV.DEMO) return;
+    var els = container.querySelectorAll('table.tab, .plaqueta, .ci-tab, .auto-tab');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.getAttribute('data-tarja')) continue;
+      el.setAttribute('data-tarja', '1');
+      var w = document.createElement('div');
+      w.className = 'tarjado';
+      el.parentNode.insertBefore(w, el);
+      w.appendChild(el);
+    }
+  };
+
+  // 4) Marca d'água, faixa e anti-cópia — instalados quando o DOM está pronto.
   function tileSvg() {
-    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='330' height='190'>" +
-      "<text x='6' y='120' fill='rgba(31,58,95,0.09)' font-size='17' font-family='Arial, sans-serif' " +
-      "font-weight='700' transform='rotate(-28 6 120)'>AMOSTRA · GD ENGENHARIA</text></svg>";
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' width='430' height='150'>" +
+      "<text x='8' y='96' fill='rgba(192,20,15,0.13)' font-size='15.5' font-family='Arial, sans-serif' " +
+      "font-weight='800' transform='rotate(-24 8 96)'>VERSÃO DEMONSTRATIVA · SEM VALIDADE LEGAL</text></svg>";
     return "url(\"data:image/svg+xml;utf8," + encodeURIComponent(svg) + "\")";
   }
   function instalar() {
@@ -61,8 +77,13 @@
     if (!document.querySelector('.demo-faixa')) {
       var f = document.createElement('div');
       f.className = 'demo-faixa';
-      f.setAttribute('aria-hidden', 'true');
-      f.textContent = 'VERSÃO DEMONSTRAÇÃO · sem salvar / exportar / imprimir · ' + LV.demoContato;
+      var txt = document.createElement('span');
+      txt.textContent = '⛔ VERSÃO DEMONSTRAÇÃO · sem salvar / exportar / imprimir · dados essenciais ocultos';
+      var b = document.createElement('button');
+      b.className = 'demo-lic-btn';
+      b.textContent = 'Adquirir licença';
+      b.addEventListener('click', function () { if (typeof LV.demoPlanos === 'function') LV.demoPlanos(); });
+      f.appendChild(txt); f.appendChild(b);
       document.body.appendChild(f);
     }
     ['contextmenu', 'copy', 'cut', 'dragstart', 'selectstart'].forEach(function (ev) {

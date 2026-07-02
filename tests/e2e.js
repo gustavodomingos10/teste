@@ -172,23 +172,25 @@ async function fluxoDemo(page, demoUrl) {
   ok('demo · body.demo-mode ativo', await page.evaluate(function () { return document.body.classList.contains('demo-mode'); }));
   ok('demo · marca d’água presente', await page.locator('.demo-watermark').count() > 0);
   ok('demo · faixa de demonstração presente', await page.locator('.demo-faixa').count() > 0);
+  ok('demo · botão "Adquirir licença" na faixa', await page.locator('.demo-lic-btn').count() > 0);
 
-  // 2 · Resultados: mostra o veredito, mas SEM entregar o "ouro" (números/cálculos)
+  // 2 · Resultados: mostra tudo (veredito, figuras, memorial), mas com TARJAS cobrindo o "ouro"
   await page.locator('.sb-nav .sb-link').nth(2).click();
   await page.waitForSelector('.verdito-banner');
-  ok('demo · veredito calculado (prova que funciona)', await page.locator('.verdito-banner').count() > 0);
-  ok('demo · comparativo internacional visível', await page.locator('.ci-card').count() > 0);
-  ok('demo · números do comparativo OCULTOS (🔒)', (await page.locator('.ci-tab').first().innerText()).indexOf('🔒') !== -1);
-  ok('demo · figuras em PRÉVIA borrada', await page.locator('.figuras-grid.demo-blur').count() > 0);
-  ok('demo · memorial de 1 página (demonstrativo)', await page.locator('.memorial-demo').count() > 0);
-  ok('demo · SEM passos de cálculo (o ouro)', await page.locator('.calc-step').count() === 0);
-  ok('demo · cálculo detalhado bloqueado', await page.locator('.demo-doc-lock').count() > 0);
+  ok('demo · veredito visível (prova que funciona)', await page.locator('.verdito-banner').count() > 0);
+  ok('demo · figuras renderizadas', await page.locator('.figuras-grid svg').count() > 0);
+  ok('demo · memorial COMPLETO renderizado', await page.locator('.calc-step').count() > 0);
+  ok('demo · TARJAS de censura presentes', await page.locator('.tarjado').count() > 2);
+  ok('demo · tabelas de dados cobertas por tarja', await page.locator('.tarjado table.tab').count() > 0);
+  ok('demo · comparativo coberto por tarja', await page.locator('.ci-card .tarjado').count() > 0);
 
-  // 3 · Exportar/Prontuário bloqueado: clique mostra aviso e NÃO abre o modal
+  // 3 · Exportar/Prontuário bloqueado → abre o painel de PLANOS (licença), não exporta
   await page.locator('.btn-prontuario').first().click();
   await page.waitForTimeout(300);
-  ok('demo · exportação bloqueada (sem modal)', await page.locator('.modal-exportar').count() === 0);
-  ok('demo · aviso de bloqueio exibido (toast)', await page.locator('.toast').count() > 0);
+  ok('demo · exportação NÃO abre modal de exportação', await page.locator('.modal-exportar').count() === 0);
+  ok('demo · abre o painel de planos/licença', await page.locator('.modal-planos').count() > 0);
+  ok('demo · painel mostra "Sob consulta"', (await page.locator('.modal-planos').innerText()).indexOf('Sob consulta') !== -1);
+  await page.locator('.modal-planos .modal-x').first().click().catch(function () {});
 
   // 4 · Nada é persistido: recarregar zera (sem projetos salvos além do exemplo)
   ok('demo · sem erros de JS', erros.length === 0);

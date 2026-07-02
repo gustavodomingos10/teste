@@ -227,15 +227,14 @@
       c.val.avisos.forEach(function (m) { box.appendChild(h('div', { class: 'av aviso', text: '⚠ ' + m })); });
       alvo.appendChild(box);
     }
-    // figuras (borradas na demonstração — mostram que há saída profissional, sem entregar as cotas)
-    var figs = h('div', { class: 'figuras-grid' + (LV.DEMO ? ' demo-blur' : ''), html:
+    // figuras — visíveis, mas BORRADAS na demonstração (mostram que há saída
+    // profissional, sem entregar as cotas nem o perfil dimensionado)
+    alvo.appendChild(h('div', { class: 'figuras-grid' + (LV.DEMO ? ' demo-blur' : ''), html:
       '<div class="fig">' + LV.Draw.iso3D(R) + '</div>' +
       '<div class="fig">' + LV.Draw.elevacaoZLQ(R) + '</div>' +
       '<div class="fig">' + LV.Draw.esforcosPoste(R) + '</div>' +
       '<div class="fig">' + LV.Draw.planta(R) + '</div>'
-    });
-    if (LV.DEMO) alvo.appendChild(h('div', { class: 'demo-preview-wrap' }, [figs, h('div', { class: 'demo-preview-tag', text: L('Prévia — figuras cotadas na versão completa', 'Preview — dimensioned figures in the full version') })]));
-    else alvo.appendChild(figs);
+    }));
     // botões
     var cfgR = LV.Storage.getConfig();
     alvo.appendChild(h('div', { class: 'toolbar' }, [
@@ -245,13 +244,10 @@
       h('button', { class: 'btn ghost', text: L('⎙ Memorial descritivo', '⎙ Descriptive report'), onclick: function () { imprimir(LV.Report.memorialDescritivo(R, proj, cfgR), 'Desc'); } }),
       h('button', { class: 'btn ghost', text: L('Editar dados', 'Edit data'), onclick: function () { LV.UI.irPara('projeto'); } })
     ]));
-    // memorial: completo na versão paga; na demonstração, apenas 1 página demonstrativa (sem cálculos)
-    if (LV.DEMO) {
-      alvo.appendChild(h('div', { class: 'doc-inline demo-doc', html: LV.Report.memorialDemo(R, proj, cfgR) }));
-      alvo.appendChild(teaserDemo(L('Memorial completo e prontuário', 'Full report and technical file')));
-    } else {
-      alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, LV.Storage.getConfig()) }));
-    }
+    // memorial de cálculo COMPLETO (na demonstração é exibido inteiro, porém com
+    // TARJAS de censura cobrindo os dados essenciais — materiais, cabo, chumbadores…)
+    alvo.appendChild(h('div', { class: 'doc-inline', html: LV.Report.memorialCalculo(R, proj, cfgR) }));
+    if (LV.DEMO && LV.aplicarTarjas) LV.aplicarTarjas(alvo);
   }
 
   // ======================= PRONTUÁRIO =======================
@@ -277,8 +273,8 @@
       h('button', { class: 'btn ghost', text: L('⎙ Imprimir / Salvar PDF', '⎙ Print / Save PDF'), onclick: function () { imprimir(html, 'TechnicalFile'); } }),
       h('button', { class: 'btn ghost', text: L('Registros', 'Records'), onclick: function () { LV.UI.irPara('registros'); } })
     ]));
-    if (LV.DEMO) alvo.appendChild(teaserDemo(L('Prontuário completo', 'Complete technical file')));
-    else alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
+    alvo.appendChild(h('div', { class: 'doc-inline', html: html }));
+    if (LV.DEMO && LV.aplicarTarjas) LV.aplicarTarjas(alvo);
   }
 
   // ======================= CONFORMIDADE (gestão de ativos) =======================
@@ -770,6 +766,37 @@
       h('span', { class: 'sc-dev', text: L('Desenvolvido por ', 'Developed by ') + (cfg.empresa || 'GD Engenharia e Perícia') + ' · Linha de Vida v' + VERSAO })
     ]));
   }
+
+  // ---- Planos / Aquisição de licença (aberto pela faixa e pelas ações bloqueadas na demo) ----
+  function demoPlanos() {
+    H();
+    var WA = 'https://wa.me/5543999259577?text=' + encodeURIComponent('Olá! Tenho interesse na licença do software Linha de Vida (dimensionamento e prontuário da GD Engenharia).');
+    var planos = [
+      { nome: L('Plano Mensal', 'Monthly'), preco: L('Sob consulta', 'On request'), nota: L('Para começar', 'To start'), dest: false },
+      { nome: L('Plano Anual', 'Annual'), preco: L('Sob consulta', 'On request'), nota: L('Melhor custo-benefício', 'Best value'), dest: true }
+    ];
+    var corpo = h('div', { class: 'demo-planos' }, [
+      h('p', { class: 'dp-intro', text: L('Você está na DEMONSTRAÇÃO. Para emitir documentos com validade legal, sem tarjas e com TODOS os dados (materiais, cabo, chumbadores, espaçadores) e exportação em Word/PDF/Excel, adquira uma licença:',
+        'You are in the DEMO. To issue legally valid documents, without redaction bars and with ALL data and Word/PDF/Excel export, get a license:') }),
+      h('div', { class: 'dp-grid' }, planos.map(function (p) {
+        return h('div', { class: 'dp-card' + (p.dest ? ' dp-dest' : '') }, [
+          p.dest ? h('div', { class: 'dp-tag', text: L('Recomendado', 'Recommended') }) : null,
+          h('div', { class: 'dp-nome', text: p.nome }),
+          h('div', { class: 'dp-preco', text: p.preco }),
+          h('div', { class: 'dp-nota', text: p.nota })
+        ]);
+      })),
+      h('div', { class: 'dp-pub' }, [
+        h('div', { class: 'dp-pub-item', text: '⚖️ ' + L('Para peritos e engenheiros — laudos e prontuários com validade legal.', 'For experts and engineers — legally valid reports.') }),
+        h('div', { class: 'dp-pub-item', text: '🏢 ' + L('Para seguradoras — verificação de conformidade e análise de sinistros.', 'For insurers — compliance verification and claim analysis.') })
+      ])
+    ]);
+    var m = modal(L('Adquirir licença', 'Get a license'), corpo, [
+      h('a', { class: 'btn primary', href: WA, target: '_blank', rel: 'noopener', text: L('✆ Falar com a GD Engenharia', '✆ Talk to GD Engenharia') }),
+      h('button', { class: 'btn ghost', text: L('Continuar na demonstração', 'Continue demo'), onclick: function () { m.fechar(); } })
+    ], 'modal-planos');
+  }
+  LV.demoPlanos = demoPlanos;
 
   LV.Views = { painel: painel, projeto: projeto, resultados: resultados, prontuario: prontuario, conformidade: conformidade, registros: registros, admin: admin, sobre: sobre };
 })(typeof self !== 'undefined' ? self : this);
