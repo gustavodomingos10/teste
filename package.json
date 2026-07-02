@@ -1,15 +1,16 @@
 {
   "name": "linha-de-vida-gd",
-  "version": "1.0.0",
-  "description": "Software de dimensionamento de linha de vida horizontal (SPIQ) e geração de prontuário técnico conforme NR-35, NR-18, ABNT NBR 16325 e NBR 8800.",
+  "version": "2.2.0",
+  "description": "Software internacional (PT-BR/EN-US) de dimensionamento de linha de vida horizontal (SPIQ) e geração de prontuário técnico — NR-35, NR-18, ABNT NBR 16325/8800, OSHA, ANSI Z359, EN 795.",
   "private": true,
   "scripts": {
     "test": "node tests/engine.test.js && node tests/report.test.js",
     "test:engine": "node tests/engine.test.js",
     "test:report": "node tests/report.test.js",
+    "test:e2e": "node tests/e2e.js",
     "start": "python3 -m http.server 8000"
   },
-  "keywords": ["linha-de-vida", "NR-35", "NR-18", "NBR-16325", "NBR-8800", "SPIQ", "trabalho-em-altura", "engenharia"],
+  "keywords": ["linha-de-vida", "lifeline", "fall-protection", "NR-35", "NR-18", "NBR-16325", "OSHA", "ANSI-Z359", "EN-795", "SPIQ", "PFAS"],
   "author": "GD Engenharia e Perícia Ltda — Eng. Gustavo F. F. Domingos (CREA 140.964-D/PR)",
   "license": "UNLICENSED"
 }

@@ -104,8 +104,80 @@
       codigo: 'ISO 12944-2',
       titulo: 'Corrosividade atmosférica — categorias C1 a CX',
       itens: { categorias: 'ISO 12944-2 — seleção de material/revestimento conforme a categoria de corrosividade (C1–CX).' }
+    },
+    NBR6123: {
+      codigo: 'ABNT NBR 6123',
+      titulo: 'Forças devidas ao vento em edificações',
+      itens: { vento: 'NBR 6123 — pressão dinâmica q = 0,613·V_k² (V_k = V₀·S1·S2·S3); força F = Ca·q·A. Relevante em silos/estruturas expostas.' }
+    },
+    // ----------------- NORMAS INTERNACIONAIS -----------------
+    EN795: {
+      codigo: 'EN 795 / CEN/TS 16415',
+      titulo: 'Anchor devices — Personal fall protection equipment',
+      internacional: true,
+      itens: {
+        tipoC: 'EN 795 Type C — flexible horizontal lifeline (cabo de aço). Equivale ao "tipo C" da NBR 16325.',
+        classes: 'EN 795 — Type A (structural), B (transportable), C (horizontal flexible line), D (rigid rail), E (deadweight).',
+        multi: 'CEN/TS 16415 — anchor devices for use by MORE THAN ONE person simultaneously (carga majorada por usuário adicional).'
+      }
+    },
+    EN355: {
+      codigo: 'EN 355 / EN 354 / EN 360 / EN 361',
+      titulo: 'PPE against falls — energy absorbers, lanyards, retractables, harnesses',
+      internacional: true,
+      itens: {
+        absorvedor: 'EN 355 — energy absorber limits the arrest force on the worker to ≤ 6 kN.',
+        arnes: 'EN 361 — full body harness; EN 354 lanyards; EN 360 self-retracting lifelines (SRL).'
+      }
+    },
+    OSHA: {
+      codigo: 'OSHA 29 CFR 1926.502 / 1910.140',
+      titulo: 'US — Fall protection systems criteria and practices',
+      internacional: true,
+      itens: {
+        gi1910: 'OSHA 1910.140 (General Industry) — personal fall protection systems: definitions and performance criteria (MAF ≤ 1,800 lbf; anchorages ≥ 5,000 lbf or engineered).',
+        arrest: 'OSHA 1926.502(d)(16) (Construction, Subpart M) — personal fall arrest: maximum arresting force (MAF) ≤ 1,800 lbf (≈ 8 kN) with body harness.',
+        freefall: 'OSHA 1926.502(d)(16) — limit free fall to 6 ft (1.83 m) and maximum deceleration distance to 3.5 ft (1.07 m).',
+        anchorage: 'OSHA 1926.502(d)(15) — anchorages: 5,000 lbf (≈ 22.2 kN) per worker, OR designed as part of a complete system (safety factor ≥ 2) supervised by a qualified person.',
+        clearance: 'OSHA — verify total fall distance (TFD): free fall + deceleration + harness stretch + safety margin — no contact with lower level.'
+      }
+    },
+    ANSI: {
+      codigo: 'ANSI/ASSP Z359 (Fall Protection Code)',
+      titulo: 'US — Fall Protection Code',
+      internacional: true,
+      itens: {
+        z359_6: 'ANSI/ASSP Z359.6 — design of active fall protection systems by a qualified person: computes lifeline DEFLECTION, anchorage/support forces and total fall clearance for engineered HLL. (Base do dimensionamento deste software.)',
+        z359_11: 'ANSI/ASSP Z359.11 — full-body harnesses.',
+        z359_13: 'ANSI/ASSP Z359.13 — personal energy absorbers and lanyards (limit MAF to 1,800 lbf).',
+        z359_14: 'ANSI/ASSP Z359.14 — self-retracting devices (SRLs).',
+        z359_15: 'ANSI/ASSP Z359.15 — single-anchor lifelines and fall arresters for vertical systems.'
+      }
+    },
+    ISO22846: {
+      codigo: 'ISO 22846 / IRATA',
+      titulo: 'Rope access — safety and practice',
+      internacional: true,
+      itens: { acesso: 'ISO 22846 / IRATA — acesso por cordas (quando aplicável a inspeção/manutenção em altura).' }
     }
   };
+
+  /** Tabela de equivalência entre normas (BR × Internacionais) — exibida no prontuário internacional. */
+  var EQUIVALENCIAS = [
+    { tema: 'Linha de vida horizontal flexível', temaEn: 'Flexible horizontal lifeline', br: 'NBR 16325-2 (tipo C)', en: 'EN 795 Type C', us: 'ANSI Z359.6 / OSHA 1926.502' },
+    { tema: 'Força máxima no trabalhador', temaEn: 'Maximum arrest force on worker', br: 'NR-35.6.7 — 6 kN', en: 'EN 355 — 6 kN', us: 'OSHA — 8 kN (1,800 lbf) / ANSI 6 kN' },
+    { tema: 'Resistência da ancoragem', temaEn: 'Anchorage strength', br: 'NR-18 — 15 kN', en: 'EN 795 — ensaio 12–18 kN', us: 'OSHA — 22.2 kN (5,000 lbf) or SF ≥ 2' },
+    { tema: 'Absorvedor de energia', temaEn: 'Energy absorber', br: 'NBR 16489', en: 'EN 355', us: 'ANSI Z359.13' },
+    { tema: 'Cinturão paraquedista', temaEn: 'Full-body harness', br: 'NR-35 / NBR 15836', en: 'EN 361', us: 'ANSI Z359.11' },
+    { tema: 'Múltiplos usuários', temaEn: 'Multiple users', br: '— (majorar carga)', en: 'CEN/TS 16415', us: 'ANSI Z359.6' },
+    { tema: 'Vento em estruturas', temaEn: 'Wind on structures', br: 'NBR 6123', en: 'EN 1991-1-4', us: 'ASCE 7' },
+    { tema: 'Estruturas de aço', temaEn: 'Steel structures', br: 'NBR 8800', en: 'EN 1993 (Eurocode 3)', us: 'AISC 360' },
+    { tema: 'Estruturas de concreto', temaEn: 'Concrete structures', br: 'NBR 6118', en: 'EN 1992', us: 'ACI 318' },
+    { tema: 'Distância/zona livre de queda', temaEn: 'Required fall clearance', br: 'NBR 16325-2 (ZLQ)', en: 'EN 363', us: 'OSHA TFD / Z359.6' },
+    { tema: 'Dispositivo retrátil (SRL)', temaEn: 'Self-retracting lifeline (SRL)', br: 'NBR 16325', en: 'EN 360', us: 'ANSI Z359.14' },
+    { tema: 'Sistema vertical / ponto único', temaEn: 'Vertical system / single point', br: 'NBR 16325-1', en: 'EN 353/795', us: 'ANSI Z359.15' },
+    { tema: 'Indústria geral (uso/critérios)', temaEn: 'General industry (use/criteria)', br: 'NR-35 / NR-18', en: 'EN 365', us: 'OSHA 1910.140' }
+  ];
 
   /** Lista plana (para a aba de referências do prontuário). */
   function listarReferencias() {
@@ -140,7 +212,7 @@
     { id: 'refs',        titulo: '18 · Referências normativas' }
   ];
 
-  var Norms = { NORMS: NORMS, PRONTUARIO_SECOES: PRONTUARIO_SECOES, listarReferencias: listarReferencias };
+  var Norms = { NORMS: NORMS, PRONTUARIO_SECOES: PRONTUARIO_SECOES, EQUIVALENCIAS: EQUIVALENCIAS, listarReferencias: listarReferencias };
 
   root.LV = root.LV || {};
   root.LV.Norms = Norms;

@@ -80,9 +80,12 @@
       W: W_mm3 * MM3_TO_CM3,       // cm³
       Z: Z_mm3 * MM3_TO_CM3,       // cm³
       i: i_mm  * MM_TO_CM,         // cm
-      // Razão dimensão/espessura (para classe da seção / flambagem local)
-      bt: (type === 'CHS') ? (dimFlex_mm / t_mm) : ((dimFlex_mm - 3 * t_mm) / t_mm),
-      // dados crus em mm (uso interno)
+      // Esbeltez local de parede (NBR 8800 Tabela F.1). Para SHS/RHS a MESA
+      // comprimida é a face de largura b (perpendicular ao eixo de flexão d);
+      // a ALMA é a face de altura d. CHS usa D/t. (largura de parede plana ≈ dim − 3t)
+      bt: (type === 'CHS') ? (dimFlex_mm / t_mm) : ((geom.b - 3 * t_mm) / t_mm),     // esbeltez da MESA (b)
+      btWeb: (type === 'CHS') ? null : ((geom.d - 3 * t_mm) / t_mm),                  // esbeltez da ALMA (d)
+      // dados crus em mm (uso interno). dim = altura de flexão (d) — usada no cisalhamento (2 almas)
       _mm: { A: A_mm2, I: I_mm4, W: W_mm3, Z: Z_mm3, i: i_mm, t: t_mm, dim: dimFlex_mm }
     };
   }

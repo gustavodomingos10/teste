@@ -22,6 +22,8 @@
     'Telha fibrocimento (frágil)':     ['✔*', '–', '–', '–', '–', '–', '–'],
     'Telha cerâmica (frágil)':         ['✔*', '–', '–', '–', '–', '–', '–'],
     'Telha termoacústica (sanduíche)': ['✔', '⚠', '⚠', '–', '–', '–', '–'],
+    'Membrana TPO (termoplástica)':    ['✔', '⚠', '–', '⚠', '–', '–', '–'],
+    'Membrana EPDM (borracha)':        ['✔', '⚠', '–', '⚠', '–', '–', '–'],
     'Laje de concreto':                ['✔', '–', '–', '✔', '⚠', '–', '–'],
     'Viga metálica (perfil I/H)':      ['✔', '✔', '✔', '–', '–', '–', '–'],
     'Viga metálica (tubular)':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
@@ -30,8 +32,22 @@
     'Solo coesivo':                    ['–', '–', '–', '–', '–', '✔', '⚠'],
     'Solo arenoso':                    ['–', '–', '–', '–', '–', '✔', '✗'],
     'Rocha':                           ['–', '–', '–', '✔', '⚠', '✔', '–'],
-    'Talude protegido':                ['–', '–', '–', '–', '–', '✔', '⚠']
+    'Talude protegido':                ['–', '–', '–', '–', '–', '✔', '⚠'],
+    'Poste cravado':                   ['–', '–', '–', '–', '–', '✔', '✔'],
+    // Silo / industrial (estruturas metálicas): suporte parafusado/soldado à estrutura resistente
+    'Teto de silo metálico (cônico)':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Costado de silo (chapa)':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Anel de reforço do silo':         ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Passarela / galeria de correia':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Estrutura de torre de elevador':  ['✔', '✔', '⚠', '–', '–', '–', '–'],
+    'Tremonta / cobertura de armazém': ['✔', '⚠', '⚠', '–', '–', '–', '–']
   };
+  // Índice normalizado (sem qualificadores entre parênteses) para casar os nomes
+  // descritivos dos cenários com as chaves da matriz (ex.: 'Solo coesivo (bloco
+  // concreto)' → 'Solo coesivo'; 'Telha fibrocimento' → 'Telha fibrocimento (frágil)').
+  function _norm(s) { return String(s || '').toLowerCase().replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(); }
+  var _MATRIZ_NORM = null;
+  function _matrizNorm() { if (!_MATRIZ_NORM) { _MATRIZ_NORM = {}; Object.keys(MATRIZ).forEach(function (k) { _MATRIZ_NORM[_norm(k)] = MATRIZ[k]; }); } return _MATRIZ_NORM; }
 
   var LEGENDA = {
     '✔':  'Recomendado — solução usual e segura',
@@ -49,12 +65,13 @@
     'Em aço, a chapa/olhal soldado deve ser executado por soldador qualificado, com solda dimensionada; o grampo (clamp) exige verificação de escorregamento.',
     'Em concreto, o chumbador químico (epóxi) deve respeitar profundidade e distância de borda do fabricante; verificar arrancamento (cone de concreto).',
     'Em solo/talude, os postes devem ser ancorados em blocos de fundação dimensionados ao tombamento/arrancamento; em solo arenoso evitar postes simplesmente cravados.',
-    'Materiais resistentes às intempéries: aço inoxidável AISI 316 ou equivalente — NR-18 18.12.12.2 (d).'
+    'Materiais resistentes às intempéries: aço inoxidável AISI 316 ou equivalente — NR-18 18.12.12.2 (d).',
+    'Coberturas de membrana (TPO/EPDM): o poste transpassa a membrana e fixa-se à estrutura/deck resistente abaixo; usar bota de vedação (flashing) soldada/colada à membrana para estanqueidade.'
   ];
 
   /** Linha da matriz para um substrato (com os símbolos por ancoragem). */
   function paraSubstrato(substrato) {
-    var linha = MATRIZ[substrato];
+    var linha = MATRIZ[substrato] || _matrizNorm()[_norm(substrato)];
     if (!linha) return null;
     return ANCORAGENS.map(function (anc, i) {
       return { ancoragem: anc, simbolo: linha[i], descricao: LEGENDA[linha[i]] };

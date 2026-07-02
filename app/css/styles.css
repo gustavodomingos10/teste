@@ -99,6 +99,7 @@ b.tok{color:var(--ok)} b.tfail{color:var(--fail)}
 .avisos-box{margin-bottom:16px}
 .av{padding:8px 12px;border-radius:7px;margin-bottom:6px;font-size:13px}
 .av.erro{background:var(--fail-bg);color:#7a1f15}
+.av.erro.forte{font-weight:700;border:1px solid var(--fail)}
 .av.aviso{background:#fff6e6;color:#7a5b13;border:1px solid #f3d99a}
 .figuras-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-bottom:8px}
 .figuras-grid .fig,.doc-inline .fig{background:#fff;border:1px solid var(--borda);border-radius:10px;padding:10px;box-shadow:var(--sombra)}
@@ -134,6 +135,38 @@ table.preencher td{height:26px}
 .toast.show{opacity:1;transform:translateY(0)}
 .toast.ok{background:var(--ok)} .toast.erro{background:var(--fail)} .toast.info{background:var(--cinza)}
 
+/* ---------- Seleção de país ---------- */
+.pais-card{max-width:680px}
+.pais-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.pais-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:18px 12px;border:2px solid var(--borda);border-radius:12px;background:#fff;cursor:pointer;transition:.15s;text-align:center}
+.pais-btn:hover{border-color:var(--azul);background:var(--azul-claro);transform:translateY(-2px)}
+.pais-flag{font-size:38px;line-height:1}
+.pais-nome{font-weight:700;color:var(--azul);font-size:15px}
+.pais-sub{font-size:11px;color:var(--muted)}
+.pais-normas-tit{font-size:10.5px;font-weight:700;color:var(--cinza);margin-top:6px;text-transform:uppercase;letter-spacing:.5px}
+.pais-normas{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.pn-chip{background:var(--azul-claro);color:var(--azul);border-radius:5px;padding:2px 6px;font-size:9.5px;font-weight:600;line-height:1.5}
+.pais-tag{background:var(--azul-claro);color:var(--azul);border-radius:20px;padding:6px 12px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.sb-pais{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#cfe0f0;border-radius:6px;padding:7px;font-size:12px;cursor:pointer;margin-bottom:8px}
+.sb-pais:hover{background:rgba(255,255,255,.16)}
+
+/* ---------- Conformidade ---------- */
+.conf-resumo{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.conf-card{border-radius:10px;padding:16px;text-align:center;color:#fff;box-shadow:var(--sombra)}
+.conf-card.ok{background:var(--ok)} .conf-card.avencer{background:#e6a700} .conf-card.vencida{background:var(--fail)} .conf-card.pendente{background:var(--cinza)}
+.cc-num{font-size:30px;font-weight:800;line-height:1}
+.cc-rot{font-size:12px;margin-top:4px;opacity:.95}
+.conf-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700;color:#fff}
+.conf-badge.ok{background:var(--ok)} .conf-badge.avencer{background:#e6a700} .conf-badge.vencida{background:var(--fail)} .conf-badge.pendente{background:var(--cinza)}
+
+/* ---------- Plaqueta + QR ---------- */
+.plaqueta-wrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.qr-box{text-align:center;border:1px solid var(--borda);border-radius:8px;padding:10px;background:#fff}
+.qr-box .qr{width:120px;height:120px;margin:0 auto}
+.qr-box .qr svg{width:100%;height:100%}
+.qr-cap{font-size:10px;color:#333;margin-top:6px;font-weight:600}
+.qr-cap span{color:var(--muted);font-weight:400}
+
 /* ============================================================================
  *  DOCUMENTOS (memoriais / prontuário)
  * ========================================================================== */
@@ -167,6 +200,17 @@ table.tab.indic .val{text-align:center}
 .report .notas-norm{font-size:11.5px} .report .notas-norm ol{padding-left:18px}
 .report .plaqueta{border:2px dashed var(--azul);border-radius:8px;padding:8px;max-width:520px}
 
+/* Roteiro de cálculo detalhado (CYPE-style) */
+.calc-step{margin:8px 0;padding:8px 10px;background:#fbfcfe;border-left:3px solid var(--azul2);border-radius:0 6px 6px 0}
+.calc-step .cs-t{font-size:12.5px;font-weight:700;color:var(--azul);margin-bottom:4px}
+.calc-step .cs-ref{font-weight:400;font-size:10.5px;color:var(--muted)}
+.calc-step .cs-eq{font-family:"Cascadia Code",Consolas,"DejaVu Sans Mono",monospace;font-size:12px;color:#1a1a1a;margin:3px 0;line-height:1.6;white-space:normal}
+.calc-step .cs-eq b{color:var(--azul);font-weight:700}
+.calc-step .cs-note{font-family:inherit;font-size:10.5px;color:var(--muted);font-style:italic}
+table.nr-tab{border-collapse:collapse;margin:4px 0;font-size:11px;font-family:Consolas,monospace}
+table.nr-tab th,table.nr-tab td{border:1px solid var(--borda);padding:2px 8px;text-align:right}
+table.nr-tab th{background:var(--azul-claro);color:var(--azul)}
+
 /* prontuário */
 .prontuario .pr-capa{text-align:center;padding:30px 20px;border:3px solid var(--azul);border-radius:12px;margin-bottom:20px;background:linear-gradient(180deg,#fff, var(--azul-claro))}
 .cp-emp{font-weight:800;color:var(--azul);font-size:18px}
@@ -182,13 +226,195 @@ table.tab.indic .val{text-align:center}
 .pr-sec .report{border:1px solid var(--borda);border-radius:8px;padding:16px}
 
 /* ============================================================================
+ *  PREMIUM · emblema/rodapé de documentos, modais, dimensionamento automático
+ * ========================================================================== */
+/* Emblema / logo / rodapé institucional dos documentos exportados */
+.rep-head .rh-top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.rep-emblema{width:46px;height:46px;flex:0 0 46px;border-radius:9px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;letter-spacing:1px;box-shadow:var(--sombra)}
+.rep-logo{max-height:54px;max-width:190px;object-fit:contain}
+.rep-head .rh-ids{line-height:1.3}
+.rep-footer{margin-top:22px;padding-top:9px;border-top:1px solid var(--borda);font-size:10px;color:var(--muted);text-align:center;line-height:1.5}
+.rep-footer b{color:var(--cinza)}
+.rf-normas{margin-top:3px;font-size:9px;color:#9aa3af;letter-spacing:.3px}
+
+/* Modal genérico (overlay central) */
+.modal-overlay{position:fixed;inset:0;background:rgba(18,30,48,.55);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;animation:fadein .15s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.modal-caixa{background:#fff;border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.35);width:100%;max-width:560px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;animation:pop .18s ease}
+@keyframes pop{from{transform:translateY(10px) scale(.98);opacity:.5}to{transform:none;opacity:1}}
+.modal-caixa.modal-auto{max-width:520px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:15px 20px;border-bottom:1px solid var(--borda);background:linear-gradient(180deg,#fff,var(--azul-claro))}
+.modal-head h3{margin:0;color:var(--azul);font-size:16px}
+.modal-x{border:none;background:transparent;font-size:15px;cursor:pointer;color:var(--muted);width:30px;height:30px;border-radius:7px;line-height:1}
+.modal-x:hover{background:var(--azul-claro);color:var(--azul)}
+.modal-corpo{padding:18px 20px;overflow:auto}
+.modal-rodape{display:flex;justify-content:flex-end;gap:10px;padding:13px 20px;border-top:1px solid var(--borda);background:var(--cinza-claro)}
+
+/* Modal de exportação (Gerar Prontuário Completo) */
+.exp-acoes-sel{display:flex;gap:8px;margin:8px 0 4px}
+.exp-titulo-grupo{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--cinza);margin:14px 0 6px}
+.exp-secoes{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px}
+.exp-item{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;font-size:12.5px;cursor:pointer}
+.exp-item:hover{background:var(--azul-claro)}
+.exp-item input,.exp-fmt input{width:15px;height:15px;accent-color:var(--azul);cursor:pointer}
+.exp-n{background:var(--azul-claro);color:var(--azul);font-size:10.5px;font-weight:700;border-radius:4px;padding:1px 5px;min-width:20px;text-align:center}
+.exp-formatos .exp-fmt{display:flex;align-items:center;gap:8px;padding:6px;border-radius:6px;font-size:12.5px;cursor:pointer}
+.exp-formatos .exp-fmt:hover{background:var(--azul-claro)}
+.exp-capa{border-top:1px dashed var(--borda);margin-top:6px;padding-top:10px}
+
+/* Cartão de convite e modal de resultado do dimensionamento automático */
+.auto-card{display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap;
+  background:linear-gradient(135deg,#eef4fb,#e3edf8);border:1px solid #cfe0f0;border-radius:12px;padding:16px 18px;margin:16px 0}
+.auto-card-t{font-weight:800;color:var(--azul);font-size:15px}
+.auto-card-s{font-size:12.5px;color:var(--cinza);max-width:660px;margin-top:3px}
+.btn-calc{box-shadow:0 4px 14px rgba(31,58,95,.28);white-space:nowrap}
+.auto-badge{display:inline-block;background:var(--ok-bg);color:var(--ok);font-weight:700;border-radius:20px;padding:5px 12px;font-size:12.5px;margin-bottom:12px}
+.auto-tab{width:100%;border-collapse:collapse;font-size:13px}
+.auto-tab td{padding:6px 8px;border-bottom:1px solid var(--borda)}
+.auto-tab .ar-rot{color:var(--cinza)}
+.auto-tab .ar-val{font-weight:700;color:var(--azul);text-align:right}
+.auto-alt{margin-top:14px}
+.auto-alt-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--cinza);margin-bottom:4px}
+.auto-alt ul{margin:0;padding-left:18px;font-size:12.5px;color:var(--cinza)}
+.auto-sem p{font-size:13px}
+
+/* Comparativo internacional (Brasil × EUA) — cereja do bolo */
+.ci-card{border:1px solid var(--borda);border-radius:12px;background:#fff;box-shadow:var(--sombra);margin:14px 0;overflow:hidden}
+.ci-head{background:linear-gradient(180deg,var(--azul),var(--azul2));color:#fff;font-weight:700;font-size:13px;padding:10px 14px}
+.ci-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.ci-col{padding:14px 16px;border-right:1px solid var(--borda)}
+.ci-col:last-child{border-right:none}
+.ci-col.ativo{background:var(--azul-claro)}
+.ci-flag{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ci-band{font-size:22px;line-height:1}
+.ci-flag b{color:var(--azul);font-size:14px}
+.ci-tag-atual{margin-left:auto;font-size:9.5px;font-weight:700;text-transform:uppercase;background:var(--azul);color:#fff;border-radius:20px;padding:2px 8px}
+.ci-verd{text-align:center;font-weight:800;border-radius:7px;padding:7px;font-size:14px;margin-bottom:8px}
+.ci-verd.ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok)}
+.ci-verd.fail{background:var(--fail-bg);color:var(--fail);border:1px solid var(--fail)}
+.ci-verd.na{background:var(--cinza-claro);color:var(--muted)}
+.ci-tab{width:100%;border-collapse:collapse;font-size:12px}
+.ci-tab td{padding:4px 4px;border-bottom:1px solid var(--borda);color:var(--cinza)}
+.ci-tab td.v{text-align:right;font-weight:700;color:var(--texto)}
+.ci-aviso{padding:9px 14px;font-size:12px;font-weight:600}
+.ci-aviso.divergem{background:#fff6e6;color:#8a5a00;border-top:1px solid #f3d99a}
+.ci-aviso.igual{background:var(--ok-bg);color:var(--ok);border-top:1px solid #bfe3cd}
+@media (max-width:620px){.ci-cols{grid-template-columns:1fr}.ci-col{border-right:none;border-bottom:1px solid var(--borda)}}
+
+/* Logotipo do escritório (admin) */
+.logo-campo .logo-prev{border:1px dashed var(--borda);border-radius:8px;padding:10px;text-align:center;background:var(--cinza-claro);margin:6px 0}
+.logo-prev img{max-height:70px;max-width:220px;object-fit:contain}
+.logo-btns{display:flex;gap:8px}
+
+/* Premium: emblema de país e marca sutil na barra lateral */
+.sb-pais{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+  color:#eaf1f8;border-radius:9px;padding:8px 10px;cursor:pointer;margin:4px 0 8px;transition:.15s;font-family:inherit}
+.sb-pais:hover{background:rgba(255,255,255,.12)}
+.sb-pais-flag{font-size:20px;line-height:1}
+.sb-pais-txt{display:flex;flex-direction:column;line-height:1.2}
+.sb-pais-txt b{color:#fff;font-size:12.5px}
+.sb-pais-un{font-size:9.5px;color:#9bb8d6;letter-spacing:.3px}
+.sb-empresa{display:block;width:100%;margin-top:10px;background:transparent;border:none;cursor:pointer;text-align:center;line-height:1.35;font-family:inherit;padding:2px;border-radius:6px;transition:.15s}
+.sb-empresa:hover{background:rgba(255,255,255,.06)}
+.sb-emp-rot{display:block;font-size:8.5px;letter-spacing:.6px;text-transform:uppercase;color:#6f8bab}
+.sb-emp-nome{display:block;font-size:10px;color:#9bb8d6;font-weight:600}
+
+/* Crédito discreto no canto da área de trabalho */
+.credito-canto{position:fixed;right:14px;bottom:12px;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(3px);
+  border:1px solid var(--borda);border-radius:20px;padding:5px 12px;font-size:10.5px;color:var(--muted);
+  cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.18s;font-family:inherit;opacity:.75}
+.credito-canto:hover{opacity:1;color:var(--azul);border-color:var(--azul2)}
+.credito-canto b{color:var(--cinza);font-weight:700}
+.credito-canto:hover b{color:var(--azul)}
+
+/* Página Sobre / About */
+.sobre-hero{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px;box-shadow:var(--sombra)}
+.sh-emblema .rep-emblema{width:60px;height:60px;font-size:22px;background:rgba(255,255,255,.16);box-shadow:none}
+.sh-emblema .rep-logo{max-height:64px;max-width:200px;background:#fff;border-radius:8px;padding:4px}
+.sh-produto{font-size:22px;font-weight:800;letter-spacing:.5px}
+.sh-tagline{font-size:12.5px;color:#dbe7f5;margin-top:2px;max-width:640px}
+.sh-dev{margin-top:10px;font-size:13px;color:#eaf1f8}.sh-dev b{color:#fff}
+.sh-versao{font-size:11px;color:#bcd0e8;margin-top:3px}
+.sobre-card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--sombra)}
+.sobre-card h3{margin:0 0 10px;color:var(--azul);font-size:15px}
+.sobre-tab{width:100%;border-collapse:collapse;font-size:13px}
+.sobre-tab td{padding:6px 4px;border-bottom:1px solid var(--borda)}
+.sobre-tab .sf-rot{color:var(--cinza);width:44%}
+.sobre-tab .sf-val{font-weight:600;color:var(--texto)}
+.sobre-recursos{display:grid;grid-template-columns:1fr 1fr;gap:12px 18px}
+.sr-item{display:flex;gap:11px;align-items:flex-start}
+.sr-ico{font-size:20px;line-height:1.1;flex:0 0 24px;text-align:center}
+.sr-item b{color:var(--azul);font-size:13.5px}
+.sr-desc{font-size:12px;color:var(--cinza);margin-top:2px}
+.sobre-normas{display:flex;flex-wrap:wrap;gap:6px}
+.sn-chip{background:var(--azul-claro);color:var(--azul);border-radius:6px;padding:3px 9px;font-size:11px;font-weight:600}
+.sobre-nota{font-size:12px;color:var(--cinza);font-style:italic;background:#f9fafb;border-left:3px solid var(--azul2);border-radius:0 8px 8px 0;padding:11px 14px;margin-bottom:14px}
+.sobre-copy{text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--borda);padding-top:14px;line-height:1.7}
+.sobre-copy .sc-dev{display:block;font-size:10px;color:#9aa3af;letter-spacing:.3px}
+@media (max-width:620px){.sobre-recursos{grid-template-columns:1fr}.sobre-hero{flex-direction:column;text-align:center}}
+
+/* Premium: leve refino nos botões primários */
+.btn.primary{background:linear-gradient(180deg,var(--azul2),var(--azul))}
+.btn.primary:hover{background:linear-gradient(180deg,#3568a0,var(--azul2))}
+.btn-prontuario{box-shadow:0 4px 14px rgba(31,58,95,.28)}
+
+/* ============================================================================
+ *  MODO DEMONSTRAÇÃO (amostra pública — sem salvar/exportar/imprimir)
+ * ========================================================================== */
+body.demo-mode{user-select:none;-webkit-user-select:none}
+.demo-watermark{position:fixed;inset:0;pointer-events:none;z-index:9998;background-repeat:repeat}
+.demo-faixa{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#111;border-top:2px solid #c0140f;color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  font-size:12px;font-weight:700;letter-spacing:.3px;padding:7px 12px;box-shadow:0 -2px 10px rgba(0,0,0,.4)}
+.demo-lic-btn{background:#c0140f;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-weight:800;font-size:12px;cursor:pointer;letter-spacing:.3px}
+.demo-lic-btn:hover{background:#e01b13}
+body.demo-mode .conteudo{padding-bottom:52px}
+body.demo-mode .credito-canto{display:none}
+.demo-lock{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#eef4fb,#e3edf8);
+  border:1px dashed var(--azul2);border-radius:12px;padding:18px 20px;margin-top:14px}
+.demo-lock-ico{font-size:30px;line-height:1;flex:0 0 auto}
+.demo-lock b{color:var(--azul);font-size:15px}
+/* prévia borrada (figuras) — mostra que há saída profissional sem entregar as cotas */
+.demo-blur{filter:blur(5px);pointer-events:none;user-select:none}
+.demo-preview-wrap{position:relative;overflow:hidden;border-radius:10px}
+.demo-preview-tag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(31,58,95,.94);color:#fff;
+  padding:9px 18px;border-radius:22px;font-weight:700;font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,.3);pointer-events:none;white-space:nowrap}
+/* TARJAS DE CENSURA — cobrem os dados essenciais (tabelas, plaqueta, comparativo) */
+.tarjado{position:relative;overflow:hidden;border-radius:6px;min-height:44px}
+.tarjado > *{filter:blur(3px)}
+.tarjado::after{content:"⛔ VERSÃO DEMONSTRATIVA — SEM VALIDADE LEGAL — NECESSÁRIO ADQUIRIR LICENÇA";
+  position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:8px 12px;background:rgba(17,17,17,.97);border:2px solid #c0140f;border-radius:6px;
+  color:#fff;font-weight:800;font-size:12px;letter-spacing:.4px;line-height:1.35;text-shadow:0 1px 2px #000}
+/* Planos / aquisição de licença */
+.demo-planos .dp-intro{font-size:13.5px;color:var(--cinza);margin:0 0 14px}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dp-card{border:1px solid var(--borda);border-radius:12px;padding:18px;text-align:center;position:relative;background:#fff}
+.dp-card.dp-dest{border-color:var(--azul);box-shadow:0 6px 18px rgba(31,58,95,.15)}
+.dp-tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border-radius:20px;padding:3px 12px}
+.dp-nome{font-weight:700;color:var(--azul);font-size:15px}
+.dp-preco{font-family:Georgia,serif;font-size:22px;color:var(--texto);margin:6px 0 2px}
+.dp-nota{font-size:12px;color:var(--muted)}
+.dp-pub{margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.dp-pub-item{font-size:13px;color:var(--cinza)}
+@media(max-width:520px){.dp-grid{grid-template-columns:1fr}}
+/* Impressão bloqueada na demonstração */
+@media print{
+  body.demo-mode *{display:none!important}
+  body.demo-mode{background:#fff}
+  body.demo-mode::before{content:"Impressão desabilitada na versão de demonstração — GD Engenharia · (43) 9 9925-9577";
+    display:block!important;padding:40px;font:700 16px Arial,sans-serif;color:#1f3a5f}
+}
+
+/* ============================================================================
  *  IMPRESSÃO
  * ========================================================================== */
 .print-body{background:#fff;padding:0;margin:0}
 .print-body .report,.print-body .prontuario{padding:18mm 16mm}
 @media print{
   body{background:#fff}
-  .sidebar,.toolbar,.tabs,.reg-form,.pg-titulo .muted{display:none!important}
+  .sidebar,.toolbar,.tabs,.reg-form,.pg-titulo .muted,.modal-overlay,.auto-card,.credito-canto{display:none!important}
   .doc-inline{border:none;box-shadow:none;padding:0}
   .pr-sec{break-inside:avoid}
   .pr-capa{break-after:page}

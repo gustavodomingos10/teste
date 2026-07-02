@@ -35,9 +35,15 @@
   var state = { rota: 'painel', projetoId: null, resultado: null };
   LV.state = state;
 
+  function T(k) { return LV.I18n ? LV.I18n.t(k) : k; }
+
   // ---- Boot ----
   function boot() {
     var app = qs('#app');
+    if (LV.DEMO) return bootDemo(app);
+    // Seleção de país/idioma na primeira execução
+    if (LV.Paises && !LV.Paises.getSelecionado()) return telaPais();
+    if (LV.Paises && LV.I18n) LV.I18n.setLang(LV.Paises.get(LV.Paises.getSelecionado()).idioma);
     LV.Auth.init().then(function () {
       var lic = LV.Auth.licencaAtual();
       if (!lic) return telaLicenca();
@@ -48,7 +54,50 @@
         if (sess.mustChange) return telaTrocaSenha(sess);
         montarApp();
       });
-    }).catch(function (e) { app.innerHTML = '<div class="erro-fatal">Erro ao iniciar: ' + e.message + '</div>'; });
+    }).catch(function (e) { app.innerHTML = '<div class="erro-fatal">' + LV.I18n.L('Erro ao iniciar: ', 'Failed to start: ') + e.message + '</div>'; });
+  }
+
+  // ---- Boot da DEMONSTRAÇÃO (sem login/licença; entra direto, sem persistir) ----
+  function bootDemo(app) {
+    if (LV.Paises && LV.I18n) {
+      var cod = LV.Paises.getSelecionado() || 'BR';
+      LV.I18n.setLang(LV.Paises.get(cod).idioma);
+    }
+    LV.Auth.init().then(function () {
+      LV.Auth.iniciarDemo();
+      montarApp();
+    }).catch(function (e) {
+      app.innerHTML = '<div class="erro-fatal">' + LV.I18n.L('Erro na demonstração: ', 'Demo error: ') + e.message + '</div>';
+    });
+  }
+
+  // ---- Tela de seleção de país / idioma ----
+  function telaPais() {
+    var app = clear(qs('#app'));
+    function escolher(cod) {
+      LV.Paises.setSelecionado(cod);
+      if (LV.I18n) LV.I18n.setLang(LV.Paises.get(cod).idioma);
+      boot();
+    }
+    var paises = LV.Paises.lista();
+    app.appendChild(h('div', { class: 'auth-wrap' }, [
+      h('div', { class: 'auth-card pais-card' }, [
+        marca(),
+        h('h2', { text: 'Selecione o país / Select country' }),
+        h('p', { class: 'muted', text: 'O software ajusta normas, unidades e idioma automaticamente. / The software adapts standards, units and language automatically.' }),
+        h('div', { class: 'pais-grid' }, paises.map(function (p) {
+          var full = LV.Paises.get(p.codigo);
+          return h('button', { class: 'pais-btn', onclick: function () { escolher(p.codigo); } }, [
+            h('span', { class: 'pais-flag', text: p.bandeira }),
+            h('span', { class: 'pais-nome', text: p.codigo === 'BR' ? p.nome : (p.nomeEn || p.nome) }),
+            h('span', { class: 'pais-sub', text: p.codigo === 'BR' ? 'Português · SI (kN, m)' : 'English · Imperial (lbf, ft)' }),
+            h('div', { class: 'pais-normas-tit', text: p.codigo === 'BR' ? 'Normas aplicáveis:' : 'Applicable standards:' }),
+            h('div', { class: 'pais-normas' }, (full.normas || []).map(function (n) { return h('span', { class: 'pn-chip', text: n }); }))
+          ]);
+        })),
+        rodapeMarca()
+      ])
+    ]));
   }
 
   // ---- Tela de licença ----
@@ -58,17 +107,17 @@
     app.appendChild(h('div', { class: 'auth-wrap' }, [
       h('div', { class: 'auth-card' }, [
         marca(),
-        h('h2', { text: 'Ativação do software' }),
+        h('h2', { text: LV.I18n.L('Ativação do software', 'Software activation') }),
         erro ? h('div', { class: 'auth-erro', text: erro }) : null,
-        h('p', { class: 'muted', text: 'Informe a chave de licença fornecida pela GD Engenharia ou inicie uma avaliação de 30 dias.' }),
+        h('p', { class: 'muted', text: LV.I18n.L('Informe a chave de licença fornecida pela GD Engenharia ou inicie uma avaliação de 30 dias.', 'Enter the license key provided by GD Engenharia or start a 30-day trial.') }),
         inp = h('input', { class: 'inp', placeholder: 'GDLV-CLIENTE-AAAAMMDD-PLANO-ASSINATURA', spellcheck: 'false' }),
-        h('button', { class: 'btn primary block', text: 'Ativar licença', onclick: function () {
-          LV.Auth.ativar(inp.value).then(function (r) { if (r.ok) { toast('Licença ativada para ' + r.cliente, 'ok'); boot(); } else toast(r.erro, 'erro'); });
+        h('button', { class: 'btn primary block', text: LV.I18n.L('Ativar licença', 'Activate license'), onclick: function () {
+          LV.Auth.ativar(inp.value).then(function (r) { if (r.ok) { toast(LV.I18n.L('Licença ativada para ', 'License activated for ') + r.cliente, 'ok'); boot(); } else toast(r.erro, 'erro'); });
         } }),
-        h('button', { class: 'btn ghost block', text: 'Iniciar avaliação (30 dias)', onclick: function () {
+        h('button', { class: 'btn ghost block', text: LV.I18n.L('Iniciar avaliação (30 dias)', 'Start trial (30 days)'), onclick: function () {
           var d = new Date(Date.now() + 30 * 864e5);
           var vd = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
-          LV.Auth.gerarChave('AVALIACAO', vd, 'TRIAL').then(function (k) { return LV.Auth.ativar(k); }).then(function () { toast('Avaliação iniciada (30 dias).', 'ok'); boot(); });
+          LV.Auth.gerarChave('AVALIACAO', vd, 'TRIAL').then(function (k) { return LV.Auth.ativar(k); }).then(function () { toast(LV.I18n.L('Avaliação iniciada (30 dias).', 'Trial started (30 days).'), 'ok'); boot(); });
         } }),
         rodapeMarca()
       ])
@@ -90,14 +139,14 @@
     app.appendChild(h('div', { class: 'auth-wrap' }, [
       h('div', { class: 'auth-card' }, [
         marca(),
-        h('h2', { text: 'Acesso ao sistema' }),
+        h('h2', { text: LV.I18n.L('Acesso ao sistema', 'System login') }),
         erro ? h('div', { class: 'auth-erro', text: erro }) : null,
-        rotulo('Usuário'),
-        u = h('input', { class: 'inp', placeholder: 'usuário', autofocus: 'true' }),
-        rotulo('Senha'),
-        p = h('input', { class: 'inp', type: 'password', placeholder: 'senha', onkeydown: function (e) { if (e.key === 'Enter') entrar(); } }),
-        h('button', { class: 'btn primary block', text: 'Entrar', onclick: entrar }),
-        h('p', { class: 'muted small', html: 'Primeiro acesso: usuário <b>admin</b> · senha <b>GD-altura@2026</b> (troca obrigatória).' }),
+        rotulo(LV.I18n.L('Usuário', 'User')),
+        u = h('input', { class: 'inp', placeholder: LV.I18n.L('usuário', 'user'), autofocus: 'true' }),
+        rotulo(LV.I18n.L('Senha', 'Password')),
+        p = h('input', { class: 'inp', type: 'password', placeholder: LV.I18n.L('senha', 'password'), onkeydown: function (e) { if (e.key === 'Enter') entrar(); } }),
+        h('button', { class: 'btn primary block', text: LV.I18n.L('Entrar', 'Sign in'), onclick: entrar }),
+        h('p', { class: 'muted small', html: LV.I18n.L('Primeiro acesso: usuário <b>admin</b> · senha <b>GD-altura@2026</b> (troca obrigatória).', 'First login: user <b>admin</b> · password <b>GD-altura@2026</b> (change required).') }),
         rodapeMarca()
       ])
     ]));
@@ -109,21 +158,21 @@
     var atual, n1, n2, barra;
     function avaliar() { var fz = LV.Crypto.forcaSenha(n1.value); barra.style.width = (fz.score * 25) + '%'; barra.className = 'forca-bar s' + fz.score; }
     function trocar() {
-      if (n1.value !== n2.value) { toast('As senhas não conferem.', 'erro'); return; }
+      if (n1.value !== n2.value) { toast(LV.I18n.L('As senhas não conferem.', 'Passwords do not match.'), 'erro'); return; }
       LV.Auth.trocarSenha(sess.username, atual.value, n1.value).then(function () {
-        toast('Senha alterada com sucesso.', 'ok'); montarApp();
+        toast(LV.I18n.L('Senha alterada com sucesso.', 'Password changed successfully.'), 'ok'); montarApp();
       }).catch(function (e) { toast(e.message, 'erro'); });
     }
     app.appendChild(h('div', { class: 'auth-wrap' }, [
       h('div', { class: 'auth-card' }, [
-        marca(), h('h2', { text: 'Defina sua nova senha' }),
-        h('p', { class: 'muted', text: 'Por segurança, é necessário alterar a senha no primeiro acesso.' }),
-        rotulo('Senha atual'), atual = h('input', { class: 'inp', type: 'password' }),
-        rotulo('Nova senha'), n1 = h('input', { class: 'inp', type: 'password', oninput: avaliar }),
+        marca(), h('h2', { text: LV.I18n.L('Defina sua nova senha', 'Set your new password') }),
+        h('p', { class: 'muted', text: LV.I18n.L('Por segurança, é necessário alterar a senha no primeiro acesso.', 'For security, you must change your password on first login.') }),
+        rotulo(LV.I18n.L('Senha atual', 'Current password')), atual = h('input', { class: 'inp', type: 'password' }),
+        rotulo(LV.I18n.L('Nova senha', 'New password')), n1 = h('input', { class: 'inp', type: 'password', oninput: avaliar }),
         h('div', { class: 'forca-wrap' }, [barra = h('div', { class: 'forca-bar s0' })]),
-        h('div', { class: 'muted small', text: 'Mínimo 8 caracteres, com maiúscula, minúscula e número.' }),
-        rotulo('Confirmar nova senha'), n2 = h('input', { class: 'inp', type: 'password', onkeydown: function (e) { if (e.key === 'Enter') trocar(); } }),
-        h('button', { class: 'btn primary block', text: 'Salvar nova senha', onclick: trocar })
+        h('div', { class: 'muted small', text: LV.I18n.L('Mínimo 8 caracteres, com maiúscula, minúscula e número.', 'Minimum 8 characters, with uppercase, lowercase and a number.') }),
+        rotulo(LV.I18n.L('Confirmar nova senha', 'Confirm new password')), n2 = h('input', { class: 'inp', type: 'password', onkeydown: function (e) { if (e.key === 'Enter') trocar(); } }),
+        h('button', { class: 'btn primary block', text: LV.I18n.L('Salvar nova senha', 'Save new password'), onclick: trocar })
       ])
     ]));
   }
@@ -144,23 +193,45 @@
         ]);
       })),
       h('div', { class: 'sb-rodape' }, [
-        h('div', { class: 'sb-user' }, [h('b', { text: sess.nome }), h('span', { text: LV.Auth.PERFIS[sess.role] })]),
-        h('div', { class: 'sb-lic small', text: 'Licença: ' + (lic ? lic.cliente + (lic.plano === 'TRIAL' ? ' (avaliação)' : '') : '—') }),
-        h('button', { class: 'btn ghost block small', text: 'Sair', onclick: function () { LV.Auth.logout(); toast('Sessão encerrada.', 'info'); telaLogin(); } })
+        h('div', { class: 'sb-user' }, [h('b', { text: sess.nome }), h('span', { text: T('role.' + sess.role) })]),
+        h('div', { class: 'sb-lic small', text: LV.I18n.L('Licença: ', 'License: ') + (lic ? lic.cliente + (lic.plano === 'TRIAL' ? LV.I18n.L(' (avaliação)', ' (trial)') : '') : '—') }),
+        (function () {
+          var p = LV.Paises ? LV.Paises.get(LV.Paises.getSelecionado()) : null;
+          return h('button', { class: 'sb-pais', title: 'Trocar país / Change country', onclick: function () { trocarPais(); } }, [
+            h('span', { class: 'sb-pais-flag', text: (p && p.bandeira) || '🏳' }),
+            h('span', { class: 'sb-pais-txt' }, [
+              h('b', { text: p ? LV.I18n.L(p.nome, p.nomeEn || p.nome) : '—' }),
+              h('span', { class: 'sb-pais-un', text: p ? (p.unidades === 'imperial' ? 'Imperial · OSHA/ANSI' : 'SI · NR/ABNT') : '' })
+            ])
+          ]);
+        })(),
+        h('button', { class: 'btn ghost block small', text: T('app.sair'), onclick: function () { LV.Auth.logout(); toast(LV.I18n.L('Sessão encerrada.', 'Session ended.'), 'info'); telaLogin(); } }),
+        (function () {
+          var emp = (LV.Storage && LV.Storage.getConfig ? (LV.Storage.getConfig().empresa || 'GD Engenharia e Perícia') : 'GD Engenharia e Perícia');
+          return h('button', { class: 'sb-empresa', title: LV.I18n.L('Sobre o software', 'About the software'), onclick: function () { irPara('sobre'); } }, [
+            h('span', { class: 'sb-emp-rot', text: LV.I18n.L('Desenvolvido por', 'Developed by') }),
+            h('span', { class: 'sb-emp-nome', text: emp })
+          ]);
+        })()
       ])
     ]);
     var main = h('main', { class: 'conteudo', id: 'conteudo' });
     app.appendChild(h('div', { class: 'shell' }, [sidebar, main]));
+    // Crédito discreto no canto da área de trabalho (bilíngue, estilo premium)
+    app.appendChild(h('button', { class: 'credito-canto', title: LV.I18n.L('Sobre o software', 'About the software'), onclick: function () { irPara('sobre'); } },
+      [h('span', { text: LV.I18n.L('Desenvolvido por ', 'Developed by ') }), h('b', { text: 'GD Engenharia e Perícia' })]));
     renderRota();
   }
 
   function navItens(sess) {
-    var itens = [{ rota: 'painel', nome: 'Painel', ico: '▤' }];
-    if (LV.Auth.pode('editar_projeto', sess)) itens.push({ rota: 'projeto', nome: 'Projeto', ico: '✎' });
-    if (LV.Auth.pode('calcular', sess)) itens.push({ rota: 'resultados', nome: 'Resultados', ico: '∑' });
-    if (LV.Auth.pode('emitir_prontuario', sess)) itens.push({ rota: 'prontuario', nome: 'Prontuário', ico: '◳' });
-    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'registros', nome: 'Registros', ico: '☑' });
-    if (LV.Auth.pode('gerenciar_usuarios', sess)) itens.push({ rota: 'admin', nome: 'Administração', ico: '⚙' });
+    var itens = [{ rota: 'painel', nome: T('app.painel'), ico: '▤' }];
+    if (LV.Auth.pode('editar_projeto', sess)) itens.push({ rota: 'projeto', nome: T('app.projeto'), ico: '✎' });
+    if (LV.Auth.pode('calcular', sess)) itens.push({ rota: 'resultados', nome: T('app.resultados'), ico: '∑' });
+    if (LV.Auth.pode('emitir_prontuario', sess)) itens.push({ rota: 'prontuario', nome: T('app.prontuario'), ico: '◳' });
+    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'conformidade', nome: T('app.conformidade'), ico: '◎' });
+    if (LV.Auth.pode('registrar_inspecao', sess)) itens.push({ rota: 'registros', nome: T('app.registros'), ico: '☑' });
+    if (LV.Auth.pode('gerenciar_usuarios', sess)) itens.push({ rota: 'admin', nome: T('app.admin'), ico: '⚙' });
+    itens.push({ rota: 'sobre', nome: T('app.sobre'), ico: 'ⓘ' });   // visível a todos os perfis
     return itens;
   }
 
@@ -176,11 +247,28 @@
         case 'projeto': V.projeto(alvo); break;
         case 'resultados': V.resultados(alvo); break;
         case 'prontuario': V.prontuario(alvo); break;
+        case 'conformidade': V.conformidade(alvo); break;
         case 'registros': V.registros(alvo); break;
         case 'admin': V.admin(alvo); break;
+        case 'sobre': V.sobre(alvo); break;
         default: V.painel(alvo);
       }
-    } catch (e) { alvo.appendChild(h('div', { class: 'erro-fatal', text: 'Erro ao renderizar: ' + e.message })); }
+    } catch (e) { alvo.appendChild(h('div', { class: 'erro-fatal', text: LV.I18n.L('Erro ao renderizar: ', 'Render error: ') + e.message })); }
+  }
+
+  function nomePaisAtual() {
+    if (!LV.Paises) return '';
+    var p = LV.Paises.get(LV.Paises.getSelecionado());
+    var nm = (LV.I18n && LV.I18n.getLang() === 'en' && p.nomeEn) ? p.nomeEn : p.nome;
+    return (p.bandeira || '') + ' ' + nm;
+  }
+  function trocarPais() {
+    var atualP = LV.Paises.getSelecionado();
+    var novo = atualP === 'BR' ? 'US' : 'BR';
+    if (!confirmar('Trocar para ' + LV.Paises.get(novo).nome + '? (normas, unidades e idioma) / Switch to ' + LV.Paises.get(novo).nome + '?')) return;
+    LV.Paises.setSelecionado(novo);
+    if (LV.I18n) LV.I18n.setLang(LV.Paises.get(novo).idioma);
+    montarApp();
   }
 
   // ---- Auxiliares visuais ----
@@ -189,7 +277,7 @@
   function rotulo(t) { return h('label', { class: 'rot', text: t }); }
 
   LV.UI = {
-    h: h, qs: qs, clear: clear, toast: toast, confirmar: confirmar, boot: boot,
+    h: h, qs: qs, clear: clear, toast: toast, confirmar: confirmar, boot: boot, T: T,
     irPara: irPara, montarApp: montarApp, rotulo: rotulo, renderRota: renderRota
   };
 })(typeof self !== 'undefined' ? self : this);
