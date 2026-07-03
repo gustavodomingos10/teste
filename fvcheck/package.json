@@ -1,0 +1,15 @@
+{
+  "name": "fv-check-gd",
+  "version": "1.0.0",
+  "description": "FV-CHECK — Verificação estrutural expressa para usinas fotovoltaicas em telhado (NBR 6123, NBR 8681, NBR 6120, NBR 8800, NBR 14762). Semáforo técnico para integradores + laudo assinado com ART pela rede de calculistas.",
+  "private": true,
+  "scripts": {
+    "test": "node tests/engine.test.js && node tests/report.test.js",
+    "test:engine": "node tests/engine.test.js",
+    "test:report": "node tests/report.test.js",
+    "start": "python3 -m http.server 8080"
+  },
+  "keywords": ["fotovoltaico", "solar", "estrutura", "telhado", "galpao", "NBR-6123", "NBR-8800", "NBR-14762", "verificacao-estrutural", "integrador", "laudo", "ART", "SaaS"],
+  "author": "GD Engenharia e Perícia Ltda — Eng. Gustavo F. F. Domingos (CREA 140.964-D/PR)",
+  "license": "UNLICENSED"
+}

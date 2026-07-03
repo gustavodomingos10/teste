@@ -1,5 +1,23 @@
 # Changelog
 
+## [Suíte] — Novo produto: FV-CHECK ⚡ (`fvcheck/`)
+
+**Verificação estrutural expressa para usinas fotovoltaicas em telhado** — SaaS para integradores:
+o instalador (não engenheiro) responde perguntas simples (distância entre treliças e terças, perfil,
+telha, barracão aberto/fechado, ambiente de vento) e recebe o **semáforo técnico**
+(🟢 verde · 🟡 atenção · 🔴 reprovado) calculado pelas normas brasileiras.
+
+- Motor: NBR 6123 (S2 completo, Tabela 5 com envoltórias, Ci ±0,2/−0,3 e +0,8 p/ barracão aberto),
+  NBR 8681/6120 (combinações C1/C2/C3 + ELS), NBR 14762/8800 (Winter, fator R no levantamento,
+  cortante em 3 ramos, flecha L/180), telha, fixação (zonas de borda Ce −2,0) e acréscimo global (V7);
+- 7 verificações com razão demanda/resistência, reserva de capacidade e diagnóstico de estrutura
+  já deficitária sem o FV; memorial imprimível com fórmulas e referências; figuras SVG;
+- SaaS: landing de vendas, trial 14 dias, planos (R$ 189/349/749), contratação de **laudo assinado
+  com ART** (dossiê JSON + e-mail ao calculista da rede), contas PBKDF2, trilha de auditoria hash-chain,
+  backup; modo demonstração (`fvcheck/demo.html`);
+- Qualidade: **148 testes** (seções conferidas por integração numérica independente; cadeia de vento/ações
+  verificada à mão; varredura de 3.888 combinações); docs de engenharia e de negócio.
+
 ## [2.2.0] — Versão de demonstração (amostra pública) + hospedagem gratuita
 
 ### Modo DEMONSTRAÇÃO (`demo.html` ou `?demo=1`)

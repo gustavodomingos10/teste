@@ -1,10 +1,14 @@
 name: Deploy site (GitHub Pages)
 
-# Publica o site estático (index.html = versão completa · demo.html = amostra)
-# no GitHub Pages a cada push nesta branch. Também pode ser disparado manualmente.
+# Publica o site estático no GitHub Pages a cada push nas branches listadas.
+#   /index.html        → Linha de Vida (completa) · /demo.html (amostra)
+#   /fvcheck/          → FV-CHECK (landing/app)   · /fvcheck/demo.html (demonstração)
+# Também pode ser disparado manualmente.
 on:
   push:
-    branches: [claude/spreadsheet-software-upgrade-k4c8hf]
+    branches:
+      - claude/spreadsheet-software-upgrade-k4c8hf
+      - claude/solar-roof-verification-saas-6rstkk
   workflow_dispatch:
 
 permissions:

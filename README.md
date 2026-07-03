@@ -1,3 +1,18 @@
+# Suíte GD Engenharia — Softwares Técnicos
+
+Este repositório contém os produtos da suíte GD Engenharia:
+
+| Produto | Pasta | O que faz |
+|---|---|---|
+| **Linha de Vida GD** | `/` (raiz) | Dimensionamento de linhas de vida horizontais (SPIQ) e prontuário técnico — NR-35/NBR 16325/8800 (PT-BR/EN-US) |
+| **FV-CHECK** ⚡ | [`fvcheck/`](fvcheck/) | Verificação estrutural **expressa** para usinas fotovoltaicas em telhado — semáforo técnico (NBR 6123/8681/6120/8800/14762) + laudo assinado com ART. [README](fvcheck/README.md) · [Guia do usuário](fvcheck/GUIA_DO_USUARIO.md) · demo: `fvcheck/demo.html` |
+
+```bash
+npm test        # roda os testes das duas aplicações (79 + 148 verificações)
+```
+
+---
+
 # Linha de Vida — Software de Dimensionamento e Prontuário
 
 Software profissional para **dimensionamento de linhas de vida horizontais (SPIQ)** e geração do **prontuário técnico completo**, conforme **NR-35**, **NR-18**, **ABNT NBR 16325-1/2** e **NBR 8800**.
