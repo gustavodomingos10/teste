@@ -61,11 +61,12 @@
     { id: 'TR100x50x3.00', type: 'TR', nome: 'Tubo 100×50×3,00', bw: 100, bf: 50, t: 3.00 },
     { id: 'TR120x60x3.00', type: 'TR', nome: 'Tubo 120×60×3,00', bw: 120, bf: 60, t: 3.00 },
     { id: 'TR150x50x3.00', type: 'TR', nome: 'Tubo 150×50×3,00', bw: 150, bf: 50, t: 3.00 },
-    // --- Perfis I laminados (Gerdau — propriedades nominais de tabela) ---
-    { id: 'W150x13', type: 'W', nome: 'W 150×13,0 (laminado)', props: { A: 16.6, Ix: 635,  Wx: 88.8,  Iy: 82.9, Wy: 16.6, ry: 2.24, hw: 138, tw: 4.3 }, peso: 13.0 },
-    { id: 'W150x18', type: 'W', nome: 'W 150×18,0 (laminado)', props: { A: 23.4, Ix: 939,  Wx: 122.8, Iy: 126,  Wy: 24.7, ry: 2.32, hw: 139, tw: 5.8 }, peso: 18.0 },
-    { id: 'W200x15', type: 'W', nome: 'W 200×15,0 (laminado)', props: { A: 19.4, Ix: 1305, Wx: 130.4, Iy: 87.6, Wy: 17.5, ry: 2.12, hw: 190, tw: 4.3 }, peso: 15.0 },
-    { id: 'W200x19.3', type: 'W', nome: 'W 200×19,3 (laminado)', props: { A: 25.1, Ix: 1686, Wx: 165.7, Iy: 116, Wy: 23.2, ry: 2.14, hw: 190, tw: 5.8 }, peso: 19.3 },
+    // --- Perfis I laminados (Gerdau — propriedades nominais de tabela;
+    //     J = Σb·t³/3 p/ o limite inferior de Mcr na FLT sob levantamento) ---
+    { id: 'W150x13', type: 'W', nome: 'W 150×13,0 (laminado)', props: { A: 16.6, Ix: 635,  Wx: 88.8,  Iy: 82.9, Wy: 16.6, ry: 2.24, hw: 138, tw: 4.3, J: 1.15 }, peso: 13.0 },
+    { id: 'W150x18', type: 'W', nome: 'W 150×18,0 (laminado)', props: { A: 23.4, Ix: 939,  Wx: 122.8, Iy: 126,  Wy: 24.7, ry: 2.32, hw: 139, tw: 5.8, J: 3.34 }, peso: 18.0 },
+    { id: 'W200x15', type: 'W', nome: 'W 200×15,0 (laminado)', props: { A: 19.4, Ix: 1305, Wx: 130.4, Iy: 87.6, Wy: 17.5, ry: 2.12, hw: 190, tw: 4.3, J: 1.44 }, peso: 15.0 },
+    { id: 'W200x19.3', type: 'W', nome: 'W 200×19,3 (laminado)', props: { A: 25.1, Ix: 1686, Wx: 165.7, Iy: 116, Wy: 23.2, ry: 2.14, hw: 190, tw: 5.8, J: 3.10 }, peso: 19.3 },
     // --- Personalizado ---
     { id: 'CUSTOM', type: 'CUSTOM', nome: 'Personalizado (informar dimensões)' }
   ];
@@ -132,7 +133,8 @@
   ];
   var S1_OPCOES = [
     { id: 'plano',  nome: 'Terreno plano ou quase plano', valor: 1.0 },
-    { id: 'talude', nome: 'No alto de um morro ou barranco (pega mais vento)', valor: 1.10, atencao: 'Edificação em topo de talude/morro: S1 varia ao longo da encosta (NBR 6123 5.2 b) — o valor exato é calculado no laudo. Adotado 1,10 (conservador).' },
+    { id: 'talude', nome: 'No alto de um morro ou barranco (pega mais vento)', valor: 1.75, capMin: 'atencao',
+      atencao: 'Topo de talude/morro: adotada a ENVOLTÓRIA MÁXIMA S1 = 1,75 da NBR 6123 5.2 (b) (θ ≥ 45°, junto à crista) — a pressão do vento pode até triplicar em relação ao terreno plano. O S1 real do seu morro (inclinação da encosta, altura, posição) é calculado no laudo e costuma ser menor; por isso o resultado expresso aqui é, no mínimo, ATENÇÃO.' },
     { id: 'vale',   nome: 'Numa baixada bem protegida do vento (vale fundo)', valor: 0.9 }
   ];
   /* Estrutura principal (pórticos/tesouras) em linguagem simples */

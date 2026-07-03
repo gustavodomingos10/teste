@@ -33,7 +33,7 @@
   var APOIO = {
     biapoiada: { kM: 0.125, kV: 0.500, kD: 5 / 384, nome: 'Biapoiada (1 vão)' },
     continua2: { kM: 0.125, kV: 0.625, kD: 0.00541, nome: 'Contínua (2 vãos)' },
-    continua3: { kM: 0.105, kV: 0.600, kD: 0.00688, nome: 'Contínua (≥ 3 vãos)' }
+    continua3: { kM: 0.107, kV: 0.607, kD: 0.00688, nome: 'Contínua (≥ 3 vãos)' } // envoltória p/ 3+ vãos
   };
 
   /* Fator R — NBR 14762 9.8.2.2 / AISI D6.1.2 (flange conectado à telha por
@@ -147,6 +147,21 @@
     var MrdY = sec.WyEf * fy / gama / 1000 * fator;
     var fr = fatorR(sec.tipo, m.inp.continuidade || 'biapoiada', !!m.telha.zipada);
     var MrdXup = fr.R * sec.WxEf * fy / gama / 1000 * fator;
+    // Perfil W laminado: o método do fator R não é calibrado para laminados —
+    // limita-se adicionalmente ao Mcr elástico (limite inferior sem empenamento):
+    // Mcr,LB = (π/L)·√(E·Iy·G·J)  (NBR 8800 Anexo G, a favor da segurança)
+    if (sec.laminado) {
+      var J = (m.perfil.props && m.perfil.props.J) || 0;
+      if (J > 0) {
+        var Lmm = m.L * 1000;
+        var McrLB = Math.PI / Lmm * Math.sqrt(P.E * sec.Iy * 1e4 * P.G * J * 1e4) / 1e6; // kN·m
+        MrdXup = Math.min(MrdXup, McrLB / gama * fator);
+        fr.nota += ' Laminado: limitado ao Mcr elástico (limite inferior, sem Cw): ' + McrLB.toFixed(2) + ' kN·m.';
+      } else {
+        MrdXup = 0.25 * sec.WxEf * fy / gama / 1000 * fator;
+        fr.nota += ' Laminado sem J catalogado: envoltória severa 0,25·W·fy.';
+      }
+    }
 
     // Cortante (NBR 14762 9.8.3, kv=5; W laminado: 0,6·fy·Aw)
     var hw = sec.hwFlat, tw = sec.t, kv = 5.0;
@@ -188,19 +203,26 @@
     var rV4 = Math.max(dS1, dS2) / dLim;
 
     // ---- V5 telha ----
-    // Capacidade corrigida para o vão real (flexão de chapa ∝ 1/L², limitada a 4×)
-    var qAdmEf = m.telha.qAdm * Math.min(4, Math.pow(m.telha.vaoMax / m.s, 2));
+    // Capacidade gravitacional corrigida ao vão real: flexão de chapa ∝ 1/L²,
+    // porém limitada a 1,5× (em vãos curtos governam esmagamento no apoio e
+    // enrugamento, que NÃO crescem ao reduzir o vão).
+    var qAdmEf = m.telha.qAdm * Math.min(1.5, Math.pow(m.telha.vaoMax / m.s, 2));
     var rVaoTelha = m.s / m.telha.vaoMax;
     // Gravitacional: manutenção (0,25 kN/m²) + FV somente se apoiado/fixado na telha
     var fvNaTelha = m.inp.fixacao === 'telha';
     var qTelhaGrav = P.SC_COBERTURA * Math.cos(m.theta) + (fvNaTelha ? gFv : 0);
     // Vento: condição preexistente (coplanar fixado na terça não agrava a telha);
-    // com fixação na telha, a sucção dos módulos é transferida a ela
+    // com fixação na telha, a sucção dos módulos é transferida a ela. Na sucção
+    // NÃO há bônus de vão curto: governa o arrancamento/pull-over dos parafusos.
     var qTelhaVento = Math.abs(m.vento.dpSuc);
     var rCargaTelha = qTelhaGrav / qAdmEf;
-    var rVentoTelha = qTelhaVento / qAdmEf;
+    // FV fixado NA TELHA: sucção verificada contra o qAdm de catálogo SEM bônus
+    // de vão (governa o arrancamento/pull-over dos parafusos, que não escala)
+    var rVentoTelha = qTelhaVento / m.telha.qAdm;
     var rV5 = Math.max(rVaoTelha, rCargaTelha, fvNaTelha ? rVentoTelha : 0);
-    var telhaVentoPreexistente = !fvNaTelha && rVentoTelha > 1;
+    // Nota informativa (FV nas terças): condição preexistente da telha frente ao
+    // vento de norma, com o bônus limitado de flexão do vão real (≤ 1,5×)
+    var telhaVentoPreexistente = !fvNaTelha && (qTelhaVento / qAdmEf) > 1;
 
     return {
       acoes: acoes, gama: gama, fatorConserv: fator, fr: fr,
@@ -217,23 +239,26 @@
     };
   }
 
-  /* ---------- reserva de capacidade (checks lineares em gFv) ------------- */
+  /* ---------- reserva de capacidade ---------------------------------------
+   * Maior gFv que mantém TODAS as verificações gravitacionais ≤ 1 (inclui a
+   * combinação C2 de sobrepressão). Cada razão é máximo de funções afins de
+   * gFv (convexa) ⇒ o conjunto viável a partir do ponto atual é um intervalo
+   * e a BISSEÇÃO é exata (a extrapolação linear falharia nas quebras). */
   function reservaCapacidade(m) {
-    var d = 0.05; // kN/m² de perturbação
-    var r0 = calcularChecks(m, m.gFv), r1 = calcularChecks(m, m.gFv + d);
-    var checks = [
-      { a: r0.rV1, b: r1.rV1 }, { a: r0.rV3, b: r1.rV3 },
-      { a: r0.rV4, b: r1.rV4 }, { a: r0.rCargaTelha, b: r1.rCargaTelha }
-    ];
-    var gMax = Infinity;
-    checks.forEach(function (c) {
-      var slope = (c.b - c.a) / d;
-      if (slope > 1e-9) gMax = Math.min(gMax, m.gFv + (1 - c.a) / slope);
-    });
-    if (!isFinite(gMax)) return null;
+    function pior(g) {
+      var c = calcularChecks(m, g);
+      return Math.max(c.rV1, c.rV2b, c.rV3, c.rV4, c.rCargaTelha);
+    }
+    if (pior(m.gFv) > 1) return null; // já no limite — sem reserva a declarar
+    var lo = m.gFv, hi = m.gFv + 5; // +5 kN/m² ≈ +510 kgf/m² (teto de busca)
+    if (pior(hi) <= 1) return { gFvMax: hi, margemKgM2: (hi - m.gFv) * 1000 / 9.81, saturado: true };
+    for (var i = 0; i < 40; i++) {
+      var mid = (lo + hi) / 2;
+      if (pior(mid) <= 1) lo = mid; else hi = mid;
+    }
     return {
-      gFvMax: Math.max(0, gMax),
-      margemKgM2: (gMax - m.gFv) * 1000 / 9.81 // kgf/m² adicionais sobre a área c/ módulos
+      gFvMax: lo,
+      margemKgM2: (lo - m.gFv) * 1000 / 9.81 // kgf/m² adicionais sobre a área c/ módulos
     };
   }
 
@@ -314,13 +339,17 @@
     var pGovernante = Math.max(pC1frame, pC3frame);
     var deltaFv = 1.35 * m.gFv * m.cobertura;
     var acrescimo = deltaFv / pGovernante * 100;
-    var stV7 = acrescimo <= P.ACRESCIMO.verde ? 'verde' : 'atencao';
+    // ≤5% desprezível · ≤10% verificar (atenção) · >10% REPROVADO expresso
+    // (a estrutura principal não é recalculada — acima de 10% não é possível
+    // aprovar sem laudo/reforço; coerente com a regra razão>1 ⇒ vermelho)
+    var stV7 = acrescimo <= P.ACRESCIMO.verde ? 'verde'
+      : (acrescimo <= P.ACRESCIMO.atencao ? 'atencao' : 'reprovado');
     var laudoObrigatorio = acrescimo > P.ACRESCIMO.atencao;
     itens.push({
       id: 'V7', titulo: 'Estrutura principal — acréscimo de carga', ratio: acrescimo / P.ACRESCIMO.atencao, status: stV7,
       ref: 'Prática de avaliação de estruturas existentes (≤ ' + P.ACRESCIMO.verde + '% desprezível · ≤ ' + P.ACRESCIMO.atencao + '% verificar)',
       detalhe: 'Estrutura principal ' + (m.inp.estruturaPrincipal === 'concreto' ? 'de concreto armado/pré-moldado' : 'metálica') + '. Acréscimo de cálculo de ' + acrescimo.toFixed(1) + '% sobre o caso governante do pórtico (' + (pC1frame >= pC3frame ? 'gravitacional' : 'sucção de vento') + ', ' + pGovernante.toFixed(2) + ' kN/m²). Sistema FV: ' + (m.gFv * 1000 / 9.81).toFixed(1) + ' kgf/m² em ' + (m.cobertura * 100).toFixed(0) + '% da área. ' +
-        (laudoObrigatorio ? 'Acréscimo RELEVANTE: pórticos/tesouras, ligações, contraventamentos e fundações devem ser verificados em laudo antes da instalação.'
+        (laudoObrigatorio ? 'Acréscimo RELEVANTE (>' + P.ACRESCIMO.atencao + '%): NÃO instale sem laudo — pórticos/tesouras, ligações, contraventamentos e fundações precisam ser verificados (e, se necessário, reforçados).'
           : acrescimo > P.ACRESCIMO.verde ? 'Acréscimo moderado: recomenda-se a verificação da estrutura principal no laudo assinado.'
             : 'Acréscimo desprezível pela prática de avaliação; a estrutura principal não é recalculada pelo método expresso.'),
       dados: { pC1frame: pC1frame, pC3frame: pC3frame, deltaFv: deltaFv, acrescimo: acrescimo }
@@ -332,6 +361,8 @@
     if (m.conserv.reprova) semaforo = 'reprovado';
     else if (m.conserv.id === 'regular') semaforo = pior(semaforo, 'atencao');
     if (laudoObrigatorio) semaforo = pior(semaforo, 'atencao');
+    // topo de morro/talude: S1 usado é envoltória — nunca melhor que ATENÇÃO
+    if (m.s1.capMin) semaforo = pior(semaforo, m.s1.capMin);
 
     // diagnóstico: estrutura já insuficiente sem o FV?
     var jaCritica = (c0.rV1 > 1 || c0.rV2 > 1 || c0.rV3 > 1 || c0.rV4 > 1);

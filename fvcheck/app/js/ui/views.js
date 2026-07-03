@@ -760,7 +760,7 @@
       '<li><b>V1–V4</b> Terça crítica: flexão gravitacional e sob levantamento (fator R), cisalhamento e flecha L/180.</li>' +
       '<li><b>V5</b> Telha: vão entre terças e carga, com dados típicos de fabricante (triagem).</li>' +
       '<li><b>V6</b> Fixação dos módulos: demanda de arrancamento por ponto, incluindo zonas de borda (Ce local −2,0).</li>' +
-      '<li><b>V7</b> Estrutura principal: indicador de acréscimo de carga (≤5% desprezível · ≤10% verificar · &gt;10% laudo).</li></ol>' +
+      '<li><b>V7</b> Estrutura principal: indicador de acréscimo de carga (≤5% desprezível · ≤10% atenção · &gt;10% reprovado — não instale sem laudo/reforço).</li></ol>' +
       '<p class="destaque-aviso">O método expresso é uma triagem e <b>não substitui laudo assinado com ART</b>. As paráfrases abaixo são auxiliares; o texto oficial ABNT prevalece.</p></div>' +
       secoes);
   }

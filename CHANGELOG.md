@@ -15,8 +15,12 @@ telha, barracão aberto/fechado, ambiente de vento) e recebe o **semáforo técn
 - SaaS: landing de vendas, trial 14 dias, planos (R$ 189/349/749), contratação de **laudo assinado
   com ART** (dossiê JSON + e-mail ao calculista da rede), contas PBKDF2, trilha de auditoria hash-chain,
   backup; modo demonstração (`fvcheck/demo.html`);
-- Qualidade: **148 testes** (seções conferidas por integração numérica independente; cadeia de vento/ações
-  verificada à mão; varredura de 3.888 combinações); docs de engenharia e de negócio.
+- Qualidade: **158 testes Node + 25 E2E** (seções conferidas por integração numérica independente; cadeia de vento/ações
+  verificada à mão; varredura de 3.888 combinações); docs de engenharia e de negócio;
+- **Revisão adversarial independente** do motor com 8 achados confirmados e corrigidos (envoltória S1=1,75
+  p/ topo de morro c/ teto ATENÇÃO, Mcr elástico p/ perfis W no levantamento, curva de Winter sem piso,
+  reserva de capacidade por bisseção incluindo C2, V7 reprova acréscimo >10%, bônus de vão da telha limitado
+  a 1,5× e suprimido na sucção c/ FV na telha, Ci −0,9 p/ abertura dominante, conversão kgf/m² do memorial).
 
 ## [2.2.0] — Versão de demonstração (amostra pública) + hospedagem gratuita
 

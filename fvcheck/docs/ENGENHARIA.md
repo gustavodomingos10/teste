@@ -20,7 +20,9 @@ não verifica. O texto oficial das normas ABNT prevalece sempre.
 
 - `Vk = V0·S1·S2·S3`; `q = 0,613·Vk²` (N/m²).
 - **V0**: informado pelo usuário; padrão conservador por UF (envoltória das isopletas da Fig. 1).
-- **S1**: 1,0 (plano) · 1,10 (topo de talude/morro — envoltória; o valor exato de 5.2(b) fica p/ o laudo) · 0,9 (vale protegido).
+- **S1**: 1,0 (plano) · **1,75 para topo de talude/morro** — envoltória MÁXIMA da NBR 6123 5.2 (b)
+  (θ ≥ 45°, junto à crista, z/d → 0); como o S1 real varia ao longo da encosta, o resultado nesses casos
+  é limitado a, no mínimo, ATENÇÃO e o valor exato fica para o laudo · 0,9 (vale protegido).
 - **S2** = `b·Fr·(z/10)^p` com Tabela 1 completa (categorias I–V × classes A/B/C). Para **terças, telhas e
   fixações** usa-se **classe A** (NBR 6123 5.3.2 — unidades de vedação e suas fixações); para o indicador
   global (V7), a classe da edificação. `z` = cota da cumeeira (conservador); abaixo de 5 m adota-se 5 m.
@@ -30,8 +32,8 @@ não verifica. O texto oficial das normas ABNT prevalece sempre.
   vento a 0° coberto pela envoltória `Ce = −0,8`. Sucção governante = mínimo das hipóteses.
   Para `1/2 < h/b ≤ 3/2`, majoração de 15% nas sucções (envoltória declarada). Uma água: tratada pela mesma
   envoltória (conservadora para sucção).
-- **Ci**: ±0,2/−0,3 (permeabilidade típica, 6.2.5). Barracão **aberto de um lado** → Ci = **+0,8**
-  (envoltória máxima de abertura dominante a barlavento).
+- **Ci**: ±0,2/−0,3 (permeabilidade típica, 6.2.5). Barracão **aberto de um lado** → envoltórias máximas de
+  abertura dominante: Ci = **+0,8** no caso de levantamento e **−0,9** no caso de sobrepressão (6.2.5).
 - **Zonas de borda**: para a demanda de fixação dos módulos usa-se Ce médio local = **−2,0** (nota da Tabela 5).
 - Pressão efetiva: `ΔP = (Ce − Ci)·q`, normal à água.
 
@@ -50,19 +52,22 @@ normal (`·cosθ`) e tangencial (`·senθ`; vão lateral `Ly = L/(n_correntes+1)
 - **ELS (raras)** `G + Q` e `G + W⁻`, limite de flecha **L/180** (NBR 8800 Anexo C, Tab. C.1)
 
 Coeficientes de esforço por vinculação: biapoiada `M=0,125wL²`, `V=0,5wL`, `δ=5/384·wL⁴/EI`;
-contínua 2 vãos `0,125 · 0,625 · 0,00541`; contínua ≥3 vãos `0,105 · 0,600 · 0,00688`.
-Flexão tangencial nos subvãos com `0,125·w_t·Ly²` (conservador).
+contínua 2 vãos `0,125 · 0,625 · 0,00541`; contínua ≥3 vãos `0,107 · 0,607 · 0,00688`
+(envoltória válida também para 4+ vãos). Flexão tangencial nos subvãos com `0,125·w_t·Ly²` (conservador).
 
 ## 4. Resistências — NBR 14762 (γ = 1,10) / NBR 8800 (γa1 = 1,10)
 
 - **Flambagem local (triagem)**: para cada elemento comprimido, `λp = (b/t)/[0,95·√(k·E/fy)]` e
-  ρ de Winter `(1−0,22/λp)/λp` — k = 4,0 (AA), 0,43 (AL), 24 (alma em flexão). Aplica-se **ρ_mín ao módulo
-  W inteiro** (conservador; o cálculo exato da seção efetiva e a flambagem distorcional ficam para o laudo).
+  ρ de Winter `(1−0,22/λp)/λp` **sem piso artificial** (elementos extremamente esbeltos recebem a redução
+  real) — k = 4,0 (AA), 0,43 (AL), 24 (alma em flexão). Aplica-se **ρ_mín ao módulo W inteiro** (conservador;
+  o cálculo exato da seção efetiva e a flambagem distorcional ficam para o laudo).
   Enrijecedor curto (D < 0,2·bf) rebaixa a mesa para k = 0,43.
 - **Flexão gravitacional**: `M_Rd = W_ef·fy/γ` — mesa comprimida travada continuamente pela telha parafusada.
 - **Levantamento (FLT)**: método do **fator R** (NBR 14762 9.8.2.2 / AISI D6.1.2) — flange conectado por
   parafusos passantes: R = 0,40 (U/Ue biapoiada) · 0,50 (Z biapoiada) · 0,60 (U/Ue contínua) · 0,70 (Z contínua);
-  tubo fechado: FLT dispensada (R = 1); perfil W: envoltória R = 0,50 (a FLT completa do Anexo G fica p/ o laudo);
+  tubo fechado: FLT dispensada (R = 1). **Perfil W laminado**: como o método R não é calibrado para laminados,
+  a resistência é adicionalmente limitada ao momento crítico elástico em limite inferior (sem empenamento),
+  `Mcr,LB = (π/L)·√(E·Iy·G·J)` (J = Σb·t³/3, catalogado por perfil) — a FLT completa do Anexo G fica p/ o laudo;
   telha **zipada** (clips deslizantes, sem travamento): R reduzido à metade + ressalva (o sistema exige ensaio).
 - **Cortante**: NBR 14762 9.8.3, kv = 5,0, três ramos (`0,6·fy·h·t` · `0,65·t²·√(kv·fy·E)` · `0,905·E·kv·t³/h`).
 - **Interação biaxial**: `Mx/MRdx + My/MRdy ≤ 1` (linear, conservadora).
@@ -70,17 +75,20 @@ Flexão tangencial nos subvãos com `0,125·w_t·Ly²` (conservador).
 
 ## 5. Telha (V5), fixações (V6) e estrutura principal (V7)
 
-- **V5**: vão real ≤ vão máximo típico; capacidade típica corrigida ao vão real por `(vão_máx/vão)²` (≤ 4×).
-  Demanda gravitacional = 0,25·cosθ (+ g_fv se apoiado na telha). A sucção de vento é comparada como
-  **condição preexistente** (módulos coplanares fixados nas terças não a agravam) — vira ATENÇÃO informativa.
+- **V5**: vão real ≤ vão máximo típico; capacidade gravitacional corrigida ao vão real por `(vão_máx/vão)²`
+  **limitada a 1,5×** (em vãos curtos governam esmagamento no apoio/enrugamento, que não escalam com o vão).
+  Demanda gravitacional = 0,25·cosθ (+ g_fv se apoiado na telha). Com **FV fixado na telha**, a sucção é
+  comparada ao qAdm de catálogo **sem bônus de vão** (governa o arrancamento/pull-over dos parafusos).
+  Com FV nas terças, a sucção de norma é comparada como **condição preexistente** (ATENÇÃO informativa).
   Tabela do fabricante prevalece (declarado).
 - **V6**: demanda por ponto (4 fixações/módulo) no centro (`ΔP_suc`) e na borda (`Ce local −2,0`); o resultado
   exige do fornecedor **ensaio de arrancamento ≥ demanda**. Fixação na telha: só onde tecnicamente admissível
   (fibrocimento → bloqueado) e sempre com ressalva.
 - **V7**: acréscimo de cálculo `1,35·g_fv·cobertura` comparado ao **caso governante do pórtico**
   (máx. entre gravitacional e sucção com S2 da edificação). ≤5% desprezível (prática consolidada de avaliação
-  de estruturas existentes, cf. IEBC 502.4) · ≤10% atenção · >10% laudo obrigatório. **Não recalcula** pórticos,
-  ligações, contraventamentos e fundações.
+  de estruturas existentes, cf. IEBC 502.4) · ≤10% ATENÇÃO · **>10% REPROVADO expresso** (não instale sem
+  laudo/reforço — coerente com a regra "razão > 1 ⇒ vermelho"). **Não recalcula** pórticos, ligações,
+  contraventamentos e fundações.
 
 ## 6. Semáforo
 
@@ -91,16 +99,24 @@ quando a estrutura já não atenderia (problema preexistente).
 
 ## 7. Reserva de capacidade
 
-As verificações gravitacionais são lineares em `g_fv`; o sistema resolve `razão = 1` por extrapolação linear
-e informa a folga em kgf/m² (não vale para V7/estrutura principal — declarado).
+Cada razão gravitacional (V1, C2, V3, V4, carga na telha) é o máximo de funções afins de `g_fv` — convexa.
+O sistema encontra o maior `g_fv` viável por **bisseção** (exata para funções convexas, ao contrário da
+extrapolação linear, que falharia nas trocas de ramo governante) e informa a folga em kgf/m²
+(não vale para V7/estrutura principal — declarado).
 
 ## 8. Verificação e testes
 
-- `tests/engine.test.js`: 88 asserções — propriedades de seção conferidas por **integração numérica
-  independente** (grade de 0,1 mm, Python), cadeia de vento/ações reproduzida à mão, fator R, três ramos do
-  cortante, semáforo, validação e varredura de **3.888 combinações** sem erro numérico;
+- `tests/engine.test.js`: 98 asserções — propriedades de seção conferidas por **integração numérica
+  independente** (grade de 0,1 mm, Python), cadeia de vento/ações reproduzida à mão, fator R + Mcr de
+  laminados, três ramos do cortante, semáforo (incl. morro, V7>10%, abertura dominante), validação e
+  varredura de **3.888 combinações** sem erro numérico;
 - `tests/report.test.js`: 60 asserções — memorial (conteúdo normativo, ausência de `NaN`/`undefined`),
-  figuras SVG bem-formadas, orçamento/dossiê/e-mail do laudo, coerência de preços.
+  figuras SVG bem-formadas, orçamento/dossiê/e-mail do laudo, coerência de preços;
+- E2E no navegador real (Playwright/Chromium): 25 asserções do fluxo completo (landing → conta → wizard →
+  resultado → memorial → laudo → planos → auditoria → demo);
+- **Revisão adversarial independente** (8 achados confirmados e corrigidos: envoltória S1 de morro,
+  Mcr p/ perfis W, piso do ρ de Winter removido, reserva por bisseção, V7 reprovando >10%, limites do
+  bônus de vão da telha, Ci −0,9 p/ abertura dominante, conversão kgf/m² do memorial).
 
 ## 9. Evoluções recomendadas (roadmap técnico)
 

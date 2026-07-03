@@ -73,7 +73,7 @@
     h.push(linhaTab('L / s', 'Vão da terça / espaçamento', n(m.L, 2) + ' / ' + n(m.s, 2) + ' m · ' + m.apoio.nome + ' · ' + m.nc + ' linha(s) de correntes', ''));
     h.push(linhaTab('—', 'Telha', esc(m.telha.nome) + ' (' + n(m.telha.peso, 2) + ' kN/m²)', 'dados típicos'));
     h.push(linhaTab('—', 'Módulo FV', esc(m.mod.nome || 'personalizado') + ' · ' + m.inp.numModulos + ' un · fixação ' + (m.inp.fixacao === 'telha' ? 'na telha' : 'nas terças'), ''));
-    h.push(linhaTab('g<sub>fv</sub>', 'Peso do sistema FV (módulos+trilhos)', n(m.gFv * 100, 1) + ' kgf/m² (' + n(m.gFv, 3) + ' kN/m²)', 'NBR 6120 (perm.)'));
+    h.push(linhaTab('g<sub>fv</sub>', 'Peso do sistema FV (módulos+trilhos)', n(m.gFv * 1000 / 9.81, 1) + ' kgf/m² (' + n(m.gFv, 3) + ' kN/m²)', 'NBR 6120 (perm.)'));
     h.push(linhaTab('—', 'Estado de conservação declarado', esc(m.conserv.nome), ''));
     h.push('</table></section>');
 

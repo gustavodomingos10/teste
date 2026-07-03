@@ -87,8 +87,12 @@
     // Coeficiente interno (NBR 6123 6.2.5)
     var ciPos = P.CI.pos, ciNeg = P.CI.neg;
     if (inp.permeabilidade === 'dominante') {
-      ciPos = 0.8; // abertura dominante a barlavento — envoltória máxima da NBR 6123 6.2.5
-      avisos.push('Edificação aberta/abertura dominante: adotado Ci = +0,8 (envoltória máxima da NBR 6123 6.2.5 — o vento entra e empurra o telhado por dentro). A análise exata das aberturas integra o laudo.');
+      // envoltórias máximas da NBR 6123 6.2.5 para abertura dominante:
+      // +0,8 (abertura a barlavento — agrava a sucção externa do telhado) e
+      // −0,9 (abertura em zona de alta sucção externa — agrava a sobrepressão p/ baixo)
+      ciPos = 0.8;
+      ciNeg = -0.9;
+      avisos.push('Edificação aberta/abertura dominante: adotadas as envoltórias máximas de pressão interna da NBR 6123 6.2.5 (Ci = +0,8 no levantamento e −0,9 na sobrepressão). A análise exata das aberturas integra o laudo.');
     }
 
     // Pressões efetivas características no telhado (kN/m²)

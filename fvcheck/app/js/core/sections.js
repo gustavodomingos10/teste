@@ -77,8 +77,10 @@
   function rhoWinter(bt, k, fy) {
     var lp = bt / (0.95 * Math.sqrt(k * E_ACO / fy));
     if (lp <= 0.673) return { lp: lp, rho: 1 };
+    // curva de Winter sem piso artificial: ρ→0 para elementos extremamente
+    // esbeltos (um piso mascararia a perda real de resistência)
     var rho = (1 - 0.22 / lp) / lp;
-    return { lp: lp, rho: Math.max(0.15, Math.min(1, rho)) };
+    return { lp: lp, rho: Math.min(1, rho) };
   }
 
   /* ---------- montagem por tipo ------------------------------------------ */

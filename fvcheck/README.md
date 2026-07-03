@@ -12,7 +12,7 @@ SaaS para **integradores fotovoltaicos** (técnicos instaladores, não engenheir
 
 Quando indicado, um clique gera o **dossiê técnico completo** e a solicitação do **laudo assinado com ART** pelo calculista da rede (GD Engenharia).
 
-![testes](https://img.shields.io/badge/testes-148%20passando-brightgreen) ![normas](https://img.shields.io/badge/NBR%206123%20%C2%B7%208681%20%C2%B7%206120%20%C2%B7%208800%20%C2%B7%2014762-conforme-blue) ![público](https://img.shields.io/badge/feito%20para-instaladores-orange)
+![testes](https://img.shields.io/badge/testes-158%20Node%20%2B%2025%20E2E-brightgreen) ![normas](https://img.shields.io/badge/NBR%206123%20%C2%B7%208681%20%C2%B7%206120%20%C2%B7%208800%20%C2%B7%2014762-conforme-blue) ![público](https://img.shields.io/badge/feito%20para-instaladores-orange)
 
 ---
 
@@ -24,7 +24,7 @@ Quando indicado, um clique gera o **dossiê técnico completo** e a solicitaçã
 4. **V4** Flecha L/180 (ELS) — NBR 8800 Anexo C
 5. **V5** Telha: vão entre terças e cargas (dados típicos de fabricante, capacidade corrigida ao vão real)
 6. **V6** Fixação dos módulos: demanda de arrancamento por ponto, incluindo zonas de borda (Ce local −2,0)
-7. **V7** Estrutura principal: indicador de **acréscimo de carga** sobre o caso governante do pórtico (≤5% ✓ · ≤10% atenção · >10% laudo)
+7. **V7** Estrutura principal: indicador de **acréscimo de carga** sobre o caso governante do pórtico (≤5% ✓ · ≤10% atenção · >10% reprovado, laudo/reforço)
 
 Extras: **reserva de capacidade** (quantos kgf/m² ainda cabem), diagnóstico de **estrutura já deficitária sem o FV**, flambagem local por larguras efetivas (Winter), estados de conservação, envoltórias de vento documentadas.
 
@@ -55,12 +55,14 @@ cd fvcheck && python3 -m http.server 8080
 ## 🧪 Testes
 
 ```bash
-npm test                      # engine (88) + relatórios (60)
+npm test                      # engine (98) + relatórios (60)
 node tests/engine.test.js     # valores conferidos com cálculo independente (Python)
 node tests/report.test.js     # memorial, figuras SVG, laudo, preços
 ```
 
-A robustez do motor é varrida em **3.888 combinações** de entrada sem erro numérico.
+A robustez do motor é varrida em **3.888 combinações** de entrada sem erro numérico, o fluxo completo tem
+**25 asserções E2E** no navegador real (Playwright) e o motor passou por **revisão adversarial independente**
+com 8 achados confirmados e corrigidos (ver `docs/ENGENHARIA.md` §8).
 
 ## 📁 Estrutura
 
