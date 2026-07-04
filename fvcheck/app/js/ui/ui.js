@@ -21,8 +21,8 @@
       var partes = hash.split('/');
       var rota = partes[0] || '';
 
-      // modo demonstração
-      if (/[?&]demo=1/.test(location.search) && !Auth.sessaoAtual && !UI._demoIniciado) {
+      // modo demonstração (?demo=1 na URL ou prévia autocontida via FV_FORCE_DEMO)
+      if ((/[?&]demo=1/.test(location.search) || root.FV_FORCE_DEMO) && !Auth.sessaoAtual && !UI._demoIniciado) {
         UI._demoIniciado = true;
         return Views.iniciarDemo();
       }

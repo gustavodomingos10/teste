@@ -8,7 +8,7 @@ Este repositório contém os produtos da suíte GD Engenharia:
 | **FV-CHECK** ⚡ | [`fvcheck/`](fvcheck/) | Verificação estrutural **expressa** para usinas fotovoltaicas em telhado — semáforo técnico (NBR 6123/8681/6120/8800/14762) + laudo assinado com ART. [README](fvcheck/README.md) · [Guia do usuário](fvcheck/GUIA_DO_USUARIO.md) · demo: `fvcheck/demo.html` |
 
 ```bash
-npm test        # roda os testes das duas aplicações (79 + 158 verificações)
+npm test        # roda os testes das duas aplicações (79 + 189 verificações + E2E)
 ```
 
 ---

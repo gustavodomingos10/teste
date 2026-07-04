@@ -83,6 +83,60 @@
     return { lp: lp, rho: Math.min(1, rho) };
   }
 
+  /* ---------- seção efetiva p/ flexão em torno de x (NBR 14762 9.2) -------
+   * Reconstrói os retângulos removendo a parte INEFETIVA de cada elemento
+   * comprimido (mesa comprimida ← ρ_mesa; parte comprimida da alma ← ρ_alma;
+   * enrijecedor ← ρ_lip); a mesa/alma tracionadas ficam íntegras. Devolve o
+   * módulo efetivo Wx_ef pela seção reconstruída — MAIS PRECISO que ρmin·Wx,
+   * que penaliza a seção inteira pelo pior elemento. */
+  function effRectsX(tipo, bw, bf, D, t, rF, rW, rL) {
+    // ybar bruto para localizar a zona comprimida (topo = +y)
+    var gross;
+    if (tipo === 'TR') gross = [
+      { x: 0, y: bw - t, w: bf, h: t }, { x: 0, y: 0, w: bf, h: t },
+      { x: 0, y: t, w: t, h: bw - 2 * t }, { x: bf - t, y: t, w: t, h: bw - 2 * t }];
+    else if (tipo === 'U') gross = retsU(bw, bf, t);
+    else if (tipo === 'Z') gross = retsZ(bw, bf, D, t);
+    else gross = retsUE(bw, bf, D, t);
+    var yb = somaRetangulos(gross).ybar;
+
+    // reduz a mesa superior (comprimida) pela sua largura efetiva; a parte
+    // comprimida da alma tem sua altura reduzida (ρ_alma); topo→zona inefetiva
+    function reduzMesaTopo(r) { return { x: r.x, y: r.y, w: r.w * rF, h: r.h }; }
+    function reduzAlma(r) {
+      // remove a faixa inefetiva no topo da parte comprimida (acima de yb)
+      var hcomp = Math.max(0, (r.y + r.h) - yb);
+      var remove = (1 - rW) * hcomp;
+      return { x: r.x, y: r.y, w: r.w, h: Math.max(t, r.h - remove) };
+    }
+    var ef = [];
+    if (tipo === 'TR') {
+      ef = [reduzMesaTopo({ x: 0, y: bw - t, w: bf, h: t }),
+            { x: 0, y: 0, w: bf, h: t },
+            reduzAlma({ x: 0, y: t, w: t, h: bw - 2 * t }),
+            reduzAlma({ x: bf - t, y: t, w: t, h: bw - 2 * t })];
+    } else if (tipo === 'U') {
+      ef = [reduzAlma({ x: 0, y: 0, w: t, h: bw }),
+            reduzMesaTopo({ x: t, y: bw - t, w: bf - t, h: t }),
+            { x: t, y: 0, w: bf - t, h: t }];
+    } else if (tipo === 'Z') {
+      ef = [reduzAlma({ x: -t / 2, y: 0, w: t, h: bw }),
+            reduzMesaTopo({ x: t / 2, y: bw - t, w: bf - t, h: t }),
+            { x: bf - t / 2 - t, y: bw - D, w: t, h: (D - t) * rL },
+            { x: -t / 2 - (bf - t), y: 0, w: bf - t, h: t },
+            { x: -(bf - t / 2), y: t, w: t, h: D - t }];
+    } else { // UE
+      ef = [reduzAlma({ x: 0, y: 0, w: t, h: bw }),
+            reduzMesaTopo({ x: t, y: bw - t, w: bf - t, h: t }),
+            { x: t, y: 0, w: bf - t, h: t },
+            { x: bf - t, y: bw - D, w: t, h: (D - t) * rL }, // enrijecedor sup (comprimido)
+            { x: bf - t, y: t, w: t, h: D - t }];             // enrijecedor inf (tracionado)
+    }
+    var G = somaRetangulos(ef);
+    var ymax = bw, c = Math.max(G.ybar, ymax - G.ybar);
+    return { Ix: G.Ix / 10000, Wx: G.Ix / c / 1000 }; // cm⁴, cm³
+  }
+
   /* ---------- montagem por tipo ------------------------------------------ */
   function props(spec, fy) {
     fy = fy || 250;
@@ -98,7 +152,7 @@
         tipo: 'W', A: p.A, Ix: p.Ix, Wx: p.Wx, Iy: p.Iy, Wy: p.Wy,
         ry: p.ry, hwFlat: p.hw, tw: p.tw, t: p.tw,
         pesoKgM: spec.peso || p.A * 0.785,
-        rho: 1, WxEf: p.Wx, WyEf: p.Wy, esbelto: false,
+        rho: 1, WxEf: p.Wx, WyEf: p.Wy, IxEf: p.Ix, esbelto: false,
         elementos: [], avisos: ['Perfil laminado: seção compacta admitida para fy ≤ 345 MPa (NBR 8800 Tabela G.1).'],
         fechado: false, laminado: true
       };
@@ -150,20 +204,36 @@
       if (tipo === 'Z') avisos.push('Perfil Z: propriedades em eixos geométricos — admite telha conectada restringindo a flexão assimétrica (prática usual p/ terças).');
     }
 
-    // triagem de flambagem local
-    var rhoMin = 1, lpMax = 0;
+    // triagem de flambagem local — ρ por elemento
+    var rhoMin = 1, lpMax = 0, rF = 1, rW = 1, rL = 1;
     elementos.forEach(function (el) {
       var r = rhoWinter(el.bt, el.k, fy);
       el.lp = r.lp; el.rho = r.rho;
       if (r.rho < rhoMin) rhoMin = r.rho;
       if (r.lp > lpMax) lpMax = r.lp;
+      if (/mesa/.test(el.nome)) rF = Math.min(rF, r.rho);
+      else if (/alma/.test(el.nome)) rW = Math.min(rW, r.rho);
+      else if (/enrijecedor/.test(el.nome)) rL = Math.min(rL, r.rho);
     });
     out.elementos = elementos;
     out.rho = rhoMin;
-    out.WxEf = out.Wx * rhoMin;
-    out.WyEf = out.Wy * rhoMin;
+
+    // Módulo efetivo em x pela SEÇÃO EFETIVA reconstruída (mais preciso).
+    // Limitado à faixa física [ρmin·Wx (piso conservador) , Wx (bruto)] como
+    // salvaguarda de segurança contra qualquer imprecisão da reconstrução.
+    if (rhoMin < 1) {
+      var eff = effRectsX(tipo, bw, bf, D, t, rF, rW, rL);
+      out.WxEf = Math.min(out.Wx, Math.max(out.Wx * rhoMin, eff.Wx));
+      out.IxEf = Math.min(out.Ix, Math.max(out.Ix * rhoMin, eff.Ix));
+      out.WyEf = out.Wy * rhoMin; // eixo fraco raramente governa (conservador)
+    } else {
+      out.WxEf = out.Wx; out.WyEf = out.Wy; out.IxEf = out.Ix;
+    }
     out.esbelto = rhoMin < 1;
-    if (out.esbelto) avisos.push('Flambagem local: seção com elementos esbeltos — módulo resistente reduzido por ρ = ' + rhoMin.toFixed(2) + ' (larguras efetivas simplificadas, NBR 14762 9.2). O cálculo exato da seção efetiva integra o laudo.');
+    if (out.esbelto) {
+      var ganho = out.Wx > 0 ? (out.WxEf / (out.Wx * rhoMin) - 1) : 0;
+      avisos.push('Flambagem local: seção com elementos esbeltos (ρ_mín = ' + rhoMin.toFixed(2) + '). Módulo resistente pela SEÇÃO EFETIVA reconstruída (larguras efetivas por elemento, NBR 14762 9.2): Wx,ef = ' + out.WxEf.toFixed(1) + ' cm³' + (ganho > 0.02 ? ' (+' + Math.round(ganho * 100) + '% vs. método simplificado ρ·W)' : '') + '. O cálculo com flambagem distorcional integra o laudo.');
+    }
     out.ry = Math.sqrt(out.Iy / out.A);
     out.pesoKgM = out.A * 0.785; // 7850 kg/m³
     out.avisos = avisos;

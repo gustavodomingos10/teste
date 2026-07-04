@@ -1,5 +1,21 @@
 # Changelog
 
+## [FV-CHECK] — Mais precisão + desenhos cotados de conferência
+
+- **Precisão do motor** (sem deixar o uso mais complexo):
+  - **Seção efetiva reconstruída** (larguras efetivas por elemento, NBR 14762 9.2) no lugar de ρmín·W —
+    5 a 15% mais preciso, limitado à faixa segura [ρmín·Wx, Wx]; a `Ix,ef` também entra na flecha;
+  - **Coeficientes de viga contínua pelo nº real de vãos** (comprimento ÷ vão): 3 vãos (0,100) é menos
+    severo que 4+ vãos (0,107) — antes era uma envoltória única.
+- **Desenhos (SVG) e conferência de medidas** — atende ao pedido de confirmar as medidas com o local:
+  - **Croqui 2D cotado** (planta + corte) e **isométrico 3D cotado** com as três medidas principais,
+    numa **tela de conferência** antes de calcular (checklist "as cotas batem com o local?");
+  - **Planta de módulos com zonas de borda** (alta sucção) e **diagrama de esforços na terça** (momento);
+  - Todos embutidos no **memorial imprimível**.
+- **Prévia autocontida**: `node build-preview.js` gera `fvcheck-preview.html` (CSS+JS embutidos, abre com
+  duplo clique já em modo demonstração; Web Crypto validado em `file://`).
+- Testes: **108 engine + 81 relatórios + 29 E2E** (todos verdes).
+
 ## [Suíte] — Novo produto: FV-CHECK ⚡ (`fvcheck/`)
 
 **Verificação estrutural expressa para usinas fotovoltaicas em telhado** — SaaS para integradores:

@@ -29,12 +29,22 @@
   var Acoes = isNode ? require('./acoes.js') : root.FV.Acoes;
   var P = Norms.PARAM;
 
-  /* ---------- coeficientes por condição de apoio ------------------------- */
+  /* ---------- coeficientes por condição de apoio (viga contínua, vãos iguais)
+   * Valores tabelados exatos por nº de vãos (momento no apoio interno mais
+   * solicitado, cortante máx. no apoio, flecha máx. no vão extremo).       */
   var APOIO = {
-    biapoiada: { kM: 0.125, kV: 0.500, kD: 5 / 384, nome: 'Biapoiada (1 vão)' },
-    continua2: { kM: 0.125, kV: 0.625, kD: 0.00541, nome: 'Contínua (2 vãos)' },
-    continua3: { kM: 0.107, kV: 0.607, kD: 0.00688, nome: 'Contínua (≥ 3 vãos)' } // envoltória p/ 3+ vãos
+    biapoiada: { kM: 0.125, kV: 0.500, kD: 5 / 384, nSpans: 1, nome: 'Biapoiada (1 vão)' },
+    continua2: { kM: 0.125, kV: 0.625, kD: 0.00521, nSpans: 2, nome: 'Contínua (2 vãos)' },
+    continua3: { kM: 0.100, kV: 0.600, kD: 0.00677, nSpans: 3, nome: 'Contínua (3 vãos)' },
+    continua4: { kM: 0.107, kV: 0.607, kD: 0.00694, nSpans: 4, nome: 'Contínua (4+ vãos)' }
   };
+  // seleciona o conjunto pelo nº de vãos efetivo (derivado do comprimento)
+  function apoioPara(continuidade, nSpans) {
+    if (continuidade === 'biapoiada') return APOIO.biapoiada;
+    if (continuidade === 'continua2') return APOIO.continua2;
+    // "3 ou mais": refina pelo nº real de vãos (3 vãos é menos severo que 4+)
+    return (nSpans != null && nSpans >= 4) ? APOIO.continua4 : APOIO.continua3;
+  }
 
   /* Fator R — NBR 14762 9.8.2.2 / AISI D6.1.2 (flange conectado à telha por
    * parafusos passantes, flange livre comprimido sob levantamento) */
@@ -114,7 +124,9 @@
     });
     vento.avisos.forEach(function (a) { avisos.push({ tipo: 'atencao', msg: a }); });
 
-    var apoio = APOIO[inp.continuidade || 'biapoiada'] || APOIO.biapoiada;
+    // nº de vãos efetivo da terça = nº de pórticos − 1 ≈ comprimento/vão da terça
+    var nSpans = Math.max(1, Math.round(inp.comprimento / inp.vaoTerca));
+    var apoio = apoioPara(inp.continuidade || 'biapoiada', nSpans);
     var nc = Math.max(0, Math.min(3, Math.round(inp.correntes || 0)));
     var Ly = inp.vaoTerca / (nc + 1);
 
@@ -125,7 +137,7 @@
       duasAguas: duasAguas, areaSuperficie: areaSuperficie,
       areaModulosTotal: areaModulosTotal, cobertura: cobertura, kwp: kwp,
       gFv: gFv, trilhos: trilhos, areaMod: areaMod,
-      apoio: apoio, nc: nc, L: inp.vaoTerca, Ly: Ly, s: inp.espacamento,
+      apoio: apoio, nSpans: nSpans, nc: nc, L: inp.vaoTerca, Ly: Ly, s: inp.espacamento,
       pesoTerca: sec.pesoKgM * 9.81e-3 // kN/m
     };
   }
@@ -140,7 +152,9 @@
     });
 
     var L = m.L, Ly = m.Ly, ap = m.apoio;
-    var EIx = P.E * sec.Ix * 1e-5; // kN·m²
+    // rigidez pela inércia efetiva (reduzida quando a seção é esbelta) — mais preciso
+    var IxServ = sec.IxEf != null ? sec.IxEf : sec.Ix;
+    var EIx = P.E * IxServ * 1e-5; // kN·m²
 
     // Resistências (kN·m, kN)
     var MrdX = sec.WxEf * fy / gama / 1000 * fator;

@@ -492,14 +492,55 @@
     UI().on('w-avancar', 'click', function () {
       coletarEtapa();
       if (!ultima) { _wiz.etapa++; renderEtapa(); return; }
-      executar();
+      conferirMedidas();
     });
   }
+
+  /* Tela de CONFERÊNCIA DE MEDIDAS — croqui 2D + isométrico 3D cotados.
+   * O usuário confirma que as cotas batem com o local ANTES de calcular. */
+  function conferirMedidas() {
+    var Val = root.FV.Validate, Eng = root.FV.Engine, Mem = root.FV.Memorial;
+    var v = Val.validar(_wiz.dados);
+    if (!v.ok) {
+      renderEtapa();
+      UI().el('w-erros').innerHTML = '<div class="avisos-box">' +
+        v.erros.map(function (e) { return '<div class="av erro">' + esc(e) + '</div>'; }).join('') + '</div>';
+      window.scrollTo(0, 0);
+      return;
+    }
+    var m;
+    try { m = Eng.montarModelo(v.inp); }
+    catch (e) { renderEtapa(); UI().el('w-erros').innerHTML = '<div class="av erro forte">Erro: ' + esc(e.message) + '</div>'; return; }
+    var fc = Mem.figurasConferencia(m);
+    var avisos = v.avisos.length ? '<div class="avisos-box">' + v.avisos.map(function (a) { return '<div class="av aviso">' + esc(a) + '</div>'; }).join('') + '</div>' : '';
+    shell('nova',
+      '<div class="pg-titulo"><h1>Confira as medidas</h1><div class="muted">Bata os desenhos abaixo com o galpão real — medidas erradas levam a um resultado errado</div></div>' +
+      '<div class="conferir-topo"><b>' + esc(m.inp.nome || 'Projeto') + '</b> · ' + m.kwp.toFixed(1).replace('.', ',') + ' kWp · ' + m.inp.numModulos + ' painéis · cobertura ' + m.areaSuperficie.toFixed(0) + ' m²</div>' +
+      avisos +
+      '<div class="figuras-grid"><div class="fig">' + fc.iso3d + '</div><div class="fig">' + fc.croquiPlanta + '</div></div>' +
+      '<div class="figuras-grid"><div class="fig">' + fc.croquiCorte + '</div>' +
+      '<div class="conferir-check"><h3>As cotas batem com o local?</h3>' +
+      '<ul class="check-medidas">' +
+      '<li>Largura: <b>' + fmtm(m.inp.largura) + ' m</b></li>' +
+      '<li>Comprimento: <b>' + fmtm(m.inp.comprimento) + ' m</b></li>' +
+      '<li>Pé-direito (beiral): <b>' + fmtm(m.inp.peDireito) + ' m</b></li>' +
+      '<li>Cumeeira: <b>' + fmtm(m.zCumeeira) + ' m</b> · inclinação ' + m.inp.inclinacao + '%</li>' +
+      '<li>Entre treliças: <b>' + fmtm(m.inp.vaoTerca) + ' m</b> (' + m.nSpans + ' vãos)</li>' +
+      '<li>Entre terças: <b>' + fmtm(m.s) + ' m</b></li>' +
+      '</ul></div></div>' +
+      '<div class="toolbar"><button class="btn" id="w-corrigir">← Corrigir medidas</button>' +
+      '<button class="btn primary" id="w-calcular">✓ As medidas estão certas — calcular</button></div>');
+    UI().on('w-corrigir', 'click', function () { _wiz.etapa = 3; renderEtapa(); });
+    UI().on('w-calcular', 'click', executar);
+  }
+
+  function fmtm(x) { return (Math.round(x * 100) / 100).toString().replace('.', ','); }
 
   function executar() {
     var Val = root.FV.Validate, Eng = root.FV.Engine, St = root.FV.Storage;
     var v = Val.validar(_wiz.dados);
     if (!v.ok) {
+      renderEtapa();
       UI().el('w-erros').innerHTML = '<div class="avisos-box">' +
         v.erros.map(function (e) { return '<div class="av erro">' + esc(e) + '</div>'; }).join('') + '</div>';
       window.scrollTo(0, 0);
@@ -587,18 +628,23 @@
       avisosHtml +
       '<h2 class="h-sec">Verificações (7 itens)</h2>' +
       '<div class="verifs">' + itensHtml + '</div>' +
-      '<h2 class="h-sec">Figuras técnicas</h2>' +
+      '<h2 class="h-sec">Conferência de medidas <span class="micro">— confirme com o local</span></h2>' +
       '<div class="figuras-grid">' +
-      '<div class="fig">' + figs.isometrica + '</div>' +
-      '<div class="fig">' + figs.corte + '</div>' +
+      '<div class="fig">' + figs.iso3d + '</div>' +
+      '<div class="fig">' + figs.croquiPlanta + '</div>' +
+      '<div class="fig">' + figs.croquiCorte + '</div>' +
+      '<div class="fig">' + figs.plantaModulos + '</div></div>' +
+      '<h2 class="h-sec">Esforços e verificação técnica</h2>' +
+      '<div class="figuras-grid">' +
+      '<div class="fig">' + figs.cargas + '</div>' +
       '<div class="fig">' + figs.vento + '</div>' +
       '<div class="fig">' + figs.perfil + '</div></div>');
 
     UI().on('btn-memorial', 'click', function () {
       var lic = Auth().estadoLicenca();
       var html = Mem.gerar(R, { numero: pid.slice(-6).toUpperCase(), trial: lic.trial });
-      // injeta figuras no documento impresso
-      html = html.replace('</header>', '</header><div class="doc-figs"><div class="fig">' + figs.corte + '</div><div class="fig">' + figs.vento + '</div></div>');
+      // injeta os diagramas técnicos no documento impresso (o croqui já vem embutido)
+      html = html.replace('</footer>', '</footer><div class="doc-figs"><div class="fig">' + figs.cargas + '</div><div class="fig">' + figs.vento + '</div></div>');
       UI().imprimir(html);
       root.FV.Audit.registrar('memorial_impresso', { projetoId: pid });
     });

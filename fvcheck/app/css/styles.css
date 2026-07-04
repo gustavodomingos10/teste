@@ -180,6 +180,14 @@ h3.sub{margin:16px 0 8px;font-size:14px;color:var(--azul)}
 .av.aviso{background:var(--at-bg);color:#6b4a08;border:1px solid #f3d99a}
 .av.info{background:var(--azul-claro);color:#1d4f7c;border:1px solid #c9dcee}
 
+/* ---------- Conferência de medidas ---------- */
+.conferir-topo{background:var(--azul-claro);border:1px solid #c9dcee;border-radius:10px;padding:11px 15px;margin-bottom:12px;color:var(--azul);font-size:14px}
+.conferir-check{background:#fff9ec;border:1px solid #f3dfad;border-radius:12px;padding:16px 18px}
+.conferir-check h3{margin:0 0 10px;color:#6b5312;font-size:15px}
+.check-medidas{list-style:none;padding:0;margin:0}
+.check-medidas li{padding:6px 0;border-bottom:1px dashed #e6d3a6;font-size:13.5px;color:#5a4a1f;display:flex;justify-content:space-between}
+.check-medidas li b{color:var(--azul)}
+
 /* ---------- Figuras ---------- */
 .figuras-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;margin-bottom:8px}
 .figuras-grid .fig,.doc .fig{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:10px;box-shadow:var(--sombra)}
@@ -299,6 +307,7 @@ ol.lista-limites li{margin:7px 0}
 .cta-laudo{background:var(--azul-claro);border:1px solid #c9dcee;border-radius:10px;padding:4px 16px 10px;margin-top:18px}
 .doc-rodape{border-top:2px solid var(--azul);margin-top:24px;padding-top:10px;color:var(--muted);font-size:11px}
 .doc-figs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.doc h3.sub-doc{font-size:13px;color:var(--azul);margin:16px 0 4px;font-weight:700}
 .tab-verif td{font-size:12px}
 
 /* ---------- Impressão ---------- */

@@ -75,7 +75,16 @@
     h.push(linhaTab('—', 'Módulo FV', esc(m.mod.nome || 'personalizado') + ' · ' + m.inp.numModulos + ' un · fixação ' + (m.inp.fixacao === 'telha' ? 'na telha' : 'nas terças'), ''));
     h.push(linhaTab('g<sub>fv</sub>', 'Peso do sistema FV (módulos+trilhos)', n(m.gFv * 1000 / 9.81, 1) + ' kgf/m² (' + n(m.gFv, 3) + ' kN/m²)', 'NBR 6120 (perm.)'));
     h.push(linhaTab('—', 'Estado de conservação declarado', esc(m.conserv.nome), ''));
-    h.push('</table></section>');
+    h.push('</table>');
+    // desenhos de conferência de medidas (croqui 2D + isométrico 3D cotados)
+    if (!opcoes.semDesenhos) {
+      var fc = figurasConferencia(m);
+      h.push('<h3 class="sub-doc">Conferência de medidas — croqui cotado</h3>',
+        '<p class="micro">Confira se as cotas abaixo batem com o galpão real. Medidas erradas invalidam o resultado.</p>',
+        '<div class="doc-figs"><div class="fig">' + fc.croquiPlanta + '</div><div class="fig">' + fc.croquiCorte + '</div></div>',
+        '<div class="doc-figs"><div class="fig" style="grid-column:1/-1">' + fc.iso3d + '</div></div>');
+    }
+    h.push('</section>');
 
     /* ---------- 3. vento ---------- */
     h.push('<section><h2>3 · Ação do vento — NBR 6123</h2><table class="tab">');
@@ -167,14 +176,27 @@
   function figuras(resultado) {
     var m = resultado.modelo;
     return {
-      isometrica: Draw.figIsometrica(m),
-      corte: Draw.figCorte(m),
+      croquiPlanta: Draw.figCroquiPlanta(m),
+      croquiCorte: Draw.figCroquiCorte(m),
+      iso3d: Draw.figIso3DCotado(m),
+      plantaModulos: Draw.figPlantaModulos(m),
+      cargas: Draw.figCargas(m, resultado.checks),
       vento: Draw.figVento(m),
       perfil: Draw.figPerfil(m)
     };
   }
 
-  var Memorial = { gerar: gerar, figuras: figuras, SEMAFORO_TXT: SEMAFORO_TXT };
+  /* Desenhos de conferência de medidas (croqui 2D + isométrico 3D cotados) */
+  function figurasConferencia(resultadoOuModelo) {
+    var m = resultadoOuModelo.modelo || resultadoOuModelo;
+    return {
+      croquiPlanta: Draw.figCroquiPlanta(m),
+      croquiCorte: Draw.figCroquiCorte(m),
+      iso3d: Draw.figIso3DCotado(m)
+    };
+  }
+
+  var Memorial = { gerar: gerar, figuras: figuras, figurasConferencia: figurasConferencia, SEMAFORO_TXT: SEMAFORO_TXT };
 
   root.FV = root.FV || {};
   root.FV.Memorial = Memorial;

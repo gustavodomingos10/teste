@@ -56,7 +56,8 @@ contem('caso crítico: alerta de estrutura já deficitária', htmlC, 'nem mesmo 
 // ---------------------------------------------------------------------------
 head('2 · Figuras SVG — boa formação');
 var figs = Memorial.figuras(R);
-['isometrica', 'corte', 'vento', 'perfil'].forEach(function (k) {
+var chaves = ['croquiPlanta', 'croquiCorte', 'iso3d', 'plantaModulos', 'cargas', 'vento', 'perfil'];
+chaves.forEach(function (k) {
   var svg = figs[k];
   ok('fig ' + k + ': inicia com <svg', svg.indexOf('<svg') === 0);
   ok('fig ' + k + ': fecha </svg>', svg.lastIndexOf('</svg>') === svg.length - 6);
@@ -64,13 +65,23 @@ var figs = Memorial.figuras(R);
   ok('fig ' + k + ': sem undefined', svg.indexOf('undefined') < 0);
   ok('fig ' + k + ': tem título acessível', svg.indexOf('<title>') > 0);
 });
-contem('corte anota o perfil da terça', figs.corte, 'Ue 200');
-contem('vento anota Vk', figs.vento, 'Vk = ' + R.modelo.vento.VkLocal.toFixed(1));
-contem('isométrico anota kWp', figs.isometrica, R.modelo.kwp.toFixed(1) + ' kWp');
-// uma água também desenha
+// desenhos de conferência COTADOS: devem conter as medidas do usuário
+contem('planta cota o comprimento', figs.croquiPlanta, 'comprimento ' + fmtm(R.modelo.inp.comprimento) + ' m');
+contem('planta cota o vão entre treliças', figs.croquiPlanta, 'entre treliças ' + fmtm(R.modelo.inp.vaoTerca) + ' m');
+contem('corte cota o pé-direito', figs.croquiCorte, 'pé-direito ' + fmtm(R.modelo.inp.peDireito) + ' m');
+contem('corte cota a largura', figs.croquiCorte, 'largura ' + fmtm(R.modelo.inp.largura) + ' m');
+contem('isométrico 3D cota as três medidas', figs.iso3d, 'pé-direito ' + fmtm(R.modelo.inp.peDireito) + ' m');
+contem('planta de módulos mostra zonas de borda', figs.plantaModulos, 'zona de borda');
+contem('diagrama de esforços mostra o momento', figs.cargas, 'M de cálculo');
+var fconf = Memorial.figurasConferencia(R);
+ok('figurasConferencia devolve os 3 croquis', !!(fconf.croquiPlanta && fconf.croquiCorte && fconf.iso3d));
+contem('memorial embute a conferência de medidas', html, 'Conferência de medidas');
+// uma água também desenha, sem NaN
 var R1a = Engine.verificar(Validate.validar(Object.assign({}, Dados.EXEMPLO, { tipoTelhado: '1agua', inclinacao: 6 })).inp);
 var f1a = Memorial.figuras(R1a);
-ok('figuras para telhado de uma água sem NaN', ['corte', 'vento'].every(function (k) { return f1a[k].indexOf('NaN') < 0; }));
+ok('figuras para telhado de uma água sem NaN', chaves.every(function (k) { return f1a[k].indexOf('NaN') < 0; }));
+
+function fmtm(x) { return (Math.round(x * 100) / 100).toString().replace('.', ','); }
 
 // ---------------------------------------------------------------------------
 head('3 · Laudo — orçamento, dossiê e e-mail');

@@ -51,17 +51,23 @@ normal (`·cosθ`) e tangencial (`·senθ`; vão lateral `Ly = L/(n_correntes+1)
 - **C3** `1,00·G + 1,40·W⁻` (permanentes favoráveis — NBR 8681 5.1.4.1)
 - **ELS (raras)** `G + Q` e `G + W⁻`, limite de flecha **L/180** (NBR 8800 Anexo C, Tab. C.1)
 
-Coeficientes de esforço por vinculação: biapoiada `M=0,125wL²`, `V=0,5wL`, `δ=5/384·wL⁴/EI`;
-contínua 2 vãos `0,125 · 0,625 · 0,00541`; contínua ≥3 vãos `0,107 · 0,607 · 0,00688`
-(envoltória válida também para 4+ vãos). Flexão tangencial nos subvãos com `0,125·w_t·Ly²` (conservador).
+Coeficientes de esforço por vinculação **selecionados pelo nº real de vãos** (comprimento ÷ vão da terça),
+mais precisos que uma envoltória única — (kM · kV · kδ): biapoiada `0,125 · 0,500 · 0,01302`;
+2 vãos `0,125 · 0,625 · 0,00521`; **3 vãos `0,100 · 0,600 · 0,00677`** (menos severo); 4+ vãos
+`0,107 · 0,607 · 0,00694`. Flexão tangencial nos subvãos com `0,125·w_t·Ly²` (conservador).
 
 ## 4. Resistências — NBR 14762 (γ = 1,10) / NBR 8800 (γa1 = 1,10)
 
-- **Flambagem local (triagem)**: para cada elemento comprimido, `λp = (b/t)/[0,95·√(k·E/fy)]` e
-  ρ de Winter `(1−0,22/λp)/λp` **sem piso artificial** (elementos extremamente esbeltos recebem a redução
-  real) — k = 4,0 (AA), 0,43 (AL), 24 (alma em flexão). Aplica-se **ρ_mín ao módulo W inteiro** (conservador;
-  o cálculo exato da seção efetiva e a flambagem distorcional ficam para o laudo).
-  Enrijecedor curto (D < 0,2·bf) rebaixa a mesa para k = 0,43.
+- **Flambagem local — SEÇÃO EFETIVA reconstruída (precisão)**: para cada elemento comprimido,
+  `λp = (b/t)/[0,95·√(k·E/fy)]` e ρ de Winter `(1−0,22/λp)/λp` **sem piso artificial** — k = 4,0 (AA),
+  0,43 (AL), 24 (alma em flexão); enrijecedor curto (D < 0,2·bf) rebaixa a mesa para k = 0,43. Em vez de
+  aplicar o ρ_mín ao módulo inteiro (que penaliza a seção toda pelo pior elemento), o motor **reconstrói a
+  seção efetiva**: remove a largura inefetiva de cada elemento comprimido (mesa ← ρ_mesa; faixa superior da
+  alma comprimida ← ρ_alma; enrijecedor ← ρ_lip), mantém mesa/alma tracionadas íntegras e recalcula o
+  centroide, `Ix,ef` e `Wx,ef`. Salvaguarda de segurança: o resultado é **limitado à faixa `[ρ_mín·Wx , Wx]`**
+  (nunca abaixo do piso conservador antigo, nunca acima do bruto). Ganho típico de 5–15% de precisão sem
+  perder segurança. A `Ix,ef` reduzida também entra na **flecha** (rigidez de serviço). Flambagem distorcional
+  fica para o laudo.
 - **Flexão gravitacional**: `M_Rd = W_ef·fy/γ` — mesa comprimida travada continuamente pela telha parafusada.
 - **Levantamento (FLT)**: método do **fator R** (NBR 14762 9.8.2.2 / AISI D6.1.2) — flange conectado por
   parafusos passantes: R = 0,40 (U/Ue biapoiada) · 0,50 (Z biapoiada) · 0,60 (U/Ue contínua) · 0,70 (Z contínua);
@@ -118,7 +124,24 @@ extrapolação linear, que falharia nas trocas de ramo governante) e informa a f
   Mcr p/ perfis W, piso do ρ de Winter removido, reserva por bisseção, V7 reprovando >10%, limites do
   bônus de vão da telha, Ci −0,9 p/ abertura dominante, conversão kgf/m² do memorial).
 
-## 9. Evoluções recomendadas (roadmap técnico)
+## 9. Desenhos e conferência de medidas
+
+Todos gerados em **SVG puro** (`app/js/report/draw.js`), sem dependências, funcionando no navegador e no Node:
+
+- **Croqui 2D cotado** — planta baixa (comprimento, largura, vão entre treliças, espaçamento das terças) e
+  corte transversal (largura, pé-direito, cumeeira, inclinação). Exibido numa **tela de conferência** ANTES
+  de calcular, com checklist das medidas, para o instalador confirmar que batem com o local (evita resultado
+  errado por medida digitada errada).
+- **Isométrico 3D cotado** — perspectiva com linhas de cota das três medidas principais (comprimento,
+  largura, pé-direito) e o arranjo de painéis.
+- **Planta de módulos + zonas de borda** — layout dos painéis com as faixas de alta sucção destacadas.
+- **Diagrama de esforços na terça** — viga contínua, carga distribuída e diagrama de momento (Msd × MRd).
+- **Vento** (pressões Ce/Ci) e **seção do perfil** (com Wx,ef quando esbelta).
+
+Os croquis cotados são embutidos no **memorial imprimível** (seção 2). Uma **prévia autocontida** de um único
+arquivo é gerada por `node build-preview.js` (`fvcheck-preview.html`, CSS+JS embutidos, abre em modo demo).
+
+## 10. Evoluções recomendadas (roadmap técnico)
 
 1. Seção efetiva exata + flambagem distorcional (NBR 14762 9.7.2/Anexo C);
 2. Tabela 5 completa (h/b até 6) e Tabelas 6/7 p/ uma água; coeficientes locais por zona;

@@ -49,6 +49,39 @@
       linha(x2, y2, x2 - L * Math.cos(ang + 0.45), y2 - L * Math.sin(ang + 0.45), cor, sw || 1.6);
   }
 
+  /* ---------- helpers de COTA (linhas de cota estilo desenho técnico) ----- */
+  function fmtm(x) { return (Math.round(x * 100) / 100).toString().replace('.', ','); }
+  function txtHalo(x, y, s, tam, cor, anchor, extra) {
+    return '<text x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" font-size="' + (tam || 10.5) + '" fill="' + (cor || CORES.cota) +
+      '" text-anchor="' + (anchor || 'middle') + '" stroke="#fff" stroke-width="3.2" paint-order="stroke"' + (extra || '') + '>' + esc(s) + '</text>';
+  }
+  function pontaH(x, y, dir) { // seta cheia apontando para dentro (dir=+1 →, −1 ←)
+    return '<path d="M' + x.toFixed(1) + ',' + y.toFixed(1) + ' l' + (7 * dir) + ',-2.6 l0,5.2 z" fill="' + CORES.cota + '"/>';
+  }
+  function pontaV(x, y, dir) {
+    return '<path d="M' + x.toFixed(1) + ',' + y.toFixed(1) + ' l-2.6,' + (7 * dir) + ' l5.2,0 z" fill="' + CORES.cota + '"/>';
+  }
+  // cota horizontal entre xa..xb na altura y, com linhas de extensão até yObj
+  function dimH(xa, xb, y, rotulo, yObjA, yObjB) {
+    var s = '';
+    if (yObjA != null) s += linha(xa, yObjA, xa, y, CORES.cota, 0.4, ' stroke-dasharray="2,2"');
+    if (yObjB != null) s += linha(xb, yObjB, xb, y, CORES.cota, 0.4, ' stroke-dasharray="2,2"');
+    s += linha(xa, y, xb, y, CORES.cota, 0.7) + pontaH(xa, y, 1) + pontaH(xb, y, -1) +
+      txtHalo((xa + xb) / 2, y - 4, rotulo, 10.5);
+    return s;
+  }
+  // cota vertical entre ya..yb em x, com extensão até xObj
+  function dimV(x, ya, yb, rotulo, xObjA, xObjB) {
+    var s = '';
+    if (xObjA != null) s += linha(xObjA, ya, x, ya, CORES.cota, 0.4, ' stroke-dasharray="2,2"');
+    if (xObjB != null) s += linha(xObjB, yb, x, yb, CORES.cota, 0.4, ' stroke-dasharray="2,2"');
+    var ym = (ya + yb) / 2;
+    s += linha(x, ya, x, yb, CORES.cota, 0.7) + pontaV(x, ya, 1) + pontaV(x, yb, -1) +
+      '<text x="' + (x + 4).toFixed(1) + '" y="' + ym.toFixed(1) + '" font-size="10.5" fill="' + CORES.cota +
+      '" text-anchor="middle" transform="rotate(-90 ' + (x + 4).toFixed(1) + ' ' + ym.toFixed(1) + ')" stroke="#fff" stroke-width="3.2" paint-order="stroke">' + esc(rotulo) + '</text>';
+    return s;
+  }
+
   /* ------------------- Figura 1: isométrico do galpão + FV --------------- */
   function figIsometrica(m) {
     var a = m.inp.comprimento, b = m.inp.largura, h = m.inp.peDireito, hc = m.zCumeeira;
@@ -233,13 +266,188 @@
       'Ix = ' + sec.Ix.toFixed(0) + ' cm⁴ · Wx = ' + sec.Wx.toFixed(1) + ' cm³',
       'Iy = ' + sec.Iy.toFixed(0) + ' cm⁴ · Wy = ' + sec.Wy.toFixed(1) + ' cm³',
       'peso = ' + sec.pesoKgM.toFixed(2) + ' kg/m',
-      sec.rho < 1 ? 'ρ (larguras efetivas) = ' + sec.rho.toFixed(2) : 'seção totalmente efetiva (ρ = 1,0)'
+      sec.rho < 1 ? 'Wx,ef (seção efetiva) = ' + sec.WxEf.toFixed(1) + ' cm³ · ρmín = ' + sec.rho.toFixed(2) : 'seção totalmente efetiva (ρ = 1,0)'
     ];
     props.forEach(function (p, i) { s += txt(330, 84 + i * 20, p, 11, CORES.texto, 'start'); });
     return svg('0 0 520 260', s, 'Seção transversal da terça e propriedades');
   }
 
-  var Draw = { figIsometrica: figIsometrica, figCorte: figCorte, figVento: figVento, figPerfil: figPerfil, CORES: CORES };
+  /* ============= CONFERÊNCIA DE MEDIDAS — croqui 2D cotado =============== */
+
+  /* Planta baixa cotada (vista de cima): comprimento, largura, vão entre
+   * treliças e espaçamento das terças — para o usuário conferir com o local. */
+  function figCroquiPlanta(m) {
+    var a = m.inp.comprimento, b = m.inp.largura, theta = m.theta;
+    var W = 560, H = 360, mx = 84, myTop = 52, myBot = 78;
+    var e = Math.min((W - mx - 96) / a, (H - myTop - myBot) / b);
+    var x0 = mx, y0 = myTop, wpx = a * e, hpx = b * e;
+    var s = txt(W / 2, 24, 'PLANTA (vista de cima) — confira com o local', 12.5, CORES.linha, 'middle', ' font-weight="700"');
+    s += poly([[x0, y0], [x0 + wpx, y0], [x0 + wpx, y0 + hpx], [x0, y0 + hpx]], '#eef3f8', CORES.linha, 1.6);
+    if (m.duasAguas) s += linha(x0, y0 + hpx / 2, x0 + wpx, y0 + hpx / 2, CORES.linha, 1.3, ' stroke-dasharray="8,4"') +
+      txtHalo(x0 + wpx - 6, y0 + hpx / 2 - 4, 'cumeeira', 9, CORES.muted, 'end');
+    // treliças (pórticos) — linhas na direção da largura, a cada vão de terça
+    var nS = m.nSpans, dxT = wpx / nS;
+    for (var i = 0; i <= nS; i++) {
+      var xx = x0 + i * dxT, borda = (i === 0 || i === nS);
+      s += linha(xx, y0, xx, y0 + hpx, borda ? CORES.linha : '#9fb2c4', borda ? 1.6 : 1);
+    }
+    // terças — linhas na direção do comprimento, a cada espaçamento (projetado)
+    var espProj = m.s * Math.cos(theta), nT = Math.max(1, Math.round(b / espProj)), dyT = hpx / nT;
+    for (var j = 1; j < nT; j++) s += linha(x0, y0 + j * dyT, x0 + wpx, y0 + j * dyT, '#c3d0dd', 0.7, ' stroke-dasharray="5,3"');
+    var nPorAgua = m.duasAguas ? Math.max(1, Math.round(nT / 2)) : nT;
+    s += txtHalo(x0 + dxT / 2, y0 + 13, 'treliça', 8, CORES.muted) +
+      txtHalo(x0 + wpx / 2, y0 + hpx - 6, '≈ ' + nPorAgua + ' terças' + (m.duasAguas ? ' por água' : ''), 8.5, CORES.muted);
+    // cotas
+    s += dimH(x0, x0 + wpx, y0 + hpx + 50, 'comprimento ' + fmtm(a) + ' m', y0 + hpx, y0 + hpx);
+    s += dimH(x0, x0 + dxT, y0 + hpx + 26, 'entre treliças ' + fmtm(m.inp.vaoTerca) + ' m', y0 + hpx, y0 + hpx);
+    s += dimV(x0 + wpx + 30, y0, y0 + hpx, 'largura ' + fmtm(b) + ' m', x0 + wpx, x0 + wpx);
+    s += dimV(x0 + wpx + 66, y0, y0 + dyT, 'terças @ ' + fmtm(m.s) + ' m', null, null);
+    return svg('0 0 ' + W + ' ' + H, s, 'Planta cotada do galpão');
+  }
+
+  /* Corte transversal cotado: largura, pé-direito, altura da cumeeira,
+   * inclinação e espaçamento das terças na água. */
+  function figCroquiCorte(m) {
+    var b = m.inp.largura, h = m.inp.peDireito, hc = m.zCumeeira, duas = m.duasAguas;
+    var W = 560, H = 340, X0 = 92, Y0 = 250;
+    var e = Math.min((W - X0 - 110) / b, (Y0 - 60) / hc);
+    function P(x, y) { return [X0 + x * e, Y0 - y * e]; }
+    var s = txt(W / 2, 24, 'CORTE (vista de frente) — confira com o local', 12.5, CORES.linha, 'middle', ' font-weight="700"');
+    s += linha(30, Y0, W - 20, Y0, CORES.solo, 2);
+    var cume = duas ? P(b / 2, hc) : P(b, hc);
+    // pilares
+    s += poly([[P(0, 0)[0] - 3, P(0, 0)[1]], [P(0, 0)[0] + 3, P(0, 0)[1]], [P(0, h)[0] + 3, P(0, h)[1]], [P(0, h)[0] - 3, P(0, h)[1]]], '#9fb2c4', CORES.linha, 1);
+    s += poly([[P(b, 0)[0] - 3, P(b, 0)[1]], [P(b, 0)[0] + 3, P(b, 0)[1]], [P(b, h)[0] + 3, P(b, h)[1]], [P(b, h)[0] - 3, P(b, h)[1]]], '#9fb2c4', CORES.linha, 1);
+    // banzos do telhado
+    s += linha(P(0, h)[0], P(0, h)[1], cume[0], cume[1], CORES.linha, 3);
+    if (duas) s += linha(P(b, h)[0], P(b, h)[1], cume[0], cume[1], CORES.linha, 3);
+    // terças (quadradinhos) na água da frente + módulos
+    (function () {
+      var p0 = P(0, h), dx = cume[0] - p0[0], dy = cume[1] - p0[1], len = Math.sqrt(dx * dx + dy * dy);
+      var ux = dx / len, uy = dy / len, nx = -uy, ny = ux, st = m.s * e, n = Math.max(2, Math.floor(len / st));
+      for (var i = 0; i <= n; i++) { var cx = p0[0] + ux * i * st, cy = p0[1] + uy * i * st; s += poly([[cx - 3, cy - 3], [cx + 3, cy - 3], [cx + 3, cy + 3], [cx - 3, cy + 3]], '#fff', CORES.linha, 1); }
+      s += linha(p0[0] + ux * len * 0.12 + nx * 9, p0[1] + uy * len * 0.12 + ny * 9, p0[0] + ux * len * 0.9 + nx * 9, p0[1] + uy * len * 0.9 + ny * 9, CORES.modulo, 4);
+      s += txtHalo((p0[0] + cume[0]) / 2 + nx * 22, (p0[1] + cume[1]) / 2 + ny * 22, 'painéis FV', 9, CORES.moduloBorda);
+    })();
+    // ângulo de inclinação
+    var pB = P(0, h);
+    s += txtHalo(pB[0] + 42, pB[1] - 8, 'inclinação ' + m.inp.inclinacao + '% (' + fmtm(m.thetaGraus) + '°)', 9.5, CORES.linha, 'start');
+    // cotas
+    s += dimH(P(0, 0)[0], P(b, 0)[0], Y0 + 30, 'largura ' + fmtm(b) + ' m', P(0, 0)[1], P(b, 0)[1]);
+    s += dimV(P(0, 0)[0] - 30, P(0, h)[1], P(0, 0)[1], 'pé-direito ' + fmtm(h) + ' m', P(0, 0)[0], P(0, 0)[0]);
+    s += dimV(P(b, 0)[0] + 42, cume[1], P(b, 0)[1], 'cumeeira ' + fmtm(hc) + ' m', cume[0], null);
+    return svg('0 0 ' + W + ' ' + H, s, 'Corte transversal cotado');
+  }
+
+  /* ============= ISOMÉTRICO 3D COTADO =================================== */
+  function figIso3DCotado(m) {
+    var a = m.inp.comprimento, b = m.inp.largura, h = m.inp.peDireito, hc = m.zCumeeira;
+    var W = 560, H = 400;
+    var e = 260 / Math.max(a, b + 6, hc * 2.2);
+    var cxp = 250, cyp = 250;
+    function P(x, y, z) { return [cxp + (x - z) * 0.866 * e, cyp - y * e + (x + z) * 0.5 * e - (a + b) * 0.25 * e]; }
+    var s = txt(W / 2, 22, 'PERSPECTIVA 3D COTADA — confira as três medidas', 12.5, CORES.linha, 'middle', ' font-weight="700"');
+    // solo
+    s += poly([P(0, 0, 0), P(a, 0, 0), P(a, 0, b), P(0, 0, b)], '#f2f5f8', '#dbe1e8', 1);
+    // paredes
+    s += poly([P(0, 0, 0), P(a, 0, 0), P(a, h, 0), P(0, h, 0)], CORES.parede, CORES.linha, 1);
+    s += poly([P(a, 0, 0), P(a, 0, b), P(a, h, b), P(a, hc, b / 2), P(a, h, 0)], CORES.empena, CORES.linha, 1);
+    // águas
+    s += poly([P(0, h, b), P(a, h, b), P(a, hc, b / 2), P(0, hc, b / 2)], CORES.telhado2, CORES.linha, 1);
+    s += poly([P(0, h, 0), P(a, h, 0), P(a, hc, b / 2), P(0, hc, b / 2)], CORES.telhado, CORES.linha, 1);
+    s += linha.apply(null, P(0, hc, b / 2).concat(P(a, hc, b / 2)).concat([CORES.linha, 1.4]));
+    // módulos na água da frente
+    var nx = Math.min(10, Math.max(3, Math.round(a / 3))), nz = Math.min(4, Math.max(2, Math.round(b / 2 / 1.6)));
+    function R(u, v) { return P(u * a, h + v * (hc - h), v * b / 2); }
+    for (var i = 0; i < nx; i++) for (var j = 0; j < nz; j++) {
+      var u0 = 0.06 + i / nx * 0.9, u1 = u0 + 0.9 / nx - 0.015, v0 = 0.12 + j / nz * 0.78, v1 = v0 + 0.78 / nz - 0.03;
+      s += poly([R(u0, v0), R(u1, v0), R(u1, v1), R(u0, v1)], CORES.modulo, CORES.moduloBorda, 0.6);
+    }
+    // ---- cotas 3D (linhas afastadas, paralelas às arestas) ----
+    function dim3(pa, pb, off, rotulo) {
+      var A = pa, Bp = pb;
+      return linha(A[0], A[1] + off, Bp[0], Bp[1] + off, CORES.cota, 0.8) +
+        linha(A[0], A[1], A[0], A[1] + off, CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+        linha(Bp[0], Bp[1], Bp[0], Bp[1] + off, CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+        txtHalo((A[0] + Bp[0]) / 2, (A[1] + Bp[1]) / 2 + off - 4, rotulo, 10);
+    }
+    // comprimento (aresta da base y=0, z=0): P(0,0,0)→P(a,0,0)
+    s += dim3(P(0, 0, 0), P(a, 0, 0), 40, 'comprimento ' + fmtm(a) + ' m');
+    // largura (aresta z): P(a,0,0)→P(a,0,b)
+    var la = P(a, 0, 0), lb = P(a, 0, b);
+    s += linha(la[0], la[1], la[0] + 34, la[1] + 20, CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+      linha(lb[0], lb[1], lb[0] + 34, lb[1] + 20, CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+      linha(la[0] + 34, la[1] + 20, lb[0] + 34, lb[1] + 20, CORES.cota, 0.8) +
+      pontaH(la[0] + 34, la[1] + 20, 1) +
+      txtHalo((la[0] + lb[0]) / 2 + 46, (la[1] + lb[1]) / 2 + 20, 'largura ' + fmtm(b) + ' m', 10, CORES.cota, 'start');
+    // altura (pé-direito) na aresta vertical P(0,0,0)→P(0,h,0)
+    var va = P(0, 0, 0), vb = P(0, h, 0);
+    s += linha(va[0] - 20, va[1], va[0], va[1], CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+      linha(vb[0] - 20, vb[1], vb[0], vb[1], CORES.cota, 0.4, ' stroke-dasharray="2,2"') +
+      linha(va[0] - 20, va[1], vb[0] - 20, vb[1], CORES.cota, 0.8) +
+      pontaV(va[0] - 20, va[1], -1) + pontaV(vb[0] - 20, vb[1], 1) +
+      '<text x="' + (va[0] - 24) + '" y="' + ((va[1] + vb[1]) / 2) + '" font-size="10" fill="' + CORES.cota + '" text-anchor="middle" transform="rotate(-90 ' + (va[0] - 24) + ' ' + ((va[1] + vb[1]) / 2) + ')" stroke="#fff" stroke-width="3.2" paint-order="stroke">pé-direito ' + fmtm(h) + ' m</text>';
+    s += txtHalo(W / 2, H - 10, m.kwp.toFixed(1).replace('.', ',') + ' kWp · ' + m.inp.numModulos + ' painéis · cumeeira a ' + fmtm(hc) + ' m', 10, CORES.muted);
+    return svg('0 0 ' + W + ' ' + H, s, 'Perspectiva isométrica cotada');
+  }
+
+  /* ============= PLANTA DE MÓDULOS + ZONAS DE BORDA ==================== */
+  function figPlantaModulos(m) {
+    var a = m.inp.comprimento, b = m.inp.largura;
+    var W = 560, H = 330, mx = 60, my = 60;
+    var e = Math.min((W - 2 * mx) / a, (H - 2 * my) / b);
+    var x0 = mx, y0 = my, wpx = a * e, hpx = b * e;
+    var s = txt(W / 2, 24, 'DISTRIBUIÇÃO DOS PAINÉIS E ZONAS DE ALTA SUCÇÃO', 12.5, CORES.linha, 'middle', ' font-weight="700"');
+    s += poly([[x0, y0], [x0 + wpx, y0], [x0 + wpx, y0 + hpx], [x0, y0 + hpx]], '#eef3f8', CORES.linha, 1.4);
+    // faixa de borda (NBR 6123): largura a0 = min(b/8 ; 0,15·menor lado) — envoltória visual
+    var a0 = Math.min(Math.min(a, b) * 0.15, b / 8) * e;
+    s += poly([[x0, y0], [x0 + wpx, y0], [x0 + wpx, y0 + a0], [x0, y0 + a0]], 'rgba(192,57,43,.14)', 'none', 0);
+    s += poly([[x0, y0 + hpx - a0], [x0 + wpx, y0 + hpx - a0], [x0 + wpx, y0 + hpx], [x0, y0 + hpx]], 'rgba(192,57,43,.14)', 'none', 0);
+    s += poly([[x0, y0], [x0 + a0, y0], [x0 + a0, y0 + hpx], [x0, y0 + hpx]], 'rgba(192,57,43,.14)', 'none', 0);
+    s += poly([[x0 + wpx - a0, y0], [x0 + wpx, y0], [x0 + wpx, y0 + hpx], [x0 + wpx - a0, y0 + hpx]], 'rgba(192,57,43,.14)', 'none', 0);
+    // grade de módulos aproximada a partir da cobertura
+    var areaMod = m.areaMod, num = m.inp.numModulos;
+    var cols = Math.max(1, Math.round(Math.sqrt(num * a / b))), rows = Math.max(1, Math.ceil(num / cols));
+    var gx = wpx * 0.82 / cols, gy = hpx * 0.82 / rows, ox = x0 + wpx * 0.09, oy = y0 + hpx * 0.09, drawn = 0;
+    for (var r = 0; r < rows && drawn < num; r++) for (var c = 0; c < cols && drawn < num; c++, drawn++) {
+      s += poly([[ox + c * gx + 1, oy + r * gy + 1], [ox + (c + 1) * gx - 1, oy + r * gy + 1], [ox + (c + 1) * gx - 1, oy + (r + 1) * gy - 1], [ox + c * gx + 1, oy + (r + 1) * gy - 1]], CORES.modulo, CORES.moduloBorda, 0.5);
+    }
+    s += txtHalo(x0 + wpx / 2, y0 + hpx + 22, num + ' painéis · ' + (m.cobertura * 100).toFixed(0) + '% da cobertura · ' + m.kwp.toFixed(1).replace('.', ',') + ' kWp', 10, CORES.muted);
+    s += '<rect x="' + (W - 168) + '" y="34" width="14" height="10" fill="rgba(192,57,43,.28)"/>' +
+      txt(W - 150, 43, 'zona de borda (sucção até Ce −2,0)', 9, CORES.succao, 'start');
+    return svg('0 0 ' + W + ' ' + H, s, 'Planta de módulos e zonas de borda');
+  }
+
+  /* ============= DIAGRAMA DE ESFORÇOS NA TERÇA ========================= */
+  function figCargas(m, checks) {
+    var W = 560, H = 300, x0 = 60, x1 = W - 60, ybeam = 96, L = m.L;
+    var s = txt(W / 2, 22, 'ESFORÇOS NA TERÇA — vão ' + fmtm(L) + ' m · ' + m.apoio.nome, 12, CORES.linha, 'middle', ' font-weight="700"');
+    // viga + apoios (treliças)
+    s += linha(x0, ybeam, x1, ybeam, CORES.linha, 3);
+    var nap = Math.min(m.nSpans, 5) + 1, dxs = (x1 - x0) / (nap - 1);
+    for (var i = 0; i < nap; i++) { var xx = x0 + i * dxs; s += poly([[xx, ybeam], [xx - 6, ybeam + 11], [xx + 6, ybeam + 11]], '#9fb2c4', CORES.linha, 1); }
+    // carga distribuída (C1) — setas para baixo
+    for (var k = 0; k <= 16; k++) { var xa = x0 + k / 16 * (x1 - x0); s += seta(xa, ybeam - 30, xa, ybeam - 3, CORES.vento, 1); }
+    s += linha(x0, ybeam - 30, x1, ybeam - 30, CORES.vento, 1.2);
+    s += txtHalo(W / 2, ybeam - 36, 'carga de cálculo (gravitacional): ' + checks.acoes.C1.n.toFixed(2).replace('.', ',') + ' kN/m', 10, CORES.vento);
+    // diagrama de momento (parábola) abaixo
+    var yM = 210, amp = 46;
+    var path = 'M' + x0 + ',' + yM;
+    for (var t = 0; t <= 1.0001; t += 0.05) { var xx2 = x0 + t * (x1 - x0), yy = yM + amp * 4 * t * (1 - t); path += ' L' + xx2.toFixed(1) + ',' + yy.toFixed(1); }
+    s += '<path d="' + path + '" fill="rgba(42,90,143,.10)" stroke="' + CORES.vento + '" stroke-width="1.4"/>';
+    s += linha(x0, yM, x1, yM, CORES.linha, 1);
+    s += txtHalo(W / 2, yM + amp + 20, 'M de cálculo (gravitacional) = ' + checks.MxC1.toFixed(2).replace('.', ',') + ' kN·m  ≤  M resistente = ' + checks.MrdX.toFixed(2).replace('.', ',') + ' kN·m', 10.5, CORES.linha);
+    // levantamento
+    var upOk = checks.acoes.temLevantamento;
+    s += txtHalo(W / 2, H - 12, upOk ? 'Sucção do vento (levantamento): M = ' + checks.MxC3.toFixed(2).replace('.', ',') + ' kN·m ≤ ' + checks.MrdXup.toFixed(2).replace('.', ',') + ' kN·m (com fator R)' : 'Sem levantamento líquido pelo vento (o peso próprio supera a sucção)', 9.5, upOk ? CORES.succao : CORES.muted);
+    return svg('0 0 ' + W + ' ' + H, s, 'Diagrama de esforços na terça');
+  }
+
+  var Draw = {
+    figIsometrica: figIsometrica, figCorte: figCorte, figVento: figVento, figPerfil: figPerfil,
+    figCroquiPlanta: figCroquiPlanta, figCroquiCorte: figCroquiCorte, figIso3DCotado: figIso3DCotado,
+    figPlantaModulos: figPlantaModulos, figCargas: figCargas, CORES: CORES
+  };
 
   root.FV = root.FV || {};
   root.FV.Draw = Draw;

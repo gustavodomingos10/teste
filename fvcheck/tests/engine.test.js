@@ -70,6 +70,18 @@ eq('elemento curto: totalmente efetivo', Sections.rhoWinter(20, 4, 250).rho, 1);
 var rwx = Sections.rhoWinter(249, 0.43, 250);
 ok('elemento extremo: ρ < 0,10 (sem piso)', rwx.rho < 0.10 && rwx.rho > 0.03);
 ok('Ue esbelto detectado (t=2,0 · fy=345)', Sections.props({ type: 'UE', bw: 300, bf: 85, D: 25, t: 2.0 }, 345).esbelto);
+// seção efetiva reconstruída: mais precisa que ρ·W, dentro da faixa [ρ·W, W]
+var seEsb = Sections.props({ type: 'UE', bw: 300, bf: 85, D: 25, t: 2.0 }, 345);
+ok('Wx,ef ≥ ρmin·Wx (menos conservador)', seEsb.WxEf >= seEsb.Wx * seEsb.rho - 1e-9);
+ok('Wx,ef ≤ Wx bruto (seguro)', seEsb.WxEf <= seEsb.Wx + 1e-9);
+ok('seção efetiva ganha vs ρ·W (>5%)', seEsb.WxEf / (seEsb.Wx * seEsb.rho) - 1 > 0.05);
+ok('Ix,ef reduzido reflete na rigidez', seEsb.IxEf < seEsb.Ix && seEsb.IxEf >= seEsb.Ix * seEsb.rho - 1e-9);
+var seComp = Sections.props({ type: 'UE', bw: 150, bf: 60, D: 20, t: 2.65 }, 250);
+if (!seComp.esbelto) eq('seção compacta: Wx,ef = Wx', seComp.WxEf, seComp.Wx);
+// coeficientes de viga contínua por nº de vãos (mais preciso)
+eq('3 vãos usa kM=0,100 (menos severo que 4+)', Engine.APOIO.continua3.kM, 0.100);
+eq('4+ vãos usa kM=0,107', Engine.APOIO.continua4.kM, 0.107);
+ok('exemplo (40/5=8 vãos) escolhe o conjunto de 4+ vãos', Engine.verificar(Validate.validar(Dados.EXEMPLO).inp).modelo.apoio.nSpans === 4);
 
 // ---------------------------------------------------------------------------
 head('3 · Vento NBR 6123 — S2, Ce, q');
@@ -108,6 +120,7 @@ approx('gFv = 0,147724 kN/m²', m.gFv, 0.147724, 1e-5);
 approx('peso da terça = 0,07743 kN/m', m.pesoTerca, 0.07743, 2e-3);
 approx('C1 normal = 0,96517 kN/m', R.checks.acoes.C1.n, 0.96517, 2e-3);
 approx('C3 normal = −1,64414 kN/m (levantamento)', R.checks.acoes.C3.n, -1.64414, 2e-3);
+eq('exemplo tem 8 vãos → coef. de 4+ vãos', m.apoio.nSpans, 4);
 approx('Mx C1 = 0,107·w·L² = 2,5818 kN·m', R.checks.MxC1, 2.58183, 2e-3);
 approx('Mx C3 = 4,3981 kN·m', R.checks.MxC3, 4.39807, 2e-3);
 // resistências
@@ -117,9 +130,11 @@ eq('semáforo do exemplo = VERDE', R.semaforo, 'verde');
 ok('todas as razões ≤ 0,85', R.itens.every(function (it) { return it.ratio == null || it.ratio <= 0.85; }));
 ok('reserva de capacidade positiva', R.reserva && R.reserva.margemKgM2 > 0);
 
-// flecha: δ = kD·w·L⁴/EI conferida por fórmula direta
-var EIx = 200000 * m.sec.Ix * 1e-5;
-approx('flecha ELS = 0,00688·w·L⁴/EI', R.checks.dS1, 0.00688 * R.checks.acoes.S1.n * Math.pow(5, 4) / EIx, 1e-9);
+// flecha: δ = kD·w·L⁴/EI (kD do nº de vãos; EI pela inércia efetiva de serviço)
+var IxServ = m.sec.IxEf != null ? m.sec.IxEf : m.sec.Ix;
+var EIx = 200000 * IxServ * 1e-5;
+approx('flecha ELS = kD·w·L⁴/EI (4+ vãos, kD=0,00694)', R.checks.dS1, m.apoio.kD * R.checks.acoes.S1.n * Math.pow(5, 4) / EIx, 1e-9);
+eq('kD de 4+ vãos = 0,00694', m.apoio.kD, 0.00694);
 
 // consistência da reserva (bisseção): na carga-limite a pior razão
 // gravitacional (incluindo a combinação C2) é ≈ 1,00
