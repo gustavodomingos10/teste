@@ -132,7 +132,7 @@ footer a{color:var(--dour2);}
 <script>
 "use strict";
 const MODE = "__MODE__";               // "PRO" ou "LITE"
-const WA_INSTRUTOR = "5543999259577";  // Grupo VIP / contato
+const WA_INSTRUTOR = "5543999259577";  // contato de vendas (CTA da versão pública)
 const LIMITE_WK = 0.30;                // mm — [VALIDAR B1] referência de serviço (NBR 6118)
 
 /* ---------- Definição do wizard ---------- */
@@ -240,7 +240,7 @@ function diagnosticar(){
   else if(ativa || (abertura!=null && abertura>LIMITE_WK)){ grav="MEDIA"; }
   else { grav="BAIXA"; }
 
-  if(grav==="ALTA") passo = {t:"Encaminhamento — gravidade ALTA", d:"Isole a área se houver risco, escore apenas se for seguro, comunique o responsável técnico POR ESCRITO e acione o calculista. Documente tudo (mapa + fotos + datas)."};
+  if(grav==="ALTA") passo = {t:"Encaminhamento — gravidade ALTA", d:"Isole a área se houver risco, escore apenas se for seguro, comunique o responsável técnico POR ESCRITO e acione o calculista. Documente tudo (mapa + fotos + datas). <b>Em risco iminente à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b>"};
   else if(grav==="MEDIA") passo = {t:"Encaminhamento — gravidade MÉDIA", d:"Trate a CAUSA (não só o acabamento) e mantenha monitoramento. Reavalie em nova data e registre a evolução."};
   else passo = {t:"Encaminhamento — gravidade BAIXA", d:"Monitore e registre (selo de gesso datado). Reavalie na próxima visita. Sem sinais novos, siga o acompanhamento."};
 
@@ -263,15 +263,15 @@ function renderResultado(hip,grav,estrutural,ativa,passo){
     <div class="step-lbl" style="margin-top:12px">Hipóteses prováveis (por ordem)</div>`;
   hip.forEach(h=> html += `<div class="hip"><b>${h[0]}</b><br><span style="font-size:.86rem">${h[1]}</span></div>`);
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
-  html += `<div class="disc"><b>Aviso técnico:</b> este resultado é uma <b>hipótese de campo</b> gerada por regras educativas.
-    Não substitui a avaliação presencial de um responsável técnico. Confirme sempre com medição e monitoramento; havendo
-    sinal de risco, acione o responsável técnico imediatamente. Valores de referência a validar (VALIDAR.md).</div>`;
+  html += `<div class="disc"><b>Aviso técnico:</b> este resultado é uma <b>hipótese de campo</b> gerada por regras educativas, com calibragem conservadora.
+    Não substitui a avaliação presencial de um engenheiro habilitado. Confirme sempre com medição e monitoramento; havendo
+    sinal de risco, acione o responsável técnico imediatamente. <b>Em risco iminente à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b> Valores de referência a validar (VALIDAR.md).</div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${shareTxt}" target="_blank" rel="noopener">📲 Compartilhar resultado</a></div>`;
   html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Novo diagnóstico</button></div>`;
   if(MODE==="LITE"){
     html += liteCTA();
   } else {
-    html += `<div class="row"><a class="btn btn-primary" style="text-decoration:none;text-align:center" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Sou aluno da Escola de Obra e quero discutir um caso de fissura.')}" target="_blank" rel="noopener">Falar com a Escola de Obra (Grupo VIP)</a></div>`;
+    html += `<div class="row"><div style="font-size:13px;line-height:1.5;padding:12px;border:1px solid rgba(201,162,75,.45);border-radius:8px;text-align:left">📓 <b>Registre este caso no seu caderno de campo</b>: foto com escala, medições, hipótese e encaminhamento. Depois, confira sua leitura com o gabarito comentado do módulo.</div></div>`;
   }
   html += `<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
   document.getElementById("wizard").innerHTML = html;

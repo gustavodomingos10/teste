@@ -212,13 +212,13 @@ function renderResultado(veredito,criticos,pendencias,passo){
     html += `<div class="mot"><b>3 sistemas + embutidos conformes.</b> Fôrma, armação (com cobrimento garantido por espaçadores), escoramento e embutidos conferidos contra o projeto.</div>`;
   }
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
-  html += `<div class="disc"><b>Aviso técnico:</b> apoio educativo à inspeção de liberação (NBR 14931 · 6118 · 15696).
+  html += `<div class="disc"><b>Aviso técnico:</b> apoio educativo à inspeção de liberação (NBR 14931 · 6118 · 15696), com calibragem conservadora — na dúvida, <b>não libere</b> e escale ao responsável técnico.
     Não substitui o checklist formal, o projeto nem o responsável técnico. Alterações de armação/fôrma/escoramento
-    são alçada do projetista. Tolerâncias e cobrimentos: valores do projeto/norma vigente (VALIDAR.md).</div>`;
+    são alçada do projetista. Tolerâncias e cobrimentos: valores do projeto/norma vigente (VALIDAR.md). <b>Em risco iminente de colapso ou à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b></div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${share}" target="_blank" rel="noopener">📲 Compartilhar</a></div>`;
   html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Nova inspeção</button></div>`;
   if(MODE==="LITE") html += liteCTA();
-  else html += `<div class="row"><a class="btn btn-primary" style="text-decoration:none;text-align:center" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Sou aluno da Escola de Obra e quero discutir uma liberacao de concretagem.')}" target="_blank" rel="noopener">Falar com a Escola de Obra (Grupo VIP)</a></div>`;
+  else html += `<div class="row"><div style="font-size:13px;line-height:1.5;padding:12px;border:1px solid rgba(201,162,75,.45);border-radius:8px;text-align:left">📓 <b>Registre esta liberação no seu caderno de campo</b>: itens conferidos, pendências e decisão. Depois, confira sua leitura com o gabarito comentado do módulo.</div></div>`;
   html += `<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
   document.getElementById("wizard").innerHTML = html;
 }

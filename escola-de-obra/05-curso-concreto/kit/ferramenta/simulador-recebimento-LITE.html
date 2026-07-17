@@ -194,13 +194,13 @@ function renderResultado(veredito,motivos,passo){
     <div class="step-lbl" style="margin-top:12px">Justificativa</div>`;
   motivos.forEach(m=> html += `<div class="mot"><b>${m[0]}</b><br>${m[1]}</div>`);
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
-  html += `<div class="disc"><b>Aviso técnico:</b> simulação educativa da aceitação <b>provisória</b> do concreto fresco.
+  html += `<div class="disc"><b>Aviso técnico:</b> simulação educativa da aceitação <b>provisória</b> do concreto fresco, com calibragem conservadora — na dúvida entre corrigir e recusar, a triagem recusa.
     Tolerâncias, tempos-limite e condições de redosagem dependem da edição vigente das normas e do traço — confirme
     (VALIDAR.md). Decisões sobre estrutura com fck não atendido são do responsável técnico.</div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${share}" target="_blank" rel="noopener">📲 Compartilhar</a></div>`;
   html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Novo caminhão</button></div>`;
   if(MODE==="LITE") html += liteCTA();
-  else html += `<div class="row"><a class="btn btn-primary" style="text-decoration:none;text-align:center" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Sou aluno da Escola de Obra e quero discutir um recebimento de concreto.')}" target="_blank" rel="noopener">Falar com a Escola de Obra (Grupo VIP)</a></div>`;
+  else html += `<div class="row"><div style="font-size:13px;line-height:1.5;padding:12px;border:1px solid rgba(201,162,75,.45);border-radius:8px;text-align:left">📓 <b>Registre este recebimento no seu caderno de campo</b>: nota fiscal, slump, horário e decisão. Depois, confira sua leitura com o gabarito comentado do módulo.</div></div>`;
   html += `<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
   document.getElementById("wizard").innerHTML = html;
 }

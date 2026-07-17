@@ -24,8 +24,8 @@ S.append({"tipo":"conteudo","kick":"Como estudar","titulo":"O curso e o seu Kit"
   "bullets":["4 módulos · aulas curtas · quiz ao fim de cada módulo",
              "⭐ Ferramenta de Diagnóstico Interativo (no celular, offline)",
              "Planilha de monitoramento · Checklist · Guia de bolso · Laudo blindado",
-             "Grupo VIP no WhatsApp — respostas toda quinta, 19h"],
-  "narr":"Além dos slides, você tem o Kit: a ferramenta de diagnóstico no celular, a planilha, o checklist, o guia de bolso e o modelo de laudo. Faça os microdesafios e traga suas dúvidas para o grupo, toda quinta às sete da noite."})
+             "Aulas gravadas para revisar quando quiser · gabarito comentado a cada módulo"],
+  "narr":"Além dos slides, você tem o Kit: a ferramenta de diagnóstico no celular, a planilha, o checklist, o guia de bolso e o modelo de laudo. Faça os microdesafios e registre no seu caderno de campo; ao fim de cada módulo, o gabarito comentado fecha o raciocínio com você."})
 
 # ---------- MÓDULO 1 ----------
 S.append({"tipo":"modulo","num":"Módulo 1","titulo":"O olho que enxerga a fissura certa","min":"~32 min · 5 aulas",
@@ -234,14 +234,14 @@ S.append({"tipo":"quiz","titulo":"Quiz do Módulo 4","q":"Um relatório técnico
 S.append({"tipo":"conteudo","kick":"Fechamento de carreira","titulo":"Você aprendeu a ler a fissura",
   "bullets":["O próximo passo é aprender a <b>assinar por ela</b> — e a cobrar por isso",
              "Continue na esteira: Patologias · Laudos · Introdução à Perícia",
-             "Faça os microdesafios e poste no Grupo VIP (quinta, 19h)"],
-  "narr":"Você chegou ao fim. Aprendeu a ler o que quase ninguém lê. O próximo passo é assinar por isso com segurança e cobrar por isso com ética — é o que os próximos cursos da esteira te dão. Faça os desafios, apareça na quinta. Em um mês, quero você sendo o júnior que o dono da obra libera de olho fechado."})
+             "Faça os microdesafios e registre no seu caderno de campo"],
+  "narr":"Você chegou ao fim. Aprendeu a ler o que quase ninguém lê. O próximo passo é assinar por isso com segurança e cobrar por isso com ética — é o que os próximos cursos da esteira te dão. Faça os desafios e registre no seu caderno de campo. Quero você sendo o júnior que o dono da obra libera de olho fechado."})
 
 S.append({"tipo":"fim","titulo":"Padrão Diamante — o rigor de quem assina",
   "bullets":["Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br",
              "Revisado e assinado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D",
-             "Grupo VIP: (43) 9 9925-9577 — respostas toda quinta, 19h"],
-  "narr":"Obrigado por estar aqui comigo. Padrão Diamante é o rigor de quem assina — e agora esse rigor é seu também. Nos vemos no grupo. Um abraço, e bons diagnósticos."})
+             "Material do Kit na área de membros · certificado de conclusão com QR"],
+  "narr":"Obrigado por estar aqui comigo. Padrão Diamante é o rigor de quem assina — e agora esse rigor é seu também. Um abraço, e bons diagnósticos."})
 
 if __name__ == "__main__":
     out = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","02-curso-piloto","slides","slides-fissuras.html"))

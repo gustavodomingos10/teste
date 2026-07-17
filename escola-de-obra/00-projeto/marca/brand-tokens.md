@@ -65,7 +65,7 @@ apostilas dos cursos NR existentes (fundo verde-petróleo escuro, creme, título
 
 ## 6. Canais e contatos oficiais (para CTAs)
 
-- **Grupo VIP WhatsApp:** (43) 9 9925-9577 — ritual fixo: respostas do instrutor **toda quinta-feira, às 19h**.
+- **WhatsApp de contato/vendas:** (43) 9 9925-9577 — usado **apenas** nos CTAs públicos (interesse no curso). O curso é **narrado**, sem atendimento ao vivo, sem grupo e sem consultoria.
 - **Site:** engenhariagd.com.br · seção de ferramentas: engenhariagd.com.br/ferramentas
 - Link `wa.me` padrão: `https://wa.me/5543999259577`
 

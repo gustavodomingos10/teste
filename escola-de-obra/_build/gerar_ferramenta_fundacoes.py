@@ -234,12 +234,12 @@ function renderResultado(familia,tipos,alertas,passo,exigir,warn){
   }
   alertas.forEach(a=> html += `<div class="alerta">⚠ ${a}</div>`);
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
-  html += `<div class="disc"><b>Aviso técnico:</b> esta é uma <b>triagem educativa</b> por regras simplificadas. NÃO substitui o
+  html += `<div class="disc"><b>Aviso técnico:</b> esta é uma <b>triagem educativa</b> por regras simplificadas, com calibragem conservadora — sem sondagem (SPT), a triagem não decide. NÃO substitui o
     projeto de fundações. A escolha, o dimensionamento e a assinatura são do <b>projetista de fundações/geotécnico</b> (NBR 6122).
     Faixas e critérios são convenção do curso — ver VALIDAR.md.</div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${shareTxt}" target="_blank" rel="noopener">📲 Compartilhar</a></div>`;
   html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Nova análise</button></div>`;
-  if(MODE==="LITE") html += liteCTA(); else html += `<div class="row"><a class="btn btn-primary" style="text-decoration:none;text-align:center" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Sou aluno da Escola de Obra e quero discutir uma escolha de fundacao.')}" target="_blank" rel="noopener">Falar com a Escola de Obra (Grupo VIP)</a></div>`;
+  if(MODE==="LITE") html += liteCTA(); else html += `<div class="row"><div style="font-size:13px;line-height:1.5;padding:12px;border:1px solid rgba(201,162,75,.45);border-radius:8px;text-align:left">📓 <b>Registre esta escolha no seu caderno de campo</b>: dados do solo, hipótese de fundação e justificativa. Depois, confira sua leitura com o gabarito comentado do módulo.</div></div>`;
   html += `<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
   document.getElementById("wizard").innerHTML = html;
 }
