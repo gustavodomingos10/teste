@@ -1,0 +1,32 @@
+%% Fluxograma de Decisão — Diagnóstico e Emergência de Fissuras
+%% Escola de Obra · Padrão Diamante. Fonte editável (Mermaid).
+%% Renderize em https://mermaid.live ou com mermaid-cli. SVG/PDF equivalentes no mesmo diretório.
+flowchart TD
+    A([Fissura identificada]) --> B{Há sinal de risco imediato?<br/>esmagamento, som, deslocamento,<br/>flecha excessiva, queda de material}
+    B -- SIM --> E[/EMERGÊNCIA<br/>Isolar a área · escorar se seguro<br/>Comunicar responsável técnico POR ESCRITO<br/>Acionar calculista — prazo: imediato/]
+    B -- NÃO --> C[Caracterizar a fissura<br/>orientação · local · abertura medida · foto com escala]
+    C --> D{Origem provável é estrutural?<br/>flexão, cisalhamento, recalque}
+    D -- SIM --> F[Instalar monitoramento HOJE<br/>selo de gesso em 2+ fissuras]
+    D -- NÃO --> G[Instalar monitoramento<br/>prazo padrão]
+    F --> H{Fissura ATIVA?<br/>selo rompe / abertura cresce<br/>acima do limiar}
+    G --> H
+    H -- SIM e estrutural --> I[/GRAVIDADE ALTA<br/>Escorar/interditar conforme risco<br/>Encaminhar ao calculista<br/>Relatório blindado/]
+    H -- SIM e não estrutural --> J[GRAVIDADE MÉDIA<br/>Tratar a CAUSA + monitorar<br/>Ex.: sanar umidade antes do acabamento]
+    H -- NÃO / estabilizada --> K[GRAVIDADE BAIXA<br/>Monitorar e registrar<br/>Reavaliar em nova data]
+    I --> L([Documentar tudo:<br/>mapa fissuratório + fotos + datas<br/>Relatório assinado])
+    J --> L
+    K --> L
+    E --> L
+
+    classDef emerg fill:#C62828,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+    classDef alta fill:#F4CCCC,stroke:#C62828,color:#7f1d1d,stroke-width:2px;
+    classDef media fill:#FFF2CC,stroke:#F9A825,color:#7a5b00,stroke-width:1.5px;
+    classDef baixa fill:#D9EAD3,stroke:#2E7D32,color:#1b4d1f,stroke-width:1.5px;
+    classDef base fill:#0E3A34,stroke:#C9A24B,color:#F5EFE0,stroke-width:2px;
+    classDef dec fill:#F5EFE0,stroke:#1C5A4E,color:#0E3A34,stroke-width:1.5px;
+    class A,L base;
+    class B,D,H dec;
+    class E emerg;
+    class I alta;
+    class J media;
+    class K baixa;

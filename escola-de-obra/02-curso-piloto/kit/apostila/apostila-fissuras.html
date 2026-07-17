@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Apostila — Diagnóstico de Fissuras e Trincas — Escola de Obra</title>
+<style>
+:root{--verde:#0E3A34;--vesc:#0A2A25;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;
+--carvao:#20211E;--cinza:#6B6B63;--verd:#2E7D32;--amar:#F9A825;--verm:#C62828;}
+@page{size:A4;margin:18mm 16mm 20mm;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--carvao);font-size:11px;line-height:1.6;
+background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+.corpo{font-family:-apple-system,'Segoe UI',Arial,sans-serif;}
+h1,h2,h3,h4{font-family:Georgia,serif;color:var(--verde);line-height:1.2;}
+p{margin:7px 0;}
+strong{color:var(--vmed);}
+/* Rodapé fixo (repete em toda página impressa) */
+.pfoot{position:fixed;bottom:-14mm;left:0;right:0;text-align:center;font-family:-apple-system,Arial,sans-serif;
+font-size:7.5px;color:var(--cinza);border-top:1px solid var(--dour);padding-top:3px;}
+.pfoot b{color:var(--verde);}
+/* Capa */
+.capa{height:245mm;background:linear-gradient(160deg,var(--verde),var(--vesc));color:var(--creme);
+display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+margin:-18mm -16mm 0;padding:30px;page-break-after:always;}
+.capa .lz{width:74px;height:74px;background:var(--dour);color:var(--verde);transform:rotate(45deg);
+display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;margin-bottom:26px;}
+.capa .lz span{transform:rotate(-45deg);}
+.capa h1{font-size:38px;color:var(--creme);margin:0 0 8px;line-height:1.05;}
+.capa .sub{font-size:15px;color:var(--dour2);font-style:italic;margin-bottom:26px;}
+.capa .selo{border:2px solid var(--dour);color:var(--dour2);font-family:-apple-system,Arial,sans-serif;
+font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:3px;}
+.capa .autor{margin-top:40px;font-size:11px;color:#d8c99b;}
+.capa .autor b{color:var(--creme);}
+/* Faixa de módulo */
+.mod{background:var(--verde);color:var(--creme);padding:12px 16px;border-left:6px solid var(--dour);
+margin:0 -16mm 12px;page-break-before:always;page-break-after:avoid;}
+.mod .ep{font-family:-apple-system,Arial,sans-serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dour2);}
+.mod h2{color:var(--creme);margin:2px 0 0;font-size:20px;}
+h3{font-size:14px;margin:16px 0 4px;border-bottom:1px solid #e3dcc7;padding-bottom:2px;page-break-after:avoid;}
+h4{font-size:12px;color:var(--vmed);margin:11px 0 2px;}
+/* Tabelas */
+table{width:100%;border-collapse:collapse;font-family:-apple-system,Arial,sans-serif;font-size:9.5px;margin:8px 0;}
+thead th{background:var(--verde);color:var(--creme);text-align:left;padding:5px 7px;}
+tbody td{padding:5px 7px;border-bottom:1px solid #e3dcc7;vertical-align:top;}
+tbody tr:nth-child(even){background:var(--creme2);}
+/* Boxes */
+.norma{background:rgba(28,90,78,.10);border-left:4px solid var(--vmed);padding:7px 11px;
+font-family:'Courier New',monospace;font-size:9px;margin:9px 0;}
+.mestre{background:var(--creme2);border-left:4px solid var(--dour);padding:9px 13px;margin:11px 0;font-family:-apple-system,Arial,sans-serif;font-size:10px;}
+.mestre b{color:var(--verde);}
+.obj{background:rgba(201,162,75,.10);border:1px solid var(--dour);border-radius:5px;padding:10px 14px;margin:10px 0;font-family:-apple-system,Arial,sans-serif;font-size:10px;}
+.validar{background:rgba(249,168,37,.12);border-left:4px solid var(--amar);padding:6px 11px;font-family:-apple-system,Arial,sans-serif;font-size:9px;color:#7a5b00;margin:8px 0;}
+.foto{background:repeating-linear-gradient(45deg,#e8e1cf,#e8e1cf 10px,#ded6c0 10px,#ded6c0 20px);
+border:1px dashed var(--cinza);color:var(--cinza);font-family:-apple-system,Arial,sans-serif;font-size:8.5px;
+display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;min-height:90px;margin:8px 0;}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle;margin-right:4px;}
+.dv{background:var(--verd);}.da{background:var(--amar);}.dm{background:var(--verm);}
+ul{margin:5px 0 5px 0;padding-left:18px;}li{margin:3px 0;}
+.sumario{font-family:-apple-system,Arial,sans-serif;}
+.sumario li{margin:6px 0;}
+.assin{margin-top:16px;padding-top:10px;border-top:2px solid var(--dour);font-family:-apple-system,Arial,sans-serif;font-size:9px;color:var(--cinza);}
+.assin b{color:var(--verde);}
+.lead{font-size:12px;color:var(--vmed);font-style:italic;}
+</style>
+</head>
+<body>
+<div class="pfoot">Escola de Obra · <b>Diagnóstico de Fissuras e Trincas</b> · GD Engenharia e Perícia · engenhariagd.com.br — Revisado e assinado por Gustavo Domingos, CREA-PR 140.964-D</div>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="lz"><span>GD</span></div>
+  <h1>Diagnóstico de<br>Fissuras e Trincas</h1>
+  <div class="sub">Enxergue como um perito — leia o que a fissura está dizendo</div>
+  <div class="selo">Apostila · Padrão Diamante</div>
+  <div class="autor">Instrutor: <b>Gustavo Domingos</b><br>Engenheiro Civil · CREA-PR 140.964-D · CREA-SP 5071652757<br>
+  Perito judicial atuante em processos do TJ-PR e do TJ-SP <span style="font-size:8px;">[VALIDAR redação — D1]</span></div>
+</div>
+
+<!-- SUMÁRIO / OBJETIVOS -->
+<h2 style="font-size:22px;">Sobre esta apostila</h2>
+<p class="lead">Este material acompanha o curso em vídeo. Ele é a sua consulta de mesa: o vídeo
+mostra, a apostila fixa. Guarde-a por perto na obra.</p>
+<div class="obj"><b>Objetivo terminal do curso.</b> Ao final, você será capaz de: (1) <b>classificar</b>
+uma fissura por abertura e origem provável; (2) <b>medir</b> e <b>monitorar</b> para decidir se é
+ativa ou estabilizada; (3) <b>avaliar</b> a gravidade e escolher o encaminhamento; (4) <b>registrar</b>
+e <b>redigir</b> um relatório que protege você.</p>
+
+<h3>Conteúdo programático</h3>
+<ol class="sumario">
+  <li><b>Módulo 1 — O olho que enxerga a fissura certa.</b> Fissura como sintoma; vocabulário; instrumentos; medição; o primeiro olhar.</li>
+  <li><b>Módulo 2 — A fissura fala: leitura do desenho.</b> As seis tipologias por origem provável e o mapa fissuratório.</li>
+  <li><b>Módulo 3 — Ativa ou estabilizada? O veredito.</b> Monitoramento, gravidade e os cinco erros que expõem o engenheiro.</li>
+  <li><b>Módulo 4 — Do diagnóstico ao encaminhamento.</b> Três caminhos, tratamento na medida, o laudo blindado e o primeiro honorário.</li>
+</ol>
+<div class="validar">⚠️ <b>Rigor Diamante:</b> todo valor técnico desta apostila referencia norma ou está marcado
+<code>[VALIDAR]</code> para confirmação e assinatura do instrutor antes da publicação (ver <code>VALIDAR.md</code>).
+A classificação por abertura é <b>convenção adotada no curso</b>, não norma.</div>
+
+<!-- MÓDULO 1 -->
+<div class="mod"><div class="ep">Módulo 1 · Episódio 1</div><h2>O olho que enxerga a fissura certa</h2></div>
+<div class="obj"><b>Ao final do módulo você vai:</b> usar o vocabulário correto (fissura/trinca/rachadura),
+escolher e usar o instrumento certo, medir e registrar sem chance de erro, e iniciar a inspeção do geral ao particular.</div>
+
+<h3>1.1 Fissura não é defeito — é sintoma</h3>
+<p>A primeira virada de chave da sua carreira em patologia é parar de ver a fissura como um
+"defeito a tapar" e passar a vê-la como um <strong>sintoma</strong> — a manifestação visível de
+um mecanismo (tensão, retração, movimentação, umidade). Tapar sem diagnosticar é tratar a febre
+sem investigar a infecção: o problema volta, e a sua credibilidade vai junto.</p>
+
+<h3>1.2 O vocabulário que te dá autoridade</h3>
+<p>Falar com precisão separa o profissional do palpiteiro. A classificação por abertura mais
+usada no mercado segue uma progressão — fissura, trinca, rachadura, fenda, brecha — da mais fina
+à mais larga. <strong>Atenção:</strong> não existe uma NBR única que fixe essas faixas em
+milímetros; por isso, neste curso, adotamos uma convenção e a declaramos como tal.</p>
+<div class="validar">⚠️ <code>[VALIDAR B2]</code> — Definir e assinar a faixa em mm de cada termo, apresentando-a
+sempre como <b>convenção do curso</b>, nunca como norma.</div>
+
+<h3>1.3 Os quatro instrumentos que separam o profissional do palpiteiro</h3>
+<table><thead><tr><th>Instrumento</th><th>Para quê</th></tr></thead><tbody>
+<tr><td>Fissurômetro / régua de fissuras</td><td>Medir a abertura no ponto mais largo</td></tr>
+<tr><td>Paquímetro</td><td>Conferência fina da abertura</td></tr>
+<tr><td>Selo de gesso / comparador</td><td>Monitorar atividade (ativa × estabilizada)</td></tr>
+<tr><td>Câmera com escala + lanterna (luz rasante)</td><td>Registro e realce do relevo da fissura</td></tr>
+</tbody></table>
+<div class="foto">[FOTO DO ACERVO: instrumentos de medição sobre uma fissura — aula-1-3--instrumentos-medicao.jpg]</div>
+
+<h3>1.4 Como medir de verdade (e registrar sem chance de erro)</h3>
+<p>Meça sempre no <strong>ponto mais largo</strong> da fissura, com o fissurômetro rente à
+superfície. Registre o <strong>trio mínimo</strong>: valor em mm, data e foto com escala. O que
+não é medido e datado, tecnicamente, não aconteceu — e não sustenta laudo.</p>
+<div class="norma">NBR 6118 — Projeto de estruturas de concreto: define estados-limite de abertura de fissuras (w<sub>k</sub>), da ordem de 0,2 a 0,4 mm conforme a classe de agressividade ambiental. <b>[VALIDAR B1 — confirmar classe e valor exato.]</b></div>
+
+<h3>1.5 O primeiro olhar: do geral ao particular</h3>
+<p>Comece pelo <strong>panorama</strong> — implantação, fachada, sinais de umidade e de recalque —
+e só então vá ao detalhe. Muitas vezes o contexto já explica o desenho: uma diagonal isolada
+conta pouco; a mesma diagonal, com portas emperrando e piso caído, conta uma história inteira.</p>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> Nunca leia <b>uma</b> fissura. Leia o <b>conjunto</b>. O olho
+treinado não se prende ao detalhe antes de entender o todo.</div>
+
+<!-- MÓDULO 2 -->
+<div class="mod"><div class="ep">Módulo 2 · Módulo de Ouro</div><h2>A fissura fala: leitura do desenho</h2></div>
+<div class="obj"><b>Ao final do módulo você vai:</b> reconhecer as seis tipologias de fissura por
+origem provável a partir de orientação e local, e montar o mapa fissuratório da parede.</div>
+
+<h3>2.1 O princípio: a geometria denuncia a origem</h3>
+<p>Cada esforço deixa uma assinatura no desenho da fissura. Aprender a ler essa assinatura é o
+coração do "enxergar como perito". Lembre-se da regra que atravessa todo o módulo:
+<strong>o desenho dá a hipótese; a medição e o monitoramento dão o diagnóstico.</strong></p>
+
+<h3>2.2 As seis tipologias de referência</h3>
+<table><thead><tr><th>Desenho / local</th><th>Origem provável</th><th>Atenção</th><th>Ref.</th></tr></thead><tbody>
+<tr><td>Diagonal ~45° saindo do canto de abertura</td><td>Concentração de tensão + movimentação</td><td>Geralmente mansa; observar se há conjunto</td><td>NBR 6118</td></tr>
+<tr><td>Vertical no meio do vão inferior da viga</td><td>Flexão (tração na fibra inferior)</td><td>Julgar por largura + quantidade + flecha</td><td>NBR 6118</td></tr>
+<tr><td>Inclinada junto ao apoio da viga</td><td>Cisalhamento (esforço cortante)</td><td>Pode ser mais brusca; monitorar e comunicar já</td><td>NBR 6118</td></tr>
+<tr><td>Malha / craquelê</td><td>Retração superficial; RAA se estrutural</td><td>Classificar o suporte; ensaio se estrutural</td><td>Lit. patologia</td></tr>
+<tr><td>Diagonal que "abre p/ cima" + esquadrias travando + piso caído</td><td>Recalque diferencial de fundação</td><td>Diagnóstico de conjunto; investigar o solo</td><td>NBR 6122</td></tr>
+<tr><td>Horizontal na base + eflorescência</td><td>Umidade ascendente</td><td>Tratar a causa antes do acabamento</td><td>NBR 9575</td></tr>
+</tbody></table>
+<div class="foto">[FOTO DO ACERVO: prancha comparativa das tipologias — usar 2.1 a 2.6 do acervo]</div>
+<div class="validar">⚠️ <code>[VALIDAR B4–B7]</code> — Confirmar redação das associações (flexão, cisalhamento, recalque, expansão) como leitura de campo, não como texto literal de norma.</div>
+
+<h3>2.3 O mapa fissuratório</h3>
+<p>Fotografe a parede inteira, numere cada fissura, anote o trio (orientação, abertura, hipótese
+de origem) e procure o <strong>padrão dominante</strong>. O mapa hierarquiza: diz o que é a
+história principal e o que é coadjuvante — e vira a sua prova documental.</p>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> O mapa é o que te dá o direito de falar com calma. Mesma parede,
+duas reputações: o amador diz "acho que não é nada"; o profissional aponta o padrão, explica e monitora.</div>
+
+<!-- MÓDULO 3 -->
+<div class="mod"><div class="ep">Módulo 3 · Episódio 3</div><h2>Ativa ou estabilizada? O veredito</h2></div>
+<div class="obj"><b>Ao final do módulo você vai:</b> instalar monitoramento, decidir se a fissura é
+ativa ou estabilizada, enquadrar a gravidade e evitar os cinco erros que expõem o engenheiro.</div>
+
+<h3>3.1 O selo de gesso: o teste de R$ 2 que decide o caso</h3>
+<p>Aplique o selo de gesso (ou comparador) sobre a fissura e date. Se ele <strong>rompe</strong>
+no período de observação, a fissura é <strong>ativa</strong> — ainda em movimento. Se permanece
+íntegro, está estabilizada. Instale em pelo menos duas fissuras representativas.</p>
+<div class="foto">[FOTO DO ACERVO: selo de gesso aplicado, com data — aula-1-4--selo-gesso-monitoramento.jpg]</div>
+<div class="validar">⚠️ <code>[VALIDAR B9]</code> — Confirmar o tempo de monitoramento e o limiar de crescimento adotados como critério de atividade.</div>
+
+<h3>3.2 Semáforo de gravidade</h3>
+<table><thead><tr><th>Nível</th><th>Quando</th><th>Encaminhamento</th></tr></thead><tbody>
+<tr><td><span class="dot dm"></span><b>ALTA</b></td><td>Risco imediato, ou origem estrutural + ativa</td><td>Escorar/interditar + acionar calculista</td></tr>
+<tr><td><span class="dot da"></span><b>MÉDIA</b></td><td>Ativa (não estrutural) ou abertura acima do limite de serviço</td><td>Tratar a causa + monitorar</td></tr>
+<tr><td><span class="dot dv"></span><b>BAIXA</b></td><td>Estabilizada, fina, sem sinal de risco</td><td>Monitorar e registrar</td></tr>
+</tbody></table>
+<p><strong>Sinais de risco imediato:</strong> esmagamento de bordas, som ao carregar, deslocamento
+relativo entre partes, flecha excessiva, queda de material. Qualquer um → caminho de emergência do fluxograma.</p>
+
+<h3>3.3 Os cinco erros que expõem o engenheiro</h3>
+<ul>
+<li>Dar veredito só no olho, sem medir nem monitorar.</li>
+<li>Tratar o sintoma (pintar por cima) em vez da causa.</li>
+<li>Culpar a estrutura sem descartar umidade e recalque.</li>
+<li>Prometer "resolvido" quando a física não garante.</li>
+<li>Não registrar — confiar na memória em vez do mapa datado.</li>
+</ul>
+
+<!-- MÓDULO 4 -->
+<div class="mod"><div class="ep">Módulo 4 · Episódio 4</div><h2>Do diagnóstico ao encaminhamento</h2></div>
+<div class="obj"><b>Ao final do módulo você vai:</b> escolher entre os três caminhos, indicar o
+tratamento na medida, montar o relatório blindado e entender como isso vira renda com ética.</div>
+
+<h3>4.1 Três caminhos: monitorar, tratar, ou interditar</h3>
+<p>Todo diagnóstico desemboca em uma de três decisões, definidas pela gravidade e pela atividade:
+<strong>monitorar</strong> (baixa), <strong>tratar a causa</strong> (média) ou
+<strong>escorar/interditar e acionar o calculista</strong> (alta). O fluxograma do Kit conduz essa decisão.</p>
+
+<h3>4.2 Tratamento na medida</h3>
+<table><thead><tr><th>Técnica</th><th>Indicação típica</th></tr></thead><tbody>
+<tr><td>Selagem elástica</td><td>Fissuras ativas de pequena movimentação, função estética/vedação</td></tr>
+<tr><td>Grampeamento / costura</td><td>Restabelecer continuidade em fissuras de alvenaria (conforme projeto)</td></tr>
+<tr><td>Injeção (resina/epóxi)</td><td>Fissuras em concreto — <b>somente após diagnóstico e definição de atividade</b></td></tr>
+</tbody></table>
+<div class="validar">⚠️ <code>[VALIDAR]</code> — O tratamento segue o diagnóstico. Nunca tratar fissura ativa como estabilizada. Especificações detalhadas conforme projeto e norma aplicável.</div>
+
+<h3>4.3 O laudo que protege você</h3>
+<p>Todo caso deve virar um <strong>relatório blindado</strong>: identificação; objeto, escopo e
+limitações; metodologia; registro fotográfico padronizado; mapa fissuratório; análise de causa
+raiz; recomendações com prazo e responsável; encaminhamentos; e assinatura com CREA. O modelo
+está no seu Kit (Word e PDF).</p>
+<div class="norma">NBR 13752 — Perícias de engenharia na construção civil · NBR 16747 — Inspeção predial. <b>[Confirmar edição vigente.]</b></div>
+
+<h3>4.4 Seu primeiro honorário — com ética</h3>
+<p>Uma vistoria ou um laudo é um serviço técnico que se cobra. Use referências de mercado como
+<strong>parâmetro</strong> — nunca prometa ganho fixo. A título de referência de mercado de
+honorários, regulamentos do IBAPE trazem valores mínimos para trabalhos periciais e vistorias.</p>
+<div class="validar">⚠️ <code>[VALIDAR C5]</code> — Valores de honorários entram só como referência de mercado, com fonte e data (ex.: regulamentos IBAPE), jamais como renda garantida.</div>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> A técnica abre a porta; a documentação te mantém dentro da sala.
+Quem diagnostica bem e registra melhor vira a referência que o dono da obra libera de olho fechado.</div>
+
+<!-- ANEXO A — PROTOCOLO DE CAMPO -->
+<div class="mod"><div class="ep">Anexo A · Prático</div><h2>Protocolo de inspeção em campo (passo a passo)</h2></div>
+<p class="lead">Imprima esta página e leve para a obra. É a sequência que transforma uma visita em um diagnóstico defensável.</p>
+<h3>Antes de tocar na fissura</h3>
+<ul>
+<li><b>Segurança primeiro.</b> EPI compatível; acesso estável; trabalho em altura protegido (NR-18, NR-35).</li>
+<li><b>Panorama.</b> Foto geral da fachada/ambiente, de frente, com boa luz.</li>
+<li><b>Histórico.</b> Pergunte: quando surgiu? Depois de quê (reforma, chuva, obra do vizinho)? Está crescendo?</li>
+</ul>
+<h3>Caracterização (repetir por fissura)</h3>
+<ol>
+<li><b>Numere</b> a fissura (marca discreta ou no croqui).</li>
+<li><b>Oriente:</b> vertical, horizontal ou diagonal (~45°).</li>
+<li><b>Localize:</b> meio do vão, apoio, canto de abertura, base/topo da parede, pilar, laje, muro.</li>
+<li><b>Meça</b> a abertura no ponto mais largo, com fissurômetro. Anote em mm.</li>
+<li><b>Fotografe</b> com escala (moeda, trena) e o número visível.</li>
+<li><b>Hipótese de origem</b> pela tabela do Módulo 2 — como hipótese, não veredito.</li>
+</ol>
+<h3>Atividade e decisão</h3>
+<ol>
+<li><b>Selo de gesso</b> datado em 2+ fissuras representativas.</li>
+<li><b>Sinais de risco imediato?</b> Se sim → caminho de emergência do fluxograma + comunicação por escrito.</li>
+<li><b>Enquadre a gravidade</b> (semáforo) e defina o encaminhamento.</li>
+<li><b>Registre tudo</b> na planilha e monte o relatório blindado.</li>
+</ol>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> Documente como se um dia fosse ter que provar — porque um dia você vai.</div>
+
+<!-- ANEXO B — CASO GUIADO -->
+<div class="mod"><div class="ep">Anexo B · Caso guiado</div><h2>Um diagnóstico do começo ao fim</h2></div>
+<p><i>Cenário ilustrativo baseado em situações recorrentes (N1). Foto do acervo a inserir (N2).</i></p>
+<div class="foto">[FOTO DO ACERVO: parede residencial com quadro fissuratório para o caso guiado]</div>
+<h4>Situação</h4>
+<p>Sobrado, morador relata que "apareceram trincas" após um período de chuvas fortes. Observam-se
+duas fissuras diagonais na parede da escada, uma porta do mesmo trecho emperrando e o rodapé
+levemente descolado num canto.</p>
+<h4>Como o profissional conduz</h4>
+<table><thead><tr><th>Passo</th><th>O que faz</th><th>O que encontra</th></tr></thead><tbody>
+<tr><td>1. Panorama</td><td>Foto geral + histórico</td><td>Sintomas após chuva; possível relação com o solo</td></tr>
+<tr><td>2. Mapa</td><td>Numera as fissuras, mede, orienta</td><td>Duas diagonais concordantes apontando para o mesmo canto</td></tr>
+<tr><td>3. Pistas de conjunto</td><td>Testa portas e piso</td><td>Porta fora de esquadro + rodapé descolado no mesmo canto</td></tr>
+<tr><td>4. Atividade</td><td>Selo de gesso, datado</td><td>A definir no retorno (ativa × estabilizada)</td></tr>
+<tr><td>5. Enquadramento</td><td>Semáforo</td><td>Origem provável estrutural (recalque) → depende da atividade</td></tr>
+</tbody></table>
+<h4>Encaminhamento</h4>
+<p>Quadro compatível com <b>recalque diferencial</b> a investigar (NBR 6122). Recomenda-se
+investigação de fundação/solo, monitoramento das fissuras e, havendo evolução, avaliar
+escoramento/interdição. Tudo registrado no relatório blindado, sem cravar causa não confirmada.</p>
+<div class="validar">⚠️ Repare: o profissional <b>não</b> afirmou "é recalque" no olho. Ele descreveu o conjunto, nomeou a hipótese e recomendou a investigação. Essa é a blindagem.</div>
+
+<!-- ANEXO C — GLOSSÁRIO -->
+<div class="mod"><div class="ep">Anexo C · Referência</div><h2>Glossário técnico</h2></div>
+<table><thead><tr><th>Termo</th><th>Significado no contexto do curso</th></tr></thead><tbody>
+<tr><td>Fissura ativa</td><td>Aquela cujo monitoramento mostra evolução (abertura/comprimento) no período observado.</td></tr>
+<tr><td>Fissura estabilizada</td><td>Sem evolução mensurável no período de monitoramento.</td></tr>
+<tr><td>w<sub>k</sub></td><td>Abertura característica de fissura; a NBR 6118 define limites de serviço conforme a agressividade ambiental.</td></tr>
+<tr><td>Recalque diferencial</td><td>Assentamento desigual da fundação, que "rasga" a construção na diagonal.</td></tr>
+<tr><td>Eflorescência</td><td>Depósito de sais (pó branco) trazido por umidade; pista de infiltração/umidade ascendente.</td></tr>
+<tr><td>Craquelê</td><td>Fissuração em malha; geralmente retração superficial (investigar RAA se em concreto estrutural).</td></tr>
+<tr><td>RAA</td><td>Reação álcali-agregado: reação expansiva interna do concreto; confirmação por ensaio laboratorial.</td></tr>
+<tr><td>Selo de gesso</td><td>Comparador simples que rompe se a fissura se movimenta — teste de atividade.</td></tr>
+<tr><td>Mapa fissuratório</td><td>Registro de todas as fissuras (numeradas, com orientação, abertura e data) que revela o padrão dominante.</td></tr>
+<tr><td>Flecha</td><td>Deformação (barriga) de uma viga/laje no meio do vão; agrava a leitura de fissura de flexão.</td></tr>
+</tbody></table>
+
+<!-- ANEXO D — FAQ -->
+<div class="mod"><div class="ep">Anexo D · Dúvidas frequentes</div><h2>Perguntas que todo júnior faz</h2></div>
+<h4>"O cliente quer uma resposta agora. O que eu digo?"</h4>
+<p>Diga o que você sabe com base: descreva o padrão, explique que instalou monitoramento e dê um
+prazo para o veredito de evolução. "Vou te dar a resposta certa, não a resposta rápida" passa mais
+confiança que qualquer chute.</p>
+<h4>"Toda fissura precisa de laudo?"</h4>
+<p>Não. Mas todo diagnóstico precisa de <b>registro</b>. O laudo formal entra quando há contratação,
+risco relevante ou necessidade jurídica. O registro (foto, medida, data) é sempre.</p>
+<h4>"Posso garantir que resolvi?"</h4>
+<p>Garanta <b>capacidades e recomendações</b>, nunca resultado. "O tratamento indicado é X; sua
+durabilidade depende de sanar a causa Y" é honesto e te protege.</p>
+<h4>"Quando eu chamo o calculista?"</h4>
+<p>Diante de suspeita estrutural ativa (flexão com flecha, cisalhamento, recalque) ou qualquer sinal
+de risco imediato. Enxergar o limite da própria alçada é competência, não fraqueza.</p>
+
+<!-- ANEXO E — QUIZ -->
+<div class="mod"><div class="ep">Anexo E · Autoavaliação</div><h2>Revisão rápida (gabarito no curso)</h2></div>
+<ol>
+<li>Uma fissura vertical no meio do vão inferior de uma viga aponta para qual esforço?</li>
+<li>O que diferencia uma fissura ativa de uma estabilizada?</li>
+<li>Diante de fissura horizontal na base com pó branco, qual a causa provável e a ordem correta de tratamento?</li>
+<li>Quais são os três encaminhamentos-base após o diagnóstico?</li>
+<li>Por que o mapa fissuratório vale mais que a análise de uma fissura isolada?</li>
+</ol>
+<p style="font-size:9px;color:var(--cinza)">Confira suas respostas com os quizzes comentados de cada módulo, na área de membros.</p>
+
+<div class="assin">
+  <p><b>Revisado e assinado por Gustavo Domingos</b> — Engenheiro Civil, CREA-PR 140.964-D · CREA-SP 5071652757.</p>
+  <p>Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br · Grupo VIP (43) 9 9925-9577 — respostas do instrutor toda quinta, 19h.</p>
+  <p style="font-size:8px;">Cenários deste material são ilustrativos, baseados em situações recorrentes (N1); fotos do acervo a inserir (N2); nada publicado como caso real sem confirmação (N3).</p>
+</div>
+
+</body>
+</html>

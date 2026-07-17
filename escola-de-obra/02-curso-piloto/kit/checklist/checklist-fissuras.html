@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Checklist de Inspeção de Fissuras e Trincas — Escola de Obra</title>
+<style>
+:root{--gd-verde-petroleo:#0E3A34;--gd-verde-medio:#1C5A4E;--gd-creme:#F5EFE0;--gd-creme-claro:#FBF8F0;
+--gd-dourado:#C9A24B;--gd-dourado-claro:#E3C97E;--gd-carvao:#20211E;--gd-cinza:#6B6B63;
+--sem-verde:#2E7D32;--sem-amarelo:#F9A825;--sem-vermelho:#C62828;}
+@page{size:A4;margin:11mm 12mm;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--gd-carvao);
+background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11px;line-height:1.4;}
+h1,h2,h3{font-family:Georgia,'Times New Roman',serif;color:var(--gd-verde-petroleo);margin:0;}
+.faixa{background:var(--gd-verde-petroleo);color:var(--gd-creme);padding:14px 16px;border-bottom:4px solid var(--gd-dourado);
+display:flex;justify-content:space-between;align-items:center;}
+.faixa h1{color:var(--gd-creme);font-size:17px;}
+.faixa .sub{color:var(--gd-dourado-claro);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;}
+.losango{width:38px;height:38px;background:var(--gd-dourado);color:var(--gd-verde-petroleo);
+transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;}
+.losango span{transform:rotate(-45deg);font-size:12px;}
+.ident{padding:10px 16px;background:var(--gd-creme-claro);border-bottom:1px solid #e3dcc7;
+display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 16px;font-size:10px;}
+.ident .campo{border-bottom:1px solid var(--gd-cinza);min-height:15px;}
+.ident label{color:var(--gd-cinza);font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;display:block;}
+.wrap{padding:8px 16px 14px;}
+h2.sec{font-size:12.5px;background:var(--gd-verde-medio);color:#fff;padding:4px 9px;margin:12px 0 0;border-radius:3px 3px 0 0;}
+table{width:100%;border-collapse:collapse;font-size:10px;}
+thead th{background:var(--gd-verde-petroleo);color:var(--gd-creme);text-align:left;padding:4px 6px;font-weight:600;}
+tbody td{padding:4px 6px;border-bottom:1px solid #e3dcc7;vertical-align:top;}
+tbody tr:nth-child(even){background:var(--gd-creme-claro);}
+.n{width:22px;text-align:center;color:var(--gd-cinza);font-weight:700;}
+.crit{width:32%;}
+.norma{width:20%;font-family:'Courier New',monospace;font-size:8.6px;color:var(--gd-verde-medio);}
+.ccol{width:76px;text-align:center;}
+.box{display:inline-block;width:12px;height:12px;border:1.4px solid var(--gd-verde-petroleo);border-radius:2px;margin:0 3px;vertical-align:middle;}
+.leg{font-size:8.5px;color:var(--gd-cinza);}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:3px;}
+.d-verde{background:var(--sem-verde);}.d-amarelo{background:var(--sem-amarelo);}.d-vermelho{background:var(--sem-vermelho);}
+.nota{font-size:9px;color:var(--gd-cinza);font-style:italic;margin:4px 0 0;}
+.assin{margin-top:14px;padding:9px 16px;border-top:2px solid var(--gd-dourado);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;}
+.assin .linha{flex:1;border-top:1px solid var(--gd-carvao);padding-top:3px;font-size:8.5px;color:var(--gd-cinza);text-align:center;}
+.selo{border:1.6px solid var(--gd-dourado);color:var(--gd-dourado);font-size:8px;font-weight:700;letter-spacing:.08em;
+text-transform:uppercase;padding:5px 8px;border-radius:3px;text-align:center;max-width:200px;}
+.rodape{font-size:8px;color:var(--gd-cinza);text-align:center;padding:2px 16px 8px;}
+</style>
+</head>
+<body>
+  <div class="faixa">
+    <div>
+      <h1>Checklist de Inspeção de Fissuras e Trincas</h1>
+      <div class="sub">Escola de Obra · Padrão Diamante · GD Engenharia e Perícia</div>
+    </div>
+    <div class="losango"><span>GD</span></div>
+  </div>
+
+  <div class="ident">
+    <div><label>Obra / Endereço</label><div class="campo"></div></div>
+    <div><label>Cliente / Responsável pela obra</label><div class="campo"></div></div>
+    <div><label>Data da inspeção</label><div class="campo"></div></div>
+    <div><label>Elemento / Ambiente</label><div class="campo"></div></div>
+    <div><label>Condição do tempo</label><div class="campo"></div></div>
+    <div><label>Nº do caso / OS</label><div class="campo"></div></div>
+  </div>
+
+  <div class="wrap">
+    <p class="leg"><b>Como preencher:</b> marque <span class="box"></span> Conforme (C), <span class="box"></span> Não Conforme (NC) ou <span class="box"></span> Não Aplicável (NA).
+    Semáforo de prioridade: <span class="dot d-verde"></span>baixa &nbsp; <span class="dot d-amarelo"></span>média &nbsp; <span class="dot d-vermelho"></span>alta. Critério = o que caracteriza "conforme".</p>
+
+    <h2 class="sec">1. Segurança e preparação da inspeção</h2>
+    <table><thead><tr><th class="n">#</th><th>Item a verificar</th><th class="crit">Critério de aceitação (objetivo)</th><th class="norma">Norma / ref.</th><th class="ccol">C / NC / NA</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>EPI e condições de acesso seguro ao ponto de inspeção</td><td>EPI compatível; acesso estável; trabalho em altura protegido</td><td class="norma">NR-18 · NR-35</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">2</td><td>Instrumentos disponíveis</td><td>Fissurômetro/régua de fissuras, paquímetro, trena, lanterna, câmera com escala</td><td class="norma">Boa prática</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">3</td><td>Identificação e histórico do caso</td><td>Obra, ambiente e histórico (quando surgiu, após o quê) registrados</td><td class="norma">NBR 16747</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">2. Contexto (do geral ao particular)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item a verificar</th><th class="crit">Critério de aceitação (objetivo)</th><th class="norma">Norma / ref.</th><th class="ccol">C / NC / NA</th></tr></thead>
+    <tbody>
+      <tr><td class="n">4</td><td>Panorama da edificação/fachada</td><td>Foto geral de frente, com boa luz, antes do detalhe</td><td class="norma">NBR 16747</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">5</td><td>Sinais de recalque no conjunto</td><td>Esquadrias no esquadro; piso nivelado; sem diagonais concordantes</td><td class="norma">NBR 6122</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">6</td><td>Sinais de umidade / infiltração</td><td>Ausência de eflorescência, mancha ou reboco esfarelando junto à fissura</td><td class="norma">NBR 9575</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">3. Caracterização de cada fissura (repetir por fissura numerada)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item a verificar</th><th class="crit">Critério de aceitação (objetivo)</th><th class="norma">Norma / ref.</th><th class="ccol">C / NC / NA</th></tr></thead>
+    <tbody>
+      <tr><td class="n">7</td><td>Orientação registrada</td><td>Vertical / horizontal / diagonal (~45°) anotada</td><td class="norma">Convenção do curso</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">8</td><td>Localização no elemento</td><td>Meio do vão, apoio, canto de abertura, base/topo da parede — anotado</td><td class="norma">NBR 6118</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">9</td><td>Abertura medida no ponto mais largo</td><td>Valor em mm registrado com fissurômetro (não estimado a olho)</td><td class="norma">NBR 6118 (w<sub>k</sub>)</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">10</td><td>Hipótese de origem</td><td>Flexão / cisalhamento / recalque / retração / expansão de alvenaria — anotada como hipótese</td><td class="norma">NBR 6118 · 6122</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">11</td><td>Registro fotográfico com escala</td><td>Foto nítida com referência de escala e nº do caso visível</td><td class="norma">NBR 13752</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">4. Atividade e gravidade</h2>
+    <table><thead><tr><th class="n">#</th><th>Item a verificar</th><th class="crit">Critério de aceitação (objetivo)</th><th class="norma">Norma / ref.</th><th class="ccol">C / NC / NA</th></tr></thead>
+    <tbody>
+      <tr><td class="n">12</td><td>Monitoramento instalado</td><td>Selo de gesso/comparador em 2+ fissuras representativas, datado</td><td class="norma">Boa prática</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">13</td><td>Sinais de risco imediato</td><td>Sem esmagamento, som, deslocamento relativo ou flecha excessiva</td><td class="norma">NBR 6118</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">14</td><td>Enquadramento do encaminhamento</td><td>Definido: monitorar / tratar / escorar-interditar e acionar calculista</td><td class="norma">Fluxograma do Kit</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+    <p class="nota">⚠️ Marcou <span class="dot d-vermelho"></span> em qualquer item de risco imediato (13)? Priorize o caminho de emergência do <b>Fluxograma de Decisão</b> e comunique o responsável técnico por escrito.</p>
+
+    <div class="assin">
+      <div class="selo">Revisado e assinado por<br>Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D</div>
+      <div class="linha">Responsável pela inspeção — assinatura / CREA</div>
+      <div class="linha">Data</div>
+    </div>
+    <p class="rodape">Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br — Grupo VIP: (43) 9 9925-9577 (respostas quinta, 19h)</p>
+  </div>
+</body>
+</html>
