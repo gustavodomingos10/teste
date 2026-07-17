@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diagnóstico de Fissuras e Trincas — Escola de Obra</title>
+<meta name="description" content="Diagnostique fissuras e trincas como um perito. Curso prático para engenheiros recém-formados, com Kit Diamante e ferramenta interativa.">
+<style>
+:root{--verde:#0E3A34;--vesc:#0A2A25;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;--wpp:#25D366;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;color:var(--carvao);background:var(--creme);line-height:1.6;}
+.serif{font-family:Georgia,'Times New Roman',serif;}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px;}
+a{color:inherit;}
+.btn{display:inline-block;background:var(--dour);color:var(--verde);font-weight:800;padding:15px 30px;border-radius:10px;
+text-decoration:none;font-size:1.05rem;border:none;cursor:pointer;transition:.15s;box-shadow:0 4px 14px rgba(201,162,75,.3);}
+.btn:hover{background:var(--dour2);transform:translateY(-1px);}
+.btn-wpp{background:var(--wpp);color:#fff;}
+.small{font-size:.82rem;color:var(--cinza);}
+/* HERO */
+header{background:linear-gradient(160deg,var(--verde),var(--vesc));color:var(--creme);padding:26px 0 60px;position:relative;overflow:hidden;}
+.nav{display:flex;align-items:center;gap:12px;}
+.lz{width:40px;height:40px;min-width:40px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;}
+.lz span{transform:rotate(-45deg);}
+.nav b{color:var(--creme);}.nav .t{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dour2);}
+.hero{text-align:center;padding:44px 0 0;}
+.hero h1{font-size:2.5rem;color:var(--creme);line-height:1.1;margin-bottom:14px;}
+.hero h1 em{color:var(--dour2);font-style:italic;}
+.hero p.sub{font-size:1.15rem;color:#e9e2cf;max-width:660px;margin:0 auto 26px;}
+.hero .price{font-size:.95rem;color:var(--dour2);margin-top:14px;}
+/* SECTIONS */
+section{padding:52px 0;}
+h2.sec{font-size:1.9rem;color:var(--verde);text-align:center;margin-bottom:8px;}
+.lead{text-align:center;color:var(--cinza);max-width:640px;margin:0 auto 30px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+.card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 3px 12px rgba(14,58,52,.07);}
+.card h3{color:var(--verde);font-size:1.1rem;margin-bottom:8px;}
+.check{list-style:none;}
+.check li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid #e3dcc7;}
+.check li::before{content:"✔";position:absolute;left:0;color:var(--dour);font-weight:800;}
+.dark{background:var(--verde);color:var(--creme);}
+.dark h2.sec,.dark h3{color:var(--creme);}
+.dark .lead{color:var(--dour2);}
+.kit{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.kit .item{background:rgba(255,255,255,.06);border:1px solid rgba(201,162,75,.35);border-radius:12px;padding:16px;}
+.kit .item b{color:var(--dour2);}
+.star{border:2px solid var(--dour);}
+.auth{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.auth .box{background:#fff;border-radius:14px;padding:22px;max-width:620px;box-shadow:0 3px 12px rgba(14,58,52,.07);}
+.anchor{background:var(--creme2);border-left:5px solid var(--dour);padding:18px 22px;border-radius:0 12px 12px 0;max-width:680px;margin:0 auto;}
+.price-box{background:#fff;border:2px solid var(--dour);border-radius:16px;padding:30px;text-align:center;max-width:520px;margin:0 auto;}
+.price-box .big{font-family:Georgia,serif;font-size:3rem;color:var(--verde);}
+.price-box .old{color:var(--cinza);text-decoration:line-through;}
+.guarantee{display:inline-block;background:rgba(201,162,75,.15);border:1px solid var(--dour);border-radius:30px;padding:8px 18px;color:var(--verde);font-weight:700;margin-top:14px;}
+details{background:#fff;border-radius:10px;margin-bottom:10px;padding:4px 18px;box-shadow:0 2px 8px rgba(14,58,52,.05);}
+summary{padding:14px 0;font-weight:700;color:var(--verde);cursor:pointer;}
+details p{padding-bottom:14px;color:#333;}
+footer{background:var(--vesc);color:var(--dour2);text-align:center;padding:28px 20px;font-size:.82rem;}
+.disc{background:#efe8d6;color:var(--cinza);font-size:.76rem;text-align:center;padding:14px;}
+@media(max-width:600px){.hero h1{font-size:1.8rem;}h2.sec{font-size:1.5rem;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="nav"><div class="lz"><span>GD</span></div><div><b>Escola de Obra</b><div class="t">GD Engenharia e Perícia</div></div></div>
+    <div class="hero">
+      <h1 class="serif">Pare de olhar a trinca.<br><em>Comece a ler o que ela está dizendo.</em></h1>
+      <p class="sub">Diagnostique fissuras e trincas como um perito — em 2h30, com quem é chamado quando a obra dá errado.</p>
+      <a class="btn" href="#oferta">Quero enxergar como perito — R$ 49,90</a>
+      <p class="price">Preço de fundador da turma beta · Garantia Diamante de 15 dias</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="sec serif">Você já viveu isso</h2>
+    <p class="lead">A fissura aparece cedo na carreira, é visível para qualquer leigo e cobra uma resposta na hora. Errar — ou travar — custa reputação.</p>
+    <div class="grid">
+      <div class="card"><h3>"É grave, engenheiro?"</h3><p>O cliente aponta a trinca e espera uma resposta que você não tem certeza de dar.</p></div>
+      <div class="card"><h3>O abismo do canteiro</h3><p>A faculdade ensinou a calcular. Ninguém ensinou a ler o que a obra está dizendo.</p></div>
+      <div class="card"><h3>O medo de assinar</h3><p>Liberar no escuro assombra. Você quer método, não palpite.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--creme2);">
+  <div class="wrap">
+    <h2 class="sec serif">Em 2h30, você sai sabendo fazer</h2>
+    <p class="lead">Capacidades demonstráveis — não teoria solta.</p>
+    <ul class="check" style="max-width:680px;margin:0 auto;">
+      <li><b>Classificar</b> a fissura por abertura e origem provável (flexão, cisalhamento, recalque, retração, umidade).</li>
+      <li><b>Medir e monitorar</b> para decidir se é ativa ou estabilizada — o veredito com base.</li>
+      <li><b>Avaliar a gravidade</b> e escolher: monitorar, tratar, ou escorar/interditar e chamar o calculista.</li>
+      <li><b>Registrar e redigir</b> um laudo que protege você — e pode virar seu primeiro honorário.</li>
+    </ul>
+    <p class="small" style="text-align:center;max-width:640px;margin:20px auto 0;">Promessa honesta: você sai com o método, o modelo de laudo e o passo a passo da primeira vistoria. A capacidade é sua para aplicar.</p>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <h2 class="sec serif">Você aprende com o perito</h2>
+    <div class="auth">
+      <div class="box" style="color:var(--carvao);">
+        <h3 style="color:var(--verde);">Gustavo Domingos</h3>
+        <p>Engenheiro Civil — <b>CREA-PR 140.964-D</b> e CREA-SP 5071652757. Perito judicial atuante em processos do TJ-PR e do TJ-SP. 12 anos de experiência; calculista de estruturas de concreto armado e metálicas; especialista em patologias, perícias e reforço estrutural.</p>
+        <p class="small" style="margin-top:10px;">Não é teoria de quem leu sobre fissura. É o método de quem é chamado quando a fissura vira processo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="sec serif">O Kit Diamante de Sobrevivência</h2>
+    <p class="lead">Um arsenal de campo que nenhum concorrente entrega. Tudo com a assinatura de quem revisou.</p>
+    <div class="kit">
+      <div class="item star"><b>⭐ Ferramenta Interativa</b><br>Diagnóstico guiado no celular, offline: hipóteses, gravidade e próximo passo.</div>
+      <div class="item"><b>Quiz de 10 cenários</b><br>Treine o olho com fotos e gabarito comentado.</div>
+      <div class="item"><b>Planilha Inteligente</b><br>Dashboard com semáforo automático de gravidade.</div>
+      <div class="item"><b>Checklist A4 + A5</b><br>Critério de aceitação e norma por item.</div>
+      <div class="item"><b>Laudo Blindado</b><br>Word + PDF — a estrutura que protege quem assina.</div>
+      <div class="item"><b>Guia de Bolso</b><br>Consulta rápida no canteiro, no formato do celular.</div>
+      <div class="item"><b>Fluxograma de Emergência</b><br>Decisões críticas com caminho claro.</div>
+      <div class="item"><b>Apostila + e-book</b><br>Padrão editorial GD e 10 histórias reais de obra.</div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--creme2);">
+  <div class="wrap">
+    <h2 class="sec serif">Quanto custaria pelo caminho tradicional?</h2>
+    <div class="anchor">
+      <p>Pós-graduação em patologia: <b>R$ 815 a R$ 1.200 por mês</b> (Instituto Nova Engenharia / IPOG, jul/2026).<br>
+      Curso ao vivo de associação: da ordem de <b>R$ 300 por 14 horas</b> (AEA, jul/2026).</p>
+      <p style="margin-top:10px;"><b>A Escola de Obra entrega o essencial prático — com Kit e ferramenta — por R$ 49,90 na turma beta. E o material fica com você para sempre.</b></p>
+    </div>
+  </div>
+</section>
+
+<section id="oferta">
+  <div class="wrap">
+    <h2 class="sec serif">A oferta de fundador</h2>
+    <div class="price-box">
+      <p class="old">De R$ 99,90</p>
+      <div class="big">R$ 49,90</div>
+      <p class="small">Turma beta · acesso vitalício conforme política publicada + atualizações gratuitas</p>
+      <p style="margin:14px 0;">Ou leve a esteira completa: <b>Combo Vitalício (10 cursos) — R$ 497 à vista ou 12x de R$ 49,70.</b></p>
+      <a class="btn" href="#" style="margin-top:8px;">Entrar na turma de fundadores</a>
+      <div class="guarantee">🛡️ Garantia Diamante de 15 dias — e você fica com a planilha</div>
+      <p class="small" style="margin-top:14px;">Certificado com QR de autenticidade · Grupo VIP no WhatsApp (respostas do instrutor toda quinta, 19h)</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap" style="max-width:720px;">
+    <h2 class="sec serif">Perguntas frequentes</h2>
+    <div style="margin-top:24px;">
+      <details><summary>É muito básico ou muito avançado?</summary><p>É para o engenheiro com menos de 2 anos de CREA. Sai do zero prático e te leva ao laudo, sem enrolação.</p></details>
+      <details><summary>Não tenho tempo.</summary><p>Micro-aulas de 3–6 min, legendadas, para assistir no canteiro, no ônibus, sem som.</p></details>
+      <details><summary>Curso gravado tira minha dúvida?</summary><p>Sim: Grupo VIP com resposta do instrutor toda quinta, 19h, e microdesafios comentados.</p></details>
+      <details><summary>Vou conseguir cobrar por isso?</summary><p>Você sai com o modelo de laudo e o passo a passo da primeira vistoria. A capacidade é sua; referências de honorários (ex.: IBAPE) são de mercado, não promessa de ganho.</p></details>
+      <details><summary>E se eu não gostar?</summary><p>Garantia Diamante de 15 dias, 100% de volta — e a planilha fica com você.</p></details>
+      <details><summary>O certificado tem valor?</summary><p>Certificado de conclusão com carga horária, conteúdo programático e QR de autenticidade. Comprova que você fez o curso; não substitui título nem insinua chancela do CREA.</p></details>
+    </div>
+    <p style="text-align:center;margin-top:30px;"><a class="btn" href="#oferta">Quero começar agora — R$ 49,90</a></p>
+  </div>
+</section>
+
+<div class="disc">
+  Ferramentas e materiais têm caráter educativo e não substituem avaliação presencial de responsável técnico.
+  Parcelamento: R$ 497 à vista ou 12x de R$ 49,70 (juros do cartão repassados). Valores e âncoras revalidados na data do lançamento.
+</div>
+<footer>
+  <div class="lz" style="margin:0 auto 10px;"><span>GD</span></div>
+  <p><b>Escola de Obra</b> · GD Engenharia e Perícia · engenhariagd.com.br</p>
+  <p class="small" style="color:#b8a877;">Padrão Diamante — o rigor de quem assina · Grupo VIP: (43) 9 9925-9577</p>
+</footer>
+</body>
+</html>
