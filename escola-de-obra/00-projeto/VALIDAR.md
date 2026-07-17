@@ -109,6 +109,24 @@
 > procedimento; decisões sobre estrutura com fck não atendido são do **responsável técnico /
 > projetista estrutural**. O curso ensina a triagem, o ensaio e o registro.
 
+## G. Valores técnicos do CONTEÚDO — Curso 4 (Inspeção de Serviços Críticos)
+
+| # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
+|---|---|---|---|---|
+| G1 | Tolerâncias de execução (dimensões, prumo, nível) de fôrmas e estrutura | Módulo 2, checklist | NBR 14931 — Execução de estruturas de concreto | 🟡 **[VALIDAR]** valores exatos por elemento na edição vigente (2023) |
+| G2 | **Cobrimentos nominais** por classe de agressividade (ex.: CAA II — laje 25 mm, viga/pilar 30 mm; CAA III — 35/40 mm) | Aula 2.4, checklist, guia, ferramenta | NBR 6118, Tabela 7.2 | 🟡 **[VALIDAR]** confirmar valores/Δc da edição vigente |
+| G3 | Espaçadores como garantia física do cobrimento (tipo, quantidade/distribuição) | Aula 2.4 | NBR 14931 / boa prática | 🔵 |
+| G4 | Fôrmas e escoramentos: projeto próprio, apoio firme, prumo, contraventamento; cargas mín. de referência (sobrecarga 2,0 kN/m²; vento 0,6 kN/m²) | Aula 2.5, checklist | NBR 15696 — Fôrmas e escoramentos (2009) | 🟡 **[VALIDAR]** confirmar cargas/da edição vigente e revisão |
+| G5 | Alvenaria de vedação: prumo/nível/esquadro, amarração, juntas, **vergas e contravergas** em vãos | Módulo 3, checklist, guia | NBR 8545 — Execução de alvenaria sem função estrutural | 🟡 **[VALIDAR]** confirmar número/nome/vigência e dimensões mín. de vergas |
+| G6 | Prazos de desforma e plano de reescoramento | Aulas 4.1/4.2 | NBR 14931 + **plano do responsável técnico conforme resistência atingida** | 🟡 **[VALIDAR]** — o curso NÃO fixa prazos; ensina a exigir o plano. Confirmar redação |
+| G7 | Encunhamento da alvenaria após deformações acomodadas (sem pressa) | Aula 3.4 | Boa prática / NBR 8545 | 🟡 **[VALIDAR]** redação e prazo usual |
+| G8 | Brocas/ninhos pós-desforma: registrar, avaliar profundidade/armadura exposta e tratar conforme orientação técnica | Aula 4.3 | NBR 14931 / prática | 🔵 |
+| G9 | Segurança na inspeção (acesso, altura, escoramento não é escada) | Módulo 1 | NR-18 · NR-35 | 🟢 |
+
+> ⚠️ **Regra da alçada (Curso 4):** o aluno **compara com o projeto e libera/trava conforme ele**;
+> qualquer alteração de armação, fôrma ou escoramento é do projetista/responsável técnico. Prazos de
+> desforma vêm do plano do RT — nunca do "achômetro" do canteiro.
+
 ## Como usar este arquivo
 
 1. Rode a coluna **Status** de cima a baixo antes de qualquer publicação.
