@@ -68,6 +68,27 @@
 
 ---
 
+## E. Valores técnicos do CONTEÚDO — Curso 2 (Tipos de Fundações)
+
+| # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
+|---|---|---|---|---|
+| E1 | **Fundação rasa (superficial):** base assentada em profundidade **inferior a 2× a menor dimensão** da fundação | Apostila, ferramenta, guia, aula 2.1 | NBR 6122:2022 (definições) | 🔵 confirmar edição/redação exata |
+| E2 | **Fundação profunda:** ponta/base apoiada em profundidade **superior a 8× a menor dimensão em planta e no mínimo 3,0 m**; carga por ponta e/ou fuste | Apostila, ferramenta, guia, aula 3.1 | NBR 6122:2022 (definições) | 🔵 confirmar edição/redação exata |
+| E3 | Sondagem SPT e N-SPT (nº de golpes) como base para caracterizar o solo | Módulo 1, guia, ferramenta | NBR 6484 — Sondagens de simples reconhecimento com SPT | 🔵 |
+| E4 | Programação/quantidade de sondagens por área/edificação | Aula 1.2, apostila | NBR 6484 / NBR 8036 (programação) | 🟡 **[VALIDAR]** confirmar norma e critérios vigentes de nº e profundidade de furos |
+| E5 | Faixas de N-SPT → consistência/compacidade (mole, média, rija; fofa, medianamente compacta, compacta) | Guia, ferramenta (referência) | Correlação consagrada de mecânica dos solos | 🟡 **[VALIDAR]** apresentar como referência de mecânica dos solos, confirmar faixas |
+| E6 | Prova de carga estática em fundação **direta** | Módulo 4, relatório | NBR 6489 — Prova de carga estática em fundação direta | 🔵 |
+| E7 | Prova de carga estática em **estacas / fundação profunda** | Módulo 4, relatório | NBR 12131 (estacas) · NBR 16903 (fundação profunda) | 🔵 |
+| E8 | Ensaio de carregamento **dinâmico** em estacas | Aula 3.2, relatório | NBR 13208 — Estacas — Ensaio de carregamento dinâmico | 🟡 **[VALIDAR]** confirmar número/nome/edição |
+| E9 | Tipos de estaca citados (pré-moldada, metálica, hélice contínua, escavada, Strauss, Franki, raiz) e tubulão (céu aberto / ar comprimido) | Módulo 3, guia, ferramenta | NBR 6122 (execução) + prática consagrada | 🟡 **[VALIDAR]** confirmar limites de uso do ar comprimido e profundidade do NA |
+| E10 | Bloco de coroamento transmite a carga do pilar às estacas (dimensionado em concreto armado) | Aula 3.6, apostila | NBR 6118 + NBR 6122 | 🟢 |
+| E11 | Sapata: isolada, corrida, associada/combinada e alavancada (viga de equilíbrio/divisa) | Módulo 2, guia | NBR 6122 + prática | 🟢 |
+| E12 | Radier como fundação rasa em laje contínua | Aula 2.5 | NBR 6122 | 🟢 |
+
+> ⚠️ **Regra da alçada:** o curso deixa explícito que a **escolha e o dimensionamento finais da
+> fundação são do projetista de fundações/geotécnico**. O aluno aprende a ler, triar e encaminhar.
+> Nenhuma aula autoriza o júnior a dispensar projeto de fundações.
+
 ## Como usar este arquivo
 
 1. Rode a coluna **Status** de cima a baixo antes de qualquer publicação.
