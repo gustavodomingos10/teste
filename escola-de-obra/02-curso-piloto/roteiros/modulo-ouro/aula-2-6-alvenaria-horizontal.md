@@ -92,13 +92,13 @@ rápido de perder a reputação que esse curso está construindo pra você.**"
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
-"Desafio: ache uma fissura horizontal e responda três perguntas com foto no Grupo VIP — (1)
-está na base ou no topo da parede? (2) tem umidade/pó branco por perto? (3) as portas do
+"Desafio: ache uma fissura horizontal e responda três perguntas com foto no seu caderno de campo
+— (1) está na base ou no topo da parede? (2) tem umidade/pó branco por perto? (3) as portas do
 ambiente estão no esquadro? Com essas três respostas, você já saiu do 'chutei estrutura' pra
-uma hipótese de verdade. Quinta, 19h, a gente fecha os diagnósticos."
+uma hipótese de verdade. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

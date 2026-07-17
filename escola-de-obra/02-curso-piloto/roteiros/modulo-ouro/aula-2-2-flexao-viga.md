@@ -87,12 +87,13 @@ você faz a triagem certa e encaminha. **Essa é a alçada do júnior. E ela pro
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: numa laje ou viga que você tenha acesso, estica uma linha de um apoio ao outro,
-rente à face de baixo, e observe se existe flecha. Fotografa a linha esticada. Posta no Grupo
-VIP com 'sem flecha visível' ou 'tem barriga'. Quinta, 19h, eu comento."
+rente à face de baixo, e observe se existe flecha. Fotografa a linha esticada. Registre no seu
+caderno de campo com 'sem flecha visível' ou 'tem barriga'. Depois, confira sua leitura com o
+gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

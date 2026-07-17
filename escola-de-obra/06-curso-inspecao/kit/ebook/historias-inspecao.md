@@ -83,7 +83,7 @@
 
 ---
 
-> **Sua história é a próxima.** Microdesafios no Grupo VIP (quinta, 19h).
+> **Sua história é a próxima.** Faça os microdesafios em campo e registre no seu caderno de campo.
 >
 > *Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D.*
 > Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br

@@ -58,7 +58,7 @@ No curso, eu abro esse método passo a passo. E você leva o Kit inteiro para ap
 
 Três perguntas se repetem sempre que abro uma turma. Respondo direto:
 
-**"Curso gravado não tira dúvida."** Tira: tem Grupo VIP no WhatsApp com resposta minha **toda quinta, 19h**, e os microdesafios são comentados.
+**"Curso gravado não tira dúvida."** As aulas ficam **gravadas** para você revisar quantas vezes quiser, no seu ritmo — e cada microdesafio tem **gabarito comentado**. Você aprende revendo o ponto exato, não esperando resposta de alguém.
 
 **"Vou mesmo conseguir cobrar por isso?"** Você sai com o modelo de laudo e o passo a passo da primeira vistoria. A capacidade é sua; como referência de mercado, regulamentos do IBAPE trazem valores para vistorias — mas isso é parâmetro, **não** promessa de ganho.
 
@@ -91,7 +91,7 @@ Recapitulando o que você leva por R$ 49,90:
 - Curso completo (2h30, micro-aulas legendadas)
 - ⭐ Ferramenta interativa de diagnóstico + quiz de 10 cenários
 - Planilha, checklist, laudo blindado, guia de bolso, fluxograma, apostila e e-book
-- Grupo VIP (quinta, 19h) + Garantia Diamante de 15 dias
+- Aulas gravadas para revisar quando quiser + Garantia Diamante de 15 dias
 
 Depois de hoje, R$ 99,90.
 👉 [Entrar antes de fechar]
@@ -106,13 +106,13 @@ Depois de hoje, R$ 99,90.
 
 Que bom ter você aqui. Três coisas para começar com o pé direito:
 
-1. **Faça o microdesafio da Aula 1** ainda esta semana — ache uma fissura, meça e poste no Grupo VIP.
-2. **Entre no Grupo VIP** [LINK] — toda quinta, 19h, eu respondo os casos de vocês.
+1. **Faça o microdesafio da Aula 1** ainda esta semana — ache uma fissura, meça e registre no seu caderno de campo.
+2. **Revise as aulas quantas vezes quiser** na área de membros — cada microdesafio tem gabarito comentado para você conferir sua leitura.
 3. **Baixe o Kit** na área de membros e leve a ferramenta e o guia de bolso para a próxima obra.
 
-Uma dúvida honesta merece uma resposta honesta — traga as suas na quinta.
+O método inteiro está nas aulas, gravado, para você reler quando precisar.
 
-Em um mês, quero você sendo o júnior que o dono da obra libera de olho fechado.
+Quero você sendo o júnior que o dono da obra libera de olho fechado.
 — Gustavo
 
 ---

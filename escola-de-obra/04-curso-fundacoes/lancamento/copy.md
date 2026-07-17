@@ -54,7 +54,7 @@ Uma pós em geotecnia/fundações custa **milhares de reais** (faixa de R$ 815�
 ## BLOCO 6 — Oferta e garantia
 - **Curso:** R$ 49,90 (fundador) → R$ 99,90. · **Combo Vitalício (10 cursos):** R$ 497 à vista ou 12x de R$ 49,70 *(nunca "sem juros")*.
 - **Garantia Diamante 15 dias** — 100% de volta e você fica com a planilha.
-- Acesso vitalício conforme política `[VALIDAR D7]` · Certificado com QR · Grupo VIP (quinta, 19h).
+- Acesso vitalício conforme política `[VALIDAR D7]` · Certificado com QR.
 
 **CTA:** `[ Entrar na turma de fundadores — R$ 49,90 ]`
 

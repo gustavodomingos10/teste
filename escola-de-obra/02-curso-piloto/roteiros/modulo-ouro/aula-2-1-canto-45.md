@@ -91,13 +91,13 @@ você entregou com método."
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · poste no Grupo VIP (quinta, 19h)"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Seu desafio: nas próximas 48 horas, ache **uma** fissura de canto de abertura — na sua obra,
 na sua casa, na da sua avó. Meça, fotografe com uma moeda do lado pra dar escala, e procure a
-gêmea no canto oposto. Posta no Grupo VIP com uma frase: 'simétrica' ou 'só de um lado'. Na
-quinta, 19h, eu comento os casos de vocês ao vivo."
+gêmea no canto oposto. Registre no seu caderno de campo com uma frase: 'simétrica' ou 'só de um
+lado'. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula (banco do módulo)
 

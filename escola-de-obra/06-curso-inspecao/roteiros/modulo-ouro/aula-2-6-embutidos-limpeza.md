@@ -69,7 +69,7 @@ quê. Responsabilidade compartilhada por escrito é responsabilidade de verdade.
 ## 6. Microdesafio 48h (5:45–6:00)
 **Teleprompter:**
 "Desafio: na próxima laje (ou na última que você tiver foto), identifique os embutidos: quantos
-eletrodutos, caixinhas, luvas você conta? Algum solto ou esmagado? Posta no Grupo VIP. Quinta, 19h."
+eletrodutos, caixinhas, luvas você conta? Algum solto ou esmagado? Registre no seu caderno de campo. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.6** Furos e passagens em vigas/lajes devem:

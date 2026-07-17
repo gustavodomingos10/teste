@@ -67,7 +67,7 @@ Cada objetivo é **demonstrável** no curso (aula + microdesafio + ferramenta/pl
 1. **Microcaso** (30–60 s) — tensão real de obra, rotulado como *cenário ilustrativo baseado em situações recorrentes* (N1/N2/N3), com `[FOTO DO ACERVO: ...]`.
 2. **Conceito visual** — perfil de sondagem, corte de fundação, foto do acervo, animação simples.
 3. **Aplicação guiada** — o "como decidir/como conferir" passo a passo.
-4. **Microdesafio 48h** — comando executável, com postagem no Grupo VIP.
+4. **Microdesafio 48h** — comando executável, com registro no seu caderno de campo.
 5. Fim de módulo: **quiz de 5 questões** com gabarito comentado.
 
 ## 7. Mapa de aulas (título-gancho + minutagem + entregável ligado)

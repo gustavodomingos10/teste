@@ -82,14 +82,14 @@ você fosse ter que provar. Porque um dia você vai.**"
 
 ## 6. Microdesafio 48h (5:50–6:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP — o desafio do módulo"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo — o desafio do módulo"]`
 
 **Teleprompter:**
 "Esse é o desafio que fecha o Módulo de Ouro: escolha uma parede real com mais de uma fissura e
 monte o **mapa fissuratório completo** — foto, fissuras numeradas, o trio de cada uma, e o
-padrão dominante que você identificou. Posta no Grupo VIP. Esse é o exercício que, sozinho, já
-vale o curso. Quinta, 19h, eu escolho alguns mapas de vocês e faço o diagnóstico ao vivo, do
-meu jeito, pra você comparar com o seu."
+padrão dominante que você identificou. Registre no seu caderno de campo. Esse é o exercício que,
+sozinho, já vale o curso. Depois, confira sua leitura com o gabarito comentado do módulo e compare
+o seu diagnóstico com o do instrutor."
 
 ## 7. Quiz da aula
 

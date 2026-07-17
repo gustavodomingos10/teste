@@ -78,9 +78,7 @@ de defesa também. Monte um por obra, alimente a cada caminhão. Dá dois minuto
 
 **Teleprompter:**
 "Desafio que fecha o Módulo de Ouro: monte o seu **dossiê de concretagem** — uma pasta (física ou no
-celular) com: checklist do Kit, registro de concretagem em branco, e o guia de bolso. Foto no Grupo
-VIP com 'pronto pro próximo caminhão'. Quinta, 19h, eu mostro como um dossiê desses já resolveu
-discussão grande em perícia."
+celular) com: checklist do Kit, registro de concretagem em branco, e o guia de bolso. Foto no seu caderno de campo com 'pronto pro próximo caminhão'."
 
 ## 7. Quiz da aula
 

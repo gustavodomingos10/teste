@@ -65,7 +65,7 @@ pegá-lo — a inspeção. Em 2h40, você aprende a usar essa chance."*
 - **Ato 4 (M4):** o pós — desforma na hora certa, reescoramento, e o termo de liberação que documenta tudo. Fechamento da Fase A: *"você agora executa bem; a Fase B te ensina a diagnosticar o que os outros executaram mal."*
 
 ## 6. Estrutura fixa de cada aula
-Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (certo × errado + norma na tela) → aplicação guiada → microdesafio 48h (Grupo VIP) → quiz por módulo.
+Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (certo × errado + norma na tela) → aplicação guiada → microdesafio 48h (caderno de campo) → quiz por módulo.
 
 ## 7. Mapa de aulas
 

@@ -83,13 +83,13 @@ obra que dorme tranquila — e engenheiro que dorme tranquilo junto."
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP — desafio do módulo"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo — desafio do módulo"]`
 
 **Teleprompter:**
 "Desafio que fecha o Módulo de Ouro: pegue um caso (real, à sua alçada, ou o exemplo da área de
 membros) e preencha as **três primeiras seções** do parecer do Kit — identificação, dados de partida
-e leitura/triagem com o porquê. Posta no Grupo VIP. Esse exercício, sozinho, já mostra o júnior que
-você virou. Quinta, 19h, eu comento os pareceres de vocês."
+e leitura/triagem com o porquê. Registre no seu caderno de campo. Esse exercício, sozinho, já mostra
+o júnior que você virou; depois, confira com o parecer-modelo comentado do módulo."
 
 ## 7. Quiz da aula
 

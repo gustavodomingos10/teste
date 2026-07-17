@@ -89,7 +89,7 @@ o registro é o mesmo: número, hora, foto, assinatura. **Ensaios sem registro n
 **Teleprompter:**
 "Desafio: monte o seu 'kit slump' — cone, haste, placa, régua, balde — e fotografe pronto pra usar.
 Não tem cone na obra? Posta a foto do que falta e marca o encarregado: essa cobrança é o primeiro
-passo do controle. Grupo VIP, quinta às 19h."
+passo do controle."
 
 ## 7. Quiz da aula
 

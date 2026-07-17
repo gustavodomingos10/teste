@@ -84,8 +84,8 @@ e réu."
 
 **Teleprompter:**
 "Desafio: na próxima reunião de equipe (ou no grupo da obra), estabeleça a regra em uma frase:
-'concreto aqui não recebe água; ajuste é com a central'. Posta no Grupo VIP como foi recebido —
-aposto que melhor do que você imagina. Quinta, 19h, eu conto as melhores reações."
+'concreto aqui não recebe água; ajuste é com a central'. Registre no seu caderno de campo como foi recebido —
+aposto que melhor do que você imagina."
 
 ## 7. Quiz da aula
 

@@ -86,8 +86,8 @@ os horários responde em 10 segundos. Quem não tem, vira réu da própria omiss
 
 **Teleprompter:**
 "Desafio: consiga uma nota fiscal de concreto (da sua obra, de um colega) e localize os campos de
-horário. Posta no Grupo VIP a foto (pode tarjar os dados comerciais) apontando onde está a hora da
-água. Quinta, 19h, a gente lê notas juntos."
+horário. Registre no seu caderno de campo a foto (pode tarjar os dados comerciais) apontando onde está a hora da
+água."
 
 ## 7. Quiz da aula
 

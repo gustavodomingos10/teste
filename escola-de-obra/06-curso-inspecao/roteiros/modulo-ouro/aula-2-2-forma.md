@@ -74,7 +74,7 @@ problema nasceu. Detalhe protege; 'ok' genérico não."
 ## 6. Microdesafio 48h (6:50–7:00)
 **Teleprompter:**
 "Desafio: numa fôrma qualquer da sua obra, faça o **teste da luz** no fundo e o **prumo em duas
-direções** num pilar. Posta no Grupo VIP o que achou. Quinta, 19h."
+direções** num pilar. Registre no seu caderno de campo o que achou. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.2** Por que a estanqueidade da fôrma importa?

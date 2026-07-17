@@ -97,13 +97,14 @@ o único que você não enxerga.**"
 
 ## 6. Microdesafio 48h (7:45–8:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio de detetive: escolha uma construção com fissuras e faça o **teste das três pistas** —
 (1) as diagonais apontam pro mesmo lado? (2) as portas daquele trecho emperram? (3) o piso caiu
-pra algum lado? Fotografa e posta no Grupo VIP quantas pistas bateram: 0, 1, 2 ou 3. Quanto mais
-pistas na mesma direção, mais forte a hipótese de recalque. Quinta, 19h, eu leio os casos com vocês."
+pra algum lado? Fotografa e registre no seu caderno de campo quantas pistas bateram: 0, 1, 2 ou 3.
+Quanto mais pistas na mesma direção, mais forte a hipótese de recalque. Depois, confira sua leitura
+com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

@@ -92,13 +92,13 @@ base, e devolveu a decisão final a quem tem a alçada. **É assim que o júnior
 
 ## 6. Microdesafio 48h (7:40–8:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: com um boletim de sondagem em mãos (o seu, ou um exemplo que eu deixo na área de
 membros), percorra a árvore e diga: rasa ou profunda? E o mais importante — **por quê**, em uma
-frase, citando a camada resistente e o NA. Posta no Grupo VIP. Quinta, 19h, a gente compara os
-raciocínios."
+frase, citando a camada resistente e o NA. Registre no seu caderno de campo. Depois, confira o seu
+raciocínio com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

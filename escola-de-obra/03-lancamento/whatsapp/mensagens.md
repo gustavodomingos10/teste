@@ -25,7 +25,7 @@
 > O que você leva além das aulas: ferramenta de diagnóstico no celular, planilha com semáforo de gravidade, checklist, laudo blindado e guia de bolso. Tudo assinado. 👉 [LINK]
 
 **7 · Objeção (lista)**
-> "Curso gravado tira dúvida?" Tira: Grupo VIP com resposta minha toda quinta, 19h. Você não fica sozinho. 👉 [LINK]
+> "Curso gravado tira dúvida?" As aulas ficam gravadas pra você revisar quantas vezes quiser, e cada microdesafio tem gabarito comentado. Você confere sua leitura contra a resposta certa. 👉 [LINK]
 
 **8 · Garantia (status)**
 > Risco zero: 15 dias de Garantia Diamante. Não gostou, devolvo 100% — e a planilha fica com você. 👉 [LINK]
@@ -38,7 +38,7 @@
 
 ---
 
-### Mensagem-modelo de boas-vindas ao Grupo VIP (pós-compra)
-> Seja bem-vindo(a) à turma de fundadores! 🙌 Aqui a regra é simples: toda **quinta, 19h**, eu respondo os casos de vocês. Comece fazendo o microdesafio da Aula 1 — ache uma fissura, meça e poste aqui. Bora?
+### Mensagem-modelo de boas-vindas (pós-compra)
+> Seja bem-vindo(a) à turma de fundadores! 🙌 Suas aulas já estão liberadas na área de membros — revise quantas vezes quiser, no seu ritmo. Comece pela Aula 1 e faça o microdesafio: ache uma fissura, meça e registre no seu caderno de campo. Bora?
 
-*Ritual fixo do Grupo VIP: respostas do instrutor toda quinta-feira, 19h — (43) 9 9925-9577.*
+*Curso 100% narrado e gravado: aulas + Kit na área de membros, no seu ritmo. Sem grupo e sem consultoria.*

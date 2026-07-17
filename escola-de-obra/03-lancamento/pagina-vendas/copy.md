@@ -85,7 +85,7 @@ E, diferente da pós, **o material fica com você para sempre.**
 - **⭐ Garantia Diamante de 15 dias:** não gostou? Devolvemos 100% — **e você fica com a planilha.**
 - **Acesso vitalício** conforme política publicada `[VALIDAR D7]` + atualizações gratuitas enquanto a esteira existir.
 - **Certificado** de conclusão com QR Code de autenticidade, carga horária e conteúdo programático. *(sem insinuar chancela do CREA)*
-- **Grupo VIP no WhatsApp** — respostas do instrutor **toda quinta, 19h.**
+- **área de membros** — aulas gravadas para revisar quando quiser + microdesafios com **gabarito comentado**.
 
 **CTA:** `[ Entrar na turma de fundadores — R$ 49,90 ]`
 
@@ -93,7 +93,7 @@ E, diferente da pós, **o material fica com você para sempre.**
 
 1. **"É muito básico / muito avançado?"** É para o engenheiro com menos de 2 anos de CREA. Sai do zero prático e te leva ao laudo — sem encher linguiça.
 2. **"Não tenho tempo."** São micro-aulas de 3–6 min, legendadas, para assistir no canteiro, no ônibus, sem som.
-3. **"Curso gravado não tira minha dúvida."** Tira: Grupo VIP com resposta do instrutor toda quinta, 19h, e microdesafios comentados.
+3. **"Curso gravado não tira minha dúvida."** As aulas ficam gravadas para você revisar quantas vezes quiser, no seu ritmo, e cada microdesafio tem **gabarito comentado** — você confere sua leitura contra a resposta certa.
 4. **"Vou mesmo conseguir cobrar por isso?"** Você sai com o modelo de laudo e o passo a passo da primeira vistoria. A capacidade é sua; a referência de honorários (ex.: IBAPE) é de mercado, não uma promessa de ganho. `[VALIDAR C5]`
 5. **"E se eu não gostar?"** Garantia Diamante de 15 dias, 100% de volta, e a planilha fica com você.
 6. **"Vale o preço?"** Uma pós custa R$ 815–1.200/mês. Aqui é R$ 49,90 e o material é seu para sempre.
@@ -101,7 +101,7 @@ E, diferente da pós, **o material fica com você para sempre.**
 
 ## BLOCO 8 — Fechamento
 
-> **Em um mês, quero você sendo o júnior que o dono da obra libera de olho fechado.**
+> **Quero você sendo o júnior que o dono da obra libera de olho fechado.**
 > Não porque decorou — porque tem método e registro. Vem comigo.
 
 **CTA final:** `[ Quero começar agora — R$ 49,90 ]`

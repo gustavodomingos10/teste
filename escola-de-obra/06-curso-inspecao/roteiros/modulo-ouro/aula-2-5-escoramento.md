@@ -75,8 +75,8 @@ registre que você **pediu** — a cobrança documentada transfere a decisão a 
 ## 6. Microdesafio 48h (6:50–7:00)
 **Teleprompter:**
 "Desafio: embaixo de uma laje escorada (com acesso seguro), fotografe **o melhor e o pior pé de
-escora** que encontrar. Posta os dois no Grupo VIP com uma linha sobre cada. Quinta, 19h, a gente
-faz o ranking dos apoios."
+escora** que encontrar. Registre os dois no seu caderno de campo com uma linha sobre cada. Depois,
+confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.5** Por que escora fora do prumo é grave?

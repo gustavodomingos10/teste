@@ -70,8 +70,8 @@ que tem biografia documentada.**"
 ## 6. Microdesafio 48h (5:45–6:00)
 **Teleprompter:**
 "Desafio final do módulo: preencha o Termo de Liberação do Kit numa inspeção real (ou simulada com
-as fotos da sua última obra). Posta no Grupo VIP o veredito e a pendência mais interessante que
-encontrou. Quinta, 19h, eu comento os termos de vocês."
+as fotos da sua última obra). Registre no seu caderno de campo o veredito e a pendência mais interessante que
+encontrou. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.7** Quando "liberado com pendências" é um veredito válido?

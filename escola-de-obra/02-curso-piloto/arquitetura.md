@@ -82,7 +82,7 @@ Toda micro-aula segue o mesmo ritmo (Seção 3.3):
    em situações recorrentes* (regras N1/N2/N3), com `[FOTO DO ACERVO: ...]`.
 2. **Conceito visual** — planta/zoom, foto em alta, sobreposição de norma na tela.
 3. **Aplicação guiada** — o "como fazer" passo a passo.
-4. **Microdesafio 48h** — comando executável na obra do aluno, com postagem no Grupo VIP.
+4. **Microdesafio 48h** — comando executável na obra do aluno, com registro no seu caderno de campo.
 5. Fim de módulo: **quiz de 5 questões** com gabarito comentado.
 
 ## 7. Mapa de aulas (título-gancho + minutagem + entregável ligado)

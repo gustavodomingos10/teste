@@ -94,12 +94,13 @@ cobram ter **ignorado** o sinal. E você não ignorou."
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: ache uma superfície craquelada e faça o **teste do som** (nós dos dedos batendo).
-Fotografa a malha e posta no Grupo VIP com uma palavra: 'oco' ou 'maciço'. Bônus: diz se está
-num elemento estrutural ou num acabamento. Quinta, 19h, a gente calibra os diagnósticos juntos."
+Fotografa a malha e registre no seu caderno de campo com uma palavra: 'oco' ou 'maciço'. Bônus:
+diz se está num elemento estrutural ou num acabamento. Depois, confira sua leitura com o gabarito
+comentado do módulo."
 
 ## 7. Quiz da aula
 

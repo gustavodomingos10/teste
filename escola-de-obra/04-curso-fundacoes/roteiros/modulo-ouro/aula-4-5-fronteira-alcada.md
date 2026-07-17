@@ -89,12 +89,12 @@ carreira longa se constrói."
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: escreva **três perguntas** que você faria a um projetista de fundações numa reunião de
-obra — do tipo que mostra que você entende sem invadir a alçada dele. Posta no Grupo VIP. Quinta,
-19h, eu escolho as melhores e explico por que são boas perguntas."
+obra — do tipo que mostra que você entende sem invadir a alçada dele. Registre no seu caderno de
+campo e confira contra a lista de perguntas-modelo do material do módulo."
 
 ## 7. Quiz da aula
 

@@ -64,7 +64,7 @@
 - **Fechamento:** ponte para os cursos 4 (inspeção de serviços) e 5 (fissuras) e o combo.
 
 ## 6. Estrutura fixa de cada aula
-Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (norma na tela) → aplicação guiada → microdesafio 48h (Grupo VIP) → quiz por módulo.
+Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (norma na tela) → aplicação guiada → microdesafio 48h (caderno de campo) → quiz por módulo.
 
 ## 7. Mapa de aulas
 

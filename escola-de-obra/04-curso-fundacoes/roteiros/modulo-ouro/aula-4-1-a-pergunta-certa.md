@@ -85,13 +85,13 @@ definição da fundação.'* Isso protege você e a obra. Decidir fundação sem
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: pegue um projeto ou uma obra à qual você tenha acesso e responda as **três perguntas**
-por escrito — o que o solo diz (tem sondagem?), qual a ordem de carga, quais as restrições. Posta
-no Grupo VIP as três respostas em três linhas. Quinta, 19h, eu mostro como cada resposta empurra a
-decisão pra um lado."
+por escrito — o que o solo diz (tem sondagem?), qual a ordem de carga, quais as restrições. Registre
+no seu caderno de campo as três respostas em três linhas. Depois, confira no gabarito comentado do
+módulo como cada resposta empurra a decisão pra um lado."
 
 ## 7. Quiz da aula
 

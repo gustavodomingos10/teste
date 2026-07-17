@@ -83,13 +83,13 @@ certa. **A alçada do júnior é enxergar o risco e acionar quem resolve — nã
 
 ## 6. Microdesafio 48h (6:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio de observação (esse é só de olho, sem tocar em nada perigoso): identifique, numa
 estrutura à qual você tenha acesso seguro, a **região dos apoios** de uma viga. Fotografe e
-poste no Grupo VIP: 'apoio limpo' ou 'tem fissura inclinada aqui'. Se for o segundo caso, a
-gente conversa sobre encaminhamento na quinta, 19h."
+registre no seu caderno de campo: 'apoio limpo' ou 'tem fissura inclinada aqui'. Se for o
+segundo caso, confira o encaminhamento com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

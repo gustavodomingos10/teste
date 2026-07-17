@@ -1,9 +1,9 @@
 # 🎬 20 Reels — Conteúdo Orgânico (Fissuras e Trincas)
 
-> Estrutura de cada Reel: **Gancho de 3s → 1 ideia técnica → CTA** (ferramenta LITE do site ou Grupo VIP).
+> Estrutura de cada Reel: **Gancho de 3s → 1 ideia técnica → CTA** (ferramenta LITE do site ou página do curso).
 > Formatos-âncora: *"Certo × Errado"* e *"O que essa fissura está dizendo"*.
 > Todo Reel usa foto/B-roll do acervo (`[FOTO DO ACERVO]`) e legenda 100%. Nada de caso real sem N3.
-> CTA padrão A: "Faça o diagnóstico grátis no link" (ferramenta LITE). CTA padrão B: "Toda quinta, 19h, respondo no Grupo VIP."
+> CTA padrão A: "Faça o diagnóstico grátis no link" (ferramenta LITE). CTA padrão B: "Conheça o curso completo no link."
 
 ---
 
@@ -61,4 +61,4 @@
 - Reutilizar trechos verticais das micro-aulas (ver `../gravacao/plano-de-gravacao.md`).
 - Cada Reel termina com selo GD e 1 CTA (não dois).
 - Ferramenta LITE é a isca principal: leva ao diagnóstico grátis → captura com consentimento LGPD → curso.
-- Toda quinta, transformar as dúvidas do Grupo VIP em 1–2 Reels novos (o ritual alimenta o conteúdo).
+- Transformar as dúvidas mais comuns (comentários e FAQ) em 1–2 Reels novos por semana.

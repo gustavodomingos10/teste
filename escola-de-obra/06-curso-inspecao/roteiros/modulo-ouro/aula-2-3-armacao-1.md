@@ -74,7 +74,7 @@ antes de liberar. Nunca aceite 'depois a gente reforça' — depois o concreto j
 ## 6. Microdesafio 48h (6:50–7:00)
 **Teleprompter:**
 "Desafio: numa armação disponível, confira **uma viga completa** (bitola, contagem, estribos) contra
-o corte do projeto. Posta no Grupo VIP: 'conferi, bateu' ou 'achei divergência'. Quinta, 19h."
+o corte do projeto. Registre no seu caderno de campo: 'conferi, bateu' ou 'achei divergência'. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.3** Por que o "negativo pisado" é grave?

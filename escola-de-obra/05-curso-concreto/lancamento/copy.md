@@ -55,7 +55,7 @@ Kit inteiro seu para sempre.
 ## BLOCO 6 — Oferta
 R$ 49,90 (fundador) → R$ 99,90 · **Combo Vitalício (10 cursos): R$ 497 à vista ou 12x de R$ 49,70**
 *(nunca "sem juros")* · **Garantia Diamante 15 dias** (fica com a planilha) · vitalício conforme
-política `[VALIDAR D7]` · certificado com QR · Grupo VIP (quinta, 19h).
+política `[VALIDAR D7]` · certificado com QR.
 
 **CTA:** `[ Entrar na turma de fundadores — R$ 49,90 ]`
 

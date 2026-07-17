@@ -49,7 +49,7 @@ apostilas dos cursos NR existentes (fundo verde-petróleo escuro, creme, título
 - Mentor direto, generoso com bastidor, **zero arrogância**. Alguém que já pagou caro por erros e agora encurta o caminho dos novatos.
 - Ângulo de autoridade único: **quem ensina é o perito que é chamado quando a obra dá errado.**
 - Humor pontual, **nunca** às custas do aluno.
-- Frase-âncora (ajustável à voz do instrutor): *"Em um mês, quero você sendo o júnior que o dono da obra libera de olho fechado."*
+- Frase-âncora (ajustável à voz do instrutor, **sem prazo** — auditoria 1.8): *"Quero você sendo o júnior que o dono da obra libera de olho fechado."*
 - Segunda pessoa ("você"), frases curtas, verbo no imperativo para instruções de campo.
 
 ## 5. Componentes visuais recorrentes

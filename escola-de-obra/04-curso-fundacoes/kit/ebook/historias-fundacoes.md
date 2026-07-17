@@ -104,7 +104,7 @@ ficou enterrado dorme tranquilo — e constrói reputação.
 
 ---
 
-> **Sua história é a próxima.** Faça os microdesafios, poste no Grupo VIP (quinta, 19h) e transforme
+> **Sua história é a próxima.** Faça os microdesafios, registre no seu caderno de campo e transforme
 > cada obra num repertório de decisões defensáveis.
 >
 > *Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D.*

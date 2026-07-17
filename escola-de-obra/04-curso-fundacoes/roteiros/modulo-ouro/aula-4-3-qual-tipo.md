@@ -80,12 +80,12 @@ prometa desempenho de um tipo específico como se fosse garantia sua."
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: pegue um caso 'profunda' e monte a **lista curta** — dois ou três tipos que fariam
-sentido — justificando **um corte** por vizinhança ou água. Posta no Grupo VIP. Quinta, 19h, eu
-comento os desempates de vocês."
+sentido — justificando **um corte** por vizinhança ou água. Registre no seu caderno de campo. Depois,
+confira os seus desempates com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 

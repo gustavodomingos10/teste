@@ -129,7 +129,7 @@ este curso te dá — e é assim que se vira a referência que o dono da obra li
 
 ---
 
-> **Sua história é a próxima.** Faça os microdesafios, poste no Grupo VIP (quinta, 19h) e
+> **Sua história é a próxima.** Faça os microdesafios, registre no seu caderno de campo e
 > transforme cada fissura que você encontrar em repertório.
 >
 > *Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D.*

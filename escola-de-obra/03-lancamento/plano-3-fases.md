@@ -30,7 +30,7 @@
 - **Alavancas:** página de vendas com depoimentos reais; sequência de 7 e-mails; Reels "resultado do aluno" (com termo).
 - **Order bumps:** combo no checkout do curso; bônus "IA na rotina do engenheiro" no checkout do combo.
 - **Meta:** `[VALIDAR — ex.: X vendas/mês e Y% de conversão da página]`.
-- **Ritual:** Grupo VIP toda quinta, 19h → alimenta FAQ e Reels.
+- **Conteúdo:** dúvidas mais comuns (comentários/FAQ) → alimentam Reels e material de apoio.
 
 **Critério de passagem para a Fase 3:**
 - [ ] Conversão estável da página `[VALIDAR: meta %]`.
@@ -49,7 +49,7 @@
 **Guardrails de escala (não negociáveis):**
 - Nenhuma campanha promete ganho garantido; toda âncora com fonte.
 - Ferramenta LITE continua sendo a isca de topo de funil (baixo custo, alto valor percebido).
-- Suporte (Grupo VIP) escala com FAQ e conteúdo, não com promessa de atendimento individual ilimitado.
+- Suporte assíncrono (FAQ + gabaritos comentados + aulas graváveis) escala com conteúdo, sem promessa de atendimento individual.
 
 ---
 
@@ -61,7 +61,7 @@
 | Ticket médio | receita / vendas | acompanhar |
 | Reembolsos (Garantia Diamante) | pedidos / vendas | manter baixo |
 | Depoimentos autorizados | nº coletado | crescente |
-| Engajamento Grupo VIP | posts de microdesafio / semana | crescente |
+| Engajamento (área de membros) | microdesafios registrados / conclusão do curso | crescente |
 
 > **Regra de ouro:** só sobe de fase quando o critério de passagem está batido. Escalar um funil que
 > ainda não converte é queimar dinheiro — e reputação.

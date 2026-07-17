@@ -36,12 +36,12 @@
 - [ ] Garantia: **15 dias** (Garantia Diamante) — configurar reembolso.
 - [ ] Política de "acesso vitalício" publicada conforme D7 (sem letra miúda enganosa).
 - [ ] Certificado: ativar com carga horária e conteúdo programático; **QR de autenticidade**; sem insinuar chancela do CREA.
-- [ ] Link do **Grupo VIP** (WhatsApp) na área de membros + e-mail de boas-vindas (E-mail 7).
+- [ ] Material de apoio e Kit disponíveis na área de membros + e-mail de boas-vindas (E-mail 7).
 
 ## 5. Ferramenta interativa (PRO e LITE)
 - [ ] **PRO:** hospedar `ferramenta-fissuras-PRO.html` (área de membros ou página protegida) e linkar. É arquivo único, funciona offline.
 - [ ] **LITE:** publicar `ferramenta-fissuras-LITE.html` no site `engenhariagd.com.br/ferramentas` como isca de leads (com consentimento LGPD já embutido).
-- [ ] Testar os links `wa.me` (compartilhar resultado e falar com a Escola) no celular.
+- [ ] Testar os links `wa.me` (compartilhar resultado; CTA de vendas da versão LITE) no celular.
 
 ## 6. Lançamento
 - [ ] Programar sequência de **7 e-mails** (`emails/sequencia-7-emails.md`) com os links certos.
@@ -50,7 +50,7 @@
 - [ ] Conferir a página de vendas (adaptar `pagina-vendas/index.html` ao layout da plataforma).
 
 ## 7. Pós-lançamento
-- [ ] Ritual do Grupo VIP: **quinta, 19h**.
+- [ ] Gabaritos comentados dos microdesafios publicados na área de membros.
 - [ ] Coletar depoimentos autorizados (`depoimentos/`) → atualizar página na Fase 2.
 - [ ] Acompanhar o painel de métricas (`plano-3-fases.md`).
 - [ ] Ao fim da turma beta: subir para R$ 99,90 e seguir o critério de passagem de fase.

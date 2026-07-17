@@ -79,7 +79,7 @@ liberou foi profissional."
 **Teleprompter:**
 "Desafio: descubra o cobrimento nominal especificado no projeto da sua obra (está nas notas do
 estrutural) e fotografe um espaçador instalado. Não achou espaçador na obra? **Essa** é a foto:
-posta no Grupo VIP 'minha obra não tem espaçador' — e vamos resolver isso juntos. Quinta, 19h."
+registre no seu caderno de campo 'minha obra não tem espaçador'. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.4** O que garante fisicamente o cobrimento da armadura?

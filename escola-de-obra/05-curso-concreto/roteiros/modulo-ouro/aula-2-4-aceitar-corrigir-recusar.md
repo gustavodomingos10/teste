@@ -87,8 +87,8 @@ com aditivo pela central e re-ensaiado: Z mm / recusado]'*. Uma linha. Cinquenta
 
 **Teleprompter:**
 "Desafio: descubra qual é o slump especificado no projeto/pedido da sua obra atual — e a tolerância.
-Não tem especificação? Essa descoberta vale ouro: posta no Grupo VIP 'minha obra não especifica
-slump' e vamos conversar sobre isso na quinta, 19h."
+Não tem especificação? Essa descoberta vale ouro: registre no seu caderno de campo 'minha obra não especifica
+slump'."
 
 ## 7. Quiz da aula
 

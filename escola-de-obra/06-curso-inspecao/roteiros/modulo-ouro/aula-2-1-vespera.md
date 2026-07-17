@@ -71,8 +71,8 @@ visível. Sem registro, a memória do canteiro sempre reescreve a história — 
 ## 6. Microdesafio 48h (6:50–7:00)
 **Teleprompter:**
 "Desafio: agende **uma** inspeção de véspera (qualquer serviço que vá ser coberto — concretagem,
-reboco, contrapiso) e faça com projeto na mão. Posta no Grupo VIP: 'inspecionei X na véspera, achei
-N pendências'. Quinta, 19h, comparamos os achados."
+reboco, contrapiso) e faça com projeto na mão. Registre no seu caderno de campo: 'inspecionei X na véspera, achei
+N pendências'. Depois, confira sua leitura com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 **Q2.1** Quando deve acontecer a inspeção de liberação de concretagem?

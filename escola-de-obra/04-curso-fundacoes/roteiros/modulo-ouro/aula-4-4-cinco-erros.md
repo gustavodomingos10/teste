@@ -68,12 +68,12 @@ te ouvirem, você salvou a obra. Se não te ouvirem, você salvou a **si mesmo**
 
 ## 5. Microdesafio 48h (6:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h · caderno de campo"]`
 
 **Teleprompter:**
 "Desafio: dos cinco erros, escolha **um** que você já viu acontecer (ou quase) numa obra e conte a
-história — sem citar nomes — junto com o antídoto que teria evitado. Posta no Grupo VIP. Os
-melhores relatos viram conteúdo na quinta, 19h."
+história — sem citar nomes — junto com o antídoto que teria evitado. Registre no seu caderno de
+campo. Escrever o erro e o antídoto, sozinho, já fixa a lição para a próxima obra."
 
 ## 6. Quiz da aula
 

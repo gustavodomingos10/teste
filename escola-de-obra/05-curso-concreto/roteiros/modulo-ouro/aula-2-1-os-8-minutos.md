@@ -90,12 +90,12 @@ recebimento' do 'engenheiro que estava lá'. Guarde tudo. O registro de hoje é 
 
 ## 6. Microdesafio 48h (6:50–7:00)
 
-`[NA TELA: "Seu desafio · 48h · Grupo VIP"]`
+`[NA TELA: "Seu desafio · 48h"]`
 
 **Teleprompter:**
 "Desafio: escreva a sua sequência de 6 passos num cartão (ou salve o guia de bolso do Kit no
-celular) e cole no capacete ou na prancheta. Fotografa e posta no Grupo VIP com a frase 'pronto pro
-próximo caminhão'. Quinta, 19h, eu conto como foi o MEU primeiro caminhão — spoiler: eu não estava pronto."
+celular) e cole no capacete ou na prancheta. Fotografa e registre no seu caderno de campo com a frase 'pronto pro
+próximo caminhão'."
 
 ## 7. Quiz da aula
 

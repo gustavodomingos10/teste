@@ -34,7 +34,7 @@ juros" seria propaganda enganosa, CDC/CONAR).
 
 Bônus são **capacidades e acessos**, não resultados prometidos:
 1. **Preço de fundador** travado (R$ 49,90 no curso / condição especial no combo enquanto durar a turma beta).
-2. **Acesso ao Grupo VIP** no WhatsApp com o ritual fixo (quinta, 19h) — respostas do instrutor.
+2. **Aulas gravadas com acesso vitalício** — revise cada aula quantas vezes quiser; microdesafios com gabarito comentado.
 3. **Order bump sugerido:** *"IA na rotina do engenheiro — com a supervisão de quem assina"*.
 4. **Todos os materiais do Kit** (planilha, checklist, ferramenta PRO) — e o aluno **fica com a planilha mesmo se pedir reembolso** (ver Garantia Diamante).
 5. **Certificado** de conclusão com QR Code de autenticidade, carga horária e conteúdo programático.
@@ -61,7 +61,7 @@ Isso torna "vitalício" **verdadeiro e defensável**, não uma promessa vaga.
 |---|---|---|
 | Checkout do curso individual | **Order bump: combo com desconto** | "leve os 10 por..." |
 | Checkout do combo | **Order bump: bônus IA** | valor baixo, alto valor percebido |
-| Pós-compra (área de membros) | Convite ao Grupo VIP | pertencimento, não venda |
+| Pós-compra (área de membros) | Onboarding do curso + Kit | ativação, não venda |
 
 ---
 

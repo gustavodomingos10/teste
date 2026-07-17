@@ -101,7 +101,7 @@ pra ele. Na terceira concretagem, era ele quem treinava o estagiário.
 
 ---
 
-> **Sua história é a próxima.** Poste os microdesafios no Grupo VIP (quinta, 19h).
+> **Sua história é a próxima.** Registre os microdesafios no seu caderno de campo.
 >
 > *Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D.*
 > Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br

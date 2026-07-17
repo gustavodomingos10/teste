@@ -41,7 +41,7 @@ Node 22, Chromium headless (HTML→PDF), mermaid-cli (fluxograma).
 - PDF equivalente para impressão. Campos preenchíveis destacados em `[colchetes]`.
 
 ### 4. Guia de Bolso
-- Formato vertical (90×160 mm ≈ 9:16), tipografia legível em tela pequena, tabelas com **fonte normativa**, semáforo, capa + 4 páginas de consulta + CTA do Grupo VIP.
+- Formato vertical (90×160 mm ≈ 9:16), tipografia legível em tela pequena, tabelas com **fonte normativa**, semáforo, capa + 4 páginas de consulta + CTA do curso.
 
 ### 5. Fluxograma
 - Fonte **Mermaid** editável (`.mmd`) + **SVG** (render fiel via mermaid-cli) + **PDF** com cabeçalho de marca. Nós de decisão sim/não com critério objetivo; **caminho de emergência destacado** em vermelho.
@@ -76,7 +76,7 @@ bash   gerar_pdfs.sh                                           # todos os PDFs d
 - 🟡 Substituir **todos** os `[FOTO DO ACERVO: ...]` por registros reais (ver `PEDIDO-DE-MATERIAL.md`).
 - 🟡 Confirmar/assinar os valores técnicos 🟡 do `VALIDAR.md` (limiares B1/B9, convenção B2, redações B4–B7).
 - 🟡 Confirmar redação das credenciais (D1) e substituir o selo textual pelo **logo/selo GD** em PNG.
-- 🟡 Reconfirmar links `wa.me` e número do Grupo VIP na publicação.
+- 🟡 Reconfirmar link `wa.me` de vendas (CTA público) na publicação.
 
 **Conclusão:** nada "especificado mas não construído". Todos os arquivos abrem e funcionam; os dois
 componentes com lógica (planilha e ferramenta) foram testados com resultados corretos.
