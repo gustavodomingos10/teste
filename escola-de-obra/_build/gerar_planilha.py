@@ -53,7 +53,7 @@ wsp["A1"].alignment = Alignment(horizontal="left", vertical="center")
 
 params = [
     ("Limiar de atividade (mm)", 0.10, "Crescimento de abertura que caracteriza fissura ATIVA no período. [VALIDAR B9]"),
-    ("Limite de abertura w_k (mm)", 0.30, "Abertura de referência (NBR 6118, Tab. 13.4 — CAA II/III). Ajustar à classe de agressividade. [VALIDAR B1]"),
+    ("Limite de abertura w_k (mm)", 0.30, "Abertura de referência (NBR 6118:2023, Tab. 13.4 — CAA II/III). Ajustar à classe de agressividade. [VALIDAR B1]"),
 ]
 wsp["A3"] = "Parâmetro"; wsp["B3"] = "Valor"; wsp["C3"] = "Observação / fonte"
 for c in ("A3","B3","C3"):

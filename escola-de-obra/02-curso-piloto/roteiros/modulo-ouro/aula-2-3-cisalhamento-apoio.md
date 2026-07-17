@@ -31,7 +31,7 @@ tipicamente lá pelos 45°, como se uma faca tivesse passado de baixo pra cima, 
 direção ao meio."
 
 `[MOSTRA FOTO: mesma foto com o traço inclinado destacado]`
-`[NA TELA — box Norma: "NBR 6118 — dimensionamento ao esforço cortante (estribos)"]`
+`[NA TELA — box Norma: "NBR 6118:2023 — dimensionamento ao esforço cortante (estribos)"]`
 
 **Teleprompter (continua):**
 "Por que eu respeito mais essa que a de flexão? Porque a ruptura por flexão costuma dar
@@ -96,7 +96,7 @@ segundo caso, confira o encaminhamento com o gabarito comentado do módulo."
 **Q2.3** Fissuras inclinadas próximas aos apoios de uma viga estão associadas a:
 - ✅ **Cisalhamento** (esforço cortante máximo junto aos apoios).
 - Flexão no meio do vão / Retração do reboco / Umidade.
-> **Gabarito comentado:** cortante é máximo nos apoios; o concreto rompe inclinado (~45°). Por poder ser mais brusca que a flexão, exige monitoramento e comunicação prioritários (VALIDAR B5; NBR 6118).
+> **Gabarito comentado:** cortante é máximo nos apoios; o concreto rompe inclinado (~45°). Por poder ser mais brusca que a flexão, exige monitoramento e comunicação prioritários (VALIDAR B5; NBR 6118:2023).
 
 ---
 ### Material de apoio ligado

@@ -32,7 +32,7 @@ na tua laje — e ainda por cima é retração a mais, ou seja, **fissura** a ma
 o assunto de outro curso nosso. A 'aguinha' facilita a vida do bombista por 40 minutos e compromete
 a estrutura por 50 anos. A conta não fecha."
 
-`[NA TELA — box Norma: "NBR 7212 — a adição de água fora das condições previstas descaracteriza o traço"]`
+`[NA TELA — box Norma: "NBR 7212:2021 — a adição de água fora das condições previstas descaracteriza o traço"]`
 > `[VALIDAR F5]` — redação exata das condições em que redosagem com água é admitida na edição vigente (casos restritos, controlados pela central, com limites).
 
 ## 3. Aplicação guiada — como dizer não (3:15–5:30)
@@ -92,7 +92,7 @@ aposto que melhor do que você imagina."
 **Q2.5** Por que adicionar água ao concreto no caminhão é proibido fora das condições da norma?
 - ✅ **Aumenta a relação água/cimento: o excesso vira poros — menos resistência e mais retração/fissura.**
 - Porque atrasa a obra / Porque a água é cara / Não é proibido, é só evitar exagero.
-> **Gabarito comentado:** resistência ≈ relação água/cimento; água extra descaracteriza o traço (NBR 7212, VALIDAR F5). A alternativa legítima para trabalhabilidade é aditivo dosado pela central + novo ensaio.
+> **Gabarito comentado:** resistência ≈ relação água/cimento; água extra descaracteriza o traço (NBR 7212:2021, VALIDAR F5). A alternativa legítima para trabalhabilidade é aditivo dosado pela central + novo ensaio.
 
 ---
 ### Material de apoio ligado

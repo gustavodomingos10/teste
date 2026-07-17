@@ -133,7 +133,7 @@ footer a{color:var(--dour2);}
 "use strict";
 const MODE = "__MODE__";               // "PRO" ou "LITE"
 const WA_INSTRUTOR = "5543999259577";  // contato de vendas (CTA da versão pública)
-const LIMITE_WK = 0.30;                // mm — [VALIDAR B1] referência de serviço (NBR 6118)
+const LIMITE_WK = 0.30;                // mm — [VALIDAR B1] referência de serviço (NBR 6118:2023)
 
 /* ---------- Definição do wizard ---------- */
 const STEPS = [
@@ -226,8 +226,8 @@ function diagnosticar(){
   if(local==="apoioviga" && (orient==="diagonal"||orient==="vertical")){ hip.push(["Cisalhamento (esforço cortante)","Junto ao apoio; pode ser mais brusca. Monitore e comunique com prioridade."]); }
   if(orient==="mapeada"){ hip.push(["Retração superficial","Padrão em malha; comum em reboco/pele do concreto."]);
      if(has("estrutural")) hip.push(["Reação álcali-agregado (a investigar)","Em concreto estrutural, exige ensaio laboratorial. Não cravar no olho."]); }
-  if(orient==="diagonal" && (has("esquadria")||has("piso"))){ hip.push(["Recalque diferencial de fundação","Diagnóstico de conjunto: diagonais concordantes + esquadria travando + piso caído. Investigar o solo (NBR 6122)."]); }
-  if(orient==="horizontal" && local==="base"){ hip.push(["Umidade ascendente","Sobretudo com eflorescência. Trate a origem antes do acabamento (NBR 9575)."]); }
+  if(orient==="diagonal" && (has("esquadria")||has("piso"))){ hip.push(["Recalque diferencial de fundação","Diagnóstico de conjunto: diagonais concordantes + esquadria travando + piso caído. Investigar o solo (NBR 6122:2019)."]); }
+  if(orient==="horizontal" && local==="base"){ hip.push(["Umidade ascendente","Sobretudo com eflorescência. Trate a origem antes do acabamento (NBR 9575:2010)."]); }
   if(orient==="horizontal" && local==="topo"){ hip.push(["Expansão de bloco / movimentação de interface","No encontro com a laje/viga; nem sempre é a estrutura."]); }
   if(orient==="horizontal" && local==="parede" && has("umidade")){ hip.push(["Umidade","Presença de água muda o diagnóstico; registre e trate a origem."]); }
   if(hip.length===0){ hip.push(["Padrão a caracterizar melhor","Combine orientação, local e sinais; meça e monitore para levantar a hipótese."]); }
@@ -309,7 +309,7 @@ const CENARIOS = [
   {foto:"Fissura diagonal + porta emperrando + piso caído no mesmo trecho",
    q:"O conjunto aponta para:",
    ops:["Flexão de laje","Recalque diferencial","Falha de pintura","Retração plástica"],
-   c:1, exp:"Diagonais concordantes + esquadria travando + piso desnivelado = recalque diferencial. Investigar o solo (NBR 6122)."},
+   c:1, exp:"Diagonais concordantes + esquadria travando + piso desnivelado = recalque diferencial. Investigar o solo (NBR 6122:2019)."},
   {foto:"Fissura horizontal na base da parede com pó branco (eflorescência)",
    q:"Causa provável e ordem de tratamento:",
    ops:["Estrutura; pintar por cima","Umidade ascendente; tratar a origem antes do acabamento","Cisalhamento; injetar resina","Flexão; escorar"],

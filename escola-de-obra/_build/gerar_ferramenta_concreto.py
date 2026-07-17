@@ -99,7 +99,7 @@ footer a{color:var(--dour2);}
     <section id="view-quiz" class="hidden"><div class="card" id="quizBox"></div></section>
   </main>
   <footer>
-    Ferramenta educativa — simula a aceitação PROVISÓRIA do concreto fresco (NBR 12655/7212/16889).
+    Ferramenta educativa — simula a aceitação PROVISÓRIA do concreto fresco (NBR 12655:2022/7212/16889).
     Não substitui o procedimento formal da obra nem o responsável técnico.<br>
     Escola de Obra · GD Engenharia e Perícia · <a href="https://engenhariagd.com.br">engenhariagd.com.br</a><br>
     Revisado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D
@@ -119,7 +119,7 @@ const STEPS = [
     ["dentro","Dentro do limite (com folga para descarregar)"],
     ["apertado","Perto do limite — a descarga terminaria em cima da hora"],
     ["estourado","Limite excedido / não sei o horário da água"] ]},
-  { key:"slump", titulo:"Resultado do slump test (NBR 16889) em relação ao pedido", ops:[
+  { key:"slump", titulo:"Resultado do slump test (NBR 16889:2020) em relação ao pedido", ops:[
     ["faixa","Dentro da tolerância"],
     ["seco","Fora — mais seco que o pedido"],
     ["fluido","Fora — mais fluido que o pedido"],
@@ -165,9 +165,9 @@ function decidir(){
   let motivos=[], veredito, passo;
 
   // Bloqueios absolutos -> RECUSAR
-  if(nota==="diverge") motivos.push(["Nota divergente do pedido","fck/slump/brita errados: o material não é o especificado. Não descarregar (NBR 12655)."]);
-  if(tempo==="estourado") motivos.push(["Tempo-limite excedido (ou desconhecido)","A hidratação começou na central; fora do limite da NBR 7212, a carga não é aceitável. Sem o horário da água, trate como excedido."]);
-  if(slump==="fluido") motivos.push(["Slump acima do pedido","Fluido demais sugere água em excesso no traço — não há correção legítima; recusar (NBR 7212)."]);
+  if(nota==="diverge") motivos.push(["Nota divergente do pedido","fck/slump/brita errados: o material não é o especificado. Não descarregar (NBR 12655:2022)."]);
+  if(tempo==="estourado") motivos.push(["Tempo-limite excedido (ou desconhecido)","A hidratação começou na central; fora do limite da NBR 7212:2021, a carga não é aceitável. Sem o horário da água, trate como excedido."]);
+  if(slump==="fluido") motivos.push(["Slump acima do pedido","Fluido demais sugere água em excesso no traço — não há correção legítima; recusar (NBR 7212:2021)."]);
   if(aspecto==="anormal") motivos.push(["Aspecto anormal","Segregação, pelotas ou início de pega comprometem a carga. Recusar e registrar."]);
 
   if(motivos.length){
@@ -175,18 +175,18 @@ function decidir(){
     passo={t:"Como recusar", d:"Comunique com base (número/motivo), registre (foto do ensaio + nota anotada + hora), formalize a devolução à central e reprograme a frente. O registro fica; o caminhão vai."};
   } else if(nota==="semnota" || slump==="naofiz"){
     veredito="CORRIGIR";
-    motivos.push(["Procedimento incompleto","Sem nota conferida e slump medido NÃO há decisão de aceitação. Complete o procedimento antes de liberar (NBR 12655)."]);
-    passo={t:"Próximo passo", d:"Peça a nota e confira contra o pedido; faça o ensaio de abatimento (NBR 16889). Só então volte ao veredito."};
+    motivos.push(["Procedimento incompleto","Sem nota conferida e slump medido NÃO há decisão de aceitação. Complete o procedimento antes de liberar (NBR 12655:2022)."]);
+    passo={t:"Próximo passo", d:"Peça a nota e confira contra o pedido; faça o ensaio de abatimento (NBR 16889:2020). Só então volte ao veredito."};
   } else if(slump==="seco"){
     veredito="CORRIGIR";
-    motivos.push(["Slump abaixo do pedido","Correção legítima: aditivo dosado PELA CENTRAL, dentro do tempo-limite, com NOVO ensaio depois (NBR 7212). Água na obra não é correção."]);
+    motivos.push(["Slump abaixo do pedido","Correção legítima: aditivo dosado PELA CENTRAL, dentro do tempo-limite, com NOVO ensaio depois (NBR 7212:2021). Água na obra não é correção."]);
     if(tempo==="apertado") motivos.push(["Relógio apertado","A correção consome tempo: confirme com a central se o limite comporta o ajuste + re-ensaio + descarga."]);
     passo={t:"Como corrigir", d:"Acione a central para redosagem com aditivo; refaça o slump após o ajuste. Dentro da tolerância, libere e registre; caso contrário, recuse."};
   } else {
     veredito="LIBERAR";
-    motivos.push(["Aceitação provisória atendida","Nota conferida, tempo controlado, slump na tolerância e aspecto normal (NBR 12655)."]);
-    if(tempo==="apertado") motivos.push(["Atenção ao relógio","Inicie a descarga imediatamente e monitore o término dentro do limite (NBR 7212)."]);
-    passo={t:"Antes de relaxar", d:"Molde e identifique os corpos de prova (NBR 5738), registre horários e slump no dossiê. A aceitação DEFINITIVA virá com os ensaios (NBR 5739/12655)."};
+    motivos.push(["Aceitação provisória atendida","Nota conferida, tempo controlado, slump na tolerância e aspecto normal (NBR 12655:2022)."]);
+    if(tempo==="apertado") motivos.push(["Atenção ao relógio","Inicie a descarga imediatamente e monitore o término dentro do limite (NBR 7212:2021)."]);
+    passo={t:"Antes de relaxar", d:"Molde e identifique os corpos de prova (NBR 5738:2015), registre horários e slump no dossiê. A aceitação DEFINITIVA virá com os ensaios (NBR 5739:2018/12655)."};
   }
   if(pressao==="sim"){
     motivos.push(["Pedido de 'aguinha' na obra","Água extra aumenta a relação água/cimento: menos resistência, mais retração/fissura. Vete e ofereça o caminho legítimo (aditivo pela central + re-ensaio)."]);
@@ -197,7 +197,7 @@ function decidir(){
 function renderResultado(veredito,motivos,passo){
   document.getElementById("bar").style.width="100%";
   document.getElementById("nav").classList.add("hidden");
-  const share = encodeURIComponent(`Simulador de Recebimento (Escola de Obra): veredito = ${veredito}. Procedimento NBR 12655/7212/16889.`);
+  const share = encodeURIComponent(`Simulador de Recebimento (Escola de Obra): veredito = ${veredito}. Procedimento NBR 12655:2022/7212/16889.`);
   let html = `<div class="result-head"><div class="step-lbl">Veredito da aceitação provisória</div>
     <span class="ver v-${veredito}">${veredito==="CORRIGIR"?"CORRIGIR VIA CENTRAL / COMPLETAR":"﻿"+veredito}</span></div>
     <div class="step-lbl" style="margin-top:12px">Justificativa</div>`;
@@ -228,35 +228,35 @@ const CENARIOS = [
   {foto:"Caminhão chega; nota indica fck C20, mas o projeto pede C30",
    q:"Conduta correta?",
    ops:["Descarregar e resolver depois","Não descarregar: a carga não é o especificado — recusar/devolver","Jogar mais cimento em cima","Aceitar se o slump estiver bom"],c:1,
-   exp:"Nota divergente = material errado. A aceitação provisória (NBR 12655) começa pela conferência da nota contra o pedido."},
-  {foto:"Slump pedido: 100 mm. Medido: dentro da tolerância da NBR 7212",
+   exp:"Nota divergente = material errado. A aceitação provisória (NBR 12655:2022) começa pela conferência da nota contra o pedido."},
+  {foto:"Slump pedido: 100 mm. Medido: dentro da tolerância da NBR 7212:2021",
    q:"Próximo passo?",
    ops:["Refazer 5 vezes por garantia","Liberar a descarga, moldar CPs e registrar","Recusar por excesso de zelo","Adicionar água para folga"],c:1,
-   exp:"Dentro da tolerância = aceito. Segue o procedimento: descarga + CPs (NBR 5738) + registro."},
+   exp:"Dentro da tolerância = aceito. Segue o procedimento: descarga + CPs (NBR 5738:2015) + registro."},
   {foto:"Concreto chegou seco demais; bombista pede 'uma aguinha'",
    q:"Correção legítima?",
    ops:["Água da mangueira até melhorar","Aditivo dosado pela central + novo slump depois","Descarregar assim mesmo","Deixar o motorista decidir"],c:1,
-   exp:"Água extra aumenta a relação água/cimento (menos resistência, mais fissura). A via legítima é a redosagem com aditivo pela central + re-ensaio (NBR 7212)."},
+   exp:"Água extra aumenta a relação água/cimento (menos resistência, mais fissura). A via legítima é a redosagem com aditivo pela central + re-ensaio (NBR 7212:2021)."},
   {foto:"Sem horário da adição de água na nota; ninguém sabe quando o caminhão saiu",
    q:"Como tratar o tempo-limite?",
    ops:["Assumir que está ok","Tratar como desconhecido = não aceitável sem confirmação","Contar a partir da chegada","Ignorar, o concreto parece bom"],c:1,
-   exp:"O relógio conta desde a água na central (NBR 7212). Sem o horário, não há como comprovar o limite — confirme com a central ou trate como excedido."},
+   exp:"O relógio conta desde a água na central (NBR 7212:2021). Sem o horário, não há como comprovar o limite — confirme com a central ou trate como excedido."},
   {foto:"Slump muito ACIMA do pedido (fluido demais)",
    q:"Veredito mais provável?",
    ops:["Aceitar, fluido é mais fácil de lançar","Recusar: excesso de água provável, sem correção legítima","Esperar secar","Adicionar cimento no balão"],c:1,
    exp:"Fluido demais sugere água em excesso — resistência comprometida. Não existe 'correção' para água que já entrou: recusa com registro."},
   {foto:"Amostra para o slump colhida nos primeiros litros da descarga",
    q:"O ensaio vale?",
-   ops:["Vale, concreto é tudo igual","Não — a amostra deve vir do meio da descarga (NBR 16889)","Vale se o motorista concordar","Só vale à tarde"],c:1,
-   exp:"Os primeiros e últimos litros não representam a carga. Amostra do meio, 3 camadas, 25 golpes/camada (NBR 16889)."},
+   ops:["Vale, concreto é tudo igual","Não — a amostra deve vir do meio da descarga (NBR 16889:2020)","Vale se o motorista concordar","Só vale à tarde"],c:1,
+   exp:"Os primeiros e últimos litros não representam a carga. Amostra do meio, 3 camadas, 25 golpes/camada (NBR 16889:2020)."},
   {foto:"Carga recusada; motorista quer ir embora imediatamente",
    q:"O que NÃO pode faltar antes de o caminhão sair?",
    ops:["Um aperto de mão","Registro: motivo com número, hora, fotos e anotação na nota","Lavar o balão na obra","Nada, só liberar"],c:1,
    exp:"Recusa é procedimento documentado: comunicar com base, registrar, formalizar a devolução, reprogramar. Sem registro, a recusa 'não existiu'."},
   {foto:"CP moldado ficou no sol, sem identificação, ao lado da betoneira",
    q:"Qual o problema?",
-   ops:["Nenhum","Cura e identificação erradas invalidam a 'testemunha' de 28 dias (NBR 5738)","Só falta pintar","CP não precisa de cuidado"],c:1,
-   exp:"CP mal curado/identificado gera resultado falso e sem rastreio — você perde a prova da aceitação definitiva (NBR 5738/5739/12655)."}
+   ops:["Nenhum","Cura e identificação erradas invalidam a 'testemunha' de 28 dias (NBR 5738:2015)","Só falta pintar","CP não precisa de cuidado"],c:1,
+   exp:"CP mal curado/identificado gera resultado falso e sem rastreio — você perde a prova da aceitação definitiva (NBR 5738:2015/5739/12655)."}
 ];
 const N_LITE = 3;
 let qi=0,qscore=0,qansw=false;

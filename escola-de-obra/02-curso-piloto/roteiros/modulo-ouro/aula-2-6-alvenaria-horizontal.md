@@ -35,7 +35,7 @@ muitas vezes lá na última fiada, no encontro com a laje ou a viga de cima.
 
 **Duas — umidade ascendente.** A água que sobe do solo pela base da parede (falta ou falha de
 impermeabilização) traz sais, cristaliza, empurra o reboco e gera fissura + aquele pó branco, a
-**eflorescência**. `[NA TELA — box Norma: "NBR 9575 — Impermeabilização (seleção e projeto)"]`
+**eflorescência**. `[NA TELA — box Norma: "NBR 9575:2010 — Impermeabilização (seleção e projeto)"]`
 
 **Três — a interface parede/estrutura.** A estrutura de concreto e a alvenaria trabalham de
 jeitos diferentes com temperatura e carga. No **encontro** dos dois — parede embaixo da viga,
@@ -43,7 +43,7 @@ por exemplo — pode abrir uma fissura horizontal na junta. Isso é movimentaç�
 'a viga rachando'."
 
 > **Valor técnico:** expansão de blocos cerâmicos por umidade e eflorescência por umidade
-> ascendente são fenômenos consagrados na literatura de patologia. Citar NBR 9575 ao falar de
+> ascendente são fenômenos consagrados na literatura de patologia. Citar NBR 9575:2010 ao falar de
 > impermeabilização — `[VALIDAR A9]` confirmar se entra no piloto.
 
 ## 3. Aplicação guiada (3:15–5:30)
@@ -106,7 +106,7 @@ uma hipótese de verdade. Depois, confira sua leitura com o gabarito comentado d
 (eflorescência), sugere mais provavelmente:
 - ✅ **Umidade ascendente** (falha de impermeabilização) — tratar a origem antes do acabamento.
 - Cisalhamento da viga / Flexão de laje / Sempre recalque.
-> **Gabarito comentado:** fissura horizontal + eflorescência na base = água subindo do solo; o tratamento estético só dura depois de sanar a origem (NBR 9575). Culpar a estrutura aqui é o erro clássico.
+> **Gabarito comentado:** fissura horizontal + eflorescência na base = água subindo do solo; o tratamento estético só dura depois de sanar a origem (NBR 9575:2010). Culpar a estrutura aqui é o erro clássico.
 
 ---
 ### Material de apoio ligado

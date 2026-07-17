@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Gera o Modelo de Relatório Técnico Blindado (.docx) — Kit Diamante.
-Estrutura NBR 13752 / NBR 16747: identificação, escopo/limitações, metodologia,
+Estrutura NBR 13752:2024 / NBR 16747: identificação, escopo/limitações, metodologia,
 registro fotográfico padronizado (2 colunas), análise causa raiz, recomendações
 com prazo/responsável, encaminhamentos, assinatura/CREA.
 Campos preenchíveis destacados em [colchetes] realçados."""
@@ -69,14 +69,14 @@ doc.add_paragraph("Vistoria de caráter [visual/cautelar], sem ensaios destrutiv
 
 # 3. Metodologia
 h("3. METODOLOGIA")
-for item in ["Inspeção do geral ao particular (contexto → detalhe), conforme boa prática de inspeção predial (NBR 16747).",
+for item in ["Inspeção do geral ao particular (contexto → detalhe), conforme boa prática de inspeção predial (NBR 16747:2020).",
              "Caracterização de cada fissura: orientação, localização, abertura medida com fissurômetro e registro fotográfico com escala.",
              "Avaliação de atividade por monitoramento (selo de gesso/comparador) quando aplicável.",
              "Enquadramento de gravidade e encaminhamento conforme critério técnico (planilha e fluxograma do método)."]:
     doc.add_paragraph(item, style="List Bullet")
 p = doc.add_paragraph(); rr = p.add_run("Normas de referência: "); rr.bold=True; rr.font.color.rgb=VERDE
-p.add_run("NBR 6118 (estruturas de concreto), NBR 6122 (fundações), NBR 16747 (inspeção predial), "
-          "NBR 13752 (perícias de engenharia). [Confirmar edição vigente na data.]")
+p.add_run("NBR 6118:2023 (estruturas de concreto), NBR 6122:2019 (fundações), NBR 16747:2020 (inspeção predial), "
+          "NBR 13752:2024 (perícias de engenharia). [Confirmar edição vigente na data.]")
 
 # 4. Registro fotográfico (2 colunas)
 h("4. REGISTRO FOTOGRÁFICO PADRONIZADO")
@@ -107,8 +107,8 @@ h("6. ANÁLISE E CAUSA RAIZ")
 doc.add_paragraph("Descreva o padrão dominante do quadro fissuratório e a causa raiz mais provável, "
                   "distinguindo sintoma de causa. Fundamente com os achados dos itens 4 e 5.")
 campo("Padrão dominante observado:","ex.: fissuras diagonais concordantes apontando para o canto X")
-campo("Causa raiz provável:","ex.: recalque diferencial de fundação a investigar (NBR 6122)")
-campo("Causas secundárias / associadas:","ex.: umidade ascendente na base (NBR 9575)")
+campo("Causa raiz provável:","ex.: recalque diferencial de fundação a investigar (NBR 6122:2019)")
+campo("Causas secundárias / associadas:","ex.: umidade ascendente na base (NBR 9575:2010)")
 
 # 7. Recomendações com prazo e responsável
 h("7. RECOMENDAÇÕES (com prazo e responsável)")

@@ -25,9 +25,9 @@ Evidência de que os 8 entregáveis **foram construídos, abrem e funcionam**. R
   seco+relógio apertado) — **9/9 ✔**.
 
 ## Rigor normativo (verificado na redação)
-- **NBR 12655** (aceitação provisória/definitiva) · **NBR 7212** (tempos-limite, tolerâncias, redosagem — `[VALIDAR F2/F4/F5]`) ·
-  **NBR 16889:2020** (slump; substituiu a NM 67) · **NBR 5738/5739** (CPs) · **NBR 8953** (classes) ·
-  **NBR 14931** (cura) · **NBR 7680** (extração — `[VALIDAR F10]`).
+- **NBR 12655:2022** (aceitação provisória/definitiva) · **NBR 7212:2021** (tempos-limite, tolerâncias, redosagem — `[VALIDAR F2/F4/F5]`) ·
+  **NBR 16889:2020** (slump; substituiu a NM 67) · **NBR 5738:2015/5739** (CPs) · **NBR 8953** (classes) ·
+  **NBR 14931:2023** (cura) · **NBR 7680-1:2015** (extração — `[VALIDAR F10]`).
 - **Alçada:** aluno decide a aceitação do concreto **fresco**; decisões estruturais (fck não atendido) são do RT/projetista.
 - Conexões da esteira: fundações (Curso 2) → recebimento (Curso 3) → fissuras/cura (Curso 5) explicitadas.
 
@@ -42,6 +42,6 @@ bash gerar_pdfs_concreto.sh
 
 ## Pendências (bloqueiam a PUBLICAÇÃO, não a montagem)
 - 🟡 `[FOTO DO ACERVO]` → fotos reais (`../PEDIDO-DE-MATERIAL.md`).
-- 🟡 VALIDAR seção F: tempos-limite/condições (F2), tolerância de slump (F4), condições de redosagem (F5), amostragem (F7), NBR 7680/13208 (F10/E8).
+- 🟡 VALIDAR seção F: tempos-limite/condições (F2), tolerância de slump (F4), condições de redosagem (F5), amostragem (F7), NBR 7680-1:2015/13208 (F10/E8).
 
 **Conclusão:** nada "especificado mas não construído"; os dois componentes com lógica testados com resultados corretos.

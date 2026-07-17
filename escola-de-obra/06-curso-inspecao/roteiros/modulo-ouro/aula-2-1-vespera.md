@@ -29,13 +29,13 @@ eu te dou o mapa do pente-fino."
 **A ARMAÇÃO** — o esqueleto. Bitola, quantidade, posição e o **cobrimento** — os milímetros de
 concreto que protegem o aço por décadas.
 
-**O ESCORAMENTO** — quem segura o peso de tudo até o concreto se sustentar sozinho (NBR 15696). É o
+**O ESCORAMENTO** — quem segura o peso de tudo até o concreto se sustentar sozinho (NBR 15696:2009). É o
 sistema que ninguém olha... até o dia em que ele avisa que devia ter sido olhado.
 
 [PAUSA] E os três se conferem **contra o projeto** — nunca de memória. Inspeção sem projeto na mão
 não é inspeção, é passeio."
 
-`[NA TELA — box Norma: "NBR 14931 — execução · NBR 6118 — projeto/cobrimentos · NBR 15696 — fôrmas e escoramentos"]`
+`[NA TELA — box Norma: "NBR 14931:2023 — execução · NBR 6118:2023 — projeto/cobrimentos · NBR 15696:2009 — fôrmas e escoramentos"]`
 
 ## 3. Aplicação guiada (3:00–5:30)
 **Teleprompter:**
@@ -78,7 +78,7 @@ N pendências'. Depois, confira sua leitura com o gabarito comentado do módulo.
 **Q2.1** Quando deve acontecer a inspeção de liberação de concretagem?
 - ✅ **Na véspera, com projeto na mão — deixando tempo de corrigir; reconfirmação rápida antes do caminhão.**
 - Durante a manobra do caminhão / Depois da concretagem / Só se der tempo.
-> **Gabarito:** na véspera há tempo de correção sem pressão; no dia, qualquer NC vira dilema. Os 3 sistemas: fôrma, armação, escoramento (NBR 14931/6118/15696).
+> **Gabarito:** na véspera há tempo de correção sem pressão; no dia, qualquer NC vira dilema. Os 3 sistemas: fôrma, armação, escoramento (NBR 14931:2023/6118/15696).
 
 ---
 ### Material ligado

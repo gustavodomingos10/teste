@@ -50,25 +50,25 @@ for lbl,hint in [("Obra:","nome / endereço"),("Data:","dd/mm/aaaa"),("Peça(s) 
 h("2. CAMINHÕES RECEBIDOS (um por linha — anexar notas)")
 tabela(["NF nº","Hora água","Chegada","Início/Fim descarga","Slump (mm)","Veredito","CPs (ids)"],4)
 p=doc.add_paragraph(); rr=p.add_run("Veredito: LIBERADO · CORRIGIDO VIA CENTRAL (re-ensaio anexo) · RECUSADO (motivo no item 4). "
- "Tempo-limite conforme NBR 7212 [VALIDAR F2]."); rr.font.size=Pt(8.5); rr.font.color.rgb=CINZA
+ "Tempo-limite conforme NBR 7212:2021 [VALIDAR F2]."); rr.font.size=Pt(8.5); rr.font.color.rgb=CINZA
 
-h("3. ENSAIOS DE ABATIMENTO (NBR 16889)")
+h("3. ENSAIOS DE ABATIMENTO (NBR 16889:2020)")
 tabela(["NF nº","Hora","Resultado (mm)","Dentro da tolerância?","Foto (ref.)","Executado por"],4)
 
 h("4. OCORRÊNCIAS E RECUSAS")
 campo("Ocorrências (água solicitada/adicionada, correções via central, recusas com motivo/hora):","descrever com hora e testemunhas")
 
-h("5. CORPOS DE PROVA (NBR 5738)")
+h("5. CORPOS DE PROVA (NBR 5738:2015)")
 tabela(["CP id","NF nº","Peça","Data moldagem","Cura inicial ok?","Envio ao laboratório"],4)
 
 h("6. CURA DA PEÇA")
-campo("Método e período de cura:","ex.: aspersão/manta por [X] dias — NBR 14931")
+campo("Método e período de cura:","ex.: aspersão/manta por [X] dias — NBR 14931:2023")
 campo("Responsável pela cura:","nome")
 
-h("7. RESULTADOS E ACEITAÇÃO DEFINITIVA (NBR 5739 / 12655)")
+h("7. RESULTADOS E ACEITAÇÃO DEFINITIVA (NBR 5739:2018 / 12655)")
 tabela(["CP id","Idade (dias)","Resultado (MPa)","Situação","Certificado (ref.)"],4)
-p=doc.add_paragraph(); rr=p.add_run("Resultado abaixo do esperado: aplicar os critérios da NBR 12655; ensaios complementares "
- "(extração NBR 7680, esclerometria) e decisão do responsável técnico/projetista. [VALIDAR F10]"); rr.font.size=Pt(8.5); rr.font.color.rgb=CINZA
+p=doc.add_paragraph(); rr=p.add_run("Resultado abaixo do esperado: aplicar os critérios da NBR 12655:2022; ensaios complementares "
+ "(extração NBR 7680-1:2015, esclerometria) e decisão do responsável técnico/projetista. [VALIDAR F10]"); rr.font.size=Pt(8.5); rr.font.color.rgb=CINZA
 
 h("8. RESPONSABILIDADE")
 doc.add_paragraph("Este registro documenta a aceitação provisória do concreto fresco e o controle de aceitação. "

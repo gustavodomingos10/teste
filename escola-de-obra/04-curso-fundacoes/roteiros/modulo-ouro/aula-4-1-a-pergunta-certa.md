@@ -37,7 +37,7 @@ edifício de dez andares pedem coisas diferentes do mesmo solo.
 dele?), acesso pro equipamento (cabe um bate-estaca aqui?), nível d'água alto, orçamento, prazo.
 [PAUSA] É a perna que a teoria esquece e o canteiro cobra."
 
-`[NA TELA — box Norma: "NBR 6122 — Projeto e execução de fundações"]`
+`[NA TELA — box Norma: "NBR 6122:2019 — Projeto e execução de fundações"]`
 
 **Teleprompter (continua):**
 "E aqui vem o alerta que atravessa o módulo inteiro: **a escolha final e o dimensionamento são do
@@ -49,7 +49,7 @@ patamar profissional."
 
 **Teleprompter — como levantar as três respostas:**
 "1. **Solo:** pegue a sondagem. Não tem? Essa é a sua primeira recomendação — **exigir a
-sondagem** (NBR 6484). Ande pelo boletim de cima pra baixo: N-SPT baixo em cima, sobe conforme
+sondagem** (NBR 6484:2020). Ande pelo boletim de cima pra baixo: N-SPT baixo em cima, sobe conforme
 desce? Onde ele vira 'firme'? Onde está o NA?
 
 2. **Carga:** converse com o projetista estrutural. Que ordem de carga chega nos pilares? É uma
@@ -79,7 +79,7 @@ não pode ser a mais barata nem a mais rápida. Tem que ser a **certa** — e ce
 
 **Teleprompter:**
 "Blindagem: se você entra numa obra e **não existe sondagem**, a sua primeira frase, por escrito,
-é: *'recomenda-se a execução de sondagem de simples reconhecimento (NBR 6484) previamente à
+é: *'recomenda-se a execução de sondagem de simples reconhecimento (NBR 6484:2020) previamente à
 definição da fundação.'* Isso protege você e a obra. Decidir fundação sem sondagem não é economia —
 é assumir um risco que não é seu pra assumir. Registre a recomendação e a quem você a encaminhou."
 
@@ -98,7 +98,7 @@ módulo como cada resposta empurra a decisão pra um lado."
 **Q4.1** Qual é a primeira pergunta que estrutura a escolha de uma fundação?
 - ✅ **O que o solo aguenta** (o que a sondagem revela) — antes de carga e restrições.
 - Qual é a mais barata / Qual o pedreiro conhece / Qual é a mais rápida.
-> **Gabarito comentado:** o solo é a base da decisão; sem sondagem (NBR 6484) você aposta, não decide. Carga e restrições completam o tripé, mas o solo vem primeiro.
+> **Gabarito comentado:** o solo é a base da decisão; sem sondagem (NBR 6484:2020) você aposta, não decide. Carga e restrições completam o tripé, mas o solo vem primeiro.
 
 ---
 ### Material de apoio ligado

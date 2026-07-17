@@ -9,7 +9,7 @@
 ## Módulo 1 — O terreno manda: ler a sondagem
 
 **Q1.1** O que responde "o que o solo aguenta"?
-- ✅ **A sondagem** (SPT, NBR 6484). · A planta de arquitetura / O orçamento / A opinião do pedreiro.
+- ✅ **A sondagem** (SPT, NBR 6484:2020). · A planta de arquitetura / O orçamento / A opinião do pedreiro.
 > A sondagem é o mapa do solo; sem ela, a escolha de fundação é aposta.
 
 **Q1.2** No boletim de sondagem, o N-SPT indica:
@@ -25,12 +25,12 @@
 > Firme perto da superfície → rasa; firme fundo ou topo mole → profunda.
 
 **Q1.5** Sem sondagem no início da obra, a conduta correta é:
-- ✅ **Exigir a sondagem (NBR 6484) por escrito antes de definir a fundação.** · Escolher a mais barata / Copiar a obra vizinha / Cravar no olho.
+- ✅ **Exigir a sondagem (NBR 6484:2020) por escrito antes de definir a fundação.** · Escolher a mais barata / Copiar a obra vizinha / Cravar no olho.
 > Registrar a recomendação protege você e a obra.
 
 ## Módulo 2 — Fundações rasas
 
-**Q2.1** Pela NBR 6122, fundação rasa é aquela cuja base está a profundidade:
+**Q2.1** Pela NBR 6122:2019, fundação rasa é aquela cuja base está a profundidade:
 - ✅ **Inferior a 2× a menor dimensão da fundação.** · Superior a 8× / Sempre a 3 m / Igual à altura do pilar.
 > Rasa transmite carga pela base, em camada boa próxima da superfície (VALIDAR E1).
 
@@ -52,7 +52,7 @@
 
 ## Módulo 3 — Fundações profundas
 
-**Q3.1** Pela NBR 6122, fundação profunda tem a ponta apoiada em profundidade:
+**Q3.1** Pela NBR 6122:2019, fundação profunda tem a ponta apoiada em profundidade:
 - ✅ **Superior a 8× a menor dimensão e no mínimo 3,0 m**, transmitindo carga por ponta e/ou fuste. · Inferior a 2× / Sempre 1 m / Igual à sapata.
 > Inclui estacas e tubulões (VALIDAR E2).
 
@@ -69,7 +69,7 @@
 > Versátil em espaços apertados, com equipamento menor.
 
 **Q3.5** O bloco de coroamento serve para:
-- ✅ **Receber o pilar e distribuir a carga às estacas** (concreto armado, NBR 6118). · Impermeabilizar / Nivelar o piso / Substituir a sondagem.
+- ✅ **Receber o pilar e distribuir a carga às estacas** (concreto armado, NBR 6118:2023). · Impermeabilizar / Nivelar o piso / Substituir a sondagem.
 > Elemento estrutural; divergência de armação se comunica ao projetista.
 
 ## Módulo 4 ⭐ — A decisão (Módulo de Ouro)
@@ -78,7 +78,7 @@
 - ✅ **O que o solo aguenta** (sondagem). · Qual a mais barata / Qual o pedreiro conhece / Qual a mais rápida.
 > Solo, depois carga, depois restrições.
 
-**Q4.2** Pela NBR 6122, caracteriza fundação profunda:
+**Q4.2** Pela NBR 6122:2019, caracteriza fundação profunda:
 - ✅ **Ponta a > 8× a menor dimensão e ≥ 3,0 m, por ponta e/ou fuste.** · Base a < 2× / Qualquer sapata enterrada / Só o radier.
 > (VALIDAR E1/E2.)
 
@@ -98,7 +98,7 @@
 
 ## 🏅 Quiz Final do Certificado (10 questões)
 1. O que responde "o que o solo aguenta?" (Q1.1)
-2. Critério rasa × profunda da NBR 6122 (Q2.1 + Q3.1)
+2. Critério rasa × profunda da NBR 6122:2019 (Q2.1 + Q3.1)
 3. Papel do NA na escolha (Q1.3)
 4. Sapata de divisa → associada/alavancada (Q2.2)
 5. Sinal de que a rasa não colabora (Q2.4)

@@ -62,7 +62,7 @@
 - b) Cisalhamento.
 - c) Torção pura.
 - d) Retração plástica.
-> **Gabarito:** a. Flexão traciona a fibra inferior no meio do vão (VALIDAR B4; mecânica das estruturas / NBR 6118).
+> **Gabarito:** a. Flexão traciona a fibra inferior no meio do vão (VALIDAR B4; mecânica das estruturas / NBR 6118:2023).
 
 **Q2.3** Fissuras **inclinadas próximas aos apoios** de uma viga estão associadas a:
 - a) Flexão no meio do vão.
@@ -154,7 +154,7 @@
 - b) Só uma foto e um "está tudo bem".
 - c) Opinião sem fundamentação.
 - d) Promessa de resultado garantido ao cliente.
-> **Gabarito:** a. Estrutura que protege juridicamente (NBR 13752 / NBR 16747; relatório do Kit).
+> **Gabarito:** a. Estrutura que protege juridicamente (NBR 13752:2024 / NBR 16747:2020; relatório do Kit).
 
 **Q4.5** Sobre transformar diagnóstico em honorário com ética:
 - ✅ a) Cobrar por um serviço técnico entregue (laudo/vistoria), usando referências de mercado como parâmetro — **sem prometer ganho fixo**.

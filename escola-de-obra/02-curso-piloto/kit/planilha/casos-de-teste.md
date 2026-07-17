@@ -9,7 +9,7 @@ Script: `../../../_build/testar_planilha.py`. **Resultado: 3/3 casos + Dashboard
 
 ## Parâmetros usados (aba Parametros)
 - Limiar de atividade: **0,10 mm** (Δ de abertura que caracteriza fissura ATIVA) — `[VALIDAR B9]`
-- Limite de abertura w_k: **0,30 mm** (referência NBR 6118, CAA II/III) — `[VALIDAR B1]`
+- Limite de abertura w_k: **0,30 mm** (referência NBR 6118:2023, CAA II/III) — `[VALIDAR B1]`
 
 ## Lógica testada (aba Lancamentos)
 - **Situação** `J` = `ATIVA` se `|Δ| ≥ limiar`, senão `ESTAVEL`.

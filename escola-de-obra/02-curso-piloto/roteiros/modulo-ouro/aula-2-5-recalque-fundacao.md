@@ -34,7 +34,7 @@ acompanha — ela **rasga**. E rasga na diagonal, porque é assim que a parede t
 seguir o pedaço que afundou."
 
 `[MOSTRA FOTO: mesma foto com o traço da fissura destacado e uma seta indicando o lado que baixou]`
-`[NA TELA — box Norma: "NBR 6122 — Projeto e execução de fundações"]`
+`[NA TELA — box Norma: "NBR 6122:2019 — Projeto e execução de fundações"]`
 
 **Teleprompter (continua):**
 "A leitura de campo tem uma regra de ouro: **a fissura de recalque 'aponta' para o problema.**
@@ -90,7 +90,7 @@ e parada é história. Pequena e viva é presente."
 "Blindagem: recalque é palavra pesada — não escreva no relatório sem o conjunto de evidências.
 Frase segura: *'quadro fissuratório com fissuras inclinadas concordantes, esquadrias fora de
 esquadro e desnível de piso no trecho X, compatível com recalque diferencial de fundação;
-recomenda-se investigação geotécnica/de fundações (NBR 6122) e monitoramento; havendo evolução,
+recomenda-se investigação geotécnica/de fundações (NBR 6122:2019) e monitoramento; havendo evolução,
 avaliar escoramento e interdição.'* Você descreveu os fatos, nomeou a hipótese com base no
 conjunto, e mandou pra quem investiga fundação. **Nunca cave a causa do solo no olho — o solo é
 o único que você não enxerga.**"
@@ -110,7 +110,7 @@ com o gabarito comentado do módulo."
 
 **Q2.5** Uma fissura inclinada que "abre para cima", com esquadrias travando e piso desnivelado
 no mesmo trecho, sugere:
-- ✅ **Recalque diferencial** de fundação naquela direção — investigar solo/fundação (NBR 6122).
+- ✅ **Recalque diferencial** de fundação naquela direção — investigar solo/fundação (NBR 6122:2019).
 - Flexão de laje / Falha de pintura / Retração plástica das primeiras horas.
 > **Gabarito comentado:** recalque diferencial produz fissuras inclinadas concordantes + esquadrias fora de esquadro + desnível de piso. Lê-se pelo **conjunto**, nunca por uma fissura só (VALIDAR B7).
 

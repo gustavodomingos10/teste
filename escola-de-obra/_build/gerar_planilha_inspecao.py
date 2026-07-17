@@ -25,7 +25,7 @@ left=Alignment(horizontal="left",vertical="center",wrap_text=True)
 
 wb=Workbook()
 ws=wb.active; ws.title="Inspecao"; ws.sheet_view.showGridLines=False
-ws["A1"]="INSPEÇÃO DE SERVIÇOS CRÍTICOS — uma linha por item verificado (NBR 14931 · 6118 · 15696 · 8545)"
+ws["A1"]="INSPEÇÃO DE SERVIÇOS CRÍTICOS — uma linha por item verificado (NBR 14931:2023 · 6118 · 15696 · 8545)"
 ws["A1"].font=f_tit; ws["A1"].fill=fill_v; ws.merge_cells("A1:I1"); ws.row_dimensions[1].height=24
 ws["A1"].alignment=Alignment(horizontal="left",vertical="center")
 headers=[("A","Data",11),("B","Serviço",13),("C","Elemento / Local",18),("D","Item verificado",26),

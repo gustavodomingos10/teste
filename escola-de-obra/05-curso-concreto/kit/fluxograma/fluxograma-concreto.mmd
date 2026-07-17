@@ -1,11 +1,11 @@
 %% Fluxograma de Decisão — Recebimento de Concreto (aceitação provisória)
-%% Escola de Obra · Padrão Diamante. NBR 12655 · 7212 · 16889 · 5738.
+%% Escola de Obra · Padrão Diamante. NBR 12655:2022 · 7212 · 16889 · 5738.
 flowchart TD
     A([Caminhão chegou]) --> B{Nota fiscal confere?<br/>fck/classe · slump · brita · uso}
     B -- NÃO --> R1[/RECUSAR<br/>material não é o especificado<br/>registrar + devolver formalizado/]
-    B -- SIM --> C{Horário da água anotado?<br/>tempo comporta a descarga<br/>dentro do limite? NBR 7212}
+    B -- SIM --> C{Horário da água anotado?<br/>tempo comporta a descarga<br/>dentro do limite? NBR 7212:2021}
     C -- NÃO / estourado --> R2[/RECUSAR - tempo<br/>sem comprovação do relógio<br/>não há aceite/]
-    C -- SIM --> D[Slump test — NBR 16889<br/>amostra do meio · 3 camadas · 25 golpes<br/>saque vertical · medir já]
+    C -- SIM --> D[Slump test — NBR 16889:2020<br/>amostra do meio · 3 camadas · 25 golpes<br/>saque vertical · medir já]
     D --> E{Resultado dentro<br/>da tolerância do pedido?}
     E -- SIM --> F{Aspecto normal?<br/>homogêneo, sem segregação}
     E -- Seco demais --> G{Correção legítima possível?<br/>aditivo PELA CENTRAL, no prazo}
@@ -18,8 +18,8 @@ flowchart TD
     I -- SIM --> J[VETAR água na obra<br/>caminho legítimo = central + re-ensaio]
     J --> K
     I -- NÃO --> K[LIBERAR DESCARGA]
-    K --> L[Moldar e identificar CPs — NBR 5738<br/>cura inicial protegida]
-    L --> M([Registrar tudo no dossiê:<br/>NF + horários + slump + fotos + CPs<br/>Aceitação DEFINITIVA: ensaios NBR 5739/12655])
+    K --> L[Moldar e identificar CPs — NBR 5738:2015<br/>cura inicial protegida]
+    L --> M([Registrar tudo no dossiê:<br/>NF + horários + slump + fotos + CPs<br/>Aceitação DEFINITIVA: ensaios NBR 5739:2018/12655])
     R1 --> N([Registro da recusa:<br/>motivo + hora + fotos + nota anotada<br/>reprogramar a frente])
     R2 --> N
     R3 --> N

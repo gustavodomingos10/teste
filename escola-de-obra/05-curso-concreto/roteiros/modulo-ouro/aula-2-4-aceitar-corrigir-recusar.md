@@ -23,7 +23,7 @@ do improviso."
 `[NA TELA: "1 ACEITAR (dentro da tolerância) · 2 CORRIGIR (redosagem autorizada) · 3 RECUSAR"]`
 
 **Teleprompter:**
-"Primeiro, entenda: o slump pedido tem uma **tolerância** — a NBR 7212 traz faixas de variação
+"Primeiro, entenda: o slump pedido tem uma **tolerância** — a NBR 7212:2021 traz faixas de variação
 aceitáveis em torno do valor especificado. `[VALIDAR F4: faixas da edição vigente]`
 
 **Saída 1 — ACEITAR.** O resultado caiu dentro da tolerância da norma? Está aceito. Registra o
@@ -40,7 +40,7 @@ se refaz depois.** `[VALIDAR F5: condições exatas de redosagem da edição vig
 problema — nota errada, tempo estourado, aspecto anormal (segregado, com pelotas, já 'puxando')?
 Recusa. A aula 2.6 é inteira sobre como recusar direito."
 
-`[NA TELA — box Norma: "NBR 7212 — tolerâncias e condições de ajuste · NBR 12655 — aceitação"]`
+`[NA TELA — box Norma: "NBR 7212:2021 — tolerâncias e condições de ajuste · NBR 12655:2022 — aceitação"]`
 
 ## 3. Aplicação guiada — o raciocínio na prática (3:15–5:30)
 
@@ -80,7 +80,7 @@ E problema adiado em concreto **endurece**."
 **Teleprompter:**
 "Blindagem: qualquer que seja a saída, o registro tem os mesmos elementos: número medido, hora,
 foto, quem decidiu e com que base. Se houve correção: qual produto, quem autorizou, o novo slump.
-Frase pro registro: *'abatimento inicial de X mm, fora da tolerância de ±Y (NBR 7212); [corrigido
+Frase pro registro: *'abatimento inicial de X mm, fora da tolerância de ±Y (NBR 7212:2021); [corrigido
 com aditivo pela central e re-ensaiado: Z mm / recusado]'*. Uma linha. Cinquenta anos de tranquilidade."
 
 ## 6. Microdesafio 48h (6:50–7:00)
@@ -93,7 +93,7 @@ slump'."
 ## 7. Quiz da aula
 
 **Q2.4** O slump deu fora da faixa. Qual é a correção LEGÍTIMA possível?
-- ✅ **Ajuste pela própria central (ex.: aditivo), dentro do tempo-limite, com novo ensaio depois** — nas condições da NBR 7212.
+- ✅ **Ajuste pela própria central (ex.: aditivo), dentro do tempo-limite, com novo ensaio depois** — nas condições da NBR 7212:2021.
 - Adicionar água até "ficar bom" / Aceitar assim mesmo se a diferença for pequena / Deixar o pedreiro decidir.
 > **Gabarito comentado:** correção legítima = central + produto previsto + re-ensaio (VALIDAR F4/F5). Água na obra não é correção — é adulteração do traço (aula 2.5). Fora disso, recusa com registro.
 

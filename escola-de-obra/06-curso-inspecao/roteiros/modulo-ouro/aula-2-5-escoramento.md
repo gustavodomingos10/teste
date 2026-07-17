@@ -1,4 +1,4 @@
-# 🎬 Aula 2.5 — "Escoramento: apoio, prumo e contraventamento (NBR 15696)"
+# 🎬 Aula 2.5 — "Escoramento: apoio, prumo e contraventamento (NBR 15696:2009)"
 
 **Módulo 2 (de Ouro) · 7 min · Legendada 100%**
 Objetivo: o aluno inspeciona o escoramento como uma **estrutura provisória de verdade** — apoio,
@@ -15,13 +15,13 @@ prumo, contraventamento, ligações — e entende que escoramento tem projeto.
 "Enquanto o concreto não endurece, quem segura a laje — o peso do concreto, da equipe, dos
 equipamentos — é **isto aqui**: a floresta de escoras. [PAUSA] E o paradoxo é cruel: o sistema que
 mais segura peso na obra é o que menos gente confere. Escoramento não é 'um monte de pau em pé'.
-É **estrutura** — com projeto, com norma, a NBR 15696 — e hoje você aprende a olhá-lo como estrutura."
+É **estrutura** — com projeto, com norma, a NBR 15696:2009 — e hoje você aprende a olhá-lo como estrutura."
 
 ## 2. Conceito visual — as 5 verificações (0:45–3:15)
 `[NA TELA: "1 PROJETO · 2 APOIO · 3 PRUMO · 4 CONTRAVENTAMENTO · 5 LIGAÇÕES/TORRES"]`
 
 **Teleprompter:**
-"**Um — o projeto existe?** A NBR 15696 trata fôrmas e escoramentos como estruturas com projeto e
+"**Um — o projeto existe?** A NBR 15696:2009 trata fôrmas e escoramentos como estruturas com projeto e
 dimensionamento — cargas de concreto, sobrecarga de trabalho, vento. Pergunte pelo plano de
 escoramento: espaçamento das escoras, torres, reescoramento. `[VALIDAR G4]`
 
@@ -38,7 +38,7 @@ dominós em pé: qualquer empurrão lateral — vento, mangote da bomba, carrinh
 **Cinco — ligações e torres.** Pinos, travas e forcados no lugar; extensões dentro do limite do
 fabricante; torre montada completa, não 'a metade que deu tempo'."
 
-`[NA TELA — box Norma: "NBR 15696 — fôrmas e escoramentos: projeto, cargas (sobrecarga mín. 2,0 kN/m²; vento 0,6 kN/m²) [VALIDAR G4]"]`
+`[NA TELA — box Norma: "NBR 15696:2009 — fôrmas e escoramentos: projeto, cargas (sobrecarga mín. 2,0 kN/m²; vento 0,6 kN/m²) [VALIDAR G4]"]`
 
 ## 3. Aplicação guiada (3:15–5:30)
 **Teleprompter:**
@@ -82,7 +82,7 @@ confira sua leitura com o gabarito comentado do módulo."
 **Q2.5** Por que escora fora do prumo é grave?
 - ✅ **Escora trabalha em compressão pura; inclinada, passa a flexionar e a capacidade despenca.**
 - É só estética / Atrapalha a passagem / Não é grave.
-> **Gabarito:** escoramento é estrutura com projeto (NBR 15696): apoio firme, prumo, contraventamento nas duas direções, ligações completas. Na dúvida: troca antes, nunca "observa durante".
+> **Gabarito:** escoramento é estrutura com projeto (NBR 15696:2009): apoio firme, prumo, contraventamento nas duas direções, ligações completas. Na dúvida: troca antes, nunca "observa durante".
 
 ---
 ### Material ligado

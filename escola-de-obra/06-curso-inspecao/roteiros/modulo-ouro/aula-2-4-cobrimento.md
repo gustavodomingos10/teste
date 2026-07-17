@@ -2,7 +2,7 @@
 
 **Módulo 2 (de Ouro) · 8 min · Legendada 100% · (a aula mais importante do módulo)**
 Objetivo: o aluno entende o cobrimento como proteção química do aço, conhece as ordens de grandeza
-da NBR 6118 e fiscaliza o único jeito de garanti-lo: **espaçadores**.
+da NBR 6118:2023 e fiscaliza o único jeito de garanti-lo: **espaçadores**.
 
 ---
 
@@ -27,12 +27,12 @@ concreto cria uma película que impede o aço de enferrujar. Só que o mundo ata
 cloretos vão penetrando pela superfície ao longo dos anos. O cobrimento é a **espessura do escudo**
 — quanto mais agressivo o ambiente, mais escudo a norma exige.
 
-A NBR 6118 define os **cobrimentos nominais** por classe de agressividade ambiental — em ambiente
+A NBR 6118:2023 define os **cobrimentos nominais** por classe de agressividade ambiental — em ambiente
 urbano (CAA II), a ordem de grandeza é **25 mm em lajes e 30 mm em vigas e pilares**; em ambientes
 mais agressivos (marinho/industrial), sobe para 35, 40 mm ou mais. [PAUSA] Os valores exatos do teu
 caso estão no projeto — que já aplicou a tabela da norma."
 
-`[NA TELA — box Norma: "NBR 6118, Tab. 7.2 — cobrimento nominal por classe de agressividade [VALIDAR G2]"]`
+`[NA TELA — box Norma: "NBR 6118:2023, Tab. 7.2 — cobrimento nominal por classe de agressividade [VALIDAR G2]"]`
 
 **Teleprompter (continua):**
 "E aqui a pergunta de um milhão: **o que garante o cobrimento na prática?** Não é o capricho do
@@ -85,7 +85,7 @@ registre no seu caderno de campo 'minha obra não tem espaçador'. Depois, confi
 **Q2.4** O que garante fisicamente o cobrimento da armadura?
 - ✅ **Espaçadores adequados (fundo e faces), na densidade certa, sem pontos de toque armadura-fôrma.**
 - O capricho do armador / A sorte / O desmoldante.
-> **Gabarito:** cobrimento é proteção química do aço (NBR 6118, Tab. 7.2 — valores por CAA no projeto). Sem espaçador, cobrimento zero → corrosão futura (ponte: curso 6).
+> **Gabarito:** cobrimento é proteção química do aço (NBR 6118:2023, Tab. 7.2 — valores por CAA no projeto). Sem espaçador, cobrimento zero → corrosão futura (ponte: curso 6).
 
 ---
 ### Material ligado

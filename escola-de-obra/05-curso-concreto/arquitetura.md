@@ -14,9 +14,9 @@
 - **Nome:** Receber e Liberar Concreto com Critério
 - **Subtítulo:** "Chegou o caminhão-betoneira" deixa de ser pânico e vira um procedimento de 8 minutos.
 - **Promessa (capacidade, não resultado garantido):** ao final, o aluno **confere a nota fiscal**
-  contra o pedido, **controla os tempos-limite**, **executa e interpreta o slump test** (NBR 16889),
-  **decide aceitar ou recusar** o concreto fresco com base na NBR 12655/7212, **molda corpos de
-  prova** (NBR 5738) e **documenta** a aceitação — sabendo o que fazer quando o fck aos 28 dias não atinge o especificado.
+  contra o pedido, **controla os tempos-limite**, **executa e interpreta o slump test** (NBR 16889:2020),
+  **decide aceitar ou recusar** o concreto fresco com base na NBR 12655:2022/7212, **molda corpos de
+  prova** (NBR 5738:2015) e **documenta** a aceitação — sabendo o que fazer quando o fck aos 28 dias não atinge o especificado.
 - **Formato:** micro-aulas de 3 a 6 min, legendadas 100%, edição cinematográfica (a "cena do caminhão" é o coração visual do curso).
 
 ### 🔗 Conexões da esteira (a trilha conversa entre si)
@@ -48,9 +48,9 @@
 
 > **Ao final do curso, o aluno será capaz de:**
 > 1. **Especificar/conferir o pedido** de concreto (fck, classe NBR 8953, slump, brita, uso) e **checar a nota fiscal** contra o pedido na chegada do caminhão.
-> 2. **Controlar os tempos-limite** de transporte e descarga do concreto dosado em central (NBR 7212) e **vetar adição de água** fora das condições permitidas.
-> 3. **Executar e interpretar o ensaio de abatimento** (slump test, NBR 16889) e **decidir aceitar/recusar** o concreto fresco (aceitação provisória, NBR 12655).
-> 4. **Moldar, identificar e curar corpos de prova** (NBR 5738) para o controle de aceitação (NBR 5739/12655) e **registrar** tudo — incluindo o procedimento correto quando o resultado aos 28 dias não atende.
+> 2. **Controlar os tempos-limite** de transporte e descarga do concreto dosado em central (NBR 7212:2021) e **vetar adição de água** fora das condições permitidas.
+> 3. **Executar e interpretar o ensaio de abatimento** (slump test, NBR 16889:2020) e **decidir aceitar/recusar** o concreto fresco (aceitação provisória, NBR 12655:2022).
+> 4. **Moldar, identificar e curar corpos de prova** (NBR 5738:2015) para o controle de aceitação (NBR 5739:2018/12655) e **registrar** tudo — incluindo o procedimento correto quando o resultado aos 28 dias não atende.
 
 ## 5. Arco narrativo
 
@@ -77,14 +77,14 @@ Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (norma na tela) �
 | 1.2 | "fck, classe e slump: o vocabulário do pedido (NBR 8953)" | 7 | Guia · VALIDAR |
 | 1.3 | "Brita, bomba e uso: os detalhes que travam a obra" | 6 | Checklist |
 | 1.4 | "A nota fiscal do concreto: os campos que você confere SEMPRE" | 7 | Checklist · ferramenta |
-| 1.5 | "Central × virado na obra: quando cada um (e o que muda no controle)" | 6 | NBR 12655 · 7212 |
+| 1.5 | "Central × virado na obra: quando cada um (e o que muda no controle)" | 6 | NBR 12655:2022 · 7212 |
 
 ### Módulo 2 ⭐ — A hora do caminhão (MÓDULO DE OURO, ~42 min)
 | Aula | Título-gancho | Min | Liga com |
 |---|---|---|---|
 | 2.1 | "O caminhão chegou: os 8 minutos que decidem tudo" | 7 | Fluxograma |
-| 2.2 | "Relógio na mão: os tempos-limite que ninguém controla (NBR 7212)" | 7 | Planilha · VALIDAR |
-| 2.3 | "Slump test sem erro: o ensaio de 3 minutos (NBR 16889)" | 8 | Ferramenta |
+| 2.2 | "Relógio na mão: os tempos-limite que ninguém controla (NBR 7212:2021)" | 7 | Planilha · VALIDAR |
+| 2.3 | "Slump test sem erro: o ensaio de 3 minutos (NBR 16889:2020)" | 8 | Ferramenta |
 | 2.4 | "Deu fora da faixa: aceitar, corrigir ou recusar?" | 7 | Fluxograma · VALIDAR |
 | 2.5 | "'Joga uma aguinha': a frase que derruba estruturas (e como dizer não)" | 7 | Ebook |
 | 2.6 | "Recusei o caminhão. E agora? O registro que te protege" | 6 | Relatório |
@@ -93,17 +93,17 @@ Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (norma na tela) �
 | Aula | Título-gancho | Min | Liga com |
 |---|---|---|---|
 | 3.1 | "Por que o CP é a sua testemunha (e como o perito o usa)" | 6 | Curso 10 |
-| 3.2 | "Moldagem sem vício: o passo a passo da NBR 5738" | 8 | Checklist |
+| 3.2 | "Moldagem sem vício: o passo a passo da NBR 5738:2015" | 8 | Checklist |
 | 3.3 | "Identificação e cura: onde 90% dos CPs são estragados" | 7 | Planilha |
-| 3.4 | "Quantos CPs? Amostragem e lotes (NBR 12655)" | 7 | Planilha · VALIDAR |
-| 3.5 | "O rompimento (NBR 5739): lendo o certificado do laboratório" | 6 | Planilha |
+| 3.4 | "Quantos CPs? Amostragem e lotes (NBR 12655:2022)" | 7 | Planilha · VALIDAR |
+| 3.5 | "O rompimento (NBR 5739:2018): lendo o certificado do laboratório" | 6 | Planilha |
 
 ### Módulo 4 — Depois da descarga: cura, aceitação e o plano B (~38 min)
 | Aula | Título-gancho | Min | Liga com |
 |---|---|---|---|
 | 4.1 | "A cura: o serviço mais barato que mais evita fissura" | 7 | **Curso 5 (fissuras)** |
 | 4.2 | "Retração plástica: a fissura das primeiras horas (déjà-vu do curso de fissuras)" | 6 | Curso 5 |
-| 4.3 | "Aceitação definitiva: fck aos 28 dias (NBR 12655)" | 7 | Planilha |
+| 4.3 | "Aceitação definitiva: fck aos 28 dias (NBR 12655:2022)" | 7 | Planilha |
 | 4.4 | "O fck não deu. Respira: o procedimento correto (sem pânico e sem martelo)" | 7 | VALIDAR · curso 8 |
 | 4.5 | "Extração, esclerometria e contraprova: o que existe além do CP" | 6 | Curso 6 |
 | 4.6 | "O dossiê do concreto: registro que blinda a obra inteira" | 5 | Relatório |
@@ -117,9 +117,9 @@ Mini e-book · **Simulador de Recebimento (ferramenta HTML PRO+LITE, testada)** 
 
 ## 9. Rigor (não negociável)
 
-- Aceitação: **NBR 12655** (provisória na descarga + definitiva por ensaios). Central: **NBR 7212**
+- Aceitação: **NBR 12655:2022** (provisória na descarga + definitiva por ensaios). Central: **NBR 7212:2021**
   (tempos-limite — valores exatos `[VALIDAR F2]`). Slump: **NBR 16889:2020** (substituiu a NM 67).
-  CPs: **NBR 5738** (moldagem/cura) e **NBR 5739** (compressão). Classes: **NBR 8953**. Execução: **NBR 14931**. Projeto: **NBR 6118**.
+  CPs: **NBR 5738:2015** (moldagem/cura) e **NBR 5739:2018** (compressão). Classes: **NBR 8953**. Execução: **NBR 14931:2023**. Projeto: **NBR 6118:2023**.
 - Tolerâncias de slump e nº de CPs por lote: **sempre com `[VALIDAR]`** — dependem da edição vigente e do caso.
 - **Alçada:** o aluno decide a aceitação **do concreto fresco** conforme procedimento; decisões sobre
   estrutura com fck não atendido são do **responsável técnico/projetista estrutural** — o curso ensina a triagem e o registro.

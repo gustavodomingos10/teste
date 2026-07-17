@@ -38,7 +38,7 @@ peça. Janela de limpeza no pé do pilar: abriu, limpou, fechou.
 
 **Seis — desmoldante.** Aplicado na fôrma, **antes** da armação — e nunca sobre a armadura."
 
-`[NA TELA — box Norma: "NBR 14931 — execução (tolerâncias) · NBR 15696 — o sistema de fôrma tem projeto"]`
+`[NA TELA — box Norma: "NBR 14931:2023 — execução (tolerâncias) · NBR 15696:2009 — o sistema de fôrma tem projeto"]`
 > Tolerâncias numéricas por elemento: `[VALIDAR G1]` — citar da edição vigente na apostila.
 
 ## 3. Aplicação guiada (3:15–5:30)
@@ -80,7 +80,7 @@ direções** num pilar. Registre no seu caderno de campo o que achou. Depois, co
 **Q2.2** Por que a estanqueidade da fôrma importa?
 - ✅ **Junta aberta vaza nata (pasta de cimento); onde vaza nata sobra pedra sem pasta — o ninho de concretagem.**
 - É só estética / Para economizar desmoldante / Não importa.
-> **Gabarito:** a fuga de nata gera ninhos/brocas na peça (NBR 14931). Teste prático: fresta que passa luz, passa nata.
+> **Gabarito:** a fuga de nata gera ninhos/brocas na peça (NBR 14931:2023). Teste prático: fresta que passa luz, passa nata.
 
 ---
 ### Material ligado

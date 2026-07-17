@@ -34,7 +34,7 @@ desempate** com critérios objetivos. Vou te dar a tabela mental que uso pra des
 5. **Acesso e equipamento** — cabe o equipamento? Tem pé-direito, tem espaço de manobra?
 6. **Custo e prazo** — sempre entram, mas **por último**, depois de a técnica filtrar."
 
-`[NA TELA — box Norma: "NBR 6122 — execução dos diferentes tipos"]`
+`[NA TELA — box Norma: "NBR 6122:2019 — execução dos diferentes tipos"]`
 
 ## 3. Aplicação guiada — desempate na prática (3:00–5:30)
 
@@ -74,7 +74,7 @@ o mais caro que existe — e em fundação, o 'não resolve' aparece como recalq
 **Teleprompter:**
 "Blindagem: ao sugerir tipos, registre-os como **alternativas técnicas a validar**, com os cortes
 justificados: *'considerando vizinhança sensível e NA a X, sugere-se avaliar estaca hélice
-contínua ou escavada, a ser confirmado pelo projetista de fundações conforme NBR 6122.'* Você
+contínua ou escavada, a ser confirmado pelo projetista de fundações conforme NBR 6122:2019.'* Você
 mostra repertório, justifica os cortes e mantém a decisão final onde ela deve estar. Nunca
 prometa desempenho de um tipo específico como se fosse garantia sua."
 

@@ -12,8 +12,8 @@
 ### Receba e libere concreto com critério — o procedimento que protege a sua estrutura (e a sua assinatura) por 50 anos.
 
 **Subheadline:** Nota, relógio, slump, veredito, corpos de prova, registro. Em 2h30 você domina a
-sequência que transforma o pânico do caminhão-betoneira num procedimento — com base na NBR 12655,
-NBR 7212 e NBR 16889.
+sequência que transforma o pânico do caminhão-betoneira num procedimento — com base na NBR 12655:2022,
+NBR 7212:2021 e NBR 16889:2020.
 
 **CTA:** `[ Quero dominar o recebimento — R$ 49,90 ]` *(fundador · Garantia Diamante 15 dias)*
 
@@ -27,10 +27,10 @@ NBR 7212 e NBR 16889.
 ## BLOCO 2 — A virada (capacidades)
 Em 2h30 você sai sabendo:
 - ✅ **Conferir a nota** contra o pedido (fck/classe NBR 8953, slump, brita, uso) antes de qualquer descarga.
-- ✅ **Controlar o relógio** desde a água na central (NBR 7212) e projetar o fim da descarga.
-- ✅ **Executar o slump test** do jeito da NBR 16889 — e decidir: liberar, corrigir via central ou recusar.
+- ✅ **Controlar o relógio** desde a água na central (NBR 7212:2021) e projetar o fim da descarga.
+- ✅ **Executar o slump test** do jeito da NBR 16889:2020 — e decidir: liberar, corrigir via central ou recusar.
 - ✅ **Vetar a "aguinha"** com física e com as palavras certas.
-- ✅ **Moldar CPs válidos** (NBR 5738) e montar o **dossiê** que te protege — inclusive quando o fck não dá (plano B da NBR 12655, sem pânico e sem martelo).
+- ✅ **Moldar CPs válidos** (NBR 5738:2015) e montar o **dossiê** que te protege — inclusive quando o fck não dá (plano B da NBR 12655:2022, sem pânico e sem martelo).
 
 ## BLOCO 3 — Autoridade (só Bloco 0)
 Com **Gustavo Domingos** — Eng. Civil, CREA-PR 140.964-D e CREA-SP 5071652757; **perito judicial
@@ -60,7 +60,7 @@ política `[VALIDAR D7]` · certificado com QR.
 **CTA:** `[ Entrar na turma de fundadores — R$ 49,90 ]`
 
 ## BLOCO 7 — FAQ (objeções)
-1. **"A concreteira não cuida disso?"** A central controla a produção; a **aceitação** é sua (NBR 12655). Quem não confere, recebe o que der.
+1. **"A concreteira não cuida disso?"** A central controla a produção; a **aceitação** é sua (NBR 12655:2022). Quem não confere, recebe o que der.
 2. **"Minha obra é pequena."** Toda obra concreta — e obra pequena é onde menos gente confere.
 3. **"Não tenho cone/equipamento."** O curso te mostra o kit mínimo e como exigi-lo — essa cobrança já é controle.
 4. **"E se o fornecedor reclamar?"** O curso te dá o procedimento e as palavras; fornecedores respeitam obra com critério (e mandam caminhões melhores).
@@ -77,5 +77,5 @@ política `[VALIDAR D7]` · certificado com QR.
 ### Reels específicos (ganchos)
 - "'Joga uma aguinha': a frase que derruba estruturas." → curso.
 - "O caminhão chegou. Você tem 8 minutos." → simulador LITE.
-- "O slump test que 90% faz errado (3 min do jeito certo)." → NBR 16889.
+- "O slump test que 90% faz errado (3 min do jeito certo)." → NBR 16889:2020.
 - "fck não deu: respira — o plano B da norma." → curso.

@@ -2,7 +2,7 @@
 
 **Módulo 4 (de Ouro) · Duração-alvo: 8 min · Legendada 100% · (aula-espinha do módulo)**
 Objetivo: o aluno percorre a árvore de decisão que separa **fundação rasa** de **profunda**,
-com o critério da NBR 6122 e os gatilhos práticos do solo, da carga e da obra.
+com o critério da NBR 6122:2019 e os gatilhos práticos do solo, da carga e da obra.
 
 ---
 
@@ -24,7 +24,7 @@ a árvore de decisão que eu uso, do primeiro galho ao último."
 `[B-ROLL: animação — uma sapata larga e pouco enterrada vs. uma estaca fina e muito enterrada, com as cotas destacadas]`
 
 **Teleprompter:**
-"Primeiro, o que a norma diz, porque isso te dá autoridade. A NBR 6122 separa as duas por
+"Primeiro, o que a norma diz, porque isso te dá autoridade. A NBR 6122:2019 separa as duas por
 **geometria**: **fundação rasa** — ou superficial — é aquela cuja base está assentada a uma
 profundidade **menor que duas vezes a menor dimensão** da própria fundação. Ela trabalha
 espalhando a carga pela **base**, apoiada numa camada boa que está **perto da superfície**.
@@ -87,7 +87,7 @@ quadro pronto."
 "Blindagem: nunca registre 'vai ser sapata' ou 'vai ser estaca' como decisão sua isolada. Registre
 o **raciocínio**: *'com base na sondagem SP-XX, com camada resistente a Y metros e NA a Z, e nas
 cargas informadas, o quadro é compatível com fundação [rasa/profunda]; a definição e o
-dimensionamento cabem ao projetista de fundações (NBR 6122).'* Você mostrou competência, citou a
+dimensionamento cabem ao projetista de fundações (NBR 6122:2019).'* Você mostrou competência, citou a
 base, e devolveu a decisão final a quem tem a alçada. **É assim que o júnior brilha sem se expor.**"
 
 ## 6. Microdesafio 48h (7:40–8:00)
@@ -102,7 +102,7 @@ raciocínio com o gabarito comentado do módulo."
 
 ## 7. Quiz da aula
 
-**Q4.2** Pela NBR 6122, o que caracteriza uma fundação **profunda**?
+**Q4.2** Pela NBR 6122:2019, o que caracteriza uma fundação **profunda**?
 - ✅ Ponta/base apoiada em profundidade **superior a 8× a menor dimensão e no mínimo 3,0 m**, transmitindo carga por ponta e/ou fuste.
 - Base a menos de 2× a menor dimensão / Qualquer sapata enterrada / Só o radier.
 > **Gabarito comentado:** a norma separa por geometria; profunda leva a carga a camadas mais fundas por ponta e/ou atrito lateral (estacas e tubulões). A rasa fica a profundidade < 2× a menor dimensão (VALIDAR E1/E2).

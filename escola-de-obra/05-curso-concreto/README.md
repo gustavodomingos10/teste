@@ -24,9 +24,9 @@ Concretagem (Word+PDF) · Guia de bolso · Fluxograma (mmd+svg+pdf) · e-book ·
 **Simulador de Recebimento PRO+LITE (testes 9/9)** · Apostila.
 
 ## Rigor
-**NBR 12655** (aceitação provisória/definitiva) · **NBR 7212** (tempos, tolerâncias, redosagem) ·
-**NBR 16889** (slump) · **NBR 5738/5739** (CPs) · **NBR 8953** (classes) · **NBR 14931** (cura) ·
-**NBR 7680** (extração). Valores em `../00-projeto/VALIDAR.md` seção F. Alçada: aceitação do fresco
+**NBR 12655:2022** (aceitação provisória/definitiva) · **NBR 7212:2021** (tempos, tolerâncias, redosagem) ·
+**NBR 16889:2020** (slump) · **NBR 5738:2015/5739** (CPs) · **NBR 8953** (classes) · **NBR 14931:2023** (cura) ·
+**NBR 7680-1:2015** (extração). Valores em `../00-projeto/VALIDAR.md` seção F. Alçada: aceitação do fresco
 é do aluno; decisões estruturais são do RT/projetista.
 
 ## Regenerar binários

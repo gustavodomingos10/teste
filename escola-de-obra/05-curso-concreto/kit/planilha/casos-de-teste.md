@@ -11,7 +11,7 @@ Slump pedido **100 mm** · tolerância **±20 mm** `[VALIDAR F4]` · tempo-limit
 ## Lógica testada
 - **Tempo decorrido** = (fim descarga − hora da água) × 1440 (minutos).
 - **Veredito**: RECUSAR/REGISTRAR se nota não confere, aspecto anormal ou água adicionada; RECUSAR-tempo se decorrido > limite; LIBERADO se |slump−pedido| ≤ tolerância; CORRIGIR VIA CENTRAL se seco; RECUSAR-fluido se acima.
-- **CPs (triagem)**: OK se resultado ≥ fck; ALERTA (aplicar critérios NBR 12655 / acionar RT) caso contrário.
+- **CPs (triagem)**: OK se resultado ≥ fck; ALERTA (aplicar critérios NBR 12655:2022 / acionar RT) caso contrário.
 
 ## Resultados
 | Caso | Entrada | Tempo | Veredito | ✔ |
@@ -21,7 +21,7 @@ Slump pedido **100 mm** · tolerância **±20 mm** `[VALIDAR F4]` · tempo-limit
 | NF-3 | slump 70 (seco) | 60 min | **CORRIGIR VIA CENTRAL** | ✔ |
 | NF-4 | slump 150 (fluido) | 60 min | **RECUSAR - fluido** | ✔ |
 | CP-1 | 32,5 MPa | — | **OK (≥ fck)** | ✔ |
-| CP-2 | 26,0 MPa | — | **ALERTA: critérios NBR 12655 / RT** | ✔ |
+| CP-2 | 26,0 MPa | — | **ALERTA: critérios NBR 12655:2022 / RT** | ✔ |
 
 **Dashboard:** Caminhões 4 · Liberados 1 · Corrigir 1 · Recusados 2 · CPs 2 (1 OK / 1 alerta) — tudo ✔.
 
@@ -30,4 +30,4 @@ Slump pedido **100 mm** · tolerância **±20 mm** `[VALIDAR F4]` · tempo-limit
 validação de dados (Sim/Não) · formatação condicional (verde/amarelo/vermelho) · painéis congelados.
 
 > ⚠️ A coluna "situação" dos CPs é **triagem de alerta** — a aceitação definitiva segue os critérios
-> estatísticos da **NBR 12655**, aplicados pelo responsável técnico. Planilha entregue vazia ao aluno.
+> estatísticos da **NBR 12655:2022**, aplicados pelo responsável técnico. Planilha entregue vazia ao aluno.

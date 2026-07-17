@@ -39,7 +39,7 @@ barra acabou', é onde o projeto mandou.
 
 **Amarração** — arame recozido firme; barra solta muda de lugar na concretagem."
 
-`[NA TELA — box Norma: "NBR 14931 — montagem conforme projeto · NBR 6118 — detalhamento é do projetista"]`
+`[NA TELA — box Norma: "NBR 14931:2023 — montagem conforme projeto · NBR 6118:2023 — detalhamento é do projetista"]`
 
 ## 3. Aplicação guiada (3:15–5:30)
 **Teleprompter:**
@@ -80,7 +80,7 @@ o corte do projeto. Registre no seu caderno de campo: 'conferi, bateu' ou 'achei
 **Q2.3** Por que o "negativo pisado" é grave?
 - ✅ **A armadura negativa só trabalha na parte de CIMA da laje; afundada, perde o braço de alavanca — origem clássica de fissura sobre apoios.**
 - É só estética / Atrapalha a pintura / Não é grave.
-> **Gabarito:** posição é tão importante quanto bitola. Exige caranguejos + passarelas no dia da concretagem (NBR 14931; detalhamento: projetista).
+> **Gabarito:** posição é tão importante quanto bitola. Exige caranguejos + passarelas no dia da concretagem (NBR 14931:2023; detalhamento: projetista).
 
 ---
 ### Material ligado

@@ -26,8 +26,8 @@ quando não está pronto.
 ## BLOCO 2 — A virada (capacidades)
 Em 2h40 você sai sabendo:
 - ✅ **Inspecionar com método:** comparar com projeto + norma, na véspera, com rota fixa e registro.
-- ✅ **Liberar (ou travar) fôrma, armação e escoramento** — geometria, prumo, estanqueidade (teste da luz), bitolas, posição, **cobrimento/espaçadores** (NBR 6118), apoio/contraventamento (NBR 15696).
-- ✅ **Inspecionar alvenaria** — prumo/nível/esquadro, amarração e as **vergas** que evitam a fissura de canto (NBR 8545).
+- ✅ **Liberar (ou travar) fôrma, armação e escoramento** — geometria, prumo, estanqueidade (teste da luz), bitolas, posição, **cobrimento/espaçadores** (NBR 6118:2023), apoio/contraventamento (NBR 15696:2009).
+- ✅ **Inspecionar alvenaria** — prumo/nível/esquadro, amarração e as **vergas** que evitam a fissura de canto (NBR 8545:1984).
 - ✅ **Controlar desforma/reescoramento** pelo plano do RT e **documentar** no Termo de Liberação.
 
 ## BLOCO 3 — Autoridade (só Bloco 0)
@@ -75,6 +75,6 @@ política `[VALIDAR D7]` · certificado com QR.
 ### Reels específicos (ganchos)
 - "O erro mais caro da obra é o escondível." → curso.
 - "O teste da luz: 10 segundos que evitam o ninho." → liberador LITE.
-- "Espaçador: o seguro mais barato da construção civil." → NBR 6118.
+- "Espaçador: o seguro mais barato da construção civil." → NBR 6118:2023.
 - "A fissura de canto de janela começa na alvenaria (verga!)." → ponte com o curso de fissuras.
 - "Você teria coragem de travar uma concretagem?" → curso.

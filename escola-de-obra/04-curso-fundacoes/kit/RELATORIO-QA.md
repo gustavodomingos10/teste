@@ -25,8 +25,8 @@ scripts em `../../_build/`.
   divisa→associada/alavancada; acesso→raiz/Strauss) — 8/8 ✔.
 
 ## Rigor normativo (verificado na redação)
-- Definições rasa/profunda **pela NBR 6122** (rasa < 2× menor dimensão; profunda > 8× e ≥ 3 m) — E1/E2.
-- SPT: **NBR 6484**; provas de carga: **NBR 6489** (direta), **NBR 12131** (estacas), **NBR 16903** (profunda); concreto: **NBR 6118**.
+- Definições rasa/profunda **pela NBR 6122:2019** (rasa < 2× menor dimensão; profunda > 8× e ≥ 3 m) — E1/E2.
+- SPT: **NBR 6484:2020**; provas de carga: **NBR 6489** (direta), **NBR 12131** (estacas), **NBR 16903** (profunda); concreto: **NBR 6118:2023**.
 - **Regra de alçada** repetida em todo o material: a escolha e o dimensionamento finais são do
   projetista de fundações/geotécnico; o júnior lê, tria, encaminha e fiscaliza.
 - Valores/faixas com fonte ou marcador `[VALIDAR]` (ver `../../00-projeto/VALIDAR.md` seção E).

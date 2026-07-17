@@ -54,7 +54,7 @@ NBR 16889: amostra do meio, 3 camadas, 25 golpes, saque vertical, leitura imedia
 **A consequência.** Resultados baixos aos 28 dias — do CP, não do concreto. Pânico, ensaios extras,
 custo e atraso para provar que a estrutura estava boa.
 **A lição.** **O CP é a sua testemunha: se você maltrata a testemunha, ela depõe contra você.**
-Cura inicial protegida e ID rastreável (NBR 5738) valem tanto quanto a moldagem.
+Cura inicial protegida e ID rastreável (NBR 5738:2015) valem tanto quanto a moldagem.
 
 ## 6. A recusa que virou lenda
 
@@ -68,8 +68,8 @@ Cura inicial protegida e ID rastreável (NBR 5738) valem tanto quanto a moldagem
 
 **Contexto.** Resultado aos 28 dias abaixo do fck. Alguém já falava em demolir. `[FOTO DO ACERVO: certificado de rompimento]`
 **O erro (evitado por pouco).** Pânico decidindo antes da técnica.
-**A consequência.** Seguindo o procedimento — critérios da NBR 12655, extração de testemunhos
-(NBR 7680), análise do projetista — a estrutura foi verificada e aceita com segurança.
+**A consequência.** Seguindo o procedimento — critérios da NBR 12655:2022, extração de testemunhos
+(NBR 7680-1:2015), análise do projetista — a estrutura foi verificada e aceita com segurança.
 **A lição.** **fck baixo no papel não é sentença — é o início de um procedimento.** Respira, aplica
 a norma, aciona o RT. O martelo é a última página, não a primeira.
 
@@ -80,7 +80,7 @@ a norma, aciona o RT. O martelo é a última página, não a primeira.
 **A consequência.** Segunda-feira: craquelê de retração plástica na laje inteira — a fissura das
 primeiras horas, exatamente a do nosso curso de fissuras.
 **A lição.** **A cura é o serviço mais barato que mais evita patologia.** O concreto não termina na
-descarga — termina na cura (NBR 14931).
+descarga — termina na cura (NBR 14931:2023).
 
 ## 9. O dossiê que salvou o engenheiro
 

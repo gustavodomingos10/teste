@@ -18,21 +18,21 @@ sem portão de `CONTINUAR`, a pedido do instrutor. Um commit por etapa.
 Segundo curso completo da esteira, em `04-curso-fundacoes/`. Mesmo Padrão Diamante: arquitetura,
 Módulo de Ouro (M4 "A decisão") roteirizado (6 aulas), banco de quizzes, **Kit Diamante 8/8
 construído e testado** (planilha seletor 4/4 ✔, seletor interativo 8/8 ✔, PDFs, docx, fluxograma),
-PEDIDO-DE-MATERIAL e copy de lançamento. Normas: NBR 6122 (rasa/profunda), 6484 (SPT),
+PEDIDO-DE-MATERIAL e copy de lançamento. Normas: NBR 6122:2019 (rasa/profunda), 6484 (SPT),
 6489/12131/16903 (provas de carga), 6118. Regra de alçada (decisão final do projetista) em todo o material.
 Pendências no `VALIDAR.md` seção E.
 
 ## Curso 3 — Receber e Liberar Concreto com Critério (construído)
 Terceiro curso completo, em `05-curso-concreto/`. Arquitetura (4 módulos, 2h30), Módulo de Ouro
 (M2 "A hora do caminhão") roteirizado (6 aulas), quizzes, **Kit 8/8 testado** (planilha 6/6 ✔ com
-aritmética de horários; simulador 9/9 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 12655, 7212,
+aritmética de horários; simulador 9/9 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 12655:2022, 7212,
 16889, 5738/5739, 8953, 14931, 7680. Conexões explícitas: fundações (2) → concreto (3) → fissuras (5).
 Pendências no `VALIDAR.md` seção F.
 
 ## Curso 4 — Inspeção de Serviços Críticos (construído — FECHA A FASE A)
 Quarto curso completo, em `06-curso-inspecao/`. Arquitetura (4 módulos, 2h40), Módulo de Ouro
 (M2 "A liberação de concretagem") roteirizado (7 aulas), quizzes, **Kit 8/8 testado** (planilha 5/5 ✔
-com veredito global; liberador 8/8 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 14931, 6118 (Tab. 7.2),
+com veredito global; liberador 8/8 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 14931:2023, 6118 (Tab. 7.2),
 15696, 8545, NR-18/35. Conexões: curso 3 (material×serviço), curso 5 (vergas↔fissura de canto,
 encunhamento↔fissura horizontal), curso 6 (cobrimento↔corrosão). **Fase A completa: cursos 1–4 + piloto.**
 Pendências no `VALIDAR.md` seção G.
@@ -41,7 +41,7 @@ Pendências no `VALIDAR.md` seção G.
 Rodada uma auditoria cética independente ao fim do projeto. Resultado: **aprovado após 1 correção**
 (o e-book "Histórias Reais de Obra" foi reenquadrado para não contradizer o rótulo N1 — situações
 reais recorrentes, casos específicos preservados). Avisos de consistência (status de âncoras de
-mercado, NBR 9575/14931) reconciliados no `VALIDAR.md`. Sem violações de integridade do instrutor,
+mercado, NBR 9575:2010/14931) reconciliados no `VALIDAR.md`. Sem violações de integridade do instrutor,
 N1/N2/N3, normas, CDC/CONAR ou LGPD. Todos os arquivos prometidos existem e funcionam.
 
 ## Legenda

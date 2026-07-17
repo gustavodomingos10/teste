@@ -1,4 +1,4 @@
-# 🎬 Aula 2.3 — "Slump test sem erro: o ensaio de 3 minutos (NBR 16889)"
+# 🎬 Aula 2.3 — "Slump test sem erro: o ensaio de 3 minutos (NBR 16889:2020)"
 
 **Módulo 2 (de Ouro) · Duração-alvo: 8 min · Legendada 100% · (aula mais "mão na massa" do curso)**
 Objetivo: o aluno executa o ensaio de abatimento do tronco de cone corretamente — amostra, camadas,
@@ -15,7 +15,7 @@ golpes, desmoldagem e leitura — e reconhece os vícios que invalidam o resulta
 **Teleprompter:**
 "O slump test é o ensaio mais famoso — e mais **mal feito** — do canteiro brasileiro. Cone torto,
 placa na terra, golpe de qualquer jeito, leitura no olho... e aí o número que decide se o caminhão
-descarrega não vale nada. [PAUSA] O ensaio leva três minutos e tem norma própria: a **NBR 16889** —
+descarrega não vale nada. [PAUSA] O ensaio leva três minutos e tem norma própria: a **NBR 16889:2020** —
 que, aliás, substituiu a antiga NM 67; se alguém na obra ainda fala 'NM 67', você já atualiza. Vem
 comigo fazer do jeito certo, passo a passo."
 
@@ -93,7 +93,7 @@ passo do controle."
 
 ## 7. Quiz da aula
 
-**Q2.3** No ensaio de abatimento (NBR 16889), o correto é:
+**Q2.3** No ensaio de abatimento (NBR 16889:2020), o correto é:
 - ✅ **Amostra do meio da descarga, 3 camadas com 25 golpes cada, saque vertical contínuo do cone e medição imediata.**
 - Amostra dos primeiros litros / 1 camada com 75 golpes / Sacar o cone de lado e medir depois.
 > **Gabarito comentado:** o procedimento padronizado é o que dá validade ao número. Amostra representativa, adensamento padronizado (3×25), saque vertical e leitura imediata (VALIDAR F3).

@@ -43,7 +43,7 @@ Balão girando (close) · descarga na bomba · slump em tempo real (série compl
 timelapse de concretagem de laje · drone da concretagem (trailer).
 
 ## Confirmações do instrutor
-- [ ] VALIDAR seção F (F2 tempos, F4 tolerâncias, F5 redosagem, F7 amostragem, F10 NBR 7680).
+- [ ] VALIDAR seção F (F2 tempos, F4 tolerâncias, F5 redosagem, F7 amostragem, F10 NBR 7680-1:2015).
 - [ ] Edições vigentes das NBR na data da gravação.
 
 **Enquanto as fotos não chegam:** tudo funciona com placeholders; nada trava a montagem.

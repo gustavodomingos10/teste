@@ -1,5 +1,5 @@
 %% Fluxograma de Decisão — Liberação de Concretagem
-%% Escola de Obra · Padrão Diamante. NBR 14931 · 6118 · 15696.
+%% Escola de Obra · Padrão Diamante. NBR 14931:2023 · 6118 · 15696.
 flowchart TD
     A([Véspera da concretagem<br/>projeto na mão + checklist]) --> B{FÔRMA conforme?<br/>geometria · prumo · travamento<br/>estanqueidade · limpeza}
     B -- NC grave --> T[/TRAVAR<br/>corrigir e reinspecionar/]
@@ -8,11 +8,11 @@ flowchart TD
     P1 --> C
     C -- Divergência sem resposta<br/>do projetista --> T
     C -- Pendência corrigível --> P2[Listar + prazo + reconferência]
-    C -- OK --> D{COBRIMENTO garantido?<br/>espaçadores fundo+faces<br/>zero ponto de toque — NBR 6118}
+    C -- OK --> D{COBRIMENTO garantido?<br/>espaçadores fundo+faces<br/>zero ponto de toque — NBR 6118:2023}
     P2 --> D
     D -- Sem espaçadores /<br/>armadura na fôrma --> T
     D -- Faltam em trechos --> P3[Completar hoje + reconferir]
-    D -- OK --> E{ESCORAMENTO conforme o plano?<br/>apoio · prumo · contraventamento<br/>NBR 15696}
+    D -- OK --> E{ESCORAMENTO conforme o plano?<br/>apoio · prumo · contraventamento<br/>NBR 15696:2009}
     P3 --> E
     E -- Sem contraventamento /<br/>apoios cedendo --> T
     E -- Ajustes pontuais --> P4[Ajustar hoje + reconferir]

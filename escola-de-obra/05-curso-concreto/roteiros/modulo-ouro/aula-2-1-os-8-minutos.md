@@ -33,18 +33,18 @@ slump, a brita, o uso? Nota errada, nem desce concreto.
 **Dois — o RELÓGIO.** Que horas a água entrou na mistura na central? O tempo-limite está correndo
 desde lá, não desde a chegada. Anota o horário.
 
-**Três — o SLUMP.** O ensaio de abatimento (NBR 16889) — três minutos que dizem se o concreto está
+**Três — o SLUMP.** O ensaio de abatimento (NBR 16889:2020) — três minutos que dizem se o concreto está
 na consistência pedida.
 
 **Quatro — o VEREDITO.** Dentro da faixa? Descarrega. Fora? Existe um procedimento — e 'jogar água'
 não faz parte dele.
 
-**Cinco — os CPs.** Moldar os corpos de prova (NBR 5738) — a sua testemunha de 28 dias.
+**Cinco — os CPs.** Moldar os corpos de prova (NBR 5738:2015) — a sua testemunha de 28 dias.
 
 **Seis — o REGISTRO.** Nota arquivada, horários anotados, slump registrado, CPs identificados.
 [PAUSA] Seis passos, oito minutos. É a diferença entre **receber** concreto e apenas **assistir** ele chegar."
 
-`[NA TELA — box Norma: "NBR 12655 — aceitação provisória (descarga) + definitiva (ensaios)"]`
+`[NA TELA — box Norma: "NBR 12655:2022 — aceitação provisória (descarga) + definitiva (ensaios)"]`
 
 **Teleprompter (continua):**
 "A norma chama isso de **aceitação provisória**: a decisão que você toma na descarga, sobre o
@@ -102,7 +102,7 @@ próximo caminhão'."
 **Q2.1** Qual é a ordem correta do procedimento de recebimento?
 - ✅ **Nota → relógio (horários) → slump → veredito → CPs → registro.**
 - Descarregar primeiro e conferir depois / Slump antes da nota / CPs só se sobrar tempo.
-> **Gabarito comentado:** a sequência fixa evita que a pressa atropele o método. A aceitação provisória (NBR 12655) é decidida ANTES da descarga — nota conferida, tempo controlado e slump dentro da faixa.
+> **Gabarito comentado:** a sequência fixa evita que a pressa atropele o método. A aceitação provisória (NBR 12655:2022) é decidida ANTES da descarga — nota conferida, tempo controlado e slump dentro da faixa.
 
 ---
 ### Material de apoio ligado

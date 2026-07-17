@@ -37,7 +37,7 @@ sub=doc.add_paragraph(); sub.alignment=WD_ALIGN_PARAGRAPH.CENTER
 rs=sub.add_run("Escola de Obra · GD Engenharia e Perícia · Padrão Diamante"); rs.font.color.rgb=DOUR; rs.bold=True; rs.font.size=Pt(9)
 nota=doc.add_paragraph()
 rn=nota.add_run("COMO USAR: um termo por peça/concretagem, preenchido na VÉSPERA a partir do Checklist Mestre. "
- "Anexar o checklist e as fotos. Alterações de armação/fôrma/escoramento são alçada do projetista (NBR 6118/15696).")
+ "Anexar o checklist e as fotos. Alterações de armação/fôrma/escoramento são alçada do projetista (NBR 6118:2023/15696).")
 rn.italic=True; rn.font.size=Pt(8.5); rn.font.color.rgb=REALCE
 
 h("1. IDENTIFICAÇÃO")

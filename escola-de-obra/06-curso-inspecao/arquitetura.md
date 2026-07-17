@@ -15,8 +15,8 @@
 - **Subtítulo:** O olho que pega o erro **antes** da concretagem — quando corrigir ainda é barato.
 - **Promessa (capacidade):** ao final, o aluno **inspeciona e libera** (ou trava) os quatro serviços
   críticos com checklist e critério objetivo: fôrma (geometria, prumo, estanqueidade), armação
-  (bitolas, posição, **cobrimento**), escoramento (apoio, contraventamento, reescoramento — NBR 15696)
-  e alvenaria (prumo, nível, esquadro, amarração, vergas — NBR 8545), **documentando a liberação**
+  (bitolas, posição, **cobrimento**), escoramento (apoio, contraventamento, reescoramento — NBR 15696:2009)
+  e alvenaria (prumo, nível, esquadro, amarração, vergas — NBR 8545:1984), **documentando a liberação**
   que o protege.
 - **Formato:** micro-aulas 3–6 min, legendadas 100%, "certo × errado" como linguagem visual central.
 
@@ -49,8 +49,8 @@
 
 > **Ao final do curso, o aluno será capaz de:**
 > 1. **Aplicar o método de inspeção** (comparar com projeto + norma, do geral ao particular, com registro) a qualquer serviço.
-> 2. **Inspecionar e liberar fôrma, armação e escoramento** para concretagem, verificando geometria, prumo, estanqueidade, bitolas, espaçamento, **cobrimento (espaçadores!)**, arranques, apoio e contraventamento (NBR 14931 / 6118 / 15696).
-> 3. **Inspecionar alvenaria** de vedação: prumo, nível, esquadro, amarração, juntas, **vergas e contravergas** (NBR 8545).
+> 2. **Inspecionar e liberar fôrma, armação e escoramento** para concretagem, verificando geometria, prumo, estanqueidade, bitolas, espaçamento, **cobrimento (espaçadores!)**, arranques, apoio e contraventamento (NBR 14931:2023 / 6118 / 15696).
+> 3. **Inspecionar alvenaria** de vedação: prumo, nível, esquadro, amarração, juntas, **vergas e contravergas** (NBR 8545:1984).
 > 4. **Controlar a desforma/reescoramento** conforme o plano do responsável e **documentar a liberação** (termo assinado) — sabendo travar a concretagem quando o serviço não está pronto.
 
 ## 5. Arco narrativo
@@ -86,7 +86,7 @@ Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (certo × errado +
 | 2.2 | "Fôrma: geometria, prumo e a estanqueidade que ninguém confere" | 7 | Checklist |
 | 2.3 | "Armação I: bitola, quantidade e posição — lendo o projeto na peça" | 7 | Ferramenta |
 | 2.4 | "Armação II: cobrimento e espaçadores — os milímetros que valem décadas" | 8 | VALIDAR · curso 6 |
-| 2.5 | "Escoramento: apoio, prumo e contraventamento (NBR 15696)" | 7 | VALIDAR |
+| 2.5 | "Escoramento: apoio, prumo e contraventamento (NBR 15696:2009)" | 7 | VALIDAR |
 | 2.6 | "Embutidos e limpeza: eletroduto, luva, caixinha — e o fundo da fôrma" | 6 | Checklist |
 | 2.7 | "Liberar ou travar: o veredito e o termo assinado" | 6 | Relatório |
 
@@ -94,7 +94,7 @@ Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (certo × errado +
 | Aula | Título-gancho | Min | Liga com |
 |---|---|---|---|
 | 3.1 | "Prumo, nível e esquadro: o trio que define a parede" | 7 | Checklist |
-| 3.2 | "Amarração e juntas: por que parede não é pilha de bloco" | 7 | NBR 8545 |
+| 3.2 | "Amarração e juntas: por que parede não é pilha de bloco" | 7 | NBR 8545:1984 |
 | 3.3 | "Vergas e contravergas: a fissura de canto começa aqui" | 8 | **Curso 5 (aula 2.1!)** |
 | 3.4 | "O encontro alvenaria × estrutura: encunhamento sem pressa" | 6 | Curso 5 (aula 2.6) |
 | 3.5 | "Instalações na parede: rasgo com critério, não com marreta" | 6 | Checklist |
@@ -102,8 +102,8 @@ Microcaso N1/N2/N3 com `[FOTO DO ACERVO]` → conceito visual (certo × errado +
 ### Módulo 4 — Desforma e registro (~34 min)
 | Aula | Título-gancho | Min | Liga com |
 |---|---|---|---|
-| 4.1 | "Quando desformar: o prazo é do responsável, não da pressa" | 7 | VALIDAR · NBR 14931 |
-| 4.2 | "Reescoramento: a escora que volta antes de a laje reclamar" | 7 | NBR 15696 |
+| 4.1 | "Quando desformar: o prazo é do responsável, não da pressa" | 7 | VALIDAR · NBR 14931:2023 |
+| 4.2 | "Reescoramento: a escora que volta antes de a laje reclamar" | 7 | NBR 15696:2009 |
 | 4.3 | "Inspeção pós-desforma: brocas, ninhos e o que fazer com eles" | 7 | Curso 6 |
 | 4.4 | "O termo de liberação: a assinatura que conta a história certa" | 6 | Relatório |
 | 4.5 | "Fechando a Fase A: de quem executa para quem diagnostica" | 5 | Esteira |
@@ -117,9 +117,9 @@ Mini e-book · **Liberador de Concretagem (ferramenta HTML PRO+LITE, testada)** 
 
 ## 9. Rigor (não negociável)
 
-- Execução e tolerâncias: **NBR 14931**. Cobrimentos nominais e classes de agressividade: **NBR 6118**
-  (valores exatos `[VALIDAR G2]`). Fôrmas/escoramentos: **NBR 15696**. Alvenaria de vedação:
-  **NBR 8545** (`[VALIDAR G5]` — confirmar vigência). Segurança: **NR-18**.
+- Execução e tolerâncias: **NBR 14931:2023**. Cobrimentos nominais e classes de agressividade: **NBR 6118:2023**
+  (valores exatos `[VALIDAR G2]`). Fôrmas/escoramentos: **NBR 15696:2009**. Alvenaria de vedação:
+  **NBR 8545:1984** (`[VALIDAR G5]` — confirmar vigência). Segurança: **NR-18**.
 - Prazos de desforma/reescoramento: **definidos pelo responsável técnico conforme projeto/resistência**
   — o curso ensina a **cobrar e conferir o plano**, nunca a inventar prazo (`[VALIDAR G6]`).
 - **Alçada:** o aluno inspeciona e libera **conforme projeto**; alterações de armação/escoramento

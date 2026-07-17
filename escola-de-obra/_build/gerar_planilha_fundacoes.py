@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Planilha Seletor/Comparador de Fundações (Kit do Curso 2).
 Abas: Parametros, Seletor (fórmulas de triagem), Comparador (matriz de referência), Dashboard.
-Triagem espelha a árvore de decisão do curso (NBR 6122). Decisão final: projetista de fundações.
+Triagem espelha a árvore de decisão do curso (NBR 6122:2019). Decisão final: projetista de fundações.
 Saída: 04-curso-fundacoes/kit/planilha/planilha-fundacoes.xlsx"""
 import os
 from openpyxl import Workbook
@@ -59,7 +59,7 @@ wp.column_dimensions["A"].width=30; wp.column_dimensions["B"].width=16; wp.colum
 
 # ---------- SELETOR ----------
 ws=wb.create_sheet("Seletor"); ws.sheet_view.showGridLines=False
-ws["A1"]="SELETOR DE FUNDAÇÃO — triagem por caso (decisão final: projetista de fundações, NBR 6122)"
+ws["A1"]="SELETOR DE FUNDAÇÃO — triagem por caso (decisão final: projetista de fundações, NBR 6122:2019)"
 ws["A1"].font=f_tit; ws["A1"].fill=fill_v; ws.merge_cells("A1:J1"); ws.row_dimensions[1].height=24
 ws["A1"].alignment=Alignment(horizontal="left",vertical="center")
 headers=[("A","Nº",6),("B","Apoio / Setor",18),("C","Prof. camada resistente (m)",13),
@@ -109,20 +109,20 @@ cols=["Tipo","Família","Quando entra na conversa","Cuidado / limite","Ref."]
 for j,c in enumerate(cols):
     cell=wc.cell(row=2,column=1+j,value=c); cell.font=f_hdr; cell.fill=fill_vm; cell.alignment=center; cell.border=border
 linhas=[
- ("Sapata isolada","Rasa","Carga de pilar sobre camada firme rasa","Recalque se solo mole/heterogêneo","NBR 6122"),
- ("Sapata corrida","Rasa","Cargas de parede/alinhadas","Idem, exige solo competente raso","NBR 6122"),
- ("Sapata associada/alavancada","Rasa","Pilares na divisa ou muito próximos","Exige viga de equilíbrio bem dimensionada","NBR 6122"),
- ("Radier","Rasa","Carga distribuída / solo raso uniforme fraco","Sensível a recalque diferencial; projeto cuidadoso","NBR 6122"),
- ("Bloco de fundação","Rasa","Cargas menores, concreto simples","Limitado a cargas/solos favoráveis","NBR 6122"),
- ("Estaca pré-moldada (cravada)","Profunda","Boa quando não há restrição de trepidação","Trepidação/ruído; vizinhança sensível","NBR 6122"),
- ("Estaca hélice contínua","Profunda","Produtividade, sem bate-estaca","Exige controle de execução/injeção","NBR 6122"),
- ("Estaca escavada","Profunda","Sem impacto; cargas variadas","Controle de furo; NA pode exigir cuidado","NBR 6122"),
- ("Estaca Strauss","Profunda","Cargas menores, equipamento simples","Limites de carga/comprimento; NA","NBR 6122"),
- ("Estaca Franki","Profunda","Boa capacidade de ponta","Trepidação; vizinhança sensível","NBR 6122"),
- ("Estaca raiz","Profunda","Espaço confinado, reforço, acesso restrito","Custo; execução especializada","NBR 6122"),
- ("Estaca metálica","Profunda","Cravação com controle, cargas altas","Custo do aço; proteção à corrosão","NBR 6122"),
- ("Tubulão a céu aberto","Profunda","Cargas altas sem NA elevado","NA alto inviabiliza / exige ar comprimido","NBR 6122"),
- ("Tubulão a ar comprimido","Profunda","Cargas altas com NA","Segurança do trabalho sob ar comprimido","NBR 6122 / NR"),
+ ("Sapata isolada","Rasa","Carga de pilar sobre camada firme rasa","Recalque se solo mole/heterogêneo","NBR 6122:2019"),
+ ("Sapata corrida","Rasa","Cargas de parede/alinhadas","Idem, exige solo competente raso","NBR 6122:2019"),
+ ("Sapata associada/alavancada","Rasa","Pilares na divisa ou muito próximos","Exige viga de equilíbrio bem dimensionada","NBR 6122:2019"),
+ ("Radier","Rasa","Carga distribuída / solo raso uniforme fraco","Sensível a recalque diferencial; projeto cuidadoso","NBR 6122:2019"),
+ ("Bloco de fundação","Rasa","Cargas menores, concreto simples","Limitado a cargas/solos favoráveis","NBR 6122:2019"),
+ ("Estaca pré-moldada (cravada)","Profunda","Boa quando não há restrição de trepidação","Trepidação/ruído; vizinhança sensível","NBR 6122:2019"),
+ ("Estaca hélice contínua","Profunda","Produtividade, sem bate-estaca","Exige controle de execução/injeção","NBR 6122:2019"),
+ ("Estaca escavada","Profunda","Sem impacto; cargas variadas","Controle de furo; NA pode exigir cuidado","NBR 6122:2019"),
+ ("Estaca Strauss","Profunda","Cargas menores, equipamento simples","Limites de carga/comprimento; NA","NBR 6122:2019"),
+ ("Estaca Franki","Profunda","Boa capacidade de ponta","Trepidação; vizinhança sensível","NBR 6122:2019"),
+ ("Estaca raiz","Profunda","Espaço confinado, reforço, acesso restrito","Custo; execução especializada","NBR 6122:2019"),
+ ("Estaca metálica","Profunda","Cravação com controle, cargas altas","Custo do aço; proteção à corrosão","NBR 6122:2019"),
+ ("Tubulão a céu aberto","Profunda","Cargas altas sem NA elevado","NA alto inviabiliza / exige ar comprimido","NBR 6122:2019"),
+ ("Tubulão a ar comprimido","Profunda","Cargas altas com NA","Segurança do trabalho sob ar comprimido","NBR 6122:2019 / NR"),
 ]
 for i,row in enumerate(linhas):
     for j,val in enumerate(row):
@@ -147,7 +147,7 @@ metric("C3","C4","PROFUNDA",'=COUNTIF(Seletor!H3:H102,"PROFUNDA")',fill_prof)
 metric("D3","D4","ZONA CINZENTA",'=COUNTIF(Seletor!H3:H102,"ZONA CINZENTA")',fill_cinza)
 wd["A6"]=('Como usar: preencha o Seletor (uma linha por apoio/situação). Família, tipos candidatos e alerta '
  'são calculados a partir dos Parametros. TODA escolha é uma triagem — a decisão e o dimensionamento finais '
- 'são do projetista de fundações (NBR 6122).')
+ 'são do projetista de fundações (NBR 6122:2019).')
 wd["A6"].font=f_small; wd.merge_cells("A6:E8"); wd["A6"].alignment=left
 wd["A10"]="Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D"
 wd["A10"].font=Font(name="Calibri",size=9,bold=True,color=DOUR)

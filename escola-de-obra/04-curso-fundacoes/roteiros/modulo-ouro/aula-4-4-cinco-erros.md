@@ -25,7 +25,7 @@ evitar esses cinco, já está à frente de muita gente com anos de canteiro."
 **Teleprompter:**
 
 "**Erro 1 — Decidir sem sondagem.** O mais comum e o mais grave. 'O terreno aqui é bom, todo mundo
-faz sapata.' *Antídoto:* exigir sondagem (NBR 6484) por escrito antes de definir. Sem o mapa do
+faz sapata.' *Antídoto:* exigir sondagem (NBR 6484:2020) por escrito antes de definir. Sem o mapa do
 solo, é aposta.
 
 **Erro 2 — Deixar o custo decidir antes da técnica.** Escolher a fundação mais barata e descobrir
@@ -63,7 +63,7 @@ obra de verdade."
 **Teleprompter:**
 "Blindagem: se você identificou um desses cinco erros prestes a acontecer, **registre o alerta por
 escrito** e a quem você comunicou. *'Alerto que a definição de fundação sem sondagem prévia
-representa risco técnico; recomendo [ação] conforme NBR 6122 e NBR 6484.'* Documento com data. Se
+representa risco técnico; recomendo [ação] conforme NBR 6122:2019 e NBR 6484:2020.'* Documento com data. Se
 te ouvirem, você salvou a obra. Se não te ouvirem, você salvou a **si mesmo**."
 
 ## 5. Microdesafio 48h (6:00)

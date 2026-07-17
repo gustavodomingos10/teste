@@ -80,7 +80,7 @@ canteiro.** Conferir a cota é item de liberação.
 `[FOTO DO ACERVO: bloco de coroamento e arranque de estacas]`
 **O erro.** Armação do bloco divergente do projeto, sem comunicar o projetista.
 **A consequência.** O elo entre pilar e estacas ficou frágil — a corrente arrebentou no elo mais fraco.
-**A lição.** **O bloco de coroamento é estrutural (NBR 6118).** Divergência de armação se comunica e
+**A lição.** **O bloco de coroamento é estrutural (NBR 6118:2023).** Divergência de armação se comunica e
 se corrige — nunca se enterra.
 
 ## 9. A prova de carga que ninguém pediu

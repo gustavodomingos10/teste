@@ -47,7 +47,7 @@ parecer, de relatório de acompanhamento, de memorial. O modelo blindado está n
 
 1. **Identificação** da obra e do responsável.
 2. **Dados de partida:** sondagem (nº, datas), cargas informadas, restrições da obra.
-3. **Leitura e triagem:** família provável e o porquê (com a citação da NBR 6122).
+3. **Leitura e triagem:** família provável e o porquê (com a citação da NBR 6122:2019).
 4. **Interface com o projeto de fundações:** o que foi definido pelo projetista, o tipo, a geometria.
 5. **Acompanhamento da execução:** locação, cotas, dimensões, ensaios/provas de carga realizados.
 6. **Divergências e encaminhamentos**, com prazo e responsável.
@@ -95,8 +95,8 @@ o júnior que você virou; depois, confira com o parecer-modelo comentado do mó
 
 **Q4.6** A prova de carga estática em **estacas** é normatizada principalmente por qual norma?
 - ✅ **NBR 12131** (e, para fundação profunda em geral, NBR 16903); em fundação **direta**, NBR 6489.
-- NBR 6484 (que é a de sondagem SPT) / NBR 15575 / NR-18.
-> **Gabarito comentado:** provas de carga estática — estacas: NBR 12131; fundação profunda: NBR 16903; fundação direta/rasa: NBR 6489. A NBR 6484 é a de sondagem SPT (a caracterização do solo, não a prova de carga).
+- NBR 6484:2020 (que é a de sondagem SPT) / NBR 15575:2013 / NR-18.
+> **Gabarito comentado:** provas de carga estática — estacas: NBR 12131; fundação profunda: NBR 16903; fundação direta/rasa: NBR 6489. A NBR 6484:2020 é a de sondagem SPT (a caracterização do solo, não a prova de carga).
 
 ---
 ### Material de apoio ligado

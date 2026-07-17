@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Gera o Parecer/Relatório de Fundação (blindado) em .docx — Kit do Curso 2.
-Triagem e acompanhamento à luz da NBR 6122; a decisão e o dimensionamento são do projetista."""
+Triagem e acompanhamento à luz da NBR 6122:2019; a decisão e o dimensionamento são do projetista."""
 import os
 from docx import Document
 from docx.shared import Pt, RGBColor, Cm
@@ -32,7 +32,7 @@ rsel=sel.add_run("Padrão Diamante — o rigor de quem assina"); rsel.italic=Tru
 nota=doc.add_paragraph(); rn=nota.add_run(
  "COMO USAR: substitua o texto entre [colchetes]. Este parecer documenta a LEITURA, a TRIAGEM e o "
  "ACOMPANHAMENTO da execução; a definição e o dimensionamento da fundação são do projetista de "
- "fundações/geotécnico (NBR 6122). Apague esta nota ao finalizar.")
+ "fundações/geotécnico (NBR 6122:2019). Apague esta nota ao finalizar.")
 rn.italic=True; rn.font.size=Pt(8.5); rn.font.color.rgb=REALCE
 
 h("1. IDENTIFICAÇÃO")
@@ -47,17 +47,17 @@ doc.add_paragraph("Objeto: triagem da família de fundação e acompanhamento da
 campo("Escopo:","o que foi solicitado/acompanhado")
 p=doc.add_paragraph(); p.add_run("Limitações: ").bold=True
 doc.add_paragraph("Este parecer NÃO constitui projeto de fundações. A escolha do tipo, o dimensionamento e a "
- "responsabilidade técnica pelo projeto são do projetista de fundações/geotécnico (NBR 6122). As hipóteses de "
+ "responsabilidade técnica pelo projeto são do projetista de fundações/geotécnico (NBR 6122:2019). As hipóteses de "
  "triagem baseiam-se na sondagem e nas cargas informadas.")
 
 h("3. DADOS DE PARTIDA")
-campo("Sondagem (nº / data / responsável):","SP-XX, dd/mm/aaaa — NBR 6484")
+campo("Sondagem (nº / data / responsável):","SP-XX, dd/mm/aaaa — NBR 6484:2020")
 campo("Camada resistente (profundidade):","ex.: N-SPT firma a X m")
 campo("Nível d'água (NA):","ex.: a Y m / ausente")
 campo("Cargas informadas (projeto estrutural):","ordem de grandeza por apoio")
 campo("Restrições da obra:","vizinhança, acesso, prazo/custo")
 
-h("4. TRIAGEM (leitura à luz da NBR 6122)")
+h("4. TRIAGEM (leitura à luz da NBR 6122:2019)")
 doc.add_paragraph("Registro do raciocínio de triagem. Família provável e o porquê — sem cravar tipo/dimensionamento.")
 campo("Família provável:","RASA / PROFUNDA / a definir (zona cinzenta)")
 campo("Justificativa:","camada resistente, NA, carga e restrições")

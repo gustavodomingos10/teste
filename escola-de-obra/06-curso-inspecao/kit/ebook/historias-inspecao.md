@@ -29,14 +29,14 @@
 **Contexto.** Obra econômica; espaçador "era luxo". `[FOTO DO ACERVO: armadura tocando a fôrma]`
 **O erro.** Armadura deitada na fôrma — cobrimento zero em vários pontos.
 **A consequência.** Anos depois: ferrugem escorrendo, concreto desplacando, recuperação estrutural cara.
-**A lição.** **Não existe seguro mais barato contra patologia que o espaçador.** Cobrimento é escudo químico (NBR 6118) — e escudo furado não avisa na hora.
+**A lição.** **Não existe seguro mais barato contra patologia que o espaçador.** Cobrimento é escudo químico (NBR 6118:2023) — e escudo furado não avisa na hora.
 
 ## 4. A escora no tijolo
 
 **Contexto.** Meio do vão, uma escora calçada num bloco cerâmico deitado. `[FOTO DO ACERVO: apoio improvisado de escora]`
 **O erro.** "Sempre foi assim." Ninguém trocou.
 **A consequência.** O bloco esmagou com a carga do concreto; a laje ganhou uma barriga de nascença.
-**A lição.** **Escoramento é estrutura (NBR 15696): apoio firme, prumo, diagonais.** Na dúvida, troca antes — nunca "observa durante".
+**A lição.** **Escoramento é estrutura (NBR 15696:2009): apoio firme, prumo, diagonais.** Na dúvida, troca antes — nunca "observa durante".
 
 ## 5. A fresta que virou ninho
 
@@ -57,7 +57,7 @@
 **Contexto.** Alvenaria subindo rápido, vãos de janela "limpos". `[FOTO DO ACERVO: vão sem verga/contraverga]`
 **O erro.** Sem verga nem contraverga — "reboco segura".
 **A consequência.** Meses depois, as clássicas fissuras a 45° saindo dos cantos das janelas — exatamente a aula 2.1 do curso de fissuras.
-**A lição.** **A fissura de canto de janela se evita na alvenaria, não no reboco.** Verga e contraverga em todo vão (NBR 8545).
+**A lição.** **A fissura de canto de janela se evita na alvenaria, não no reboco.** Verga e contraverga em todo vão (NBR 8545:1984).
 
 ## 8. O encunhamento apressado
 

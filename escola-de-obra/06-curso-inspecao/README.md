@@ -24,8 +24,8 @@ Liberação (Word+PDF) · Guia de bolso · Fluxograma A3 (mmd+svg+pdf) · e-book
 **Liberador de Concretagem PRO+LITE (testes 8/8)** · Apostila.
 
 ## Rigor
-**NBR 14931** (execução/tolerâncias) · **NBR 6118 Tab. 7.2** (cobrimentos) · **NBR 15696**
-(fôrmas/escoramentos) · **NBR 8545** (alvenaria) · **NR-18/35**. Valores em `../00-projeto/VALIDAR.md`
+**NBR 14931:2023** (execução/tolerâncias) · **NBR 6118:2023 Tab. 7.2** (cobrimentos) · **NBR 15696:2009**
+(fôrmas/escoramentos) · **NBR 8545:1984** (alvenaria) · **NR-18/35**. Valores em `../00-projeto/VALIDAR.md`
 seção G. Alçada: o aluno libera/trava **conforme o projeto**; alterações são do projetista; prazos de
 desforma vêm do plano do RT.
 

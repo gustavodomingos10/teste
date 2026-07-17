@@ -36,4 +36,4 @@ Script: `../../../_build/testar_planilha_fundacoes.py`. **Resultado: 4/4 casos +
 
 > ⚠️ A planilha é uma **ferramenta de triagem** entregue vazia ao aluno. Os limiares são convenção do
 > curso (`[VALIDAR]`) e **não substituem o projeto de fundações** — a decisão e o dimensionamento
-> finais são do projetista de fundações/geotécnico (NBR 6122).
+> finais são do projetista de fundações/geotécnico (NBR 6122:2019).

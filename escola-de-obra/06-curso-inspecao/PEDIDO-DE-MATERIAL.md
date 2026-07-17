@@ -42,7 +42,7 @@ Caminhada de inspeção na laje armada · close do teste da luz no fundo de viga
 contagem de barras com a mão · drone da laje pronta (trailer) · time-lapse de correção de pendência.
 
 ## Confirmações do instrutor
-- [ ] VALIDAR seção G (tolerâncias G1, cobrimentos G2, cargas 15696 G4, NBR 8545 G5, desforma G6, encunhamento G7).
+- [ ] VALIDAR seção G (tolerâncias G1, cobrimentos G2, cargas 15696 G4, NBR 8545:1984 G5, desforma G6, encunhamento G7).
 - [ ] Edições vigentes das NBR na data da gravação.
 
 **Enquanto as fotos não chegam:** tudo funciona com placeholders; nada trava a montagem.

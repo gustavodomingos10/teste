@@ -32,7 +32,7 @@ pode: 'libera que depois arruma' — depois não existe.
 suporte, divergência de armação sem resposta do projetista. Trava-se a concretagem. [PAUSA] Custa
 uma remarcação de caminhão. A alternativa custa a estrutura."
 
-`[NA TELA — box Norma: "NBR 14931 — a concretagem pressupõe os serviços conferidos e liberados"]`
+`[NA TELA — box Norma: "NBR 14931:2023 — a concretagem pressupõe os serviços conferidos e liberados"]`
 
 ## 3. Aplicação guiada — como travar sem guerra (2:40–4:30)
 **Teleprompter:**
@@ -77,7 +77,7 @@ encontrou. Depois, confira sua leitura com o gabarito comentado do módulo."
 **Q2.7** Quando "liberado com pendências" é um veredito válido?
 - ✅ **Quando as pendências são corrigíveis antes da concretagem, listadas com prazo e com reconferência marcada.**
 - Sempre — libera e arruma depois / Nunca / Quando o mestre prometer verbalmente.
-> **Gabarito:** pendência sem prazo e sem reconferência é liberação disfarçada. NC estrutural sem tempo de correção = travar, com fato + solução + registro (NBR 14931).
+> **Gabarito:** pendência sem prazo e sem reconferência é liberação disfarçada. NC estrutural sem tempo de correção = travar, com fato + solução + registro (NBR 14931:2023).
 
 ---
 ### Material ligado

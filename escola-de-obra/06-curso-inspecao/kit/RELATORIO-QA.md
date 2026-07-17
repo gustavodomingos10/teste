@@ -24,8 +24,8 @@ Evidência de que os 8 entregáveis **foram construídos, abrem e funcionam**. R
   concretagem hoje→TRAVADO por prazo; NC domina pendência) — **8/8 ✔**.
 
 ## Rigor normativo (verificado na redação)
-- **NBR 14931** (execução/tolerâncias — `[VALIDAR G1]`) · **NBR 6118 Tab. 7.2** (cobrimentos — `[VALIDAR G2]`) ·
-  **NBR 15696** (fôrmas/escoramentos, cargas de referência — `[VALIDAR G4]`) · **NBR 8545** (alvenaria — `[VALIDAR G5]`) ·
+- **NBR 14931:2023** (execução/tolerâncias — `[VALIDAR G1]`) · **NBR 6118:2023 Tab. 7.2** (cobrimentos — `[VALIDAR G2]`) ·
+  **NBR 15696:2009** (fôrmas/escoramentos, cargas de referência — `[VALIDAR G4]`) · **NBR 8545:1984** (alvenaria — `[VALIDAR G5]`) ·
   **NR-18/NR-35** (segurança).
 - **Alçada:** o aluno compara com o projeto e libera/trava conforme ele; alterações são do projetista.
   Prazos de desforma: **plano do RT**, nunca fixados pelo curso (`[VALIDAR G6]`).
@@ -42,6 +42,6 @@ bash gerar_pdfs_inspecao.sh
 
 ## Pendências (bloqueiam a PUBLICAÇÃO, não a montagem)
 - 🟡 `[FOTO DO ACERVO]` → fotos reais (`../PEDIDO-DE-MATERIAL.md`).
-- 🟡 VALIDAR seção G: tolerâncias (G1), cobrimentos (G2), cargas NBR 15696 (G4), NBR 8545 (G5), redação de desforma (G6), encunhamento (G7).
+- 🟡 VALIDAR seção G: tolerâncias (G1), cobrimentos (G2), cargas NBR 15696:2009 (G4), NBR 8545:1984 (G5), redação de desforma (G6), encunhamento (G7).
 
 **Conclusão:** nada "especificado mas não construído"; os dois componentes com lógica testados com resultados corretos.

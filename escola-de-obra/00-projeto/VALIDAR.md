@@ -14,16 +14,16 @@
 
 | # | Norma (número — nome usado no projeto) | Onde aparece | Status | Observação |
 |---|---|---|---|---|
-| A1 | NBR 6118 — Projeto de estruturas de concreto — Procedimento | Todo o curso, apostila, checklist | 🔵 | Confirmar edição vigente (2014 + emendas). Aberturas de fissura: Tab. 13.4. |
-| A2 | NBR 6122 — Projeto e execução de fundações | Catálogo (curso 2), apostila | 🔵 | Vigente 2019/2022. |
-| A3 | NBR 12655 — Concreto de cimento Portland — Preparo, controle, recebimento e aceitação | Catálogo (curso 3) | 🔵 | Confirmar edição. |
-| A4 | NBR 14931 — Execução de estruturas de concreto | Checklist, apostila | 🔵 | A revisão de 2023 passou a se chamar "Estruturas de concreto — Execução". Confirmar título/edição vigente. |
-| A5 | NBR 15575 — Edificações habitacionais — Desempenho | Apostila, copy | 🔵 | 6 partes. |
-| A6 | NBR 16747 — Inspeção predial — Diretrizes, conceitos, terminologia e procedimento | Curso 9/10, relatório | 🔵 | Publicada 2020. |
-| A7 | NBR 13752 — Perícias de engenharia na construção civil | Relatório blindado, curso 10 | 🔵 | — |
-| A8 | NBR 16280 — Reforma em edificações — Sistema de gestão de reformas | Catálogo (curso 8) | 🔵 | — |
-| A9 | NBR 9575 — Impermeabilização — Seleção e projeto | Aula 2.6, apostila, guia, checklist, ferramenta | 🔵 | Já citada no piloto (umidade/eflorescência). Confirmar edição vigente. |
-| A10 | NBR 16889 — Concreto — Determinação da consistência pelo abatimento do tronco de cone (slump) | Guia de bolso, curso 3 | 🟡 | Substituiu a antiga NM 67. Confirmar. |
+| A1 | NBR 6118:2023 — Projeto de estruturas de concreto — Procedimento | Todo o curso, apostila, checklist | 🔵 | Confirmar edição vigente (2014 + emendas). Aberturas de fissura: Tab. 13.4. |
+| A2 | NBR 6122:2019 — Projeto e execução de fundações | Catálogo (curso 2), apostila | 🔵 | Vigente 2019/2022. |
+| A3 | NBR 12655:2022 — Concreto de cimento Portland — Preparo, controle, recebimento e aceitação | Catálogo (curso 3) | 🔵 | Confirmar edição. |
+| A4 | NBR 14931:2023 — Execução de estruturas de concreto | Checklist, apostila | 🔵 | A revisão de 2023 passou a se chamar "Estruturas de concreto — Execução". Confirmar título/edição vigente. |
+| A5 | NBR 15575:2013 — Edificações habitacionais — Desempenho | Apostila, copy | 🔵 | 6 partes. |
+| A6 | NBR 16747:2020 — Inspeção predial — Diretrizes, conceitos, terminologia e procedimento | Curso 9/10, relatório | 🔵 | Publicada 2020. |
+| A7 | NBR 13752:2024 — Perícias de engenharia na construção civil | Relatório blindado, curso 10 | 🔵 | — |
+| A8 | NBR 16280:2024 — Reforma em edificações — Sistema de gestão de reformas | Catálogo (curso 8) | 🔵 | — |
+| A9 | NBR 9575:2010 — Impermeabilização — Seleção e projeto | Aula 2.6, apostila, guia, checklist, ferramenta | 🔵 | Já citada no piloto (umidade/eflorescência). Confirmar edição vigente. |
+| A10 | NBR 16889:2020 — Concreto — Determinação da consistência pelo abatimento do tronco de cone (slump) | Guia de bolso, curso 3 | 🟡 | Substituiu a antiga NM 67. Confirmar. |
 | A11 | NR-18 — Segurança e saúde no trabalho na indústria da construção | Checklist de segurança | 🟢 | Norma regulamentadora MTE. |
 | A12 | NR-35 — Trabalho em altura | Checklist de inspeção | 🟢 | — |
 
@@ -33,13 +33,13 @@
 
 | # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
 |---|---|---|---|---|
-| B1 | Abertura-limite de fissura (w_k) em concreto armado: **0,4 mm (CAA I) / 0,3 mm (CAA II e III) / 0,2 mm (CAA IV)** | Apostila, ferramenta, guia de bolso | NBR 6118, Tabela 13.4 (estado-limite de abertura de fissuras) | 🔵 confirmar valores exatos e classe |
+| B1 | Abertura-limite de fissura (w_k) em concreto armado: **0,4 mm (CAA I) / 0,3 mm (CAA II e III) / 0,2 mm (CAA IV)** | Apostila, ferramenta, guia de bolso | NBR 6118:2023, Tabela 13.4 (estado-limite de abertura de fissuras) | 🔵 confirmar valores exatos e classe |
 | B2 | Classificação por abertura: fissura / trinca / rachadura / fenda | Apostila, ferramenta, guia | **Não há NBR única** que fixe esta faixa; é convenção de mercado/literatura | 🟡 **VALIDAR redação**: apresentar como "convenção adotada no curso", não como norma |
 | B3 | Fissura por retração plástica aparece nas **primeiras horas** após concretagem | Módulo de Ouro, ebook | Prática consagrada / literatura de patologia | 🟡 confirmar janela temporal preferida do instrutor |
-| B4 | Fissura de flexão: no terço médio inferior da viga, vertical ascendente | Módulo de Ouro, ferramenta | Mecânica das estruturas / NBR 6118 | 🟢 |
+| B4 | Fissura de flexão: no terço médio inferior da viga, vertical ascendente | Módulo de Ouro, ferramenta | Mecânica das estruturas / NBR 6118:2023 | 🟢 |
 | B5 | Fissura de cisalhamento: ~45° próxima aos apoios | Módulo de Ouro, ferramenta | Mecânica das estruturas | 🟢 |
 | B6 | Fissura mapeada (craquelê) associada a retração/reação álcali-agregado | Ferramenta, ebook | Literatura de patologia | 🟡 confirmar |
-| B7 | Recalque diferencial → fissura inclinada "abrindo para cima" na direção do recalque | Módulo de Ouro, ferramenta | Prática de fundações / NBR 6122 | 🟡 confirmar redação |
+| B7 | Recalque diferencial → fissura inclinada "abrindo para cima" na direção do recalque | Módulo de Ouro, ferramenta | Prática de fundações / NBR 6122:2019 | 🟡 confirmar redação |
 | B8 | Uso de **fissurômetro / paquímetro / régua de fissuras** e **selos de gesso (comparadores)** para medir evolução | Módulo de Ouro, guia, ferramenta | Prática de inspeção consagrada | 🟢 |
 | B9 | Critério de "fissura ativa vs. estabilizada" por monitoramento (selo de gesso rompe = ativa) | Ferramenta (wizard), fluxograma | Prática consagrada | 🟡 confirmar tempo de monitoramento recomendado |
 
@@ -74,16 +74,16 @@
 |---|---|---|---|---|
 | E1 | **Fundação rasa (superficial):** base assentada em profundidade **inferior a 2× a menor dimensão** da fundação | Apostila, ferramenta, guia, aula 2.1 | NBR 6122:2022 (definições) | 🔵 confirmar edição/redação exata |
 | E2 | **Fundação profunda:** ponta/base apoiada em profundidade **superior a 8× a menor dimensão em planta e no mínimo 3,0 m**; carga por ponta e/ou fuste | Apostila, ferramenta, guia, aula 3.1 | NBR 6122:2022 (definições) | 🔵 confirmar edição/redação exata |
-| E3 | Sondagem SPT e N-SPT (nº de golpes) como base para caracterizar o solo | Módulo 1, guia, ferramenta | NBR 6484 — Sondagens de simples reconhecimento com SPT | 🔵 |
-| E4 | Programação/quantidade de sondagens por área/edificação | Aula 1.2, apostila | NBR 6484 / NBR 8036 (programação) | 🟡 **[VALIDAR]** confirmar norma e critérios vigentes de nº e profundidade de furos |
+| E3 | Sondagem SPT e N-SPT (nº de golpes) como base para caracterizar o solo | Módulo 1, guia, ferramenta | NBR 6484:2020 — Sondagens de simples reconhecimento com SPT | 🔵 |
+| E4 | Programação/quantidade de sondagens por área/edificação | Aula 1.2, apostila | NBR 6484:2020 / NBR 8036:1983 (programação) | 🟡 **[VALIDAR]** confirmar norma e critérios vigentes de nº e profundidade de furos |
 | E5 | Faixas de N-SPT → consistência/compacidade (mole, média, rija; fofa, medianamente compacta, compacta) | Guia, ferramenta (referência) | Correlação consagrada de mecânica dos solos | 🟡 **[VALIDAR]** apresentar como referência de mecânica dos solos, confirmar faixas |
 | E6 | Prova de carga estática em fundação **direta** | Módulo 4, relatório | NBR 6489 — Prova de carga estática em fundação direta | 🔵 |
 | E7 | Prova de carga estática em **estacas / fundação profunda** | Módulo 4, relatório | NBR 12131 (estacas) · NBR 16903 (fundação profunda) | 🔵 |
 | E8 | Ensaio de carregamento **dinâmico** em estacas | Aula 3.2, relatório | NBR 13208 — Estacas — Ensaio de carregamento dinâmico | 🟡 **[VALIDAR]** confirmar número/nome/edição |
-| E9 | Tipos de estaca citados (pré-moldada, metálica, hélice contínua, escavada, Strauss, Franki, raiz) e tubulão (céu aberto / ar comprimido) | Módulo 3, guia, ferramenta | NBR 6122 (execução) + prática consagrada | 🟡 **[VALIDAR]** confirmar limites de uso do ar comprimido e profundidade do NA |
-| E10 | Bloco de coroamento transmite a carga do pilar às estacas (dimensionado em concreto armado) | Aula 3.6, apostila | NBR 6118 + NBR 6122 | 🟢 |
-| E11 | Sapata: isolada, corrida, associada/combinada e alavancada (viga de equilíbrio/divisa) | Módulo 2, guia | NBR 6122 + prática | 🟢 |
-| E12 | Radier como fundação rasa em laje contínua | Aula 2.5 | NBR 6122 | 🟢 |
+| E9 | Tipos de estaca citados (pré-moldada, metálica, hélice contínua, escavada, Strauss, Franki, raiz) e tubulão (céu aberto / ar comprimido) | Módulo 3, guia, ferramenta | NBR 6122:2019 (execução) + prática consagrada | 🟡 **[VALIDAR]** confirmar limites de uso do ar comprimido e profundidade do NA |
+| E10 | Bloco de coroamento transmite a carga do pilar às estacas (dimensionado em concreto armado) | Aula 3.6, apostila | NBR 6118:2023 + NBR 6122:2019 | 🟢 |
+| E11 | Sapata: isolada, corrida, associada/combinada e alavancada (viga de equilíbrio/divisa) | Módulo 2, guia | NBR 6122:2019 + prática | 🟢 |
+| E12 | Radier como fundação rasa em laje contínua | Aula 2.5 | NBR 6122:2019 | 🟢 |
 
 > ⚠️ **Regra da alçada:** o curso deixa explícito que a **escolha e o dimensionamento finais da
 > fundação são do projetista de fundações/geotécnico**. O aluno aprende a ler, triar e encaminhar.
@@ -93,17 +93,17 @@
 
 | # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
 |---|---|---|---|---|
-| F1 | Aceitação em 2 etapas: **provisória** (descarga, estado fresco) e **definitiva** (ensaios de controle) | Todo o curso, fluxograma | NBR 12655 — Concreto — Preparo, controle, recebimento e aceitação | 🔵 confirmar edição |
-| F2 | Tempos-limite do concreto dosado em central: transporte ~**90 min** e descarga total ~**150 min** (da adição da água) | Aula 2.2, planilha, guia | NBR 7212 — Concreto dosado em central (ed. 2024) | 🟡 **[VALIDAR]** confirmar valores/condições exatas na edição vigente (aditivos podem alterar) |
+| F1 | Aceitação em 2 etapas: **provisória** (descarga, estado fresco) e **definitiva** (ensaios de controle) | Todo o curso, fluxograma | NBR 12655:2022 — Concreto — Preparo, controle, recebimento e aceitação | 🔵 confirmar edição |
+| F2 | Tempos-limite do concreto dosado em central: transporte ~**90 min** e descarga total ~**150 min** (da adição da água) | Aula 2.2, planilha, guia | NBR 7212:2021 — Concreto dosado em central (ed. 2024) | 🟡 **[VALIDAR]** confirmar valores/condições exatas na edição vigente (aditivos podem alterar) |
 | F3 | Ensaio de abatimento (slump test): método, camadas e 25 golpes por camada | Aula 2.3, ferramenta, guia | NBR 16889:2020 (substituiu a NM 67) | 🔵 |
-| F4 | Tolerância de slump em relação ao pedido | Aula 2.4, ferramenta, planilha | NBR 7212 (tabela de tolerâncias) | 🟡 **[VALIDAR]** confirmar faixas da edição vigente |
-| F5 | **Proibição de adição de água** fora das condições previstas (limites de slump/tempo e autorização) | Aula 2.5, fluxograma | NBR 7212 / boa prática | 🟡 **[VALIDAR]** redação das condições em que redosagem é admitida |
-| F6 | Moldagem e cura de corpos de prova (camadas, golpes, cura inicial/úmida) | Aula 3.2/3.3, checklist | NBR 5738 — Moldagem e cura de corpos de prova | 🔵 |
-| F7 | Amostragem: nº de amostras/CPs por lote no controle de aceitação | Aula 3.4, planilha | NBR 12655 (amostragem parcial/total) | 🟡 **[VALIDAR]** critérios e nº exatos por tipo de controle |
-| F8 | Ensaio de compressão e leitura do certificado | Aula 3.5, planilha | NBR 5739 — Ensaio de compressão de CPs cilíndricos | 🔵 |
+| F4 | Tolerância de slump em relação ao pedido | Aula 2.4, ferramenta, planilha | NBR 7212:2021 (tabela de tolerâncias) | 🟡 **[VALIDAR]** confirmar faixas da edição vigente |
+| F5 | **Proibição de adição de água** fora das condições previstas (limites de slump/tempo e autorização) | Aula 2.5, fluxograma | NBR 7212:2021 / boa prática | 🟡 **[VALIDAR]** redação das condições em que redosagem é admitida |
+| F6 | Moldagem e cura de corpos de prova (camadas, golpes, cura inicial/úmida) | Aula 3.2/3.3, checklist | NBR 5738:2015 — Moldagem e cura de corpos de prova | 🔵 |
+| F7 | Amostragem: nº de amostras/CPs por lote no controle de aceitação | Aula 3.4, planilha | NBR 12655:2022 (amostragem parcial/total) | 🟡 **[VALIDAR]** critérios e nº exatos por tipo de controle |
+| F8 | Ensaio de compressão e leitura do certificado | Aula 3.5, planilha | NBR 5739:2018 — Ensaio de compressão de CPs cilíndricos | 🔵 |
 | F9 | Classes de resistência (C20, C25, C30…) e grupos | Aula 1.2, guia | NBR 8953 — Concreto para fins estruturais — classificação | 🔵 |
-| F10 | fck não atendido: seguir procedimento da norma (revisão do projeto pelo RT, ensaios complementares — extração NBR 7680, esclerometria) — **sem demolição por pânico** | Aula 4.4/4.5 | NBR 12655 + NBR 7680 (extração) | 🟡 **[VALIDAR]** citar procedimento e norma de extração com edição |
-| F11 | Cura: manter umidade/temperatura para evitar retração plástica e garantir resistência | Aula 4.1/4.2 | NBR 14931 (execução) + prática consagrada | 🔵 |
+| F10 | fck não atendido: seguir procedimento da norma (revisão do projeto pelo RT, ensaios complementares — extração NBR 7680-1:2015, esclerometria) — **sem demolição por pânico** | Aula 4.4/4.5 | NBR 12655:2022 + NBR 7680-1:2015 (extração) | 🟡 **[VALIDAR]** citar procedimento e norma de extração com edição |
+| F11 | Cura: manter umidade/temperatura para evitar retração plástica e garantir resistência | Aula 4.1/4.2 | NBR 14931:2023 (execução) + prática consagrada | 🔵 |
 
 > ⚠️ **Regra da alçada (Curso 3):** o aluno decide a **aceitação do concreto fresco** conforme
 > procedimento; decisões sobre estrutura com fck não atendido são do **responsável técnico /
@@ -113,14 +113,14 @@
 
 | # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
 |---|---|---|---|---|
-| G1 | Tolerâncias de execução (dimensões, prumo, nível) de fôrmas e estrutura | Módulo 2, checklist | NBR 14931 — Execução de estruturas de concreto | 🟡 **[VALIDAR]** valores exatos por elemento na edição vigente (2023) |
-| G2 | **Cobrimentos nominais** por classe de agressividade (ex.: CAA II — laje 25 mm, viga/pilar 30 mm; CAA III — 35/40 mm) | Aula 2.4, checklist, guia, ferramenta | NBR 6118, Tabela 7.2 | 🟡 **[VALIDAR]** confirmar valores/Δc da edição vigente |
-| G3 | Espaçadores como garantia física do cobrimento (tipo, quantidade/distribuição) | Aula 2.4 | NBR 14931 / boa prática | 🔵 |
-| G4 | Fôrmas e escoramentos: projeto próprio, apoio firme, prumo, contraventamento; cargas mín. de referência (sobrecarga 2,0 kN/m²; vento 0,6 kN/m²) | Aula 2.5, checklist | NBR 15696 — Fôrmas e escoramentos (2009) | 🟡 **[VALIDAR]** confirmar cargas/da edição vigente e revisão |
-| G5 | Alvenaria de vedação: prumo/nível/esquadro, amarração, juntas, **vergas e contravergas** em vãos | Módulo 3, checklist, guia | NBR 8545 — Execução de alvenaria sem função estrutural | 🟡 **[VALIDAR]** confirmar número/nome/vigência e dimensões mín. de vergas |
-| G6 | Prazos de desforma e plano de reescoramento | Aulas 4.1/4.2 | NBR 14931 + **plano do responsável técnico conforme resistência atingida** | 🟡 **[VALIDAR]** — o curso NÃO fixa prazos; ensina a exigir o plano. Confirmar redação |
-| G7 | Encunhamento da alvenaria após deformações acomodadas (sem pressa) | Aula 3.4 | Boa prática / NBR 8545 | 🟡 **[VALIDAR]** redação e prazo usual |
-| G8 | Brocas/ninhos pós-desforma: registrar, avaliar profundidade/armadura exposta e tratar conforme orientação técnica | Aula 4.3 | NBR 14931 / prática | 🔵 |
+| G1 | Tolerâncias de execução (dimensões, prumo, nível) de fôrmas e estrutura | Módulo 2, checklist | NBR 14931:2023 — Execução de estruturas de concreto | 🟡 **[VALIDAR]** valores exatos por elemento na edição vigente (2023) |
+| G2 | **Cobrimentos nominais** por classe de agressividade (ex.: CAA II — laje 25 mm, viga/pilar 30 mm; CAA III — 35/40 mm) | Aula 2.4, checklist, guia, ferramenta | NBR 6118:2023, Tabela 7.2 | 🟡 **[VALIDAR]** confirmar valores/Δc da edição vigente |
+| G3 | Espaçadores como garantia física do cobrimento (tipo, quantidade/distribuição) | Aula 2.4 | NBR 14931:2023 / boa prática | 🔵 |
+| G4 | Fôrmas e escoramentos: projeto próprio, apoio firme, prumo, contraventamento; cargas mín. de referência (sobrecarga 2,0 kN/m²; vento 0,6 kN/m²) | Aula 2.5, checklist | NBR 15696:2009 — Fôrmas e escoramentos (2009) | 🟡 **[VALIDAR]** confirmar cargas/da edição vigente e revisão |
+| G5 | Alvenaria de vedação: prumo/nível/esquadro, amarração, juntas, **vergas e contravergas** em vãos | Módulo 3, checklist, guia | NBR 8545:1984 — Execução de alvenaria sem função estrutural | 🟡 **[VALIDAR]** confirmar número/nome/vigência e dimensões mín. de vergas |
+| G6 | Prazos de desforma e plano de reescoramento | Aulas 4.1/4.2 | NBR 14931:2023 + **plano do responsável técnico conforme resistência atingida** | 🟡 **[VALIDAR]** — o curso NÃO fixa prazos; ensina a exigir o plano. Confirmar redação |
+| G7 | Encunhamento da alvenaria após deformações acomodadas (sem pressa) | Aula 3.4 | Boa prática / NBR 8545:1984 | 🟡 **[VALIDAR]** redação e prazo usual |
+| G8 | Brocas/ninhos pós-desforma: registrar, avaliar profundidade/armadura exposta e tratar conforme orientação técnica | Aula 4.3 | NBR 14931:2023 / prática | 🔵 |
 | G9 | Segurança na inspeção (acesso, altura, escoramento não é escada) | Módulo 1 | NR-18 · NR-35 | 🟢 |
 
 > ⚠️ **Regra da alçada (Curso 4):** o aluno **compara com o projeto e libera/trava conforme ele**;

@@ -1,8 +1,8 @@
-# 🎬 Aula 2.2 — "Relógio na mão: os tempos-limite que ninguém controla (NBR 7212)"
+# 🎬 Aula 2.2 — "Relógio na mão: os tempos-limite que ninguém controla (NBR 7212:2021)"
 
 **Módulo 2 (de Ouro) · Duração-alvo: 7 min · Legendada 100%**
 Objetivo: o aluno entende que o tempo do concreto conta **desde a água na central**, conhece os
-limites de transporte e descarga da NBR 7212 e sabe agir quando o relógio aperta.
+limites de transporte e descarga da NBR 7212:2021 e sabe agir quando o relógio aperta.
 
 ---
 
@@ -24,14 +24,14 @@ segundo, uma reação química começou — e ela não espera bomba, almoço, ne
 `[B-ROLL: animação de cronômetro correndo sobre a linha do tempo]`
 
 **Teleprompter:**
-"O cimento hidrata com hora marcada. A NBR 7212 — a norma do concreto dosado em central — trabalha
+"O cimento hidrata com hora marcada. A NBR 7212:2021 — a norma do concreto dosado em central — trabalha
 com limites de referência: o **transporte** da central até a obra e a **descarga completa**, ambos
 contados **a partir da adição da água**. As referências usuais são da ordem de **90 minutos para o
 transporte** e **150 minutos para completar a descarga** — podendo mudar com aditivos retardadores
 e condições especificadas. [PAUSA] Guarda o princípio, que não muda: **o relógio do concreto começa
 na central, e quem recebe precisa saber que horas ele começou.**"
 
-`[NA TELA — box Norma: "NBR 7212 — Concreto dosado em central (tempos-limite de transporte e descarga)"]`
+`[NA TELA — box Norma: "NBR 7212:2021 — Concreto dosado em central (tempos-limite de transporte e descarga)"]`
 
 > **Valores exatos e condições:** confirmar na edição vigente (2024) — `[VALIDAR F2]`. Na fala,
 > apresentar como "referências usuais da norma, a confirmar com a central e os aditivos do traço".
@@ -92,7 +92,7 @@ horário. Registre no seu caderno de campo a foto (pode tarjar os dados comercia
 ## 7. Quiz da aula
 
 **Q2.2** O tempo-limite do concreto dosado em central conta a partir de quê?
-- ✅ **Da adição da água na central** (informada na nota fiscal) — referências usuais: ~90 min transporte, ~150 min para completar a descarga (NBR 7212, a confirmar com aditivos).
+- ✅ **Da adição da água na central** (informada na nota fiscal) — referências usuais: ~90 min transporte, ~150 min para completar a descarga (NBR 7212:2021, a confirmar com aditivos).
 - Da chegada do caminhão na obra / Do início da descarga / Do horário do almoço.
 > **Gabarito comentado:** a hidratação começa com a água, na central. Por isso a nota (com os horários) é o primeiro passo do recebimento (VALIDAR F2).
 

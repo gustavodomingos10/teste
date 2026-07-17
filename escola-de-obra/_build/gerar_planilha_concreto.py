@@ -32,8 +32,8 @@ wp["A1"].font=f_tit; wp["A1"].fill=fill_v; wp.merge_cells("A1:D1"); wp.row_dimen
 wp["A1"].alignment=Alignment(horizontal="left",vertical="center")
 params=[
  ("Slump pedido (mm)",100,"Conforme pedido/projeto. Confira na nota fiscal."),
- ("Tolerância de slump (± mm)",20,"Faixa da NBR 7212 conforme o slump pedido. [VALIDAR F4]"),
- ("Tempo-limite descarga (min)",150,"Da adição da água ao fim da descarga (NBR 7212; aditivos podem alterar). [VALIDAR F2]"),
+ ("Tolerância de slump (± mm)",20,"Faixa da NBR 7212:2021 conforme o slump pedido. [VALIDAR F4]"),
+ ("Tempo-limite descarga (min)",150,"Da adição da água ao fim da descarga (NBR 7212:2021; aditivos podem alterar). [VALIDAR F2]"),
  ("fck de projeto (MPa)",30,"Conforme projeto estrutural (classe NBR 8953)."),
 ]
 wp["A3"]="Parâmetro"; wp["B3"]="Valor"; wp["C3"]="Observação / fonte"
@@ -45,13 +45,13 @@ for nome,val,obs in params:
     wp[f"C{r}"]=obs; wp[f"C{r}"].font=f_small; wp[f"C{r}"].alignment=left
     for col in "ABC": wp[f"{col}{r}"].border=border
     r+=1
-wp["A9"]="⚠ A aceitação definitiva do concreto segue os critérios estatísticos da NBR 12655 — a coluna 'situação' da aba CPs é uma triagem de alerta, não o critério final. [VALIDAR F7]"
+wp["A9"]="⚠ A aceitação definitiva do concreto segue os critérios estatísticos da NBR 12655:2022 — a coluna 'situação' da aba CPs é uma triagem de alerta, não o critério final. [VALIDAR F7]"
 wp["A9"].font=f_small; wp.merge_cells("A9:D10"); wp["A9"].alignment=left
 wp.column_dimensions["A"].width=30; wp.column_dimensions["B"].width=12; wp.column_dimensions["C"].width=48
 
 # ---------- RECEBIMENTO ----------
 ws=wb.create_sheet("Recebimento"); ws.sheet_view.showGridLines=False
-ws["A1"]="RECEBIMENTO — uma linha por caminhão (aceitação provisória, NBR 12655/7212/16889)"
+ws["A1"]="RECEBIMENTO — uma linha por caminhão (aceitação provisória, NBR 12655:2022/7212/16889)"
 ws["A1"].font=f_tit; ws["A1"].fill=fill_v; ws.merge_cells("A1:L1"); ws.row_dimensions[1].height=24
 ws["A1"].alignment=Alignment(horizontal="left",vertical="center")
 headers=[("A","Data",11),("B","NF nº",10),("C","Hora água (central)",11),("D","Fim descarga",11),
@@ -86,7 +86,7 @@ ws.conditional_formatting.add(rng,CellIsRule(operator="beginsWith",formula=['"RE
 
 # ---------- CPs ----------
 wc=wb.create_sheet("CPs"); wc.sheet_view.showGridLines=False
-wc["A1"]="CORPOS DE PROVA — moldagem NBR 5738 · ensaio NBR 5739 · aceitação NBR 12655"
+wc["A1"]="CORPOS DE PROVA — moldagem NBR 5738:2015 · ensaio NBR 5739:2018 · aceitação NBR 12655:2022"
 wc["A1"].font=f_tit; wc["A1"].fill=fill_v; wc.merge_cells("A1:H1"); wc.row_dimensions[1].height=24
 wc["A1"].alignment=Alignment(horizontal="left",vertical="center")
 h2=[("A","CP id",10),("B","NF / caminhão",12),("C","Data moldagem",12),("D","Peça concretada",18),
@@ -98,7 +98,7 @@ wc.freeze_panes="A3"
 for row in range(3,103):
     wc[f"G{row}"]=(f'=IF(F{row}="","",'
       f'IF(F{row}>=Parametros!$B$7,"OK (>= fck)",'
-      f'"ALERTA: abaixo do fck - aplicar criterios NBR 12655 / acionar RT"))')
+      f'"ALERTA: abaixo do fck - aplicar criterios NBR 12655:2022 / acionar RT"))')
     for col,_,_ in h2:
         cell=wc[f"{col}{row}"]; cell.font=f_norm; cell.border=border
         cell.alignment=center if col in "ABCEFG" else left
@@ -124,7 +124,7 @@ metric("B6","B7","CPs OK",'=COUNTIF(CPs!G3:G102,"OK*")',fill_ok)
 metric("C6","C7","CPs em alerta",'=COUNTIF(CPs!G3:G102,"ALERTA*")',fill_bad)
 wd["A9"]=('Como usar: uma linha por caminhão no Recebimento (veredito automático a partir dos Parametros); '
  'uma linha por CP na aba CPs. A "situação" dos CPs é triagem de alerta — a aceitação definitiva segue os '
- 'critérios estatísticos da NBR 12655, aplicados pelo responsável técnico.')
+ 'critérios estatísticos da NBR 12655:2022, aplicados pelo responsável técnico.')
 wd["A9"].font=f_small; wd.merge_cells("A9:E11"); wd["A9"].alignment=left
 wd["A13"]="Revisado e assinado por Gustavo Domingos — Engenheiro Civil, CREA-PR 140.964-D"
 wd["A13"].font=Font(name="Calibri",size=9,bold=True,color=DOUR)

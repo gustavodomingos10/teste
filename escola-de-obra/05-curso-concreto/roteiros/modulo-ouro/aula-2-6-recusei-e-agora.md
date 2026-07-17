@@ -38,7 +38,7 @@ assim que a devolução vira crédito/reposição e não 'sumiço de caminhão'.
 **Quatro — reprogramar.** Avisar a equipe, segurar o caminhão seguinte se preciso, e reorganizar a
 frente de lançamento. Recusa sem reprogramação vira caos — e caos pressiona o próximo veredito."
 
-`[NA TELA — box Norma: "NBR 12655 — a aceitação provisória é decisão do responsável pelo recebimento"]`
+`[NA TELA — box Norma: "NBR 12655:2022 — a aceitação provisória é decisão do responsável pelo recebimento"]`
 
 ## 3. Aplicação guiada — o kit da recusa (2:40–4:30)
 

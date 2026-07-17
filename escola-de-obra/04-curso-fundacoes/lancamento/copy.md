@@ -26,8 +26,8 @@
 
 ## BLOCO 2 — A virada (capacidades)
 Em 2h40, direto ao ponto, você sai sabendo:
-- ✅ **Ler uma sondagem SPT** (NBR 6484) — camada resistente e nível d'água.
-- ✅ **Classificar** a fundação como rasa ou profunda pelo critério da **NBR 6122** e nomear os tipos (sapata isolada/corrida/associada/alavancada, bloco, radier; estaca — vários tipos —, tubulão).
+- ✅ **Ler uma sondagem SPT** (NBR 6484:2020) — camada resistente e nível d'água.
+- ✅ **Classificar** a fundação como rasa ou profunda pelo critério da **NBR 6122:2019** e nomear os tipos (sapata isolada/corrida/associada/alavancada, bloco, radier; estaca — vários tipos —, tubulão).
 - ✅ **Aplicar critérios objetivos** (solo, carga, água, vizinhança, acesso, custo) para indicar **qual família cabe**.
 - ✅ **Reconhecer o limite da sua alçada** e **registrar** a decisão de forma blindada.
 
@@ -78,7 +78,7 @@ Uma pós em geotecnia/fundações custa **milhares de reais** (faixa de R$ 815�
 - "45 segundos pra saber se é sapata ou estaca." → seletor LITE.
 - "A trinca da sua casa começou aqui: 5 erros de fundação." → e-book/curso.
 - "Vizinho colado? Esqueça bate-estaca." → hélice contínua.
-- "Sem sondagem, você não decide — aposta." → NBR 6484.
+- "Sem sondagem, você não decide — aposta." → NBR 6484:2020.
 > Roteiros completos: adaptar `../../03-lancamento/conteudo-organico/20-reels.md`.
 
 ### Depoimentos: só reais e autorizados (turma beta) — usar `../../03-lancamento/depoimentos/`.

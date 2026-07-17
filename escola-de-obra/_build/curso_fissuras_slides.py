@@ -59,7 +59,7 @@ S.append({"tipo":"conteudo","kick":"Aula 1.4","titulo":"Como medir de verdade (e
   "bullets":["Meça sempre no <b>ponto mais largo</b>, com o fissurômetro rente à superfície",
              "Registre o <b>trio mínimo</b>: valor em mm · data · foto com escala",
              "O que não é medido e datado, tecnicamente, não aconteceu"],
-  "norma":"NBR 6118 — abertura de fissuras w<sub>k</sub> (da ordem de 0,2 a 0,4 mm conforme a classe de agressividade). [VALIDAR B1]",
+  "norma":"NBR 6118:2023 — abertura de fissuras w<sub>k</sub> (da ordem de 0,2 a 0,4 mm conforme a classe de agressividade). [VALIDAR B1]",
   "narr":"Meça no ponto mais largo, sempre. E registre o trio: milímetro, data e foto com escala. Anota isso na planilha do Kit. Porque numa discussão futura, o que você não mediu e não datou simplesmente não aconteceu. Registro é a sua defesa."})
 
 S.append({"tipo":"conteudo","kick":"Aula 1.5","titulo":"O primeiro olhar: do geral ao particular",
@@ -91,7 +91,7 @@ S.append({"tipo":"conteudo","kick":"Aula 2.2","titulo":"Vertical no meio da viga
   "bullets":["A viga flexiona: a fibra <b>inferior</b> traciona no meio do vão",
              "Concreto odeia tração → fissura vertical, subindo de baixo",
              "Julgue pelo trio: <b>largura + quantidade + flecha</b>, nunca pela largura só"],
-  "norma":"NBR 6118 — a fissuração de serviço é prevista; há limites de abertura (w<sub>k</sub>).",
+  "norma":"NBR 6118:2023 — a fissuração de serviço é prevista; há limites de abertura (w<sub>k</sub>).",
   "foto":"fissura vertical no meio do vão, face inferior de viga",
   "narr":"Fissura vertical, bem no meio da viga, na parte de baixo. Aí a viga está falando de flexão: a fibra inferior estica, o concreto racha. Mas cuidado — não julgue pela largura sozinha. Julgue pelo trio: largura, quantidade e flecha. Uma fininha pode ser serviço normal; várias com barriga é pedido de socorro."})
 
@@ -115,7 +115,7 @@ S.append({"tipo":"conteudo","kick":"Aula 2.5","titulo":"A diagonal que sobe: rec
              "Recalque diferencial: uma parte da fundação baixa mais → a construção rasga na diagonal",
              "A fissura 'aponta' para onde o terreno cedeu",
              "Diagnóstico de <b>conjunto</b>: diagonais + esquadrias travando + piso caído"],
-  "norma":"NBR 6122 — projeto e execução de fundações.",
+  "norma":"NBR 6122:2019 — projeto e execução de fundações.",
   "foto":"fissura inclinada de recalque, mais aberta em cima, em muro/parede",
   "narr":"A fissura que mais tira o sono. Inclinada, abrindo mais em cima, apontando para um canto que baixou. A causa não está na parede — está no solo. É recalque diferencial. E nunca se lê numa fissura só: você soma as pistas. Diagonais que conversam, portas emperrando, piso caído na mesma direção. Aí sim é recalque."})
 
@@ -123,7 +123,7 @@ S.append({"tipo":"conteudo","kick":"Aula 2.6","titulo":"Horizontal na alvenaria:
   "bullets":["Na <b>base</b> + pó branco (eflorescência) → umidade ascendente",
              "No <b>topo</b> (encontro com laje) → expansão de bloco / interface",
              "Erro clássico: culpar a estrutura sem checar umidade e recalque"],
-  "norma":"NBR 9575 — impermeabilização (seleção e projeto). [VALIDAR A9]",
+  "norma":"NBR 9575:2010 — impermeabilização (seleção e projeto). [VALIDAR A9]",
   "foto":"fissura horizontal em alvenaria com eflorescência na base",
   "narr":"Fissura horizontal na alvenaria. O vício do júnior é culpar a estrutura. Mas na base, com pó branco, é umidade subindo do solo. No topo, é expansão do bloco ou a interface com a estrutura. E lembre: em fissura com umidade, primeiro seca a origem, depois conserta a cara. Quem inverte, retrabalha de graça."})
 
@@ -215,7 +215,7 @@ S.append({"tipo":"conteudo","kick":"Aula 4.4","titulo":"O laudo que protege voc�
              "Registro fotográfico padronizado · mapa fissuratório",
              "Causa raiz · recomendações com prazo e responsável",
              "Encaminhamentos · assinatura com CREA"],
-  "norma":"NBR 13752 (perícias) · NBR 16747 (inspeção predial). O modelo blindado está no seu Kit.",
+  "norma":"NBR 13752:2024 (perícias) · NBR 16747:2020 (inspeção predial). O modelo blindado está no seu Kit.",
   "narr":"Todo caso vira um relatório blindado. Identificação, escopo e limitações, metodologia, registro fotográfico, causa raiz, recomendações com prazo e responsável, e a sua assinatura. O modelo pronto está no Kit, em Word e PDF. É a estrutura que protege quem assina."})
 
 S.append({"tipo":"conteudo","kick":"Aula 4.5","titulo":"Seu primeiro honorário — com ética",
@@ -227,7 +227,7 @@ S.append({"tipo":"conteudo","kick":"Aula 4.5","titulo":"Seu primeiro honorário 
 
 S.append({"tipo":"quiz","titulo":"Quiz do Módulo 4","q":"Um relatório técnico 'blindado' obrigatoriamente contém:",
   "alts":["Só uma foto e um 'está tudo bem'","Escopo, limitações, metodologia, causa raiz, recomendações e assinatura/CREA","Opinião sem fundamentação","Promessa de resultado garantido"],
-  "correta":1,"coment":"É a estrutura que protege juridicamente (NBR 13752 / NBR 16747).",
+  "correta":1,"coment":"É a estrutura que protege juridicamente (NBR 13752:2024 / NBR 16747:2020).",
   "narr":"Último quiz. O que o laudo blindado tem que ter? Letra B: escopo, limitações, metodologia, causa raiz, recomendações e a assinatura com CREA. Essa estrutura é a sua proteção jurídica."})
 
 # ---------- Encerramento ----------

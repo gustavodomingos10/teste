@@ -34,7 +34,7 @@ furar concreto novo amanhã.
 **Limpeza final:** o fundo da fôrma limpo — serragem, arame, pontas de bloco, garrafa (sim,
 garrafa). E a mangueira de água pra lavar por último."
 
-`[NA TELA — box Norma: "NBR 14931 — embutidos previstos e fixados antes da concretagem; furos conforme projeto"]`
+`[NA TELA — box Norma: "NBR 14931:2023 — embutidos previstos e fixados antes da concretagem; furos conforme projeto"]`
 
 ## 3. Aplicação guiada (2:40–4:30)
 **Teleprompter:**
@@ -75,7 +75,7 @@ eletrodutos, caixinhas, luvas você conta? Algum solto ou esmagado? Registre no 
 **Q2.6** Furos e passagens em vigas/lajes devem:
 - ✅ **Estar previstos no projeto (com reforço detalhado quando necessário) e conferidos antes da concretagem.**
 - Ser furados depois onde precisar / Ser combinados com o pedreiro / Não importam.
-> **Gabarito:** furo pós-concretagem sem projeto pode cortar armadura. Luvas/passagens na véspera + "minuto das equipes" com assinatura (NBR 14931).
+> **Gabarito:** furo pós-concretagem sem projeto pode cortar armadura. Luvas/passagens na véspera + "minuto das equipes" com assinatura (NBR 14931:2023).
 
 ---
 ### Material ligado

@@ -19,8 +19,8 @@ Checklist de liberação · **Planilha Seletor/Comparador (testes 4/4)** · Pare
 Guia de bolso · Fluxograma de decisão (mmd+svg+pdf) · e-book · **Seletor Interativo PRO+LITE (testes 8/8)** · Apostila.
 
 ## Rigor
-Definições rasa/profunda pela **NBR 6122**; SPT **NBR 6484**; provas de carga **NBR 6489/12131/16903**;
-concreto **NBR 6118**. Valores no `../00-projeto/VALIDAR.md` (seção E). **A escolha e o dimensionamento
+Definições rasa/profunda pela **NBR 6122:2019**; SPT **NBR 6484:2020**; provas de carga **NBR 6489/12131/16903**;
+concreto **NBR 6118:2023**. Valores no `../00-projeto/VALIDAR.md` (seção E). **A escolha e o dimensionamento
 finais são do projetista de fundações/geotécnico** — o curso ensina o júnior a ler, triar, encaminhar e fiscalizar.
 
 ## Regenerar binários do Kit

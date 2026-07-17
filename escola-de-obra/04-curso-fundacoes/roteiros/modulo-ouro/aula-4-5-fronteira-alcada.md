@@ -38,7 +38,7 @@ valioso **sem se expor**."
 - **Definir** oficialmente o tipo e a geometria.
 - **Assinar** o projeto de fundações e responder tecnicamente por ele.
 
-`[NA TELA — box Norma: 'NBR 6122 — projeto e execução; o projeto de fundações é responsabilidade do projetista habilitado']`
+`[NA TELA — box Norma: 'NBR 6122:2019 — projeto e execução; o projeto de fundações é responsabilidade do projetista habilitado']`
 
 **Teleprompter (continua):**
 "A linha no meio é simples de lembrar: **você lê, tria e encaminha; o projetista calcula, define e
@@ -101,7 +101,7 @@ campo e confira contra a lista de perguntas-modelo do material do módulo."
 **Q4.5** Qual atividade está **na alçada do júnior de obra**, e não do projetista de fundações?
 - ✅ **Exigir/ler a sondagem, triar a família provável e inspecionar a execução conforme o projeto.**
 - Dimensionar o número e o comprimento das estacas / Definir a tensão admissível / Assinar o projeto de fundações.
-> **Gabarito comentado:** o júnior lê, tria, encaminha e fiscaliza a execução; o dimensionamento, a definição e a assinatura do projeto de fundações são do projetista habilitado (NBR 6122). Conhecer o limite protege.
+> **Gabarito comentado:** o júnior lê, tria, encaminha e fiscaliza a execução; o dimensionamento, a definição e a assinatura do projeto de fundações são do projetista habilitado (NBR 6122:2019). Conhecer o limite protege.
 
 ---
 ### Material de apoio ligado

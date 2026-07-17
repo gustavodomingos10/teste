@@ -33,7 +33,7 @@ canto, tipicamente **na diagonal, por volta de 45°**."
 
 `[MOSTRA FOTO: mesma foto, agora com o traçado da fissura destacado em amarelo saindo do canto]`
 
-`[NA TELA — box Norma: "NBR 6118 — Projeto de estruturas de concreto (estados-limite de fissuração)"]`
+`[NA TELA — box Norma: "NBR 6118:2023 — Projeto de estruturas de concreto (estados-limite de fissuração)"]`
 
 **Teleprompter (continua):**
 "Agora, atenção — e aqui é onde eu quero te separar do palpiteiro: **45° saindo do canto não

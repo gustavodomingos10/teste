@@ -32,7 +32,7 @@ parte de **baixo** **estica**, entra em **tração**. E concreto **odeia** traç
 com facilidade. Por isso existe a armadura: o aço embaixo é quem segura essa tração."
 
 `[MOSTRA FOTO: mesma viga, com traço vertical da fissura destacado, subindo da fibra inferior]`
-`[NA TELA — box Norma: "NBR 6118 — a abertura de fissuras tem limites de serviço (w_k)"]`
+`[NA TELA — box Norma: "NBR 6118:2023 — a abertura de fissuras tem limites de serviço (w_k)"]`
 
 **Teleprompter (continua):**
 "Então uma fissura vertical, fininha, no terço médio inferior, subindo de baixo pra cima, é o
@@ -41,7 +41,7 @@ trabalha fissurado, e a norma define **aberturas-limite** justamente pra isso. O
 alerta não é *existir* a fissura. É ela estar **larga demais**, **crescendo**, ou vindo
 **acompanhada** de flecha — aquela barriga, a viga visivelmente 'caída' no meio."
 
-> **Valor técnico:** os limites de abertura (w_k) da NBR 6118 (≈ 0,2 a 0,4 mm conforme a
+> **Valor técnico:** os limites de abertura (w_k) da NBR 6118:2023 (≈ 0,2 a 0,4 mm conforme a
 > classe de agressividade ambiental) entram na apostila com o número da tabela. **Confirmar
 > valores e classe — VALIDAR B1.** Aqui, dizemos "há limites de serviço" sem cravar o número na fala.
 
@@ -81,7 +81,7 @@ largura, quantidade e flecha.**"
 "Blindagem: fissura em elemento estrutural — viga, pilar, laje — sobe o nível do seu registro.
 Fotografe, meça, **registre a flecha se houver**, e no relatório use: *'fissuração em face
 inferior no meio do vão, compatível com esforço de flexão; recomenda-se avaliação do estado-
-limite de abertura conforme NBR 6118 e monitoramento; em caso de flecha excessiva ou evolução,
+limite de abertura conforme NBR 6118:2023 e monitoramento; em caso de flecha excessiva ou evolução,
 acionar o responsável técnico pelo cálculo.'* Você não vira calculista na frente do cliente —
 você faz a triagem certa e encaminha. **Essa é a alçada do júnior. E ela protege você.**"
 
@@ -100,7 +100,7 @@ gabarito comentado do módulo."
 **Q2.2** Fissura vertical no terço médio inferior de uma viga aponta para esforço de:
 - ✅ **Flexão** (tração na fibra inferior no meio do vão).
 - Cisalhamento / Torção pura / Retração plástica.
-> **Gabarito comentado:** no meio do vão a fibra inferior traciona; concreto fissura à tração — daí a armadura de flexão (VALIDAR B4; NBR 6118).
+> **Gabarito comentado:** no meio do vão a fibra inferior traciona; concreto fissura à tração — daí a armadura de flexão (VALIDAR B4; NBR 6118:2023).
 
 ---
 ### Material de apoio ligado
