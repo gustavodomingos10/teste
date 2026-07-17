@@ -20,14 +20,14 @@
 - **Preço:** R$ 49,90 beta / R$ 99,90 cheio — *âncora: pós em projeto/BIM custa 18x R$ 740 (IPOG, jul/2026)*.
 - **Posição na esteira:** porta de entrada da Fase A; pré-requisito mental para os cursos 2–4.
 
-## Curso 2: Fundações de Casas e Sobrados sem Sustos
-- **Subtítulo de transformação:** Da locação à concretagem — o júnior que não deixa a fundação virar o primeiro erro caro da obra.
-- **Dor aniquilada (nº 2):** medo de errar locação, cota de assentamento e o tipo de fundação adequado ao solo.
-- **Antes → Depois:** antes, confia cegamente no gabarito do pedreiro; depois, confere locação, sondagem e cota de apoio com critério (NBR 6122).
-- **Material premium de destaque:** Planilha de Conferência de Locação e Cotas + Checklist de Liberação de Fundação.
-- **Ferramenta Interativa Diamante:** *Diagnóstico de Escolha de Fundação* — wizard (tipo de solo/sondagem/carga) → família de fundação provável + alerta de quando chamar o geotécnico.
-- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: pós em geotecnia/fundações, mesma faixa de milhares de reais*.
-- **Posição na esteira:** primeiro serviço crítico do canteiro; conecta com o curso 7 (contenções).
+## ⭐ Curso 2: Tipos de Fundações e Quando Usar Cada Uma  *(construído — ver `../04-curso-fundacoes/`)*
+- **Subtítulo de transformação:** Da sondagem à escolha certa — rasa ou profunda, sem chute.
+- **Dor aniquilada (nº 2):** não saber qual fundação cabe em qual solo/carga — sapata, bloco, radier, estaca ou tubulão — nem onde termina a alçada do júnior.
+- **Antes → Depois:** antes, "todo mundo aqui faz sapata"; depois, lê a sondagem, classifica rasa/profunda (NBR 6122), tria a família certa e encaminha ao projetista com o porquê.
+- **Material premium de destaque:** Planilha Seletor/Comparador de Fundações + Checklist de Liberação + Parecer blindado.
+- **Ferramenta Interativa Diamante:** *Seletor Interativo de Fundação* — wizard (sondagem/camada resistente/NA/carga/restrições) → família recomendada + tipos candidatos + próximo passo.
+- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: pós em geotecnia/fundações, faixa de milhares de reais (jul/2026 — `[PESQUISAR: cotar]`)*.
+- **Posição na esteira:** primeiro serviço crítico do canteiro; **segundo curso construído** por completo. Conecta com o curso 4 (inspeção) e o 7 (contenções).
 
 ## Curso 3: Receber e Liberar Concreto com Critério
 - **Subtítulo de transformação:** "Chegou o caminhão-betoneira" deixa de ser pânico e vira um procedimento de 8 minutos que te protege.

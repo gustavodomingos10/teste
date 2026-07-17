@@ -14,6 +14,14 @@ sem portão de `CONTINUAR`, a pedido do instrutor. Um commit por etapa.
 | 4 | Kit Diamante (8 entregáveis) | ✅ concluída | checklist, planilha, relatório, guia, fluxograma, ebook, ferramenta, apostila + RELATORIO-QA |
 | 5 | Produção, lançamento e tração | ✅ concluída | gravação, copy, e-mails, WhatsApp, depoimentos, reels, plano 3 fases, checklist publicação |
 
+## Curso 2 — Tipos de Fundações e Quando Usar Cada Uma (construído)
+Segundo curso completo da esteira, em `04-curso-fundacoes/`. Mesmo Padrão Diamante: arquitetura,
+Módulo de Ouro (M4 "A decisão") roteirizado (6 aulas), banco de quizzes, **Kit Diamante 8/8
+construído e testado** (planilha seletor 4/4 ✔, seletor interativo 8/8 ✔, PDFs, docx, fluxograma),
+PEDIDO-DE-MATERIAL e copy de lançamento. Normas: NBR 6122 (rasa/profunda), 6484 (SPT),
+6489/12131/16903 (provas de carga), 6118. Regra de alçada (decisão final do projetista) em todo o material.
+Pendências no `VALIDAR.md` seção E.
+
 ## Auditoria de qualidade (Seção 6)
 Rodada uma auditoria cética independente ao fim do projeto. Resultado: **aprovado após 1 correção**
 (o e-book "Histórias Reais de Obra" foi reenquadrado para não contradizer o rótulo N1 — situações
