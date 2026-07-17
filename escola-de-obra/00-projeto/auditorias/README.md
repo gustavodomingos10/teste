@@ -7,8 +7,8 @@
 | # | Documento | Arquivo | Status |
 |---|---|---|---|
 | 1 | Auditoria Proativa 360° (Claude Cowork) | `01-auditoria-proativa-360.md` | 📥 recebido · a aplicar |
-| 2 | (aguardando) | — | — |
-| 3 | (aguardando) | — | — |
+| 2 | Prompt-Mestre Diamante **v3.2** (auditado 360°) | `02-prompt-mestre-diamante-v3.2.md` | 📥 recebido · a aplicar |
+| 3 | Auditoria Normativa dos 10 cursos (Anexo A) | `03-auditoria-normativa-10-cursos.md` | 📥 recebido · a aplicar |
 | 4 | (aguardando) | — | — |
 
 ## Ao receber o sinal "pode começar":
