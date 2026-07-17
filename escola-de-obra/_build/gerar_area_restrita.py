@@ -178,7 +178,8 @@ def page(title, body, depth=1, crumb=""):
 {f'<div class="crumb">{crumb}</div>' if crumb else ''}
 {body}
 </div></main>
-<footer>Conteúdo em revisão pelo instrutor — não distribuir. · GD Engenharia e Perícia · Padrão Diamante</footer>
+<footer>Conteúdo em revisão pelo instrutor — não distribuir. · Cursos 100% narrados (gravados), sem grupo e sem consultoria.<br>
+GD Engenharia e Perícia Ltda · CNPJ 54.705.748/0001-19 · Cornélio Procópio/PR · engenhariagd.com.br · Padrão Diamante</footer>
 </body></html>"""
 
 def md2html(path, strip_h1=False):
