@@ -95,7 +95,7 @@ footer a{color:var(--dour2);}
   </main>
   <footer>
     Ferramenta educativa — sugestão de triagem, NÃO substitui o projeto de fundações. A escolha e o
-    dimensionamento finais são do projetista de fundações/geotécnico (NBR 6122).<br>
+    dimensionamento finais são do projetista de fundações/geotécnico (NBR 6122:2019).<br>
     Escola de Obra · GD Engenharia e Perícia · <a href="https://engenhariagd.com.br">engenhariagd.com.br</a><br>
     Revisado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D
   </footer>
@@ -174,8 +174,8 @@ function recomendar(){
   if(sondagem==="nao" || camada==="naosei"){
     exigir=true; warn=true;
     familia="Indefinida — falta o mapa do solo";
-    passo={t:"Primeiro passo obrigatório", d:"Exigir a sondagem de simples reconhecimento (SPT, NBR 6484) antes de definir a fundação. Sem ela, qualquer escolha é aposta — e o risco não é seu para assumir."};
-    return render({familia,tipos:[],alertas:["Sem sondagem não há decisão técnica de fundação (NBR 6484)."],passo,exigir,warn});
+    passo={t:"Primeiro passo obrigatório", d:"Exigir a sondagem de simples reconhecimento (SPT, NBR 6484:2020) antes de definir a fundação. Sem ela, qualquer escolha é aposta — e o risco não é seu para assumir."};
+    return render({familia,tipos:[],alertas:["Sem sondagem não há decisão técnica de fundação (NBR 6484:2020)."],passo,exigir,warn});
   }
   if(camada==="rasa" && carga!=="alta"){ familia="Fundação RASA (superficial)"; }
   else if(camada==="profunda" || carga==="alta"){ familia="Fundação PROFUNDA"; }
@@ -206,7 +206,7 @@ function recomendar(){
   if(na==="naosei") alertas.push("Nível d'água não informado: confirme na sondagem — ele filtra os tipos.");
   if(has("prazo")) alertas.push("Prazo/custo desempatam por ÚLTIMO, só entre as opções tecnicamente viáveis.");
 
-  passo={t:"Próximo passo", d:"Leve a família e os tipos candidatos ao projetista de fundações para definição e dimensionamento (NBR 6122). Registre solo (sondagem), cargas e restrições no parecer do Kit."};
+  passo={t:"Próximo passo", d:"Leve a família e os tipos candidatos ao projetista de fundações para definição e dimensionamento (NBR 6122:2019). Registre solo (sondagem), cargas e restrições no parecer do Kit."};
   render({familia,tipos,alertas,passo,exigir,warn});
 }
 
@@ -215,7 +215,7 @@ function render(r){ renderResultado(r.familia, r.tipos, r.alertas, r.passo, r.ex
 function renderResultado(familia,tipos,alertas,passo,exigir,warn){
   document.getElementById("bar").style.width="100%";
   document.getElementById("nav").classList.add("hidden");
-  const shareTxt = encodeURIComponent(`Seletor de Fundacao (Escola de Obra): familia recomendada = ${familia}. Decisao final do projetista de fundacoes (NBR 6122).`);
+  const shareTxt = encodeURIComponent(`Seletor de Fundacao (Escola de Obra): familia recomendada = ${familia}. Decisao final do projetista de fundacoes (NBR 6122:2019).`);
   let html = `<div class="result-head"><div class="step-lbl">Recomendação de triagem</div>
     <span class="fam ${warn?'warn':''}">${familia}</span></div>`;
   if(tipos.length){
@@ -225,7 +225,7 @@ function renderResultado(familia,tipos,alertas,passo,exigir,warn){
   alertas.forEach(a=> html += `<div class="alerta">⚠ ${a}</div>`);
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
   html += `<div class="disc"><b>Aviso técnico:</b> esta é uma <b>triagem educativa</b> por regras simplificadas, com calibragem conservadora — sem sondagem (SPT), a triagem não decide. NÃO substitui o
-    projeto de fundações. A escolha, o dimensionamento e a assinatura são do <b>projetista de fundações/geotécnico</b> (NBR 6122).
+    projeto de fundações. A escolha, o dimensionamento e a assinatura são do <b>projetista de fundações/geotécnico</b> (NBR 6122:2019).
     Faixas e critérios são convenção do curso — ver VALIDAR.md.</div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${shareTxt}" target="_blank" rel="noopener">📲 Compartilhar</a></div>`;
   html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Nova análise</button></div>`;
@@ -260,8 +260,8 @@ const CENARIOS = [
    exp:"Vizinhança sensível pede execução sem trepidação: hélice contínua ou escavada. Evitar cravação com impacto."},
   {foto:"Não há boletim de sondagem no início da obra",
    q:"Primeira providência antes de escolher a fundação?",
-   ops:["Escolher sapata por ser mais barata","Exigir sondagem SPT (NBR 6484)","Cravar estaca de teste no olho","Copiar a obra vizinha"],c:1,
-   exp:"Sem sondagem não há decisão técnica. A primeira providência é exigir a sondagem de simples reconhecimento (NBR 6484)."},
+   ops:["Escolher sapata por ser mais barata","Exigir sondagem SPT (NBR 6484:2020)","Cravar estaca de teste no olho","Copiar a obra vizinha"],c:1,
+   exp:"Sem sondagem não há decisão técnica. A primeira providência é exigir a sondagem de simples reconhecimento (NBR 6484:2020)."},
   {foto:"Pilares na divisa do terreno, cargas próximas, solo firme raso",
    q:"Solução de fundação rasa mais indicada?",
    ops:["Radier geral","Sapata associada / alavancada (viga de equilíbrio)","Tubulão","Estaca raiz"],c:1,

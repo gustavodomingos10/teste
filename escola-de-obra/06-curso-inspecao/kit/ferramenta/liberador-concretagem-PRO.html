@@ -91,7 +91,7 @@ footer a{color:var(--dour2);}
     <section id="view-quiz" class="hidden"><div class="card" id="quizBox"></div></section>
   </main>
   <footer>
-    Ferramenta educativa — apoia a inspeção de liberação (NBR 14931 · 6118 · 15696). Não substitui o
+    Ferramenta educativa — apoia a inspeção de liberação (NBR 14931:2023 · 6118 · 15696). Não substitui o
     checklist formal nem o projeto; alterações de armação/escoramento são do projetista/RT.<br>
     Escola de Obra · GD Engenharia e Perícia · <a href="https://engenhariagd.com.br">engenhariagd.com.br</a><br>
     Revisado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D
@@ -115,7 +115,7 @@ const STEPS = [
     ["ok","Espaçadores adequados, sem pontos de toque"],
     ["pend","Faltam espaçadores em trechos — dá pra completar hoje"],
     ["nc","Armadura tocando a fôrma / sem espaçadores no conjunto"] ]},
-  { key:"escoramento", titulo:"ESCORAMENTO — apoio, prumo, contraventamento (NBR 15696)", ops:[
+  { key:"escoramento", titulo:"ESCORAMENTO — apoio, prumo, contraventamento (NBR 15696:2009)", ops:[
     ["ok","Conforme o plano: apoios firmes, prumo, diagonais nas 2 direções"],
     ["pend","Ajustes pontuais (cunha frouxa, calço a trocar) — hoje"],
     ["nc","Sem contraventamento / apoios cedendo / fora do plano"] ]},
@@ -188,7 +188,7 @@ function renderResultado(veredito,criticos,pendencias,passo){
   document.getElementById("bar").style.width="100%";
   document.getElementById("nav").classList.add("hidden");
   const lbl = veredito==="PENDENCIAS" ? "LIBERADO COM PENDÊNCIAS" : veredito;
-  const share = encodeURIComponent(`Liberador de Concretagem (Escola de Obra): veredito = ${lbl}. Inspecao NBR 14931/6118/15696.`);
+  const share = encodeURIComponent(`Liberador de Concretagem (Escola de Obra): veredito = ${lbl}. Inspecao NBR 14931:2023/6118/15696.`);
   let html = `<div class="result-head"><div class="step-lbl">Veredito da liberação</div>
     <span class="ver v-${veredito}">${lbl}</span></div>`;
   if(criticos.length){
@@ -203,7 +203,7 @@ function renderResultado(veredito,criticos,pendencias,passo){
     html += `<div class="mot"><b>3 sistemas + embutidos conformes.</b> Fôrma, armação (com cobrimento garantido por espaçadores), escoramento e embutidos conferidos contra o projeto.</div>`;
   }
   html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
-  html += `<div class="disc"><b>Aviso técnico:</b> apoio educativo à inspeção de liberação (NBR 14931 · 6118 · 15696), com calibragem conservadora — na dúvida, <b>não libere</b> e escale ao responsável técnico.
+  html += `<div class="disc"><b>Aviso técnico:</b> apoio educativo à inspeção de liberação (NBR 14931:2023 · 6118 · 15696), com calibragem conservadora — na dúvida, <b>não libere</b> e escale ao responsável técnico.
     Não substitui o checklist formal, o projeto nem o responsável técnico. Alterações de armação/fôrma/escoramento
     são alçada do projetista. Tolerâncias e cobrimentos: valores do projeto/norma vigente (VALIDAR.md). <b>Em risco iminente de colapso ou à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b></div>`;
   html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${share}" target="_blank" rel="noopener">📲 Compartilhar</a></div>`;
@@ -228,19 +228,19 @@ const CENARIOS = [
   {foto:"Negativos da laje afundando quando alguém pisa; sem caranguejos",
    q:"Qual o risco?",
    ops:["Nenhum, é normal","Armadura negativa perde a posição/braço de alavanca → fissura sobre apoios","Só estética","Melhora o concreto"],c:1,
-   exp:"O negativo só trabalha em cima. Exige caranguejos + passarelas para o tráfego da concretagem (NBR 14931)."},
+   exp:"O negativo só trabalha em cima. Exige caranguejos + passarelas para o tráfego da concretagem (NBR 14931:2023)."},
   {foto:"Armadura da viga encostada no fundo da fôrma, sem espaçador",
    q:"Consequência a longo prazo?",
    ops:["Nenhuma","Cobrimento zero → carbonatação/corrosão da armadura no futuro","Concreto mais forte","Economia"],c:1,
-   exp:"Cobrimento é proteção química (NBR 6118, Tab. 7.2). Espaçador é o seguro mais barato contra patologia."},
+   exp:"Cobrimento é proteção química (NBR 6118:2023, Tab. 7.2). Espaçador é o seguro mais barato contra patologia."},
   {foto:"Escoramento sem diagonais de contraventamento nas duas direções",
    q:"Veredito da inspeção?",
-   ops:["Liberar, diagonais são opcionais","Travar: NC estrutural — contraventar antes de concretar (NBR 15696)","Liberar com pendência para depois","Observar durante a concretagem"],c:1,
+   ops:["Liberar, diagonais são opcionais","Travar: NC estrutural — contraventar antes de concretar (NBR 15696:2009)","Liberar com pendência para depois","Observar durante a concretagem"],c:1,
    exp:"Sem contraventamento o conjunto é instável. NC estrutural não se 'observa durante' — corrige antes."},
   {foto:"Fresta no fundo da viga que passa luz",
    q:"O que ela indica?",
    ops:["Nada","Por onde passa luz, passa nata → ninho de concretagem; vedar antes","Ventilação boa","Design moderno"],c:1,
-   exp:"Fuga de nata deixa pedra sem pasta (ninho). Teste da luz + vedação na véspera (NBR 14931)."},
+   exp:"Fuga de nata deixa pedra sem pasta (ninho). Teste da luz + vedação na véspera (NBR 14931:2023)."},
   {foto:"Barra Ø10 instalada onde o projeto pede Ø12,5; armador sugere 'compensar com mais uma'",
    q:"Conduta correta?",
    ops:["Aceitar a compensação do armador","Comunicar o projetista por escrito e corrigir conforme ele — alteração é alçada dele","Ignorar, é quase igual","Resolver depois da concretagem"],c:1,
@@ -252,7 +252,7 @@ const CENARIOS = [
   {foto:"Escora apoiada em bloco cerâmico deitado, no meio do vão",
    q:"O que fazer?",
    ops:["Nada, sempre foi assim","NC: apoio improvisado cede — trocar por base firme antes da carga","Pintar o bloco","Adicionar outro bloco"],c:1,
-   exp:"Apoio de escora exige base firme e distribuição (NBR 15696). Bloco cerâmico esmaga/cede sob carga."},
+   exp:"Apoio de escora exige base firme e distribuição (NBR 15696:2009). Bloco cerâmico esmaga/cede sob carga."},
   {foto:"Concretagem em 2 horas; fôrma com pendências e embutidos não conferidos",
    q:"Melhor decisão?",
    ops:["Liberar e torcer","Reprogramar: sem janela para corrigir + reconferir, não há liberação segura","Conferir durante a descarga","Deixar o mestre decidir"],c:1,
