@@ -38,14 +38,14 @@
 - **Preço:** R$ 49,90 / R$ 99,90 — *âncora: cursos de tecnologia do concreto de associação, centenas de reais por poucas horas (`[PESQUISAR: cotar]`)*.
 - **Posição na esteira:** **terceiro curso construído**; conecta fundações (2) → concreto (3) → fissuras (5).
 
-## Curso 4: Inspeção de Serviços Críticos — Forma, Armação, Escoramento e Alvenaria
+## ⭐ Curso 4: Inspeção de Serviços Críticos — Forma, Armação, Escoramento e Alvenaria  *(construído — ver `../06-curso-inspecao/`)*
 - **Subtítulo de transformação:** O olho que pega o erro **antes** da concretagem — quando ainda dá para corrigir sem quebrar nada.
 - **Dor aniquilada (nº 4):** liberar forma/armação/escoramento sem um método, e descobrir o problema quando já está concretado.
-- **Antes → Depois:** antes, "parece que está certo"; depois, confere cobrimento, bitolas, espaçamento, prumo e escoramento com checklist e critério (NBR 6118 / NBR 14931).
-- **Material premium de destaque:** Checklist Mestre de Liberação de Concretagem (o "pare e confira" antes do caminhão chegar).
-- **Ferramenta Interativa Diamante:** *Quiz de Inspeção "Certo × Errado"* — fotos de armação/escoramento; o aluno aprova ou reprova e recebe o gabarito comentado.
-- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: treinamentos in-company de inspeção, valor por participante bem acima disto*.
-- **Posição na esteira:** fecha a Fase A; ponte natural para a Fase B (o que inspecionar mal vira patologia depois).
+- **Antes → Depois:** antes, "parece que está certo"; depois, inspeciona na véspera com projeto na mão — geometria, bitolas, **cobrimento/espaçadores**, escoramento, vergas — e libera/trava com termo assinado (NBR 14931 / 6118 / 15696 / 8545).
+- **Material premium de destaque:** Checklist Mestre de Liberação (18 itens) + Planilha de Inspeção (veredito automático) + Termo de Liberação Blindado.
+- **Ferramenta Interativa Diamante:** *Liberador de Concretagem* — wizard pelos 3 sistemas + embutidos → LIBERADO / COM PENDÊNCIAS / TRAVADO + **quiz de 8 cenários certo × errado**.
+- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: treinamentos in-company de inspeção, valor por participante bem acima disto (`[PESQUISAR: cotar]`)*.
+- **Posição na esteira:** **quarto curso construído — fecha a Fase A**; ponte natural para a Fase B (o que se inspeciona mal vira a patologia dos cursos 5 e 6).
 
 ---
 

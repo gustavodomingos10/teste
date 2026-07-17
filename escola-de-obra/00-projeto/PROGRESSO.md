@@ -29,6 +29,14 @@ aritmética de horários; simulador 9/9 ✔), PEDIDO-DE-MATERIAL e copy. Normas:
 16889, 5738/5739, 8953, 14931, 7680. Conexões explícitas: fundações (2) → concreto (3) → fissuras (5).
 Pendências no `VALIDAR.md` seção F.
 
+## Curso 4 — Inspeção de Serviços Críticos (construído — FECHA A FASE A)
+Quarto curso completo, em `06-curso-inspecao/`. Arquitetura (4 módulos, 2h40), Módulo de Ouro
+(M2 "A liberação de concretagem") roteirizado (7 aulas), quizzes, **Kit 8/8 testado** (planilha 5/5 ✔
+com veredito global; liberador 8/8 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 14931, 6118 (Tab. 7.2),
+15696, 8545, NR-18/35. Conexões: curso 3 (material×serviço), curso 5 (vergas↔fissura de canto,
+encunhamento↔fissura horizontal), curso 6 (cobrimento↔corrosão). **Fase A completa: cursos 1–4 + piloto.**
+Pendências no `VALIDAR.md` seção G.
+
 ## Auditoria de qualidade (Seção 6)
 Rodada uma auditoria cética independente ao fim do projeto. Resultado: **aprovado após 1 correção**
 (o e-book "Histórias Reais de Obra" foi reenquadrado para não contradizer o rótulo N1 — situações

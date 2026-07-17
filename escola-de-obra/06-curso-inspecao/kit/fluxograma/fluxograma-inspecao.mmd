@@ -1,0 +1,41 @@
+%% Fluxograma de Decisão — Liberação de Concretagem
+%% Escola de Obra · Padrão Diamante. NBR 14931 · 6118 · 15696.
+flowchart TD
+    A([Véspera da concretagem<br/>projeto na mão + checklist]) --> B{FÔRMA conforme?<br/>geometria · prumo · travamento<br/>estanqueidade · limpeza}
+    B -- NC grave --> T[/TRAVAR<br/>corrigir e reinspecionar/]
+    B -- Pendência corrigível --> P1[Listar: item + prazo<br/>+ reconferência marcada]
+    B -- OK --> C{ARMAÇÃO conforme o projeto?<br/>bitola · quantidade · posição<br/>estribos · emendas}
+    P1 --> C
+    C -- Divergência sem resposta<br/>do projetista --> T
+    C -- Pendência corrigível --> P2[Listar + prazo + reconferência]
+    C -- OK --> D{COBRIMENTO garantido?<br/>espaçadores fundo+faces<br/>zero ponto de toque — NBR 6118}
+    P2 --> D
+    D -- Sem espaçadores /<br/>armadura na fôrma --> T
+    D -- Faltam em trechos --> P3[Completar hoje + reconferir]
+    D -- OK --> E{ESCORAMENTO conforme o plano?<br/>apoio · prumo · contraventamento<br/>NBR 15696}
+    P3 --> E
+    E -- Sem contraventamento /<br/>apoios cedendo --> T
+    E -- Ajustes pontuais --> P4[Ajustar hoje + reconferir]
+    E -- OK --> F{EMBUTIDOS conferidos<br/>com as equipes?<br/>elétrica · hidráulica · esperas}
+    P4 --> F
+    F -- NÃO --> P5[Minuto das equipes<br/>com assinatura — hoje]
+    F -- SIM --> G{Há pendências abertas<br/>e a concretagem é HOJE?}
+    P5 --> G
+    G -- Múltiplas pendências<br/>sem janela --> T2[/TRAVAR por prazo<br/>reprogramar caminhão/]
+    G -- Pendências com janela --> H[LIBERADO COM PENDÊNCIAS<br/>prazo + reconferência obrigatórios]
+    G -- Zero pendências --> I[LIBERADO]
+    H --> J([Reconferência 15 min antes<br/>do caminhão + Termo assinado<br/>+ fotos no dossiê])
+    I --> J
+    T --> K([Comunicar com FATO + solução<br/>escalar por escrito · remarcar<br/>registrar motivo + fotos])
+    T2 --> K
+
+    classDef trava fill:#C62828,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+    classDef ok fill:#D9EAD3,stroke:#2E7D32,color:#1b4d1f,stroke-width:2px;
+    classDef pend fill:#FFF2CC,stroke:#F9A825,color:#7a5b00,stroke-width:1.5px;
+    classDef base fill:#0E3A34,stroke:#C9A24B,color:#F5EFE0,stroke-width:2px;
+    classDef dec fill:#F5EFE0,stroke:#1C5A4E,color:#0E3A34,stroke-width:1.5px;
+    class A,J,K base;
+    class B,C,D,E,F,G dec;
+    class T,T2 trava;
+    class H,P1,P2,P3,P4,P5 pend;
+    class I ok;
