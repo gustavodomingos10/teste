@@ -89,6 +89,26 @@
 > fundação são do projetista de fundações/geotécnico**. O aluno aprende a ler, triar e encaminhar.
 > Nenhuma aula autoriza o júnior a dispensar projeto de fundações.
 
+## F. Valores técnicos do CONTEÚDO — Curso 3 (Receber e Liberar Concreto)
+
+| # | Valor técnico afirmado | Onde aparece | Fonte declarada | Status |
+|---|---|---|---|---|
+| F1 | Aceitação em 2 etapas: **provisória** (descarga, estado fresco) e **definitiva** (ensaios de controle) | Todo o curso, fluxograma | NBR 12655 — Concreto — Preparo, controle, recebimento e aceitação | 🔵 confirmar edição |
+| F2 | Tempos-limite do concreto dosado em central: transporte ~**90 min** e descarga total ~**150 min** (da adição da água) | Aula 2.2, planilha, guia | NBR 7212 — Concreto dosado em central (ed. 2024) | 🟡 **[VALIDAR]** confirmar valores/condições exatas na edição vigente (aditivos podem alterar) |
+| F3 | Ensaio de abatimento (slump test): método, camadas e 25 golpes por camada | Aula 2.3, ferramenta, guia | NBR 16889:2020 (substituiu a NM 67) | 🔵 |
+| F4 | Tolerância de slump em relação ao pedido | Aula 2.4, ferramenta, planilha | NBR 7212 (tabela de tolerâncias) | 🟡 **[VALIDAR]** confirmar faixas da edição vigente |
+| F5 | **Proibição de adição de água** fora das condições previstas (limites de slump/tempo e autorização) | Aula 2.5, fluxograma | NBR 7212 / boa prática | 🟡 **[VALIDAR]** redação das condições em que redosagem é admitida |
+| F6 | Moldagem e cura de corpos de prova (camadas, golpes, cura inicial/úmida) | Aula 3.2/3.3, checklist | NBR 5738 — Moldagem e cura de corpos de prova | 🔵 |
+| F7 | Amostragem: nº de amostras/CPs por lote no controle de aceitação | Aula 3.4, planilha | NBR 12655 (amostragem parcial/total) | 🟡 **[VALIDAR]** critérios e nº exatos por tipo de controle |
+| F8 | Ensaio de compressão e leitura do certificado | Aula 3.5, planilha | NBR 5739 — Ensaio de compressão de CPs cilíndricos | 🔵 |
+| F9 | Classes de resistência (C20, C25, C30…) e grupos | Aula 1.2, guia | NBR 8953 — Concreto para fins estruturais — classificação | 🔵 |
+| F10 | fck não atendido: seguir procedimento da norma (revisão do projeto pelo RT, ensaios complementares — extração NBR 7680, esclerometria) — **sem demolição por pânico** | Aula 4.4/4.5 | NBR 12655 + NBR 7680 (extração) | 🟡 **[VALIDAR]** citar procedimento e norma de extração com edição |
+| F11 | Cura: manter umidade/temperatura para evitar retração plástica e garantir resistência | Aula 4.1/4.2 | NBR 14931 (execução) + prática consagrada | 🔵 |
+
+> ⚠️ **Regra da alçada (Curso 3):** o aluno decide a **aceitação do concreto fresco** conforme
+> procedimento; decisões sobre estrutura com fck não atendido são do **responsável técnico /
+> projetista estrutural**. O curso ensina a triagem, o ensaio e o registro.
+
 ## Como usar este arquivo
 
 1. Rode a coluna **Status** de cima a baixo antes de qualquer publicação.
