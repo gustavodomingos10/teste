@@ -29,14 +29,14 @@
 - **Preço:** R$ 49,90 / R$ 99,90 — *âncora: pós em geotecnia/fundações, faixa de milhares de reais (jul/2026 — `[PESQUISAR: cotar]`)*.
 - **Posição na esteira:** primeiro serviço crítico do canteiro; **segundo curso construído** por completo. Conecta com o curso 4 (inspeção) e o 7 (contenções).
 
-## Curso 3: Receber e Liberar Concreto com Critério
+## ⭐ Curso 3: Receber e Liberar Concreto com Critério  *(construído — ver `../05-curso-concreto/`)*
 - **Subtítulo de transformação:** "Chegou o caminhão-betoneira" deixa de ser pânico e vira um procedimento de 8 minutos que te protege.
-- **Dor aniquilada (nº 3):** liberar (ou reprovar) concreto sem saber slump, moldagem de corpos de prova e o que a nota fiscal precisa dizer.
-- **Antes → Depois:** antes, assina o recebimento no escuro; depois, faz o abatimento, molda os CPs e documenta a aceitação (NBR 12655 / NBR 16889).
-- **Material premium de destaque:** Checklist de Recebimento de Concreto + Modelo de Registro de Ensaio de Abatimento.
-- **Ferramenta Interativa Diamante:** *Simulador de Recebimento de Concreto* — cenários (slump fora, atraso, adição de água) → aceitar/reprovar + justificativa normativa.
-- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: cursos de tecnologia do concreto de associação, centenas de reais por poucas horas*.
-- **Posição na esteira:** 2º lançamento recomendado (dor recorrente, checklist muito reaproveitável).
+- **Dor aniquilada (nº 3):** liberar (ou reprovar) concreto sem saber slump, tempos-limite, moldagem de corpos de prova e o que a nota fiscal precisa dizer.
+- **Antes → Depois:** antes, assina o recebimento no escuro; depois, executa a sequência nota→relógio→slump→veredito→CPs→registro (NBR 12655 / 7212 / 16889 / 5738).
+- **Material premium de destaque:** Planilha de Controle (veredito automático + CPs) + Checklist de Recebimento + Registro de Concretagem Blindado.
+- **Ferramenta Interativa Diamante:** *Simulador de Recebimento de Concreto* — nota/tempo/slump/aspecto → LIBERAR / CORRIGIR VIA CENTRAL / RECUSAR, com justificativa normativa.
+- **Preço:** R$ 49,90 / R$ 99,90 — *âncora: cursos de tecnologia do concreto de associação, centenas de reais por poucas horas (`[PESQUISAR: cotar]`)*.
+- **Posição na esteira:** **terceiro curso construído**; conecta fundações (2) → concreto (3) → fissuras (5).
 
 ## Curso 4: Inspeção de Serviços Críticos — Forma, Armação, Escoramento e Alvenaria
 - **Subtítulo de transformação:** O olho que pega o erro **antes** da concretagem — quando ainda dá para corrigir sem quebrar nada.

@@ -22,6 +22,13 @@ PEDIDO-DE-MATERIAL e copy de lançamento. Normas: NBR 6122 (rasa/profunda), 6484
 6489/12131/16903 (provas de carga), 6118. Regra de alçada (decisão final do projetista) em todo o material.
 Pendências no `VALIDAR.md` seção E.
 
+## Curso 3 — Receber e Liberar Concreto com Critério (construído)
+Terceiro curso completo, em `05-curso-concreto/`. Arquitetura (4 módulos, 2h30), Módulo de Ouro
+(M2 "A hora do caminhão") roteirizado (6 aulas), quizzes, **Kit 8/8 testado** (planilha 6/6 ✔ com
+aritmética de horários; simulador 9/9 ✔), PEDIDO-DE-MATERIAL e copy. Normas: NBR 12655, 7212,
+16889, 5738/5739, 8953, 14931, 7680. Conexões explícitas: fundações (2) → concreto (3) → fissuras (5).
+Pendências no `VALIDAR.md` seção F.
+
 ## Auditoria de qualidade (Seção 6)
 Rodada uma auditoria cética independente ao fim do projeto. Resultado: **aprovado após 1 correção**
 (o e-book "Histórias Reais de Obra" foi reenquadrado para não contradizer o rótulo N1 — situações
