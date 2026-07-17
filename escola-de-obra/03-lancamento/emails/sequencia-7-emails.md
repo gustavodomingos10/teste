@@ -54,9 +54,9 @@ No curso, eu abro esse método passo a passo. E você leva o Kit inteiro para ap
 
 ## E-mail 4 — Objeções (D+1)
 **Assunto:** "Curso gravado não tira minha dúvida" — tira, sim
-**Assunto B:** As 3 dúvidas que me mandaram ontem
+**Assunto B:** As 3 dúvidas que mais me chegam sobre o curso
 
-Recebi três perguntas ontem. Respondo direto:
+Três perguntas se repetem sempre que abro uma turma. Respondo direto:
 
 **"Curso gravado não tira dúvida."** Tira: tem Grupo VIP no WhatsApp com resposta minha **toda quinta, 19h**, e os microdesafios são comentados.
 

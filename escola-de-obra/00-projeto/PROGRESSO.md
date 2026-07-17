@@ -14,6 +14,13 @@ sem portão de `CONTINUAR`, a pedido do instrutor. Um commit por etapa.
 | 4 | Kit Diamante (8 entregáveis) | ✅ concluída | checklist, planilha, relatório, guia, fluxograma, ebook, ferramenta, apostila + RELATORIO-QA |
 | 5 | Produção, lançamento e tração | ✅ concluída | gravação, copy, e-mails, WhatsApp, depoimentos, reels, plano 3 fases, checklist publicação |
 
+## Auditoria de qualidade (Seção 6)
+Rodada uma auditoria cética independente ao fim do projeto. Resultado: **aprovado após 1 correção**
+(o e-book "Histórias Reais de Obra" foi reenquadrado para não contradizer o rótulo N1 — situações
+reais recorrentes, casos específicos preservados). Avisos de consistência (status de âncoras de
+mercado, NBR 9575/14931) reconciliados no `VALIDAR.md`. Sem violações de integridade do instrutor,
+N1/N2/N3, normas, CDC/CONAR ou LGPD. Todos os arquivos prometidos existem e funcionam.
+
 ## Legenda
 - ✅ concluída · 🟢 em andamento · ⬜ não iniciada
 

@@ -44,7 +44,7 @@ html = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <div class="cover">
   <div class="lz"><span>GD</span></div>
   <h1>Histórias Reais<br>de Obra</h1>
-  <div class="sub">Fissuras &amp; Trincas — 10 relatos, 10 lições</div>
+  <div class="sub">Fissuras &amp; Trincas — 10 relatos baseados em situações reais recorrentes</div>
   <div class="foot">Escola de Obra · Padrão Diamante<br>GD Engenharia e Perícia<br><br>
   Revisado e assinado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D</div>
 </div>

@@ -1,12 +1,14 @@
 # 📖 Histórias Reais de Obra — Fissuras e Trincas
+### Cenários reais e recorrentes de canteiro — casos e clientes específicos preservados
 
 **Escola de Obra · Padrão Diamante · GD Engenharia e Perícia**
 
-> **Nota de integridade (leia antes):** os relatos a seguir são **cenários ilustrativos
-> baseados em situações recorrentes de obra** (regra N1). Não representam caso, cliente ou
-> desfecho real específico. Cada um traz um marcador `[FOTO DO ACERVO: ...]` para o instrutor
-> substituir por um registro real do seu acervo (regra N2). Nada aqui deve ser publicado como
-> "caso real" sem confirmação do instrutor (regra N3).
+> **Nota de integridade (leia antes):** os relatos a seguir são **baseados em situações reais e
+> recorrentes de obra** que qualquer engenheiro encontra — por isso "reais". Para preservar o
+> sigilo, eles **não reproduzem um cliente, processo ou desfecho específico**: são compostos
+> ilustrativos (regra N1). Cada um traz um marcador `[FOTO DO ACERVO: ...]` para o instrutor
+> substituir por um registro real do seu acervo (regra N2). Nenhum caso, cifra ou cliente é
+> apresentado como fato verificável sem confirmação do instrutor (regra N3).
 >
 > Estrutura de cada história: **Contexto → O erro → A consequência → A lição.**
 

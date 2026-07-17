@@ -97,7 +97,7 @@
 - **Antes → Depois:** antes, relatório solto e vulnerável; depois, laudo estruturado (escopo, limitações, metodologia, causa raiz, encaminhamentos, assinatura/CREA) que se sustenta (NBR 13752 / NBR 16747).
 - **Material premium de destaque:** Modelo de Relatório Técnico Blindado (Word + PDF) + Checklist de Vistoria + Termo de Autorização de Imagem.
 - **Ferramenta Interativa Diamante:** *Montador de Laudo Guiado* — o aluno responde por seção e sai com o esqueleto do relatório preenchido.
-- **Preço:** R$ 49,90 / R$ 99,90 — *âncora de referência de mercado de honorários: IBAPE-SP fixa mínimo de R$ 6.875 e IBAPE-MG cita ~R$ 4.100 para vistoria cautelar de imóvel urbano típico (regulamentos 2022–2025). Referência de mercado, jamais ganho garantido.*
+- **Preço:** R$ 49,90 / R$ 99,90 — *âncora de referência de mercado de honorários: IBAPE-SP fixa mínimo de R$ 6.875 e IBAPE-MG cita ~R$ 4.100 para vistoria cautelar de imóvel urbano típico (regulamentos 2022–2025 — fontes em `pesquisa-mercado.md`; `[PESQUISAR: revalidar valores/vigência na data]`). Referência de mercado, jamais ganho garantido.*
 - **Posição na esteira:** onde a competência técnica vira renda; carro-chefe emocional do combo.
 
 ## Curso 10: Introdução à Perícia de Engenharia — Do Júnior ao Judiciário

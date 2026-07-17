@@ -63,7 +63,7 @@ Mais que aulas: um **arsenal de campo** que nenhum concorrente entrega.
 - 📄 **Modelo de Laudo Blindado** (Word + PDF) — a estrutura que protege quem assina.
 - 📱 **Guia de Bolso** vertical para consulta rápida no canteiro.
 - 🔀 **Fluxograma de Decisão de Emergência** com tempos e caminhos claros.
-- 📖 **Mini e-book "Histórias Reais de Obra"** — 10 lições que encurtam anos de erro.
+- 📖 **Mini e-book "Histórias Reais de Obra"** — 10 relatos baseados em situações reais e recorrentes de canteiro (casos específicos preservados), cada um com sua lição.
 - 📚 **Apostila Diamante** no padrão editorial GD.
 
 **Todo material traz:** *"Revisado e assinado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D."*

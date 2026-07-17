@@ -17,12 +17,12 @@
 | A1 | NBR 6118 — Projeto de estruturas de concreto — Procedimento | Todo o curso, apostila, checklist | 🔵 | Confirmar edição vigente (2014 + emendas). Aberturas de fissura: Tab. 13.4. |
 | A2 | NBR 6122 — Projeto e execução de fundações | Catálogo (curso 2), apostila | 🔵 | Vigente 2019/2022. |
 | A3 | NBR 12655 — Concreto de cimento Portland — Preparo, controle, recebimento e aceitação | Catálogo (curso 3) | 🔵 | Confirmar edição. |
-| A4 | NBR 14931 — Execução de estruturas de concreto — Procedimento | Checklist, apostila | 🔵 | — |
+| A4 | NBR 14931 — Execução de estruturas de concreto | Checklist, apostila | 🔵 | A revisão de 2023 passou a se chamar "Estruturas de concreto — Execução". Confirmar título/edição vigente. |
 | A5 | NBR 15575 — Edificações habitacionais — Desempenho | Apostila, copy | 🔵 | 6 partes. |
 | A6 | NBR 16747 — Inspeção predial — Diretrizes, conceitos, terminologia e procedimento | Curso 9/10, relatório | 🔵 | Publicada 2020. |
 | A7 | NBR 13752 — Perícias de engenharia na construção civil | Relatório blindado, curso 10 | 🔵 | — |
 | A8 | NBR 16280 — Reforma em edificações — Sistema de gestão de reformas | Catálogo (curso 8) | 🔵 | — |
-| A9 | NBR 9575 — Impermeabilização — Seleção e projeto | Módulo de infiltração/fissura | 🟡 | Confirmar se será citada no piloto. |
+| A9 | NBR 9575 — Impermeabilização — Seleção e projeto | Aula 2.6, apostila, guia, checklist, ferramenta | 🔵 | Já citada no piloto (umidade/eflorescência). Confirmar edição vigente. |
 | A10 | NBR 16889 — Concreto — Determinação da consistência pelo abatimento do tronco de cone (slump) | Guia de bolso, curso 3 | 🟡 | Substituiu a antiga NM 67. Confirmar. |
 | A11 | NR-18 — Segurança e saúde no trabalho na indústria da construção | Checklist de segurança | 🟢 | Norma regulamentadora MTE. |
 | A12 | NR-35 — Trabalho em altura | Checklist de inspeção | 🟢 | — |
@@ -47,11 +47,11 @@
 
 | # | Afirmação de mercado | Onde aparece | Fonte/Status |
 |---|---|---|---|
-| C1 | Taxa Kiwify ≈ **8,99% + R$ 2,49** por venda (área de membros e vídeo inclusos) | Estratégia, plano de plataforma | 🟡 [PESQUISAR] confirmar na página oficial da Kiwify na data do lançamento |
-| C2 | Taxa Hotmart ≈ 9,9% + R$ 1,00 (+ R$ 2,49 se player nativo) | Estratégia | 🟡 [PESQUISAR] confirmar na página oficial |
-| C3 | Preço de pós-graduação em patologia das construções | Âncora de preço na copy | 🟡 [PESQUISAR] cotar 2–3 instituições reais, com link e data |
-| C4 | Preço de cursos ao vivo de associações (ex.: IBAPE, ALCONPAT) | Âncora de preço | 🟡 [PESQUISAR] |
-| C5 | Referenciais de honorários (ex.: tabela IBAPE) para laudos/vistorias | Copy do curso 9/10 | 🟡 [PESQUISAR + VALIDAR] usar **só como referência de mercado com fonte**, nunca ganho garantido |
+| C1 | Taxa Kiwify ≈ **8,99% + R$ 2,49** por venda (área de membros e vídeo inclusos) | Estratégia, plano de plataforma | 🔵 fonte citada (`pesquisa-mercado.md`, jul/2026); revalidar na página oficial na data do lançamento |
+| C2 | Taxa Hotmart ≈ 9,9% + R$ 1,00 (+ R$ 2,49 se player nativo) | Estratégia | 🔵 fonte citada (jul/2026); revalidar na data |
+| C3 | Preço de pós-graduação em patologia (R$ 815–1.200/mês — Instituto Nova Eng./IPOG) | Âncora de preço na copy | 🔵 fonte citada com link (jul/2026); revalidar na data |
+| C4 | Preço de cursos ao vivo de associações (AEA ~R$ 300/14h) | Âncora de preço | 🔵 fonte citada (jul/2026); revalidar na data |
+| C5 | Referenciais de honorários — IBAPE-SP mín. R$ 6.875 / IBAPE-MG ~R$ 4.100 (regs. 2022–2025) | Catálogo (curso 9), copy | 🔵 fonte citada com link; **usar só como referência de mercado, nunca ganho garantido**; revalidar vigência |
 | C6 | "Dor de maior busca orgânica" entre recém-formados | Justificativa do piloto | 🟡 [PESQUISAR] validar com dados de volume de busca |
 
 ## D. Dados do instrutor e da oferta (confirmar redação preferida)
