@@ -84,7 +84,7 @@ E, diferente da pós, **o material fica com você para sempre.**
 - **Combo Vitalício (10 cursos da esteira):** **R$ 497 à vista ou 12x de R$ 49,70.** *(nunca "sem juros")*
 - **⭐ Garantia Diamante de 15 dias:** não gostou? Devolvemos 100% — **e você fica com a planilha.**
 - **Acesso vitalício** conforme política publicada `[VALIDAR D7]` + atualizações gratuitas enquanto a esteira existir.
-- **Certificado** de conclusão com QR Code de autenticidade, carga horária e conteúdo programático. *(sem insinuar chancela do CREA)*
+- **Certificado** de conclusão com **nota de corte de 70%** no quiz final, QR Code de autenticidade, carga horária e conteúdo programático. *(sem insinuar chancela do CREA)*
 - **área de membros** — aulas gravadas para revisar quando quiser + microdesafios com **gabarito comentado**.
 
 **CTA:** `[ Entrar na turma de fundadores — R$ 49,90 ]`
@@ -97,7 +97,7 @@ E, diferente da pós, **o material fica com você para sempre.**
 4. **"Vou mesmo conseguir cobrar por isso?"** Você sai com o modelo de laudo e o passo a passo da primeira vistoria. A capacidade é sua; a referência de honorários (ex.: IBAPE) é de mercado, não uma promessa de ganho. `[VALIDAR C5]`
 5. **"E se eu não gostar?"** Garantia Diamante de 15 dias, 100% de volta, e a planilha fica com você.
 6. **"Vale o preço?"** Uma pós custa R$ 815–1.200/mês. Aqui é R$ 49,90 e o material é seu para sempre.
-7. **"O certificado tem valor?"** É certificado de conclusão com carga horária e conteúdo programático (com QR de autenticidade). Não substitui título; comprova que você fez o curso.
+7. **"O certificado tem valor?"** É certificado de conclusão com carga horária e conteúdo programático (com QR de autenticidade), emitido com **nota de corte de 70%** no quiz final. Não substitui título; comprova que você fez o curso e passou na avaliação.
 
 ## BLOCO 8 — Fechamento
 

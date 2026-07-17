@@ -28,14 +28,15 @@
 - [ ] Quizzes por módulo + quiz final do certificado (banco em `../02-curso-piloto/quizzes/`).
 
 ## 3. Checkout, combo e bumps
-- [ ] Order bump: **Combo Vitalício** (R$ 497 à vista ou 12x de R$ 49,70 — **nunca "sem juros"**).
+- [ ] **Identificação do fornecedor no checkout (Decreto 7.962/2013):** GD Engenharia e Perícia Ltda · CNPJ 54.705.748/0001-19 · Cornélio Procópio/PR · canal de atendimento visível.
+- [ ] Order bump: **Combo Vitalício** (R$ 497 à vista ou 12x de R$ 49,70 — **nunca "sem juros"**); só publicar o combo com **≥3 cursos no ar ou cronograma público** (CDC 30/35). Âncora no preço cheio (R$ 999).
 - [ ] Order bump: bônus "IA na rotina do engenheiro" (se disponível).
 - [ ] Configurar parcelamento exibindo "à vista ou 12x de R$ 49,70".
 
 ## 4. Garantia, certificado e comunidade
 - [ ] Garantia: **15 dias** (Garantia Diamante) — configurar reembolso.
 - [ ] Política de "acesso vitalício" publicada conforme D7 (sem letra miúda enganosa).
-- [ ] Certificado: ativar com carga horária e conteúdo programático; **QR de autenticidade**; sem insinuar chancela do CREA.
+- [ ] Certificado: ativar com **nota de corte de 70%** no quiz final, carga horária e conteúdo programático; **QR de autenticidade**; sem insinuar chancela do CREA.
 - [ ] Material de apoio e Kit disponíveis na área de membros + e-mail de boas-vindas (E-mail 7).
 
 ## 5. Ferramenta interativa (PRO e LITE)

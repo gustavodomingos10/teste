@@ -28,7 +28,11 @@ juros" seria propaganda enganosa, CDC/CONAR).
   ancora em ~50% — âncora **honesta** porque os 10 cursos existem de fato na esteira.
 - A progressão de carreira (Executar → Diagnosticar → Documentar) só é capturada por inteiro
   no combo. Quem compra 1 curso e evolui, volta para o combo.
-- Order bump e recorrência de comunidade (grupo VIP) aumentam o valor percebido sem inflar promessa.
+- Order bump e a chegada de novos cursos da esteira aumentam o valor percebido sem inflar promessa.
+
+> **Condição de venda do combo (CDC arts. 30 e 35 — venda de entrega futura vincula):** o combo
+> só vai ao ar com **≥ 3 cursos já publicados** OU **cronograma público de lançamento** + política
+> de atraso publicada. Âncora sempre no preço cheio (R$ 999), nunca no preço beta.
 
 ## 3. Bônus de fundador (turma beta) — demonstráveis, nunca ganho garantido
 
@@ -37,7 +41,7 @@ Bônus são **capacidades e acessos**, não resultados prometidos:
 2. **Aulas gravadas com acesso vitalício** — revise cada aula quantas vezes quiser; microdesafios com gabarito comentado.
 3. **Order bump sugerido:** *"IA na rotina do engenheiro — com a supervisão de quem assina"*.
 4. **Todos os materiais do Kit** (planilha, checklist, ferramenta PRO) — e o aluno **fica com a planilha mesmo se pedir reembolso** (ver Garantia Diamante).
-5. **Certificado** de conclusão com QR Code de autenticidade, carga horária e conteúdo programático.
+5. **Certificado** de conclusão com **nota de corte de 70%** no quiz final, QR Code de autenticidade, carga horária e conteúdo programático.
 
 ## 4. Garantia
 

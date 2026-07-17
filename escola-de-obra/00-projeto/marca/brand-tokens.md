@@ -69,6 +69,34 @@ apostilas dos cursos NR existentes (fundo verde-petróleo escuro, creme, título
 - **Site:** engenhariagd.com.br · seção de ferramentas: engenhariagd.com.br/ferramentas
 - Link `wa.me` padrão: `https://wa.me/5543999259577`
 
+## 7. Regras de integridade e blindagem jurídica (valem para todo o conteúdo)
+
+**Integridade do conteúdo (N1–N4):**
+- **N1 — Cenário ilustrativo rotulado.** Todo microcaso é *"cenário ilustrativo baseado em situações
+  recorrentes (não é caso real específico)"*. Nunca apresentar ficção como fato.
+- **N2 — `[FOTO DO ACERVO]`.** Imagens entram como placeholder do acervo do instrutor, nunca inventadas.
+- **N3 — Nada de fato inventado** (cifras, clientes, desfechos). Depoimento só real, específico e autorizado.
+- **N4 — Confidencialidade do acervo (auditoria 2.1).** Só usar foto de **obra própria ou autorizada** e
+  **anonimizada** (sem fachada/rosto/dado identificável). Material de **perícia** identificável ou de
+  **processo em curso** está **VETADO** (sigilo profissional CONFEA + segredo de justiça + LGPD).
+  Caso-limite → advogado antes de usar.
+
+**Direito autoral ABNT (auditoria A10):** as normas são texto protegido e pago. **Citar** (número:ano e
+item), **nunca reproduzir** tabelas/trechos extensos em apostila, slide ou checklist. Redação própria +
+conferência final no texto oficial (ABNT Coleção/GEDWEB).
+
+**Ferramentas públicas (LITE):** calibragem **conservadora** — em cenário grave/ambíguo nunca "libera";
+encaminha engenheiro habilitado e, em risco iminente, **Defesa Civil (199) / Bombeiros (193)**.
+
+**Certificado:** conclusão com **nota de corte de 70%** no quiz final + QR de autenticidade, carga
+horária e conteúdo programático. **Sem** insinuar chancela do CREA.
+
+**Fornecedor (Decreto 7.962/2013):** toda página de venda/checkout identifica
+**GD Engenharia e Perícia Ltda — CNPJ 54.705.748/0001-19**, Cornélio Procópio/PR e o canal de atendimento.
+
+**Preço/combo:** âncora no preço cheio (R$ 999); parcelamento sempre "R$ 497 à vista ou 12x de R$ 49,70"
+(nunca "sem juros"); combo (entrega futura, CDC 30/35) só com ≥3 cursos publicados ou cronograma público.
+
 ---
 
-*Estes tokens são a lei visual do projeto. Divergência = defeito de produção.*
+*Estes tokens são a lei visual **e de integridade** do projeto. Divergência = defeito de produção.*
