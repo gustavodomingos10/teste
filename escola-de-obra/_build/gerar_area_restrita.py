@@ -93,6 +93,9 @@ footer{background:var(--vesc);color:var(--dour2);text-align:center;padding:18px;
 GUARD = """/* Portão da área restrita — GD Engenharia (client-side; ver LEIA-ME). */
 (function(){
   var H = "%HASH%";
+  /* Pré-visualização local: aberto direto do disco (file://) libera sem senha —
+     é a sua máquina. No site publicado (http/https) a senha é exigida. */
+  if (location.protocol === 'file:') return;
   try{
     if (sessionStorage.getItem('gd_area_ok') !== H){
       var depth = (document.currentScript.getAttribute('data-depth')||'1');
@@ -129,10 +132,31 @@ LOGIN = """<!doctype html>
   <input type="password" id="pw" placeholder="Senha de acesso" autocomplete="current-password" onkeydown="if(event.key==='Enter')entrar()">
   <div class="msg" id="msg"></div>
   <button class="btn" id="bt" onclick="entrar()">Entrar</button>
+  <div id="ctxwarn" style="display:none;text-align:left;background:#fdf6e3;border:1px solid var(--dour);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:.82rem;color:var(--carvao);line-height:1.5">
+    <b>Pré-visualização local.</b> Você abriu do disco (<code>file://</code>) — aqui liberamos <b>sem senha</b>,
+    porque é o seu computador. Clique no botão acima para ver os cursos.<br>
+    <b>No seu site publicado</b> (Amplify/https), a área <b>pede a senha</b> normalmente.<br>
+    Quer testar com a senha localmente? Abra a pasta do site no terminal e rode
+    <code>python3 -m http.server 8000</code>, depois acesse <code>http://localhost:8000/area-restrita/</code>.
+  </div>
   <div class="foot">Conteúdo em fase de revisão — não distribuir.<br>GD Engenharia e Perícia · engenhariagd.com.br</div>
 </div>
 <script>
 var SALT="%SALT%", HASH="%HASH%", ITER=%ITER%;
+var LOCAL = (location.protocol === 'file:');
+var SECURE = (window.isSecureContext && window.crypto && crypto.subtle);
+if(LOCAL){
+  /* Pré-visualização local (arquivo aberto do disco): libera sem senha. */
+  document.getElementById('ctxwarn').style.display='block';
+  document.getElementById('pw').style.display='none';
+  var bt=document.getElementById('bt');
+  bt.textContent='Ver os cursos (pré-visualização local)';
+  bt.onclick=function(){ location.href='painel.html'; };
+  document.getElementById('msg').textContent='';
+} else if(!SECURE){
+  document.getElementById('ctxwarn').style.display='block';
+  document.getElementById('msg').textContent='Abra por http/https (veja abaixo) para o login funcionar.';
+}
 async function pbkdf2(pw){
   var enc=new TextEncoder();
   var key=await crypto.subtle.importKey('raw',enc.encode(pw),{name:'PBKDF2'},false,['deriveBits']);
@@ -148,7 +172,7 @@ async function entrar(){
     var h=await pbkdf2(pw);
     if(h===HASH){ sessionStorage.setItem('gd_area_ok',HASH); location.href='painel.html'; }
     else { msg.textContent='Senha incorreta.'; bt.disabled=false; bt.textContent='Entrar'; }
-  }catch(e){ msg.textContent='Erro de criptografia — use um navegador atual em https.'; bt.disabled=false; bt.textContent='Entrar'; }
+  }catch(e){ document.getElementById('ctxwarn').style.display='block'; msg.textContent='O login precisa de http/https (veja abaixo).'; bt.disabled=false; bt.textContent='Entrar'; }
 }
 try{ if(sessionStorage.getItem('gd_area_ok')===HASH) location.replace('painel.html'); }catch(e){}
 </script>
