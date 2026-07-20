@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico Interativo de Fissuras — Escola de Obra (LITE)</title>
+<style>
+:root{--verde:#0E3A34;--vesc:#0A2A25;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;
+--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;--verd:#2E7D32;--amar:#F9A825;--verm:#C62828;--wpp:#25D366;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--creme);
+color:var(--carvao);line-height:1.5;font-size:16px;}
+.app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--creme);display:flex;flex-direction:column;}
+header{background:linear-gradient(160deg,var(--verde),var(--vesc));color:var(--creme);padding:16px 18px;position:sticky;top:0;z-index:5;
+border-bottom:3px solid var(--dour);}
+.brand{display:flex;align-items:center;gap:10px;}
+.lz{width:34px;height:34px;min-width:34px;background:var(--dour);color:var(--verde);transform:rotate(45deg);
+display:flex;align-items:center;justify-content:center;font-weight:800;}
+.lz span{transform:rotate(-45deg);font-size:.8rem;}
+header h1{font-size:1.05rem;margin:0;font-family:Georgia,serif;color:var(--creme);}
+header .tag{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dour2);}
+.badge{font-size:.58rem;border:1px solid var(--dour2);color:var(--dour2);padding:2px 7px;border-radius:20px;margin-left:auto;text-transform:uppercase;letter-spacing:.1em;}
+main{padding:16px 18px 28px;flex:1;}
+.tabs{display:flex;gap:6px;margin-bottom:14px;}
+.tab{flex:1;padding:9px;border:none;border-radius:9px;background:#e6dfc9;color:var(--verde);font-weight:700;font-size:.82rem;cursor:pointer;}
+.tab.on{background:var(--verde);color:var(--creme);}
+.card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(14,58,52,.08);margin-bottom:14px;}
+h2{font-family:Georgia,serif;color:var(--verde);font-size:1.15rem;margin:0 0 4px;}
+.step-lbl{font-size:.72rem;color:var(--cinza);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.opts{display:grid;gap:9px;}
+.opt{display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid #ded6c0;border-radius:10px;background:var(--creme2);
+cursor:pointer;font-size:.95rem;transition:.12s;}
+.opt:hover{border-color:var(--dour);}
+.opt.sel{border-color:var(--verde);background:rgba(28,90,78,.10);font-weight:600;}
+.opt .k{width:22px;height:22px;min-width:22px;border-radius:50%;border:2px solid var(--vmed);display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--vmed);}
+.opt.sel .k{background:var(--verde);border-color:var(--verde);color:#fff;}
+.chk{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1.5px solid #ded6c0;border-radius:10px;background:var(--creme2);cursor:pointer;font-size:.9rem;margin-bottom:8px;}
+.chk input{width:18px;height:18px;accent-color:var(--verde);}
+.chk.sel{border-color:var(--verde);background:rgba(28,90,78,.08);}
+input[type=number]{width:100%;padding:12px;border:1.5px solid #ded6c0;border-radius:10px;font-size:1rem;}
+.row{display:flex;gap:10px;margin-top:14px;}
+.btn{flex:1;padding:13px;border:none;border-radius:10px;font-weight:700;font-size:.95rem;cursor:pointer;}
+.btn-primary{background:var(--verde);color:var(--creme);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+.btn-ghost{background:transparent;color:var(--verde);border:1.5px solid var(--verde);}
+.btn-wpp{background:var(--wpp);color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;}
+.progress{height:6px;background:#e6dfc9;border-radius:6px;overflow:hidden;margin-bottom:14px;}
+.progress > i{display:block;height:100%;background:var(--dour);transition:.25s;}
+/* Resultado */
+.result-head{text-align:center;padding:8px 0 4px;}
+.grav{display:inline-block;padding:6px 16px;border-radius:20px;font-weight:800;font-size:1.05rem;letter-spacing:.04em;}
+.g-ALTA{background:rgba(198,40,40,.14);color:var(--verm);}
+.g-MEDIA{background:rgba(249,168,37,.18);color:#9C6500;}
+.g-BAIXA{background:rgba(46,125,50,.16);color:var(--verd);}
+.hip{margin:6px 0;padding:10px 12px;border-left:4px solid var(--dour);background:var(--creme2);border-radius:0 8px 8px 0;}
+.hip b{color:var(--verde);}
+.passo{background:var(--verde);color:var(--creme);border-radius:10px;padding:12px 14px;margin-top:10px;}
+.passo .t{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dour2);}
+.disc{font-size:.76rem;color:var(--cinza);background:#f4efe0;border:1px dashed var(--cinza);border-radius:8px;padding:10px;margin-top:12px;}
+.selo{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;font-size:.72rem;color:var(--cinza);}
+.selo .lz{width:26px;height:26px;min-width:26px;}
+/* Quiz */
+.foto{background:repeating-linear-gradient(45deg,#e8e1cf,#e8e1cf 12px,#ded6c0 12px,#ded6c0 24px);
+border:1px dashed var(--cinza);color:var(--cinza);font-size:.74rem;display:flex;align-items:center;justify-content:center;
+text-align:center;padding:16px;min-height:120px;border-radius:10px;margin-bottom:12px;}
+.fb{margin-top:10px;padding:11px 13px;border-radius:9px;font-size:.9rem;}
+.fb.ok{background:rgba(46,125,50,.12);border-left:4px solid var(--verd);}
+.fb.no{background:rgba(198,40,40,.10);border-left:4px solid var(--verm);}
+.score{text-align:center;font-family:Georgia,serif;font-size:2.4rem;color:var(--verde);}
+.cta{background:linear-gradient(160deg,var(--verde),var(--vesc));color:var(--creme);border-radius:12px;padding:16px;margin-top:14px;text-align:center;}
+.cta h3{color:var(--creme);margin:0 0 6px;font-family:Georgia,serif;}
+.cta p{color:var(--dour2);font-size:.85rem;margin:0 0 12px;}
+.lgpd{font-size:.72rem;color:var(--cinza);display:flex;gap:8px;align-items:flex-start;margin:10px 0;}
+.lgpd input{margin-top:2px;accent-color:var(--verde);}
+.locked{filter:grayscale(.4) opacity(.5);pointer-events:none;}
+footer{background:var(--vesc);color:var(--dour2);text-align:center;font-size:.68rem;padding:12px;}
+footer a{color:var(--dour2);}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="lz"><span>GD</span></div>
+      <div>
+        <h1>Diagnóstico de Fissuras</h1>
+        <div class="tag">Escola de Obra · Padrão Diamante</div>
+      </div>
+      <span class="badge">LITE</span>
+    </div>
+  </header>
+  <main>
+    <div class="tabs">
+      <button class="tab on" id="tab-diag" onclick="showView('diag')">🔎 Diagnóstico</button>
+      <button class="tab" id="tab-quiz" onclick="showView('quiz')">🧠 Quiz de cenários</button>
+    </div>
+
+    <!-- ================= DIAGNÓSTICO (WIZARD) ================= -->
+    <section id="view-diag">
+      <div class="progress"><i id="bar" style="width:0%"></i></div>
+      <div class="card" id="wizard"></div>
+      <div class="row" id="nav">
+        <button class="btn btn-ghost" id="btnBack" onclick="back()">Voltar</button>
+        <button class="btn btn-primary" id="btnNext" onclick="next()" disabled>Avançar</button>
+      </div>
+    </section>
+
+    <!-- ================= QUIZ ================= -->
+    <section id="view-quiz" class="hidden">
+      <div class="card" id="quizBox"></div>
+    </section>
+  </main>
+  <footer>
+    Ferramenta educativa — hipótese de campo, não substitui avaliação presencial de responsável técnico.<br>
+    Escola de Obra · GD Engenharia e Perícia · <a href="https://engenhariagd.com.br">engenhariagd.com.br</a><br>
+    Revisado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D
+  </footer>
+</div>
+
+<script>
+"use strict";
+const MODE = "LITE";               // "PRO" ou "LITE"
+const WA_INSTRUTOR = "5543999259577";  // contato de vendas (CTA da versão pública)
+const LIMITE_WK = 0.30;                // mm — [VALIDAR B1] referência de serviço (NBR 6118:2023)
+
+/* ---------- Definição do wizard ---------- */
+const STEPS = [
+  { key:"orient", titulo:"Qual a orientação da fissura?", tipo:"radio", ops:[
+    ["vertical","Vertical (sobe reta)"],
+    ["horizontal","Horizontal (corre reta)"],
+    ["diagonal","Diagonal (~45°, inclinada)"],
+    ["mapeada","Malha / craquelê (mosaico)"] ]},
+  { key:"local", titulo:"Onde ela está?", tipo:"radio", ops:[
+    ["canto","Saindo do canto de porta/janela"],
+    ["meioviga","No meio do vão de uma viga (face de baixo)"],
+    ["apoioviga","Junto ao apoio da viga / sobre o pilar"],
+    ["base","Na base da parede"],
+    ["topo","No topo da parede (encontro com a laje)"],
+    ["parede","Numa parede / muro (genérico)"] ]},
+  { key:"sinais", titulo:"Sinais de conjunto (marque os que existem)", tipo:"check", ops:[
+    ["esquadria","Portas/janelas do trecho emperrando (fora de esquadro)"],
+    ["piso","Piso desnivelado / rodapé descolado"],
+    ["umidade","Umidade, mancha ou pó branco (eflorescência)"],
+    ["flecha","Barriga (flecha) visível na viga/laje"],
+    ["estrutural","Está em elemento de concreto estrutural (viga/pilar/laje)"],
+    ["risco","⚠ Risco imediato: som ao carregar, esmagamento, deslocamento ou queda de material"] ]},
+  { key:"abertura", titulo:"Abertura medida no ponto mais largo (mm)", tipo:"num",
+    dica:"Use o fissurômetro. Se ainda não mediu, deixe em branco." },
+  { key:"evolucao", titulo:"O que o monitoramento mostra?", tipo:"radio", ops:[
+    ["ativa","Cresceu / o selo de gesso rompeu (ATIVA)"],
+    ["estavel","Sem mudança no período (ESTABILIZADA)"],
+    ["naomonit","Ainda não monitorei"] ]},
+];
+
+const ans = { sinais:[] };
+let cur = 0;
+
+function showView(v){
+  document.getElementById("view-diag").classList.toggle("hidden", v!=="diag");
+  document.getElementById("view-quiz").classList.toggle("hidden", v!=="quiz");
+  document.getElementById("tab-diag").classList.toggle("on", v==="diag");
+  document.getElementById("tab-quiz").classList.toggle("on", v==="quiz");
+  if(v==="quiz") renderQuiz();
+}
+
+function renderStep(){
+  const s = STEPS[cur];
+  const bar = document.getElementById("bar");
+  bar.style.width = ((cur)/(STEPS.length))*100 + "%";
+  let html = `<div class="step-lbl">Passo ${cur+1} de ${STEPS.length}</div><h2>${s.titulo}</h2>`;
+  if(s.tipo==="radio"){
+    html += `<div class="opts">` + s.ops.map((o,i)=>{
+      const sel = ans[s.key]===o[0] ? "sel":"";
+      return `<div class="opt ${sel}" onclick="pick('${s.key}','${o[0]}')"><span class="k">${String.fromCharCode(65+i)}</span>${o[1]}</div>`;
+    }).join("") + `</div>`;
+  } else if(s.tipo==="check"){
+    html += s.ops.map(o=>{
+      const sel = ans.sinais.includes(o[0]) ? "sel":"";
+      return `<label class="chk ${sel}"><input type="checkbox" ${sel?"checked":""} onchange="toggleSinal('${o[0]}')">${o[1]}</label>`;
+    }).join("");
+  } else if(s.tipo==="num"){
+    html += `<input type="number" step="0.1" min="0" inputmode="decimal" placeholder="ex.: 0,4" value="${ans.abertura??""}" oninput="setNum(this.value)"><div class="disc">${s.dica}</div>`;
+  }
+  document.getElementById("wizard").innerHTML = html;
+  document.getElementById("btnBack").style.visibility = cur===0 ? "hidden":"visible";
+  const nb = document.getElementById("btnNext");
+  nb.textContent = cur===STEPS.length-1 ? "Ver diagnóstico" : "Avançar";
+  nb.disabled = !stepValid();
+}
+function stepValid(){
+  const s = STEPS[cur];
+  if(s.tipo==="radio") return !!ans[s.key];
+  if(s.tipo==="check") return true;          // opcional
+  if(s.tipo==="num") return true;            // opcional
+  return true;
+}
+function pick(key,val){ ans[key]=val; renderStep(); }
+function toggleSinal(v){
+  const i=ans.sinais.indexOf(v);
+  if(i>=0) ans.sinais.splice(i,1); else ans.sinais.push(v);
+  renderStep();
+}
+function setNum(v){ ans.abertura = v===""?null:parseFloat(v.replace(",",".")); document.getElementById("btnNext").disabled=!stepValid(); }
+function back(){ if(cur>0){cur--; renderStep();} }
+function next(){ if(cur<STEPS.length-1){cur++; renderStep();} else diagnosticar(); }
+
+/* ---------- Motor de diagnóstico (espelha a lógica do curso) ---------- */
+function diagnosticar(){
+  const {orient,local,sinais=[],abertura,evolucao} = ans;
+  const has = k => sinais.includes(k);
+  let hip = [];   // hipóteses de origem
+  if(orient==="diagonal" && local==="canto"){ hip.push(["Concentração de tensão em canto de abertura","Clássico e geralmente manso; observe se há um conjunto de fissuras."]); }
+  if(orient==="vertical" && local==="meioviga"){ hip.push(["Flexão da viga","Tração na fibra inferior no meio do vão. Julgue por largura + quantidade + flecha."]); }
+  if(local==="apoioviga" && (orient==="diagonal"||orient==="vertical")){ hip.push(["Cisalhamento (esforço cortante)","Junto ao apoio; pode ser mais brusca. Monitore e comunique com prioridade."]); }
+  if(orient==="mapeada"){ hip.push(["Retração superficial","Padrão em malha; comum em reboco/pele do concreto."]);
+     if(has("estrutural")) hip.push(["Reação álcali-agregado (a investigar)","Em concreto estrutural, exige ensaio laboratorial. Não cravar no olho."]); }
+  if(orient==="diagonal" && (has("esquadria")||has("piso"))){ hip.push(["Recalque diferencial de fundação","Diagnóstico de conjunto: diagonais concordantes + esquadria travando + piso caído. Investigar o solo (NBR 6122:2019)."]); }
+  if(orient==="horizontal" && local==="base"){ hip.push(["Umidade ascendente","Sobretudo com eflorescência. Trate a origem antes do acabamento (NBR 9575:2010)."]); }
+  if(orient==="horizontal" && local==="topo"){ hip.push(["Expansão de bloco / movimentação de interface","No encontro com a laje/viga; nem sempre é a estrutura."]); }
+  if(orient==="horizontal" && local==="parede" && has("umidade")){ hip.push(["Umidade","Presença de água muda o diagnóstico; registre e trate a origem."]); }
+  if(hip.length===0){ hip.push(["Padrão a caracterizar melhor","Combine orientação, local e sinais; meça e monitore para levantar a hipótese."]); }
+
+  const estrutural = has("estrutural") || hip.some(h=>/Flex|Cisalh|Recalque/.test(h[0]));
+  const ativa = evolucao==="ativa";
+  let grav, passo;
+  if(has("risco")){ grav="ALTA"; }
+  else if(estrutural && ativa){ grav="ALTA"; }
+  else if(ativa || (abertura!=null && abertura>LIMITE_WK)){ grav="MEDIA"; }
+  else { grav="BAIXA"; }
+
+  if(grav==="ALTA") passo = {t:"Encaminhamento — gravidade ALTA", d:"Isole a área se houver risco, escore apenas se for seguro, comunique o responsável técnico POR ESCRITO e acione o calculista. Documente tudo (mapa + fotos + datas). <b>Em risco iminente à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b>"};
+  else if(grav==="MEDIA") passo = {t:"Encaminhamento — gravidade MÉDIA", d:"Trate a CAUSA (não só o acabamento) e mantenha monitoramento. Reavalie em nova data e registre a evolução."};
+  else passo = {t:"Encaminhamento — gravidade BAIXA", d:"Monitore e registre (selo de gesso datado). Reavalie na próxima visita. Sem sinais novos, siga o acompanhamento."};
+
+  if(evolucao==="naomonit") passo.d += " Como você ainda não monitorou, o primeiro passo é instalar o selo de gesso datado e medir a abertura.";
+
+  renderResultado(hip,grav,estrutural,ativa,passo);
+}
+
+function renderResultado(hip,grav,estrutural,ativa,passo){
+  document.getElementById("bar").style.width="100%";
+  document.getElementById("nav").classList.add("hidden");
+  const gtxt = grav==="MEDIA"?"MÉDIA":grav;
+  const resumo = `Diagnostico Escola de Obra: gravidade ${gtxt}. Hipotese: ${hip[0][0]}. ${estrutural?"Origem possivelmente estrutural.":""} ${ativa?"Fissura ativa.":""}`;
+  const shareTxt = encodeURIComponent(resumo + " — Diagnostico Interativo de Fissuras (engenhariagd.com.br)");
+  let html = `<div class="result-head"><div class="step-lbl">Resultado do diagnóstico</div>
+    <span class="grav g-${grav}">Gravidade ${gtxt}</span></div>
+    <p style="text-align:center;font-size:.86rem;color:var(--cinza);margin:8px 0 4px">
+      ${estrutural?"Origem possivelmente <b>estrutural</b>":"Origem provavelmente <b>não estrutural</b>"} ·
+      ${ativa?"fissura <b>ativa</b>":"atividade a confirmar"}</p>
+    <div class="step-lbl" style="margin-top:12px">Hipóteses prováveis (por ordem)</div>`;
+  hip.forEach(h=> html += `<div class="hip"><b>${h[0]}</b><br><span style="font-size:.86rem">${h[1]}</span></div>`);
+  html += `<div class="passo"><div class="t">${passo.t}</div><div>${passo.d}</div></div>`;
+  html += `<div class="disc"><b>Aviso técnico:</b> este resultado é uma <b>hipótese de campo</b> gerada por regras educativas, com calibragem conservadora.
+    Não substitui a avaliação presencial de um engenheiro habilitado. Confirme sempre com medição e monitoramento; havendo
+    sinal de risco, acione o responsável técnico imediatamente. <b>Em risco iminente à segurança das pessoas, acione a Defesa Civil (199) ou o Corpo de Bombeiros (193).</b> Valores de referência a validar (VALIDAR.md).</div>`;
+  html += `<div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${shareTxt}" target="_blank" rel="noopener">📲 Compartilhar resultado</a></div>`;
+  html += `<div class="row"><button class="btn btn-ghost" onclick="restart()">↺ Novo diagnóstico</button></div>`;
+  if(MODE==="LITE"){
+    html += liteCTA();
+  } else {
+    html += `<div class="row"><div style="font-size:13px;line-height:1.5;padding:12px;border:1px solid rgba(201,162,75,.45);border-radius:8px;text-align:left">📓 <b>Registre este caso no seu caderno de campo</b>: foto com escala, medições, hipótese e encaminhamento. Depois, confira sua leitura com o gabarito comentado do módulo.</div></div>`;
+  }
+  html += `<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
+  document.getElementById("wizard").innerHTML = html;
+}
+function restart(){ cur=0; for(const k in ans) delete ans[k]; ans.sinais=[]; document.getElementById("nav").classList.remove("hidden"); renderStep(); }
+
+function liteCTA(){
+  return `<div class="cta"><h3>Quer o método completo?</h3>
+    <p>Esta é a versão pública. No curso <b>Diagnóstico de Fissuras e Trincas</b> você recebe a ferramenta PRO,
+    a planilha de monitoramento, o checklist e o modelo de laudo blindado.</p>
+    <label class="lgpd"><input type="checkbox" id="consent" onchange="document.getElementById('leadBtn').classList.toggle('locked',!this.checked)">
+      Autorizo o contato pela Escola de Obra pelo WhatsApp sobre o curso. Nenhum dado é coletado ou armazenado por esta página; o contato só acontece se eu clicar no botão abaixo (LGPD).</label>
+    <a id="leadBtn" class="btn btn-wpp locked" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Fiz o diagnostico gratuito de fissuras e quero saber do curso da Escola de Obra.')}" target="_blank" rel="noopener">Quero conhecer o curso</a>
+  </div>`;
+}
+
+/* ---------- Banco de cenários do Quiz ---------- */
+const CENARIOS = [
+  {foto:"Fissura ~45° saindo do canto superior de uma janela",
+   q:"Qual a hipótese mais provável?",
+   ops:["Falha de pintura","Concentração de tensão no canto (movimentação)","Sempre corrosão de armadura","Umidade ascendente"],
+   c:1, exp:"Cantos de abertura concentram tensão; a fissura escapa a ~45°. É hipótese, confirma-se com medição/monitoramento."},
+  {foto:"Fissura vertical no meio do vão, na face inferior de uma viga",
+   q:"Que esforço essa fissura sugere?",
+   ops:["Cisalhamento","Flexão (tração inferior)","Torção pura","Retração plástica"],
+   c:1, exp:"No meio do vão a fibra inferior traciona; concreto fissura à tração. Julgue por largura + quantidade + flecha."},
+  {foto:"Fissura inclinada junto ao apoio da viga, sobre o pilar",
+   q:"Associa-se mais provavelmente a:",
+   ops:["Flexão no meio do vão","Retração do reboco","Cisalhamento (cortante)","Umidade"],
+   c:2, exp:"Cortante é máximo nos apoios; a fissura surge inclinada. Pode ser mais brusca — monitorar e comunicar já."},
+  {foto:"Fissuração em malha (craquelê) no reboco de um muro de jardim",
+   q:"Conduta mais adequada:",
+   ops:["Cravar 'reação álcali-agregado' e alarmar","Ignorar sempre","Tratar como retração superficial (acabamento), após checar aderência","Demolir a parede"],
+   c:2, exp:"Craquelê em acabamento costuma ser retração superficial. RAA só se investiga em concreto estrutural, por ensaio."},
+  {foto:"Fissura diagonal + porta emperrando + piso caído no mesmo trecho",
+   q:"O conjunto aponta para:",
+   ops:["Flexão de laje","Recalque diferencial","Falha de pintura","Retração plástica"],
+   c:1, exp:"Diagonais concordantes + esquadria travando + piso desnivelado = recalque diferencial. Investigar o solo (NBR 6122:2019)."},
+  {foto:"Fissura horizontal na base da parede com pó branco (eflorescência)",
+   q:"Causa provável e ordem de tratamento:",
+   ops:["Estrutura; pintar por cima","Umidade ascendente; tratar a origem antes do acabamento","Cisalhamento; injetar resina","Flexão; escorar"],
+   c:1, exp:"Fissura horizontal + eflorescência na base = água subindo. Trate a origem antes de recuperar a cara."},
+  {foto:"Selo de gesso aplicado sobre a fissura, rompido na visita seguinte",
+   q:"O que isso indica?",
+   ops:["Fissura estabilizada","Fissura ATIVA (em movimento)","Erro de medição","Nada"],
+   c:1, exp:"Selo rompido = a fissura se movimentou no período = ATIVA. Muda a gravidade e o encaminhamento."},
+  {foto:"Fissura fina, antiga, empoeirada, com a pintura acompanhando a borda",
+   q:"Leitura mais provável:",
+   ops:["Recalque ativo e perigoso","Provavelmente estabilizada (cicatriz antiga) — confirmar por monitoramento","Sempre estrutural","Umidade"],
+   c:1, exp:"Borda arredondada/suja e pintura acompanhando sugerem fissura antiga. Não deixe o tamanho assustar; a atividade informa."},
+  {foto:"Viga com fissura no meio do vão e barriga (flecha) visível",
+   q:"O que a flecha acrescenta ao diagnóstico?",
+   ops:["Nada","Eleva a prioridade — flexão com deformação excessiva","Prova que é umidade","Indica retração"],
+   c:1, exp:"Fissura de flexão + flecha eleva a prioridade e pode exigir o calculista. Julgue pelo trio, não pela largura sozinha."},
+  {foto:"Parede com várias fissuras de tipos diferentes, sem registro",
+   q:"Primeiro passo do profissional:",
+   ops:["Dar veredito imediato no olho","Montar o mapa fissuratório (numerar, medir, datar) e achar o padrão dominante","Pintar tudo","Ignorar as menores"],
+   c:1, exp:"O mapa revela o padrão dominante e vira prova documental. Diagnóstico de conjunto, nunca de uma fissura só."}
+];
+const N_LITE = 3;
+let qi=0, qscore=0, qansw=false;
+function quizPool(){ return MODE==="LITE" ? CENARIOS.slice(0,N_LITE) : CENARIOS; }
+function renderQuiz(){
+  const pool=quizPool();
+  if(qi>=pool.length){ return renderQuizEnd(pool.length); }
+  const c=pool[qi]; qansw=false;
+  let html=`<div class="step-lbl">Cenário ${qi+1} de ${pool.length} · pontuação ${qscore}</div>
+    <div class="foto">[FOTO DO ACERVO: ${c.foto}]</div><h2 style="font-size:1.02rem">${c.q}</h2><div class="opts" id="qops">`;
+  c.ops.forEach((o,i)=> html+=`<div class="opt" onclick="answer(${i})"><span class="k">${String.fromCharCode(65+i)}</span>${o}</div>`);
+  html+=`</div><div id="qfb"></div><div class="row hidden" id="qnav"><button class="btn btn-primary" onclick="nextQ()">${qi===pool.length-1?"Ver resultado":"Próximo cenário"}</button></div>`;
+  document.getElementById("quizBox").innerHTML=html;
+}
+function answer(i){
+  if(qansw) return; qansw=true;
+  const pool=quizPool(); const c=pool[qi];
+  const ops=document.querySelectorAll("#qops .opt");
+  ops.forEach((el,idx)=>{ el.style.pointerEvents="none";
+    if(idx===c.c) el.classList.add("sel");
+  });
+  const ok=i===c.c; if(ok) qscore++;
+  document.getElementById("qfb").innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'✔ Correto!':'✗ Não é a melhor escolha.'}</b><br>${c.exp}</div>`;
+  document.getElementById("qnav").classList.remove("hidden");
+}
+function nextQ(){ qi++; renderQuiz(); }
+function renderQuizEnd(total){
+  const shareTxt=encodeURIComponent(`Fiz ${qscore}/${total} no Quiz de Diagnóstico de Fissuras da Escola de Obra!`);
+  let html=`<div class="result-head"><div class="step-lbl">Resultado do quiz</div>
+    <div class="score">${qscore}/${total}</div>
+    <p style="color:var(--cinza);font-size:.9rem">${qscore===total?"Olho de perito! 👏":qscore>=Math.ceil(total*0.7)?"Muito bom — quase lá.":"Bom começo — revise o Módulo de Ouro."}</p></div>
+    <div class="row"><a class="btn btn-wpp" href="https://wa.me/?text=${shareTxt}" target="_blank" rel="noopener">📲 Compartilhar</a>
+    <button class="btn btn-ghost" onclick="qi=0;qscore=0;renderQuiz()">↺ Refazer</button></div>`;
+  if(MODE==="LITE"){
+    html+=`<div class="cta"><h3>Estes são 3 de 10 cenários</h3><p>A versão PRO do curso traz os 10 cenários com fotos reais, o diagnóstico completo e o Kit Diamante.</p>
+      <a class="btn btn-wpp" href="https://wa.me/${WA_INSTRUTOR}?text=${encodeURIComponent('Ola! Fiz o quiz gratuito de fissuras e quero o curso completo.')}" target="_blank" rel="noopener">Quero o curso completo</a></div>`;
+  }
+  html+=`<div class="selo"><div class="lz"><span>GD</span></div> Padrão Diamante — o rigor de quem assina</div>`;
+  document.getElementById("quizBox").innerHTML=html;
+}
+
+/* init */
+renderStep();
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Guia de Bolso — Fissuras e Trincas — Escola de Obra</title>
+<style>
+:root{--verde:#0E3A34;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;
+--carvao:#20211E;--cinza:#6B6B63;--verd:#2E7D32;--amar:#F9A825;--verm:#C62828;}
+@page{size:90mm 160mm;margin:0;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--carvao);
+background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9.5px;line-height:1.35;}
+.page{width:90mm;height:160mm;page-break-after:always;position:relative;overflow:hidden;padding:0;}
+.page:last-child{page-break-after:auto;}
+.hd{background:var(--verde);color:var(--creme);padding:8px 10px;border-bottom:3px solid var(--dour);}
+.hd h1{font-family:Georgia,serif;font-size:14px;margin:0;color:var(--creme);}
+.hd h2{font-family:Georgia,serif;font-size:12.5px;margin:0;color:var(--creme);}
+.hd .s{color:var(--dour2);font-size:7px;letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+.bd{padding:8px 10px;}
+h3{font-family:Georgia,serif;color:var(--verde);font-size:11px;margin:8px 0 3px;border-left:3px solid var(--dour);padding-left:6px;}
+table{width:100%;border-collapse:collapse;font-size:8px;margin:3px 0;}
+th{background:var(--vmed);color:#fff;text-align:left;padding:3px 4px;}
+td{padding:3px 4px;border-bottom:1px solid #e3dcc7;vertical-align:top;}
+tr:nth-child(even) td{background:var(--creme2);}
+.norma{font-family:'Courier New',monospace;font-size:7px;color:var(--vmed);}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:middle;margin-right:3px;}
+.dv{background:var(--verd);}.da{background:var(--amar);}.dm{background:var(--verm);}
+.chip{display:inline-block;background:var(--creme);border:1px solid var(--dour);border-radius:10px;padding:1px 6px;font-size:7.5px;margin:1px;}
+.tag{background:var(--verde);color:var(--creme);border-radius:3px;padding:1px 5px;font-size:7.5px;}
+.note{background:var(--creme2);border-left:3px solid var(--dour);padding:5px 7px;font-size:8px;margin:5px 0;}
+.foot{position:absolute;bottom:0;left:0;right:0;background:var(--verde);color:var(--dour2);font-size:6.5px;
+text-align:center;padding:3px;}
+.big{font-size:10px;font-weight:700;color:var(--verde);}
+.cover{background:var(--verde);color:var(--creme);height:160mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:14px;}
+.cover .lz{width:46px;height:46px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;margin-bottom:14px;}
+.cover .lz span{transform:rotate(-45deg);}
+.cover h1{font-family:Georgia,serif;font-size:20px;margin:0 0 6px;color:var(--creme);}
+.cover p{color:var(--dour2);font-size:9px;margin:2px 0;}
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="page">
+  <div class="cover">
+    <div class="lz"><span>GD</span></div>
+    <h1>Guia de Bolso<br>Fissuras &amp; Trincas</h1>
+    <p>Consulta rápida de campo</p>
+    <p style="margin-top:18px;">Escola de Obra · Padrão Diamante</p>
+    <p>GD Engenharia e Perícia</p>
+    <p style="margin-top:18px;font-size:7.5px;color:#cdbd8e;">Revisado e assinado por Gustavo Domingos<br>Eng. Civil · CREA-PR 140.964-D</p>
+  </div>
+</div>
+
+<!-- P1: leitura do desenho -->
+<div class="page">
+  <div class="hd"><h2>1 · A fissura fala: leitura do desenho</h2><div class="s">origem provável pela geometria</div></div>
+  <div class="bd">
+    <table>
+      <tr><th>Desenho</th><th>Origem provável</th><th>Ref.</th></tr>
+      <tr><td>Diagonal ~45° saindo de canto de porta/janela</td><td>Concentração de tensão no canto (movimentação)</td><td class="norma">NBR 6118:2023</td></tr>
+      <tr><td>Vertical no meio do vão da viga (face inferior)</td><td>Flexão (tração inferior)</td><td class="norma">NBR 6118:2023</td></tr>
+      <tr><td>Inclinada perto do apoio da viga</td><td>Cisalhamento (cortante)</td><td class="norma">NBR 6118:2023</td></tr>
+      <tr><td>Malha/craquelê</td><td>Retração superficial · investigar RAA se estrutural</td><td class="norma">lit. patologia</td></tr>
+      <tr><td>Diagonal que "abre p/ cima", esquadrias travando, piso caído</td><td>Recalque diferencial</td><td class="norma">NBR 6122:2019</td></tr>
+      <tr><td>Horizontal na base + pó branco</td><td>Umidade ascendente (eflorescência)</td><td class="norma">NBR 9575:2010</td></tr>
+      <tr><td>Horizontal no topo (encontro c/ laje)</td><td>Expansão de bloco / interface</td><td class="norma">lit. patologia</td></tr>
+    </table>
+    <div class="note">Regra de ouro: <b>o desenho dá a hipótese; a medição + o monitoramento dão o diagnóstico.</b> Nunca cravar causa só pela foto.</div>
+  </div>
+  <div class="foot">Escola de Obra · valores a confirmar (VALIDAR.md)</div>
+</div>
+
+<!-- P2: medir e classificar -->
+<div class="page">
+  <div class="hd"><h2>2 · Medir e classificar</h2><div class="s">instrumento certo, número anotado</div></div>
+  <div class="bd">
+    <h3>Instrumentos</h3>
+    <span class="chip">Fissurômetro / régua</span><span class="chip">Paquímetro</span><span class="chip">Trena</span>
+    <span class="chip">Lanterna (luz rasante)</span><span class="chip">Câmera + escala</span><span class="chip">Selo de gesso</span>
+    <h3>Classificação por abertura <span class="tag">convenção do curso</span></h3>
+    <table>
+      <tr><th>Termo</th><th>Faixa (convenção)</th></tr>
+      <tr><td>Fissura</td><td>[VALIDAR B2] — confirmar faixa</td></tr>
+      <tr><td>Trinca</td><td>[VALIDAR B2]</td></tr>
+      <tr><td>Rachadura</td><td>[VALIDAR B2]</td></tr>
+      <tr><td>Fenda / brecha</td><td>[VALIDAR B2]</td></tr>
+    </table>
+    <div class="note">⚠️ Não há NBR única fixando as faixas. Apresentar como <b>convenção adotada</b>, nunca como norma. Confirmar valores com o instrutor.</div>
+    <h3>Abertura de referência (serviço)</h3>
+    <p style="font-size:8px;">w<sub>k</sub> — NBR 6118:2023 (Tab. 13.4): da ordem de <b>0,2 a 0,4&nbsp;mm</b> conforme a classe de agressividade ambiental. <span class="norma">[VALIDAR B1 — confirmar classe e valor]</span></p>
+  </div>
+  <div class="foot">Meça no ponto mais largo. Anote mm + data + foto.</div>
+</div>
+
+<!-- P3: ativa ou estabilizada + gravidade -->
+<div class="page">
+  <div class="hd"><h2>3 · Ativa ou estabilizada? Gravidade</h2><div class="s">o veredito</div></div>
+  <div class="bd">
+    <h3>Selo de gesso</h3>
+    <p style="font-size:8px;">Aplique sobre a fissura, date. <b>Rompeu/trincou = ATIVA.</b> Íntegro após o período = estabilizada. Instale em 2+ fissuras representativas.</p>
+    <h3>Semáforo de gravidade</h3>
+    <table>
+      <tr><th>Nível</th><th>Quando</th><th>Ação</th></tr>
+      <tr><td><span class="dot dm"></span>ALTA</td><td>Risco imediato, OU origem estrutural + ativa</td><td>Escorar/interditar + calculista</td></tr>
+      <tr><td><span class="dot da"></span>MÉDIA</td><td>Ativa (não estrutural) ou abertura &gt; w<sub>k</sub></td><td>Tratar a causa + monitorar</td></tr>
+      <tr><td><span class="dot dv"></span>BAIXA</td><td>Estabilizada, fina, sem risco</td><td>Monitorar e registrar</td></tr>
+    </table>
+    <div class="note big">Sinais de risco imediato: esmagamento, som ao carregar, deslocamento relativo, flecha excessiva, queda de material → EMERGÊNCIA.</div>
+  </div>
+  <div class="foot">Grande e parada = história. Pequena e viva = presente.</div>
+</div>
+
+<!-- P4: os 5 erros + CTA -->
+<div class="page">
+  <div class="hd"><h2>4 · Os 5 erros que expõem você</h2><div class="s">e o que fazer no lugar</div></div>
+  <div class="bd">
+    <table>
+      <tr><th>Erro</th><th>No lugar</th></tr>
+      <tr><td>Dar veredito só no olho</td><td>Medir + monitorar + datar</td></tr>
+      <tr><td>Tratar sintoma (pintar por cima)</td><td>Tratar a causa raiz</td></tr>
+      <tr><td>Culpar a estrutura sem checar</td><td>Descartar umidade/recalque antes</td></tr>
+      <tr><td>Prometer "resolvido"</td><td>Descrever capacidade e recomendação</td></tr>
+      <tr><td>Não registrar</td><td>Mapa fissuratório + fotos com data</td></tr>
+    </table>
+    <div class="note">Documente como se um dia fosse ter que provar — porque um dia você vai. Todo caso vira <b>relatório blindado</b> (Kit).</div>
+    <h3>Precisa de ajuda?</h3>
+    <p style="font-size:8px;">engenhariagd.com.br</p>
+  </div>
+  <div class="foot">Revisado e assinado — Gustavo Domingos · CREA-PR 140.964-D</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Gera todos os PDFs do Kit de Fundações (Curso 2) a partir dos HTML/MD (Chromium headless, offline).
+set -euo pipefail
+DIR="$(cd "$(dirname "$0")" && pwd)"
+K="$DIR/../04-curso-fundacoes/kit"
+H2P="$DIR/html2pdf.sh"
+
+# E-book: markdown -> HTML diagramado (capa + estilo GD)
+python3 - "$K/ebook/historias-fundacoes.md" "$K/ebook/historias-fundacoes.html" <<'PY'
+import markdown, sys
+src, out = sys.argv[1], sys.argv[2]
+raw = open(src, encoding="utf-8").read()
+body = markdown.markdown(raw.split("\n",1)[1], extensions=["extra","sane_lists"])
+CSS=""":root{--verde:#0E3A34;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;}
+@page{size:A5;margin:14mm 13mm;}*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+body{font-family:Georgia,serif;color:var(--carvao);font-size:11px;line-height:1.55;-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#fff;}
+.cover{background:var(--verde);color:var(--creme);min-height:180mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;page-break-after:always;margin:-14mm -13mm 0;}
+.cover .lz{width:60px;height:60px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;margin-bottom:22px;}.cover .lz span{transform:rotate(-45deg);}
+.cover h1{font-family:Georgia,serif;font-size:28px;margin:0 0 10px;color:var(--creme);line-height:1.1;}.cover .sub{color:var(--dour2);font-size:11px;}.cover .foot{margin-top:30px;font-size:9px;color:#cdbd8e;}
+h2{font-family:Georgia,serif;color:var(--verde);font-size:15px;margin:18px 0 6px;padding-bottom:3px;border-bottom:2px solid var(--dour);page-break-after:avoid;}h1{display:none;}
+p{margin:6px 0;}strong{color:var(--vmed);}blockquote{background:var(--creme2);border-left:4px solid var(--dour);margin:10px 0;padding:8px 14px;font-size:10.5px;color:#333;}blockquote strong{color:var(--verde);}
+code{font-family:'Courier New',monospace;font-size:9.5px;background:#eee7d3;color:var(--vmed);padding:1px 3px;border-radius:2px;}hr{border:none;border-top:1px solid var(--dour);margin:14px 0;}.wm{font-size:8px;color:var(--cinza);text-align:center;margin-top:8px;}"""
+html=f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Histórias Reais de Obra — Fundações</title><style>{CSS}</style></head><body>
+<div class="cover"><div class="lz"><span>GD</span></div><h1>Histórias Reais<br>de Obra</h1><div class="sub">Fundações — 10 relatos baseados em situações reais recorrentes</div>
+<div class="foot">Escola de Obra · Padrão Diamante<br>GD Engenharia e Perícia<br><br>Revisado e assinado por Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D</div></div>
+{body}
+<p class="wm">Cenários ilustrativos baseados em situações reais recorrentes (N1). Fotos do acervo a inserir (N2). Nada publicado como caso específico sem confirmação (N3).</p></body></html>"""
+open(out,"w",encoding="utf-8").write(html); print("ebook html ok")
+PY
+
+bash "$H2P" "$K/checklist/checklist-fundacoes.html" "$K/checklist/checklist-fundacoes-a4.pdf"
+sed 's/size:A4/size:A5/' "$K/checklist/checklist-fundacoes.html" > /tmp/ckf-a5.html
+bash "$H2P" /tmp/ckf-a5.html "$K/checklist/checklist-fundacoes-a5.pdf"
+bash "$H2P" "$K/guia-bolso/guia-bolso-fundacoes.html" "$K/guia-bolso/guia-bolso-fundacoes.pdf"
+bash "$H2P" "$K/ebook/historias-fundacoes.html" "$K/ebook/historias-fundacoes.pdf"
+bash "$H2P" "$K/apostila/apostila-fundacoes.html" "$K/apostila/apostila-fundacoes.pdf"
+bash "$H2P" "$K/relatorio/parecer-fundacao.html" "$K/relatorio/parecer-fundacao.pdf"
+echo "== PDFs do Kit de Fundações gerados =="
+echo "(fluxograma: gerar SVG com mermaid-cli e converter — ver README/RELATORIO-QA)"

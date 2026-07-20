@@ -1,0 +1,48 @@
+%% Fluxograma de Decisão — Escolha de Fundação (triagem)
+%% Escola de Obra · Padrão Diamante. Fonte editável (Mermaid).
+%% Triagem do júnior. A escolha e o dimensionamento FINAIS são do projetista de fundações (NBR 6122:2019).
+flowchart TD
+    A([Início: definir fundação]) --> B{Existe sondagem SPT?<br/>NBR 6484:2020}
+    B -- NÃO --> B1[/EXIGIR sondagem antes de decidir<br/>Sem o mapa do solo, é aposta/]
+    B -- SIM --> C[Ler o perfil: camada resistente e NA<br/>Levantar cargas e restrições da obra]
+    C --> D{Camada resistente perto da superfície<br/>e carga compatível?}
+    D -- SIM --> E[Família: FUNDAÇÃO RASA<br/>sapata / bloco / radier]
+    D -- NÃO / topo mole / carga alta --> F[Família: FUNDAÇÃO PROFUNDA<br/>estacas / tubulões]
+    D -- Zona cinzenta --> Z[/Levar ao projetista<br/>desempate pelo custo da FALHA/]
+
+    E --> E1{Pilar na divisa / muito próximo?}
+    E1 -- SIM --> E2[Sapata associada / alavancada<br/>viga de equilíbrio]
+    E1 -- NÃO --> E3[Sapata isolada / corrida / radier<br/>conforme cargas]
+
+    F --> G{Vizinhança sensível<br/>risco de trepidação?}
+    G -- SIM --> G1[Sem impacto:<br/>hélice contínua / escavada]
+    G -- NÃO --> G2[Cravadas ou hélice<br/>conforme carga]
+    F --> H{Nível d'água alto?}
+    H -- SIM --> H1[Cautela com tubulão a céu aberto<br/>avaliar métodos p/ água]
+    F --> I{Acesso restrito?}
+    I -- SIM --> I1[Estaca raiz / Strauss<br/>equipamento menor]
+
+    E2 --> P[Projetista de fundações:<br/>DEFINE tipo, DIMENSIONA e ASSINA]
+    E3 --> P
+    G1 --> P
+    G2 --> P
+    H1 --> P
+    I1 --> P
+    Z --> P
+    P --> Q([Executar conforme projeto<br/>fiscalizar + provas de carga + registrar<br/>NBR 6489 / 12131 / 16903])
+    B1 --> C
+
+    classDef exigir fill:#C62828,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+    classDef rasa fill:#D9EAD3,stroke:#2E7D32,color:#1b4d1f,stroke-width:1.5px;
+    classDef prof fill:#CFE2F3,stroke:#3d85c6,color:#0b3d66,stroke-width:1.5px;
+    classDef cinza fill:#FFF2CC,stroke:#F9A825,color:#7a5b00,stroke-width:1.5px;
+    classDef base fill:#0E3A34,stroke:#C9A24B,color:#F5EFE0,stroke-width:2px;
+    classDef dec fill:#F5EFE0,stroke:#1C5A4E,color:#0E3A34,stroke-width:1.5px;
+    classDef proj fill:#C9A24B,stroke:#0E3A34,color:#0E3A34,stroke-width:2px;
+    class A,Q base;
+    class B,D,E1,G,H,I dec;
+    class B1 exigir;
+    class E,E2,E3 rasa;
+    class F,G1,G2,H1,I1 prof;
+    class Z cinza;
+    class P proj;

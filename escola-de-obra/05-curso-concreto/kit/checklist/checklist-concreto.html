@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Checklist de Recebimento de Concreto — Escola de Obra</title>
+<style>
+:root{--verde:#0E3A34;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;--verm:#C62828;}
+@page{size:A4;margin:11mm 12mm;}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--carvao);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11px;line-height:1.4;}
+h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--verde);margin:0;}
+.faixa{background:var(--verde);color:var(--creme);padding:14px 16px;border-bottom:4px solid var(--dour);display:flex;justify-content:space-between;align-items:center;}
+.faixa h1{color:var(--creme);font-size:16px;} .faixa .sub{color:var(--dour2);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;}
+.losango{width:38px;height:38px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;} .losango span{transform:rotate(-45deg);font-size:12px;}
+.ident{padding:10px 16px;background:var(--creme2);border-bottom:1px solid #e3dcc7;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 16px;font-size:10px;}
+.ident .campo{border-bottom:1px solid var(--cinza);min-height:15px;} .ident label{color:var(--cinza);font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;display:block;}
+.wrap{padding:8px 16px 14px;}
+h2.sec{font-size:12px;background:var(--vmed);color:#fff;padding:4px 9px;margin:12px 0 0;border-radius:3px 3px 0 0;}
+table{width:100%;border-collapse:collapse;font-size:9.6px;} thead th{background:var(--verde);color:var(--creme);text-align:left;padding:4px 6px;font-weight:600;}
+tbody td{padding:4px 6px;border-bottom:1px solid #e3dcc7;vertical-align:top;} tbody tr:nth-child(even){background:var(--creme2);}
+.n{width:20px;text-align:center;color:var(--cinza);font-weight:700;} .crit{width:34%;} .norma{width:17%;font-family:'Courier New',monospace;font-size:8.4px;color:var(--vmed);} .ccol{width:74px;text-align:center;}
+.box{display:inline-block;width:12px;height:12px;border:1.4px solid var(--verde);border-radius:2px;margin:0 3px;vertical-align:middle;}
+.leg{font-size:8.5px;color:var(--cinza);} .nota{font-size:9px;color:var(--verm);font-weight:700;margin:4px 0 0;}
+.assin{margin-top:14px;padding:9px 16px;border-top:2px solid var(--dour);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;}
+.assin .linha{flex:1;border-top:1px solid var(--carvao);padding-top:3px;font-size:8.5px;color:var(--cinza);text-align:center;}
+.selo{border:1.6px solid var(--dour);color:var(--dour);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:3px;text-align:center;max-width:210px;}
+.rodape{font-size:8px;color:var(--cinza);text-align:center;padding:2px 16px 8px;}
+</style>
+</head>
+<body>
+  <div class="faixa">
+    <div><h1>Checklist de Recebimento de Concreto</h1><div class="sub">Escola de Obra · Padrão Diamante · GD Engenharia e Perícia</div></div>
+    <div class="losango"><span>GD</span></div>
+  </div>
+  <div class="ident">
+    <div><label>Obra</label><div class="campo"></div></div>
+    <div><label>Data / Peça concretada</label><div class="campo"></div></div>
+    <div><label>NF nº / Central</label><div class="campo"></div></div>
+    <div><label>fck pedido (MPa) / Classe</label><div class="campo"></div></div>
+    <div><label>Slump pedido (mm) ± tol.</label><div class="campo"></div></div>
+    <div><label>Responsável pelo recebimento</label><div class="campo"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="leg"><b>Como preencher:</b> <span class="box"></span> Conforme · <span class="box"></span> Não Conforme · <span class="box"></span> Não Aplicável. Um checklist por caminhão (a planilha consolida a obra).</p>
+
+    <h2 class="sec">1. Nota fiscal (antes de qualquer descarga)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério de aceitação (objetivo)</th><th class="norma">Norma/ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">1</td><td>fck e classe</td><td>Iguais ao pedido/projeto (classe NBR 8953)</td><td class="norma">NBR 8953 · 12655</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">2</td><td>Slump especificado</td><td>Igual ao pedido</td><td class="norma">NBR 7212:2021</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">3</td><td>Brita / tipo de uso (bombeável?)</td><td>Conforme pedido (dimensão do agregado, uso)</td><td class="norma">Pedido</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">4</td><td>Horário da adição de água</td><td>Informado na nota e ANOTADO</td><td class="norma">NBR 7212:2021</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">2. Tempo (o relógio da química)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Norma/ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">5</td><td>Tempo decorrido na chegada</td><td>Compatível com completar a descarga dentro do limite</td><td class="norma">NBR 7212:2021 [VALIDAR F2]</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">6</td><td>Projeção do fim da descarga</td><td>Fim estimado ≤ tempo-limite (considerando bomba/equipe)</td><td class="norma">NBR 7212:2021</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">3. Ensaio de abatimento (slump test)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Norma/ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">7</td><td>Amostra representativa</td><td>Colhida do meio da descarga, recipiente umedecido</td><td class="norma">NBR 16889:2020</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">8</td><td>Execução do ensaio</td><td>Placa nivelada; 3 camadas; 25 golpes/camada; saque vertical; leitura imediata</td><td class="norma">NBR 16889:2020</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">9</td><td>Resultado vs. tolerância</td><td>Dentro da faixa do pedido (NBR 7212:2021) — registrar valor + foto</td><td class="norma">NBR 7212:2021 [VALIDAR F4]</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">10</td><td>Aspecto do concreto</td><td>Homogêneo, coeso; sem segregação/pelotas/início de pega</td><td class="norma">NBR 12655:2022</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">4. Veredito, água e corpos de prova</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Norma/ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">11</td><td>NENHUMA água adicionada na obra</td><td>Ajuste só por aditivo dosado pela central + novo ensaio</td><td class="norma">NBR 7212:2021 [VALIDAR F5]</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">12</td><td>CPs moldados e identificados</td><td>Qtde conforme plano de amostragem; moldagem em camadas normalizadas; id única</td><td class="norma">NBR 5738:2015 · 12655 [VALIDAR F7]</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">13</td><td>Cura inicial dos CPs protegida</td><td>Local plano, sombreado, sem vibração; transferência p/ cura úmida no prazo</td><td class="norma">NBR 5738:2015</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">14</td><td>Registro completo do caminhão</td><td>NF arquivada + horários + slump + fotos + veredito assinado</td><td class="norma">Dossiê da obra</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+    <p class="nota">⚠️ NC nos itens 1–4 (nota), 5–6 (tempo) ou 9–11: NÃO descarregar sem resolver — aplicar o fluxograma aceitar/corrigir/recusar.</p>
+
+    <div class="assin">
+      <div class="selo">Revisado e assinado por<br>Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D</div>
+      <div class="linha">Responsável pelo recebimento — assinatura / CREA</div>
+      <div class="linha">Hora início / fim da descarga</div>
+    </div>
+    <p class="rodape">Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br — Aceitação provisória (NBR 12655:2022); a definitiva vem dos ensaios (NBR 5739:2018).</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Apostila — Inspeção de Serviços Críticos — Escola de Obra</title>
+<style>
+:root{--verde:#0E3A34;--vesc:#0A2A25;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;--amar:#F9A825;}
+@page{size:A4;margin:18mm 16mm 20mm;} *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{font-family:Georgia,'Times New Roman',serif;color:var(--carvao);font-size:11px;line-height:1.6;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+h1,h2,h3,h4{font-family:Georgia,serif;color:var(--verde);line-height:1.2;} p{margin:7px 0;} strong{color:var(--vmed);}
+.pfoot{position:fixed;bottom:-14mm;left:0;right:0;text-align:center;font-family:-apple-system,Arial,sans-serif;font-size:7.5px;color:var(--cinza);border-top:1px solid var(--dour);padding-top:3px;} .pfoot b{color:var(--verde);}
+.capa{height:245mm;background:linear-gradient(160deg,var(--verde),var(--vesc));color:var(--creme);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;margin:-18mm -16mm 0;padding:30px;page-break-after:always;}
+.capa .lz{width:74px;height:74px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px;margin-bottom:26px;} .capa .lz span{transform:rotate(-45deg);}
+.capa h1{font-size:32px;color:var(--creme);margin:0 0 8px;line-height:1.05;} .capa .sub{font-size:14px;color:var(--dour2);font-style:italic;margin-bottom:26px;}
+.capa .selo{border:2px solid var(--dour);color:var(--dour2);font-family:-apple-system,Arial,sans-serif;font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:3px;}
+.capa .autor{margin-top:40px;font-size:11px;color:#d8c99b;} .capa .autor b{color:var(--creme);}
+.mod{background:var(--verde);color:var(--creme);padding:12px 16px;border-left:6px solid var(--dour);margin:0 -16mm 12px;page-break-before:always;page-break-after:avoid;}
+.mod .ep{font-family:-apple-system,Arial,sans-serif;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dour2);} .mod h2{color:var(--creme);margin:2px 0 0;font-size:19px;}
+h3{font-size:14px;margin:16px 0 4px;border-bottom:1px solid #e3dcc7;padding-bottom:2px;page-break-after:avoid;} h4{font-size:12px;color:var(--vmed);margin:11px 0 2px;}
+table{width:100%;border-collapse:collapse;font-family:-apple-system,Arial,sans-serif;font-size:9.5px;margin:8px 0;} thead th{background:var(--verde);color:var(--creme);text-align:left;padding:5px 7px;} tbody td{padding:5px 7px;border-bottom:1px solid #e3dcc7;vertical-align:top;} tbody tr:nth-child(even){background:var(--creme2);}
+.norma{background:rgba(28,90,78,.10);border-left:4px solid var(--vmed);padding:7px 11px;font-family:'Courier New',monospace;font-size:9px;margin:9px 0;}
+.mestre{background:var(--creme2);border-left:4px solid var(--dour);padding:9px 13px;margin:11px 0;font-family:-apple-system,Arial,sans-serif;font-size:10px;} .mestre b{color:var(--verde);}
+.obj{background:rgba(201,162,75,.10);border:1px solid var(--dour);border-radius:5px;padding:10px 14px;margin:10px 0;font-family:-apple-system,Arial,sans-serif;font-size:10px;}
+.validar{background:rgba(249,168,37,.12);border-left:4px solid var(--amar);padding:6px 11px;font-family:-apple-system,Arial,sans-serif;font-size:9px;color:#7a5b00;margin:8px 0;}
+.foto{background:repeating-linear-gradient(45deg,#e8e1cf,#e8e1cf 10px,#ded6c0 10px,#ded6c0 20px);border:1px dashed var(--cinza);color:var(--cinza);font-family:-apple-system,Arial,sans-serif;font-size:8.5px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;min-height:80px;margin:8px 0;}
+ul,ol{margin:5px 0;padding-left:18px;} li{margin:3px 0;} .lead{font-size:12px;color:var(--vmed);font-style:italic;}
+.assin{margin-top:16px;padding-top:10px;border-top:2px solid var(--dour);font-family:-apple-system,Arial,sans-serif;font-size:9px;color:var(--cinza);} .assin b{color:var(--verde);}
+.sumario{font-family:-apple-system,Arial,sans-serif;} .sumario li{margin:6px 0;}
+</style>
+</head>
+<body>
+<div class="pfoot">Escola de Obra · <b>Inspeção de Serviços Críticos</b> · GD Engenharia e Perícia — Revisado e assinado por Gustavo Domingos, CREA-PR 140.964-D</div>
+
+<div class="capa">
+  <div class="lz"><span>GD</span></div>
+  <h1>Inspeção de<br>Serviços Críticos</h1>
+  <div class="sub">Forma, armação, escoramento e alvenaria — pegue o erro enquanto dá para corrigir</div>
+  <div class="selo">Apostila · Padrão Diamante</div>
+  <div class="autor">Instrutor: <b>Gustavo Domingos</b><br>Engenheiro Civil · CREA-PR 140.964-D · CREA-SP 5071652757<br>Perito judicial atuante em processos do TJ-PR e do TJ-SP <span style="font-size:8px;">[VALIDAR — D1]</span></div>
+</div>
+
+<h2 style="font-size:22px;">Sobre esta apostila</h2>
+<p class="lead">Depois que o concreto desce — ou o reboco cobre — o erro fica escondido por décadas. Este material fixa o método da última chance: a inspeção.</p>
+<div class="obj"><b>Objetivo terminal.</b> Ao final, você será capaz de: (1) <b>aplicar o método</b> (comparar com projeto + norma, registrar); (2) <b>liberar ou travar</b> fôrma, armação (com cobrimento!) e escoramento (NBR 14931:2023/6118/15696); (3) <b>inspecionar alvenaria</b> (NBR 8545:1984 — vergas!); (4) <b>controlar desforma/reescoramento</b> pelo plano do RT e <b>documentar</b> no Termo de Liberação.</div>
+<h3>Conteúdo programático</h3>
+<ol class="sumario">
+  <li><b>Módulo 1 — O método:</b> inspecionar é comparar com critério.</li>
+  <li><b>Módulo 2 — A liberação de concretagem:</b> forma, armação e escoramento (Módulo de Ouro).</li>
+  <li><b>Módulo 3 — Alvenaria:</b> prumo, esquadro, amarração e vergas.</li>
+  <li><b>Módulo 4 — Desforma e registro:</b> prazos, reescoramento e o termo.</li>
+</ol>
+<div class="validar">⚠️ <b>Rigor Diamante:</b> tolerâncias e cobrimentos referenciam norma/projeto ou trazem <code>[VALIDAR]</code> (seção G do VALIDAR.md). Alterações de armação/fôrma/escoramento: alçada do projetista. Prazos de desforma: plano do responsável técnico.</div>
+
+<div class="mod"><div class="ep">Módulo 1 · Episódio 1</div><h2>O método: inspecionar é comparar com critério</h2></div>
+<div class="obj"><b>Ao final:</b> você inspeciona com projeto na mão, na ordem certa, registrando cada NC com foto — e comunica sem guerra.</div>
+<h3>1.1 Olhar ≠ inspecionar</h3>
+<p>Inspecionar é <strong>comparar</strong> o executado com dois padrões: o <strong>projeto</strong> (a intenção) e a <strong>norma</strong> (o mínimo). Sem os dois na mão, a vistoria vira opinião — e opinião não libera concretagem.</p>
+<h3>1.2 As ferramentas</h3>
+<p>Trena, prumo (ou nível a laser), nível de bolha, esquadro, paquímetro (bitolas), câmera e o <strong>checklist</strong>. E a mais importante: a <strong>véspera</strong> — inspeção sem tempo de correção é teatro.</p>
+<h3>1.3 A rota</h3>
+<p>Do geral ao particular, sempre na mesma ordem (o checklist mestre fixa a rota) — rota fixa é o que garante que nada foi pulado no dia corrido.</p>
+<h3>1.4 Comunicação de NC</h3>
+<p>Fato, não adjetivo: <em>"faltam espaçadores no bordo leste"</em> constrói; <em>"está tudo errado"</em> incendeia. NC apontada com solução e prazo é gestão, não bronca.</p>
+<div class="norma">NBR 14931:2023 — Execução de estruturas de concreto · NR-18 — segurança nas atividades.</div>
+
+<div class="mod"><div class="ep">Módulo 2 · Módulo de Ouro</div><h2>A liberação de concretagem</h2></div>
+<div class="obj"><b>Ao final:</b> você percorre fôrma → armação → escoramento → embutidos e fecha com um dos três vereditos, documentado.</div>
+<h3>2.1 Fôrma — 6 verificações</h3>
+<table><thead><tr><th>#</th><th>Verificação</th><th>Critério prático</th></tr></thead><tbody>
+<tr><td>1</td><td>Geometria</td><td>Medir de ponta a ponta contra o projeto</td></tr>
+<tr><td>2</td><td>Prumo/nível</td><td>Pilar em 2 direções; contraflecha do projeto</td></tr>
+<tr><td>3</td><td>Travamento</td><td>Sem painel com folga (empuxo do concreto!)</td></tr>
+<tr><td>4</td><td>Estanqueidade</td><td><b>Teste da luz</b>: passa luz, passa nata → ninho</td></tr>
+<tr><td>5</td><td>Limpeza</td><td>Janela no pé do pilar: abriu, limpou, fechou</td></tr>
+<tr><td>6</td><td>Desmoldante</td><td>Na fôrma, antes da armação — nunca no aço</td></tr>
+</tbody></table>
+<h3>2.2 Armação — o esqueleto</h3>
+<p><strong>Bitola</strong> (medir, não confiar), <strong>quantidade</strong> (contar), <strong>posição</strong> — o
+<strong>negativo pisado</strong> é o defeito de armação mais comum do país: negativo só trabalha EM CIMA, e isso
+exige <strong>caranguejos + passarelas</strong> para o dia. <strong>Estribos</strong> medidos; <strong>emendas</strong> do projeto. Divergência? <strong>Projetista, por escrito.</strong></p>
+<div class="foto">[FOTO DO ACERVO: armação conferida / negativo com caranguejo]</div>
+<h3>2.3 Cobrimento — os milímetros que valem décadas</h3>
+<p>O cobrimento é a <strong>proteção química</strong> do aço (a alcalinidade do concreto). A NBR 6118:2023 (Tab. 7.2)
+fixa os nominais por classe de agressividade — ordem de grandeza urbana: laje ~25 mm, viga/pilar ~30 mm;
+ambientes agressivos: 35–40+ mm. O valor do SEU caso está no projeto. O que o garante fisicamente:
+<strong>espaçadores</strong> (fundo e faces, densidade certa, zero ponto de toque). Pedra, tijolo e madeira não são espaçador.</p>
+<div class="validar">⚠️ <code>[VALIDAR G2]</code> — confirmar valores/Δc da edição vigente. Ponte: cobrimento insuficiente hoje = corrosão no curso 6 amanhã.</div>
+<h3>2.4 Escoramento — estrutura provisória de verdade</h3>
+<p>Tem <strong>projeto/plano</strong> (NBR 15696:2009): apoios firmes com distribuição, escoras <strong>no prumo</strong>
+(compressão pura), <strong>contraventamento nas duas direções</strong>, torres completas. Na dúvida sobre uma escora:
+troca <strong>antes</strong> — nunca "observa durante".</p>
+<div class="norma">NBR 15696:2009 — fôrmas e escoramentos (cargas mín. de referência: sobrecarga 2,0 kN/m²; vento 0,6 kN/m²) [VALIDAR G4].</div>
+<h3>2.5 Embutidos e o minuto das equipes</h3>
+<p>Elétrica fixada e vedada; luvas/furos <strong>só onde o projeto permite</strong>; esperas na posição. Na véspera,
+cada equipe percorre a laje com você e <strong>assina</strong> a sua linha. É a vacina contra a furadeira do futuro.</p>
+<h3>2.6 O veredito</h3>
+<table><thead><tr><th>Veredito</th><th>Quando</th></tr></thead><tbody>
+<tr><td>✅ LIBERADO</td><td>3 sistemas + embutidos conformes → termo + reconferência no dia</td></tr>
+<tr><td>⚠️ COM PENDÊNCIAS</td><td>Só corrigíveis antes, LISTADAS, com prazo + reconferência marcada</td></tr>
+<tr><td>⛔ TRAVADO</td><td>NC estrutural sem tempo: fato + solução + escalar por escrito + remarcar</td></tr>
+</tbody></table>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> Você travará pouquíssimas concretagens na vida — mas a fama de ser CAPAZ de travar muda todas as outras. O canteiro é treinado pelo que você tolera.</div>
+
+<div class="mod"><div class="ep">Módulo 3 · Episódio 3</div><h2>Alvenaria: prumo, esquadro e as vergas</h2></div>
+<div class="obj"><b>Ao final:</b> você inspeciona a alvenaria de vedação com critério — e evita na origem a fissura de canto do curso de fissuras.</div>
+<h3>3.1 O trio: prumo, nível, esquadro</h3>
+<p>Prumo por pano de parede; nível das fiadas; esquadro dos cantos. Fora do trio, tudo que vem depois (reboco, esquadria, bancada) herda o erro — e paga por ele.</p>
+<h3>3.2 Amarração e juntas</h3>
+<p>Juntas defasadas (amarração), espessura de junta regular, argamassa adequada. Parede é um sistema tramado — pilha de bloco com junta alinhada fissura no alinhamento.</p>
+<h3>3.3 Vergas e contravergas — a aula que conversa com o curso de fissuras</h3>
+<p>Todo vão (porta/janela) concentra tensão nos cantos. A <strong>verga</strong> (acima) e a <strong>contraverga</strong>
+(abaixo da janela), com apoio adequado nas laterais do vão, distribuem essas tensões. Sem elas, aparece a clássica
+<strong>fissura a 45° saindo do canto</strong> — exatamente a Aula 2.1 do curso piloto. A fissura de canto se evita na alvenaria, não no reboco.</p>
+<div class="foto">[FOTO DO ACERVO: verga/contraverga executadas em vão de janela]</div>
+<div class="validar">⚠️ <code>[VALIDAR G5]</code> — NBR 8545:1984 (execução de alvenaria sem função estrutural): confirmar vigência e dimensões mínimas de apoio das vergas.</div>
+<h3>3.4 Encunhamento sem pressa</h3>
+<p>O encontro alvenaria × estrutura se fecha (encunha) <strong>depois</strong> de a estrutura acomodar deformações — encunhamento apressado transfere carga para a parede e gera a fissura horizontal do topo (curso de fissuras, Aula 2.6). <code>[VALIDAR G7]</code></p>
+<h3>3.5 Rasgos com critério</h3>
+<p>Instalações na parede pedem corte com ferramenta e profundidade controlada — nunca marreta em qualquer lugar, nunca rasgo horizontal longo em parede esbelta sem avaliação.</p>
+
+<div class="mod"><div class="ep">Módulo 4 · Episódio 4</div><h2>Desforma, reescoramento e o registro</h2></div>
+<div class="obj"><b>Ao final:</b> você controla a retirada de fôrmas/escoras pelo plano do RT e fecha o dossiê com o termo.</div>
+<h3>4.1 Quando desformar</h3>
+<p>O prazo <strong>não é do costume</strong> ("o vizinho tira com X dias") — é do <strong>plano do responsável técnico</strong>, em função da resistência atingida e do cimbramento (NBR 14931:2023). Sua função: <strong>exigir e conferir o plano</strong>, nunca inventar prazo. <code>[VALIDAR G6]</code></p>
+<h3>4.2 Reescoramento</h3>
+<p>Quando previsto, a escora volta imediatamente após a desforma, conforme o plano — laje jovem carregada sem reescoro "lembra" da flecha para sempre (NBR 15696:2009).</p>
+<h3>4.3 Pós-desforma: brocas e ninhos</h3>
+<p>Inspecione a peça recém-desformada: brocas/ninhos são registrados (foto + medida), avaliados (profundidade? armadura exposta?) e tratados conforme orientação técnica — nunca "maquiados" com argamassa por conta própria (ponte: curso 6).</p>
+<h3>4.4 O Termo de Liberação</h3>
+<p>Fecha o ciclo: síntese dos sistemas, pendências com prazo/reconferência, assinaturas das equipes, veredito. Junto com o registro do caminhão (curso 3), forma a <strong>biografia documentada da estrutura</strong>.</p>
+<div class="mestre">🔑 <b>Segredo do Mestre.</b> O erro mais caro da construção é o erro escondível. A inspeção da véspera é a última vez que a estrutura está nua na sua frente — trate essa hora como sagrada.</div>
+
+<div class="mod"><div class="ep">Anexo A · Referência</div><h2>Glossário técnico</h2></div>
+<table><thead><tr><th>Termo</th><th>Significado no curso</th></tr></thead><tbody>
+<tr><td>Cobrimento</td><td>Espessura de concreto entre o aço e a face — proteção química (NBR 6118:2023).</td></tr>
+<tr><td>Espaçador</td><td>Peça que garante fisicamente o cobrimento (fundo e faces).</td></tr>
+<tr><td>Negativo</td><td>Armadura superior da laje (momentos negativos) — só trabalha em cima.</td></tr>
+<tr><td>Caranguejo</td><td>Suporte que mantém o negativo na posição.</td></tr>
+<tr><td>Contraventamento</td><td>Diagonais que estabilizam o escoramento nas duas direções.</td></tr>
+<tr><td>Reescoramento</td><td>Escoras reinstaladas após a desforma, conforme plano.</td></tr>
+<tr><td>Verga / contraverga</td><td>Elementos acima/abaixo dos vãos que evitam a fissura de canto.</td></tr>
+<tr><td>Encunhamento</td><td>Fechamento do encontro alvenaria-estrutura, feito sem pressa.</td></tr>
+<tr><td>Ninho (broca)</td><td>Falha de concretagem com pedra sem pasta — fuga de nata/adensamento.</td></tr>
+<tr><td>Teste da luz</td><td>Verificação prática de estanqueidade: fresta que passa luz, passa nata.</td></tr>
+</tbody></table>
+
+<div class="mod"><div class="ep">Anexo B · Autoavaliação</div><h2>Revisão rápida (gabarito no curso)</h2></div>
+<ol>
+<li>Por que a liberação se faz na véspera, e o que se reconfere no dia?</li>
+<li>O que garante fisicamente o cobrimento, e qual o risco sem ele?</li>
+<li>Quais as 4 verificações do escoramento (NBR 15696:2009)?</li>
+<li>Para que servem verga e contraverga, e com qual fissura do curso piloto elas conversam?</li>
+<li>De onde vem o prazo de desforma — e de onde ele NÃO pode vir?</li>
+</ol>
+
+<div class="assin">
+  <p><b>Revisado e assinado por Gustavo Domingos</b> — Engenheiro Civil, CREA-PR 140.964-D · CREA-SP 5071652757.</p>
+  <p>Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br</p>
+  <p style="font-size:8px;">Alterações de armação/fôrma/escoramento: alçada do projetista. Cenários ilustrativos (N1); fotos do acervo a inserir (N2).</p>
+</div>
+<p style="font-size:10px;color:#8a8172;border-top:1px solid #d9d0bd;margin-top:18px;padding-top:10px">Nota sobre normas: as NBR são citadas por <b>número:ano e item</b> para fins didaticos; os textos e tabelas da ABNT (obra protegida) <b>nao sao reproduzidos</b>. Confira sempre o valor no texto oficial da norma vigente (ABNT Coleção/GEDWEB) antes de aplicar em obra.</p>
+</body>
+</html>

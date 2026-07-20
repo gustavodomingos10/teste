@@ -1,0 +1,38 @@
+%% Fluxograma de Decisão — Recebimento de Concreto (aceitação provisória)
+%% Escola de Obra · Padrão Diamante. NBR 12655:2022 · 7212 · 16889 · 5738.
+flowchart TD
+    A([Caminhão chegou]) --> B{Nota fiscal confere?<br/>fck/classe · slump · brita · uso}
+    B -- NÃO --> R1[/RECUSAR<br/>material não é o especificado<br/>registrar + devolver formalizado/]
+    B -- SIM --> C{Horário da água anotado?<br/>tempo comporta a descarga<br/>dentro do limite? NBR 7212:2021}
+    C -- NÃO / estourado --> R2[/RECUSAR - tempo<br/>sem comprovação do relógio<br/>não há aceite/]
+    C -- SIM --> D[Slump test — NBR 16889:2020<br/>amostra do meio · 3 camadas · 25 golpes<br/>saque vertical · medir já]
+    D --> E{Resultado dentro<br/>da tolerância do pedido?}
+    E -- SIM --> F{Aspecto normal?<br/>homogêneo, sem segregação}
+    E -- Seco demais --> G{Correção legítima possível?<br/>aditivo PELA CENTRAL, no prazo}
+    E -- Fluido demais --> R3[/RECUSAR - fluido<br/>água em excesso provável<br/>não há correção/]
+    G -- SIM --> H[Redosar via central<br/>REFAZER o slump]
+    H --> E
+    G -- NÃO --> R4[/RECUSAR<br/>sem condição de correção/]
+    F -- NÃO --> R5[/RECUSAR - aspecto anormal/]
+    F -- SIM --> I{Alguém pediu<br/>'jogar uma água'?}
+    I -- SIM --> J[VETAR água na obra<br/>caminho legítimo = central + re-ensaio]
+    J --> K
+    I -- NÃO --> K[LIBERAR DESCARGA]
+    K --> L[Moldar e identificar CPs — NBR 5738:2015<br/>cura inicial protegida]
+    L --> M([Registrar tudo no dossiê:<br/>NF + horários + slump + fotos + CPs<br/>Aceitação DEFINITIVA: ensaios NBR 5739:2018/12655])
+    R1 --> N([Registro da recusa:<br/>motivo + hora + fotos + nota anotada<br/>reprogramar a frente])
+    R2 --> N
+    R3 --> N
+    R4 --> N
+    R5 --> N
+
+    classDef rec fill:#C62828,stroke:#7f1d1d,color:#fff,stroke-width:2px;
+    classDef ok fill:#D9EAD3,stroke:#2E7D32,color:#1b4d1f,stroke-width:2px;
+    classDef corr fill:#FFF2CC,stroke:#F9A825,color:#7a5b00,stroke-width:1.5px;
+    classDef base fill:#0E3A34,stroke:#C9A24B,color:#F5EFE0,stroke-width:2px;
+    classDef dec fill:#F5EFE0,stroke:#1C5A4E,color:#0E3A34,stroke-width:1.5px;
+    class A,M,N base;
+    class B,C,E,F,G,I dec;
+    class R1,R2,R3,R4,R5 rec;
+    class K,L ok;
+    class D,H,J corr;

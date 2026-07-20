@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Checklist Mestre de Liberação de Concretagem — Escola de Obra</title>
+<style>
+:root{--verde:#0E3A34;--vmed:#1C5A4E;--creme:#F5EFE0;--creme2:#FBF8F0;--dour:#C9A24B;--dour2:#E3C97E;--carvao:#20211E;--cinza:#6B6B63;--verm:#C62828;}
+@page{size:A4;margin:11mm 12mm;}
+*{box-sizing:border-box;} html,body{margin:0;padding:0;}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--carvao);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11px;line-height:1.4;}
+h1,h2{font-family:Georgia,'Times New Roman',serif;color:var(--verde);margin:0;}
+.faixa{background:var(--verde);color:var(--creme);padding:14px 16px;border-bottom:4px solid var(--dour);display:flex;justify-content:space-between;align-items:center;}
+.faixa h1{color:var(--creme);font-size:15px;} .faixa .sub{color:var(--dour2);font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:3px;}
+.losango{width:38px;height:38px;background:var(--dour);color:var(--verde);transform:rotate(45deg);display:flex;align-items:center;justify-content:center;font-weight:800;} .losango span{transform:rotate(-45deg);font-size:12px;}
+.ident{padding:10px 16px;background:var(--creme2);border-bottom:1px solid #e3dcc7;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px 16px;font-size:10px;}
+.ident .campo{border-bottom:1px solid var(--cinza);min-height:15px;} .ident label{color:var(--cinza);font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;display:block;}
+.wrap{padding:8px 16px 14px;}
+h2.sec{font-size:12px;background:var(--vmed);color:#fff;padding:4px 9px;margin:11px 0 0;border-radius:3px 3px 0 0;}
+table{width:100%;border-collapse:collapse;font-size:9.4px;} thead th{background:var(--verde);color:var(--creme);text-align:left;padding:4px 6px;font-weight:600;}
+tbody td{padding:3.5px 6px;border-bottom:1px solid #e3dcc7;vertical-align:top;} tbody tr:nth-child(even){background:var(--creme2);}
+.n{width:20px;text-align:center;color:var(--cinza);font-weight:700;} .crit{width:34%;} .norma{width:16%;font-family:'Courier New',monospace;font-size:8.2px;color:var(--vmed);} .ccol{width:72px;text-align:center;}
+.box{display:inline-block;width:11px;height:11px;border:1.4px solid var(--verde);border-radius:2px;margin:0 3px;vertical-align:middle;}
+.leg{font-size:8.5px;color:var(--cinza);} .nota{font-size:9px;color:var(--verm);font-weight:700;margin:4px 0 0;}
+.assin{margin-top:12px;padding:9px 16px;border-top:2px solid var(--dour);display:flex;justify-content:space-between;align-items:flex-end;gap:14px;}
+.assin .linha{flex:1;border-top:1px solid var(--carvao);padding-top:3px;font-size:8.5px;color:var(--cinza);text-align:center;}
+.selo{border:1.6px solid var(--dour);color:var(--dour);font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:3px;text-align:center;max-width:200px;}
+.rodape{font-size:8px;color:var(--cinza);text-align:center;padding:2px 16px 8px;}
+.verd{display:flex;gap:14px;padding:8px 16px;font-size:9.5px;align-items:center;}
+.verd b{color:var(--verde);}
+</style>
+</head>
+<body>
+  <div class="faixa">
+    <div><h1>Checklist Mestre de Liberação de Concretagem</h1><div class="sub">Escola de Obra · Padrão Diamante · GD Engenharia e Perícia</div></div>
+    <div class="losango"><span>GD</span></div>
+  </div>
+  <div class="ident">
+    <div><label>Obra</label><div class="campo"></div></div>
+    <div><label>Peça / Pavimento</label><div class="campo"></div></div>
+    <div><label>Data da inspeção (véspera)</label><div class="campo"></div></div>
+    <div><label>Concretagem prevista (data/hora)</label><div class="campo"></div></div>
+    <div><label>Projeto (rev.) usado na conferência</label><div class="campo"></div></div>
+    <div><label>Responsável pela inspeção</label><div class="campo"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="leg"><b>Preencher:</b> <span class="box"></span> Conforme · <span class="box"></span> Não Conforme · <span class="box"></span> N/A. Inspecionar na <b>véspera</b>, com projeto na mão. NC crítica sem tempo de correção = <b>TRAVAR</b>.</p>
+
+    <h2 class="sec">1. Fôrma (o molde)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério (objetivo)</th><th class="norma">Ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">1</td><td>Geometria</td><td>Seções/alturas/espessuras medidas de ponta a ponta = projeto</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">2</td><td>Prumo e nível</td><td>Pilar no prumo (2 direções); fundos nivelados/contraflecha do projeto</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">3</td><td>Travamento</td><td>Gravatas/tensores/travas completos; sem painel com folga</td><td class="norma">NBR 15696:2009</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">4</td><td>Estanqueidade</td><td>Sem frestas (teste da luz no fundo); juntas vedadas</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">5</td><td>Limpeza + desmoldante</td><td>Fundo limpo (janela de limpeza); desmoldante na fôrma, nunca na armadura</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">2. Armação (o esqueleto)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">6</td><td>Bitolas e quantidade</td><td>Conferidas contra o corte do projeto (contar barras)</td><td class="norma">Projeto · NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">7</td><td>Posição / negativos</td><td>Negativos EM CIMA com caranguejos; passarelas previstas p/ o dia</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">8</td><td>Estribos</td><td>Espaçamento medido = projeto; fechados e posicionados</td><td class="norma">Projeto</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">9</td><td>Arranques e emendas</td><td>Esperas/traspasses no comprimento e posição do projeto</td><td class="norma">Projeto</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">10</td><td><b>Cobrimento / espaçadores</b></td><td>Cobrimento do projeto (___ mm); espaçadores fundo+faces; zero ponto de toque</td><td class="norma">NBR 6118:2023 Tab 7.2</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">11</td><td>Amarração</td><td>Arame firme; nada solto que mude de posição na concretagem</td><td class="norma">NBR 14931:2023</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">3. Escoramento (quem segura tudo)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">12</td><td>Plano de escoramento</td><td>Existe e o espaçamento executado confere com ele</td><td class="norma">NBR 15696:2009</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">13</td><td>Apoios</td><td>Base firme + distribuição; sem tijolo/calço improvisado; cunhas apertadas</td><td class="norma">NBR 15696:2009</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">14</td><td>Prumo das escoras</td><td>Compressão pura — escora no prumo, extensões dentro do limite</td><td class="norma">NBR 15696:2009</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">15</td><td>Contraventamento</td><td>Diagonais nas 2 direções; torres completas e travadas</td><td class="norma">NBR 15696:2009</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <h2 class="sec">4. Embutidos e véspera (com as equipes)</h2>
+    <table><thead><tr><th class="n">#</th><th>Item</th><th class="crit">Critério</th><th class="norma">Ref.</th><th class="ccol">C/NC/NA</th></tr></thead><tbody>
+      <tr><td class="n">16</td><td>Elétrica</td><td>Dutos/caixas fixados e vedados — conferido c/ equipe: ______________</td><td class="norma">Projeto elétrico</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">17</td><td>Hidráulica / furos</td><td>Luvas/passagens conforme projeto de furação — equipe: ______________</td><td class="norma">Projeto hidráulico</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+      <tr><td class="n">18</td><td>Limpeza final + acesso</td><td>Fôrma lavada; passarelas p/ tráfego; segurança de acesso ok</td><td class="norma">NR-18</td><td class="ccol"><span class="box"></span><span class="box"></span><span class="box"></span></td></tr>
+    </tbody></table>
+
+    <div class="verd"><b>VEREDITO:</b>
+      <span><span class="box"></span> LIBERADO</span>
+      <span><span class="box"></span> LIBERADO COM PENDÊNCIAS (listar no verso: item + prazo + reconferência __h__)</span>
+      <span><span class="box"></span> TRAVADO (motivo no verso; caminhão remarcado)</span>
+    </div>
+    <p class="nota">⚠️ Reconferência obrigatória no dia, 15 min antes do caminhão (a obra mexe entre a véspera e a manhã).</p>
+
+    <div class="assin">
+      <div class="selo">Revisado e assinado por<br>Gustavo Domingos — Eng. Civil, CREA-PR 140.964-D</div>
+      <div class="linha">Responsável pela inspeção — assinatura / CREA</div>
+      <div class="linha">Reconferência no dia — hora / rubrica</div>
+    </div>
+    <p class="rodape">Escola de Obra · GD Engenharia e Perícia · engenhariagd.com.br — Alterações de armação/fôrma/escoramento: alçada do projetista (NBR 6118:2023/15696).</p>
+  </div>
+</body>
+</html>
